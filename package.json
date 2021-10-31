@@ -1,6 +1,6 @@
 {
-  "name": "order-and-pay-frontend",
-  "version": "0.1.0",
+  "name": "order-and-pay-frontend-admin",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.0",
