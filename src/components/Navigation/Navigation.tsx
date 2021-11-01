@@ -10,6 +10,9 @@ export const Navigation: React.FunctionComponent = () => {
                 <li>
                     <Link to="/example">Example</Link>
                 </li>
+                <li>
+                    <Link to="/tables">Tables</Link>
+                </li>
             </ul>
         </div>
     )
