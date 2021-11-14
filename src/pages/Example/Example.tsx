@@ -6,7 +6,7 @@ export const Example: React.FunctionComponent = () => {
   const { posts, isLoadingPosts } = useAppState().example
 
   return (
-    <div className="container mx-auto">
+    <div>
       <h3 className="text-xl font-bold pb-4 bg-red-100">Hello World!</h3>
       {isLoadingPosts ? <p>Loading posts...</p> : (
         <ul>
