@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/*** Font ***/
 body {
     font-family: 'Sofia Pro', 'sans-serif';
+}
+
+/**** Sidebar ****/
+.sidebar {
+    flex: 250px 0 0;
+    width: 250px;
+    transition: 1s ease-in;
+    @apply bg-white-lightgrey px-6 
+}
+
+.sidebar-heading {
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+}
+
+.sidebar-closed {
+    flex: 74px 0 0;
+    width: 74px;
+    transition: 1s;
+    @apply bg-white-lightgrey px-4
 }

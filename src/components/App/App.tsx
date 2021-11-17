@@ -6,7 +6,8 @@ import { useActions } from '../../overmind';
 import { Example } from '../../pages/Example/Example';
 import { Home } from '../../pages/Home/Home';
 import { Tables } from '../../pages/Tables/Tables';
-import { Navigation } from '../Navigation/Navigation';
+import { Sidebar } from '../Navigation/Sidebar';
+import { Topbar } from '../Navigation/Topbar';
 
 export const App: React.FunctionComponent = () => {
   const { loadClient } = useActions().example
@@ -16,13 +17,22 @@ export const App: React.FunctionComponent = () => {
   }, [loadClient])
 
   return (
-    <Router basename="/admin">
-      <Navigation />
-          <Switch>
-            <Route exact path="/tables" component={Tables} />
-            <Route exact path="/example" component={Example} />
-            <Route exact path="/" component={Home} />
-          </Switch>
-    </Router>
+      <Router basename="/admin">
+        <div className="h-screen">
+          <Topbar />
+          <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
+            <Sidebar />
+            <div className="flex-grow overflow-y-auto">
+              {/* Content Start */}
+              <Switch>
+                <Route exact path="/tables" component={Tables} />
+                <Route exact path="/example" component={Example} />
+                <Route exact path="/" component={Home} />
+              </Switch>
+              {/* Content End */}
+            </div>
+          </div>
+        </div>
+      </Router>
   )
 }
