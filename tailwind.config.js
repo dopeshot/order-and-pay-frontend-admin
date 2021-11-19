@@ -34,7 +34,8 @@ module.exports = {
         'hr-grey': '#E4E7EB',
         'checkbox-grey': '#E0E6EE',
         'lightgrey': '#9AA5B1',
-        'darkgrey': '#52606D'
+        'darkgrey': '#52606D',
+        'active-grey': "#E8EEF5"
       },
     },
   },

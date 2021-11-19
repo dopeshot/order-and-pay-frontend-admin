@@ -3,37 +3,49 @@ import { NavLink } from "react-router-dom"
 export const Sidebar: React.FunctionComponent = () => {
     return (
         <nav className="sidebar">
-            <div className="mt-16">
+            <div className="text-darkgrey mt-16">
                 {/* Heading Start */}
-                <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
-                    <span className="bg-white-lightgrey pr-3">Betrieb</span>
-                </h5>
-                {/* Heading End */}
+                <div className="mx-6">
+                    <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
+                        <span className="bg-white-lightgrey pr-3">Betrieb</span>
+                    </h5>
+                    {/* Heading End */}
+                </div>
                 <ul>
-                    <li className="text-darkgrey mb-2">
-                        <i className="fa fa-home text-lg text-center mr-5" style={{ width: "24px" }}></i>
-                        <NavLink to="/" activeClassName="selected">Dashboard</NavLink>
+                    <li>
+                        <NavLink to="/home" className="block hover:bg-active-grey w-full h-full py-2 px-6">
+                            <i className="fa fa-home text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <span>Dashboard</span>
+                        </NavLink>
                     </li>
-                    <li className="text-darkgrey">
-                        <i className="fa fa-receipt text-lg text-center mr-5" style={{ width: "24px" }}></i>
-                        <NavLink to="/">Bestellungen</NavLink>
+                    <li>
+                        <NavLink to="/order" className="block hover:bg-active-grey w-full h-full py-2 px-6">
+                            <i className="fa fa-receipt text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <span>Bestellungen</span>
+                        </NavLink>
                     </li>
                 </ul>
             </div>
-            <div className="mt-16">
+            <div className="text-darkgrey mt-16">
                 {/* Heading Start */}
-                <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
-                    <span className="bg-white-lightgrey pr-3">Konfiguration</span>
-                </h5>
-                {/* Heading End */}
+                <div className="mx-6">
+                    <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
+                        <span className="bg-white-lightgrey pr-3">Konfiguration</span>
+                    </h5>
+                    {/* Heading End */}
+                </div>
                 <ul>
-                    <li className="text-darkgrey mb-2">
-                        <i className="fa fa-chair text-lg text-center mr-5" style={{ width: "24px" }}></i>
-                        <NavLink to="/tables" >Tische</NavLink>
+                    <li>
+                        <NavLink to="/tables" className="block hover:bg-active-grey w-full h-full py-2 px-6">
+                            <i className="fa fa-chair text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <span>Tische</span>
+                        </NavLink>
                     </li>
-                    <li className="text-darkgrey">
-                        <i className="fa fa-utensils text-lg text-center mr-5" style={{ width: "24px" }}></i>
-                        <NavLink to="/">Menü</NavLink>
+                    <li>
+                        <NavLink to="/menu" className="block hover:bg-active-grey w-full h-full py-2 px-6">
+                            <i className="fa fa-utensils text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <span>Menü</span>
+                        </NavLink>
                     </li>
                 </ul>
             </div>
