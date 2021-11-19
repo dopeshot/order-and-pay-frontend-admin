@@ -11,9 +11,9 @@ body {
 
 /**** Sidebar ****/
 .sidebar {
-    flex: 250px 0 0;
-    width: 250px;
+    max-width: 250px;
     transition: 1s;
+    flex: 1 1 auto;
     @apply bg-white-lightgrey;
 }
 

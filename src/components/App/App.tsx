@@ -22,7 +22,7 @@ export const App: React.FunctionComponent = () => {
           <Topbar />
           <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
             <Sidebar />
-            <div className="flex-grow overflow-y-auto">
+            <div className="flex-1 overflow-y-auto">
               <div className="container md:max-w-full">
               {/* Content Start */}
               <Switch>
