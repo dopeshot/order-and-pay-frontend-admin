@@ -9,7 +9,7 @@ export const Topbar: React.FunctionComponent = () => {
                     <i className="fas fa-bars"></i>
                 </button>
                 {/* Logo */}
-                <img src={logo} />
+                <img src={logo} alt="logo" />
                 {/* Logo End */}
             </div>
         </div>
