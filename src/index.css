@@ -13,7 +13,7 @@ body {
 .sidebar {
     flex: 250px 0 0;
     width: 250px;
-    transition: 1s ease-in;
+    transition: 1s;
     @apply bg-white-lightgrey
 }
 
@@ -25,10 +25,10 @@ body {
 .sidebar-closed {
     flex: 74px 0 0;
     width: 74px;
-    transition: 1s;
+    transition: 1s; 
     @apply bg-white-lightgrey
 }
 
 .active {
-    @apply bg-active-grey text-primary-blue font-semibold
+    @apply bg-active-grey text-primary-blue font-semibold border-l-4 border-primary-blue
 }
