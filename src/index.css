@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://use.typekit.net/azv0mmk.css");
+
 /*** Font ***/
 body {
     font-family: 'Sofia Pro', 'sans-serif';
@@ -12,7 +14,7 @@ body {
     flex: 250px 0 0;
     width: 250px;
     transition: 1s ease-in;
-    @apply bg-white-lightgrey px-6 
+    @apply bg-white-lightgrey
 }
 
 .sidebar-heading {
@@ -24,5 +26,9 @@ body {
     flex: 74px 0 0;
     width: 74px;
     transition: 1s;
-    @apply bg-white-lightgrey px-4
+    @apply bg-white-lightgrey
+}
+
+.active {
+    @apply bg-active-grey text-primary-blue font-semibold
 }
