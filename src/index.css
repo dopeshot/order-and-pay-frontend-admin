@@ -6,7 +6,7 @@
 
 /*** Font ***/
 body {
-    font-family: 'Sofia Pro', 'sans-serif';
+    font-family: "Sofia Pro", "sans-serif";
 }
 
 /**** Sidebar ****/
@@ -14,21 +14,29 @@ body {
     flex: 250px 0 0;
     width: 250px;
     transition: 1s;
-    @apply bg-white-lightgrey
+    @apply bg-white-lightgrey;
 }
 
 .sidebar-heading {
     line-height: 0.1em;
-    margin: 10px 0 20px; 
+    margin: 10px 0 20px;
 }
 
 .sidebar-closed {
     flex: 74px 0 0;
     width: 74px;
-    transition: 1s; 
-    @apply bg-white-lightgrey
+    transition: 1s;
+    @apply bg-white-lightgrey;
 }
 
 .active {
-    @apply bg-active-grey text-primary-blue font-semibold border-l-4 border-primary-blue
+    @apply bg-active-grey text-primary-blue font-semibold border-l-4 border-primary-blue;
+}
+
+/** Search **/
+.search-wrapper::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f002";
+    position: absolute;
+    left: 1em;
 }

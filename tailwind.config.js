@@ -31,7 +31,7 @@ module.exports = {
         'primary-blue': '#0967D2',
         'headline-black': '#1F2933',
         'white-lightgrey': '#F5F7FA',
-        'hr-grey': '#E4E7EB',
+        'border-grey': '#E4E7EB',
         'checkbox-grey': '#E0E6EE',
         'lightgrey': '#9AA5B1',
         'darkgrey': '#52606D',
