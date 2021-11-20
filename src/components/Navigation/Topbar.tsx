@@ -12,7 +12,7 @@ export const Topbar: React.FunctionComponent = () => {
             {/* Logo End */}
             <div className="container">
                 <div className="search-wrapper inline-block relative">
-                <input type="text" placeholder="Search..." className="border border-border-grey rounded-xl focus-visible:border-primary-blue placeholder-lightgrey w-auto md:w-80 py-2 pl-10"></input>
+                    <input type="text" placeholder="Search..." className="border border-border-grey rounded-xl focus-visible:border-primary-blue placeholder-lightgrey w-auto md:w-80 py-2 pl-12"></input>
                 </div>
             </div>
         </div>

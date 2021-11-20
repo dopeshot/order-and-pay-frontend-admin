@@ -22,7 +22,7 @@ body {
 
 .sidebar-closed {
     flex: 74px 0 0;
-    width: 74px;
+    max-width: 74px;
     transition: 1s;
     @apply bg-white-lightgrey;
 }
@@ -35,6 +35,9 @@ body {
 .search-wrapper::before {
     font-family: "Font Awesome 5 Free";
     content: "\f002";
-    position: absolute;
-    left: 1em;
+    @apply absolute text-lightgrey text-sm font-black top-3 left-5 
+}
+
+input::placeholder {
+    font-size: 15px;
 }
