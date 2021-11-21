@@ -1,4 +1,4 @@
-import { faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect } from "react"
 import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
@@ -90,14 +90,27 @@ export const Tables: React.FunctionComponent = () => {
                                         <small className="text-lightgrey">erstellt am 23.05.2032</small>
                                     </td>
                                     <td className="text-lightgrey">
-                                            <button className="mr-5">
-                                                <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
-                                                Bearbeiten
-                                            </button>
-                                            {/* TODO: Dropdown */}
-                                            <button>
+                                        <button className="mr-5">
+                                            <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
+                                            Bearbeiten
+                                        </button>
+                                        {/* TODO: Dropdown */}
+                                        <div className="relative inline-block">
+                                            {/* TODO: When dropdown open click outside close it */}
+                                            {/*<div onClick={() => showHideElement('#table-delete-dropdown')} className="hidden fixed inset-0 h-full w-full z-10"></div>*/}
+
+                                            <button onClick={() => showHideElement('#table-delete-dropdown')}>
                                                 <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
                                             </button>
+                                            <div id="table-delete-dropdown" className="hidden absolute origin-top-right right-0 z-20 bg-white rounded-lg shadow mt-2 w-30" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
+                                                <div className="py-1" role="none">
+                                                    <button className="block text-darkgrey text-sm px-4 py-2" role="menuitem" tabIndex={-1} id="menu-item-0">
+                                                        <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3"></FontAwesomeIcon>
+                                                        Löschen
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>))
                             }
