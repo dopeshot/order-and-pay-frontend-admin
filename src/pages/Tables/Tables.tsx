@@ -44,24 +44,24 @@ export const Tables: React.FunctionComponent = () => {
                     </button>
                 </div>
             </div>
-            <table className="table-fixed text-left min-w-full">
+            <table className="table-auto text-left whitespace-nowrap min-w-full">
                 <thead className="bg-white-lightgrey">
                     <tr className="text-darkgrey text-xs tracking-widest uppercase">
-                        <th className="text-center w-1/12 py-5">
+                        <th className="text-center py-5">
                             <input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
-                        <th className="w-2/12">
+                        <th>
                             Tischnummer
                             <FontAwesomeIcon icon={faSort} className="ml-2"></FontAwesomeIcon>
                         </th>
-                        <th className="w-3/12">
+                        <th>
                             <FontAwesomeIcon icon={faUsers} className="mr-2"></FontAwesomeIcon>
                             Personenanzahl
                             <FontAwesomeIcon icon={faSort} className="ml-2"></FontAwesomeIcon>
                         </th>
-                        <th className="w-3/12">Erstellt von</th>
-                        <th className="w-2/12">Aktionen</th>
-                        <th className="w-1/12 text-center">
+                        <th>Erstellt von</th>
+                        <th>Aktionen</th>
+                        <th className="text-center">
                             <button onClick={() => syncTables()}>
                                 <FontAwesomeIcon icon={faSyncAlt}></FontAwesomeIcon>
                             </button>
@@ -90,14 +90,14 @@ export const Tables: React.FunctionComponent = () => {
                                         <small className="text-lightgrey">erstellt am 23.05.2032</small>
                                     </td>
                                     <td className="text-lightgrey">
-                                        <button className="mr-5">
-                                            <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
-                                            Bearbeiten
-                                        </button>
-                                        {/* TODO: Dropdown */}
-                                        <button>
-                                            <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
-                                        </button>
+                                            <button className="mr-5">
+                                                <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
+                                                Bearbeiten
+                                            </button>
+                                            {/* TODO: Dropdown */}
+                                            <button>
+                                                <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
+                                            </button>
                                     </td>
                                 </tr>))
                             }

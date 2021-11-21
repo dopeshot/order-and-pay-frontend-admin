@@ -13,7 +13,7 @@ export const Topbar: React.FunctionComponent = () => {
             {/* Logo */}
             <img src={logo} alt="logo" className="max-w-full" />
             {/* Logo End */}
-            <div className="container md:max-w-full flex justify-between items-center">
+            <div className="flex justify-between items-center w-full mx-3 sm:mx-20">
                 <form>
                     <div className="relative">
                         <span className="absolute flex items-center inset-y-0 left-0 pl-4">
@@ -26,7 +26,7 @@ export const Topbar: React.FunctionComponent = () => {
                     {/* TODO: Message Dropdown */}
                     <FontAwesomeIcon icon={faBell} className="text-lightgrey"></FontAwesomeIcon>
                     <img src={avatar} className="pr-3" alt="Avatar"></img>
-                    <div>
+                    <div className="whitespace-nowrap">
                         <h6 className="text-darkgrey font-semibold h-4">Da Burger</h6>
                         <small className="text-lightgrey text-xs">Admin</small>
                     </div>
