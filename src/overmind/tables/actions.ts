@@ -6,8 +6,12 @@ export const syncTables = async ({ state }: Context) => {
     state.tables.isLoadingTables = true
     state.tables.tables = await new Promise<Table[]>((resolve) => {
         setTimeout(() => {
-            resolve([{ id: "mongoid", tableNumber: 1, capacity: 4 }, { id: "mongoid", tableNumber: 2, capacity: 2 }, { id: "mongoid", tableNumber: 3, capacity: 4 }])
+            resolve([{ id: "mongoid", tableNumber: "1", capacity: 4, updatedAt: new Date(), createdBy: "Admin" }, { id: "mongoid", tableNumber: "2", capacity: 2, updatedAt: new Date(), createdBy: "Admin" }, { id: "mongoid", tableNumber: "3", capacity: 4, updatedAt: new Date(), createdBy: "Admin" }])
         }, 500)
     })
     state.tables.isLoadingTables = false
+}
+
+export const addTable = async ({ state }: Context, table: Table) => {
+    state.tables.tables = [...state.tables.tables, table]
 }

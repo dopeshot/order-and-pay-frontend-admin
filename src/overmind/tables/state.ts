@@ -1,7 +1,9 @@
 export type Table = {
     id: string,
-    tableNumber: number,
-    capacity: number
+    tableNumber: string,
+    capacity: number,
+    updatedAt: Date,
+    createdBy: string
 }
 
 export type State = {

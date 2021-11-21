@@ -1,13 +1,13 @@
 import { faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
 import { useActions, useAppState } from "../../overmind"
-import { showHideElement } from "../../services/utilities"
 
 export const Tables: React.FunctionComponent = () => {
     const { tables, isLoadingTables, hasLoadedTablesOnce } = useAppState().tables
     const { syncTables } = useActions().tables
+    const [displayModal, setDisplayModal] = useState(false)
 
     useEffect(() => {
         if (!hasLoadedTablesOnce)
@@ -17,9 +17,7 @@ export const Tables: React.FunctionComponent = () => {
 
     return (
         <div className="text-darkgrey">
-            <div id="table-modal" className="hidden">
-                <AddTableModal />
-            </div>
+            {displayModal && <AddTableModal setDisplayModal={setDisplayModal} /> }
             <h1 className="text-2xl text-headline-black font-semibold mb-5">Tische</h1>
             <div className="flex justify-between items-end mb-5">
                 <div>
@@ -38,7 +36,7 @@ export const Tables: React.FunctionComponent = () => {
                 </div>
                 <div className="flex items-end">
                     <p className="text-lightgrey mr-3">14 Tische</p>
-                    <button onClick={() => showHideElement('#table-modal')} className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-8">
+                    <button onClick={() => setDisplayModal(true)} className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-8">
                         <FontAwesomeIcon icon={faPlus} className="text-sm mr-3"></FontAwesomeIcon>
                         Tisch hinzufügen
                     </button>
@@ -86,8 +84,8 @@ export const Tables: React.FunctionComponent = () => {
                                     { /* TODO: Add icons depending of the person count */}
                                     <td className="font-roboto font-semibold">{table.capacity}</td>
                                     <td>
-                                        <h5 className="font-semibold text-sm h-3">Admin</h5>
-                                        <small className="text-lightgrey">erstellt am 23.05.2032</small>
+                                        <h5 className="font-semibold text-sm h-3">{table.createdBy}</h5>
+                                        <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString('de-DE')}</small>
                                     </td>
                                     <td className="text-lightgrey">
                                             <button className="mr-5">
