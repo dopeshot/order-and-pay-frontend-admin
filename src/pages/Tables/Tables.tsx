@@ -76,9 +76,12 @@ export const Tables: React.FunctionComponent = () => {
                             {
                                 tables.map((table, index) => (<tr key={index}>
                                     <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
-                                    <td>{table.id}</td>
-                                    <td>{table.tableNumber}</td>
-                                    <td>{table.capacity}</td>
+                                    <td className="font-roboto font-semibold">{table.tableNumber}</td>
+                                    <td className="font-roboto font-semibold">{table.capacity}</td>
+                                    <td>
+                                        <h5 className="font-semibold text-sm h-3">Admin</h5>
+                                        <small className="text-lightgrey">erstellt am 23.05.2032</small>
+                                    </td>
                                     <td className="text-lightgrey">
                                         <button className="mr-5">
                                             <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>

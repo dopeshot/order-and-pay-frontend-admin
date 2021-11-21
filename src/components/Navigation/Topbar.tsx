@@ -27,7 +27,7 @@ export const Topbar: React.FunctionComponent = () => {
                     <FontAwesomeIcon icon={faBell} className="text-lightgrey"></FontAwesomeIcon>
                     <img src={avatar} className="pr-3" alt="Avatar"></img>
                     <div>
-                        <h6 className="text-darkgrey font-semibold">Da Burger</h6>
+                        <h6 className="text-darkgrey font-semibold h-4">Da Burger</h6>
                         <small className="text-lightgrey text-xs">Admin</small>
                     </div>
                 </div>
