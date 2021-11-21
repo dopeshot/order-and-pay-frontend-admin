@@ -5,3 +5,11 @@ export const toggleSidebar = () => {
     else
         sidebar.classList.add('sidebar-closed')
 }
+
+export const showHideElement = (selector) => {
+    const element = document.querySelector(selector)
+    if (element.classList.contains('hidden'))
+        element.classList.remove('hidden')
+    else
+        element.classList.add('hidden')
+}

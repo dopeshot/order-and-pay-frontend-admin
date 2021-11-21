@@ -35,7 +35,8 @@ module.exports = {
         'checkbox-grey': '#E0E6EE',
         'lightgrey': '#9AA5B1',
         'darkgrey': '#52606D',
-        'active-grey': "#E8EEF5"
+        'active-grey': "#E8EEF5",
+        'modal-bg-blue': '#132144'
       },
     },
   },

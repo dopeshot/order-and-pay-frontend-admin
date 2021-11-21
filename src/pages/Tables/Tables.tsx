@@ -1,7 +1,9 @@
 import { faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect } from "react"
+import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
 import { useActions, useAppState } from "../../overmind"
+import { showHideElement } from "../../services/utilities"
 
 export const Tables: React.FunctionComponent = () => {
     const { tables, isLoadingTables, hasLoadedTablesOnce } = useAppState().tables
@@ -12,8 +14,12 @@ export const Tables: React.FunctionComponent = () => {
             syncTables()
     }, [syncTables, hasLoadedTablesOnce])
 
+
     return (
         <div className="text-darkgrey">
+            <div id="table-modal" className="hidden">
+                <AddTableModal />
+            </div>
             <h1 className="text-2xl text-headline-black font-semibold mb-5">Tische</h1>
             <div className="flex justify-between items-end mb-5">
                 <div>
@@ -32,7 +38,7 @@ export const Tables: React.FunctionComponent = () => {
                 </div>
                 <div className="flex items-end">
                     <p className="text-lightgrey mr-3">14 Tische</p>
-                    <button className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-8">
+                    <button onClick={() => showHideElement('#table-modal')} className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-8">
                         <FontAwesomeIcon icon={faPlus} className="text-sm mr-3"></FontAwesomeIcon>
                         Tisch hinzufügen
                     </button>
@@ -77,6 +83,7 @@ export const Tables: React.FunctionComponent = () => {
                                 tables.map((table, index) => (<tr key={index}>
                                     <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
                                     <td className="font-roboto font-semibold">{table.tableNumber}</td>
+                                    { /* TODO: Add icons depending of the person count */}
                                     <td className="font-roboto font-semibold">{table.capacity}</td>
                                     <td>
                                         <h5 className="font-semibold text-sm h-3">Admin</h5>
