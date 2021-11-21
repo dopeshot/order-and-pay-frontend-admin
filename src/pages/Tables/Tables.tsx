@@ -1,3 +1,5 @@
+import { faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect } from "react"
 import { useActions, useAppState } from "../../overmind"
 
@@ -11,200 +13,87 @@ export const Tables: React.FunctionComponent = () => {
     }, [syncTables, hasLoadedTablesOnce])
 
     return (
-        <div>
-            <h1>Loading tables...Loading tLoading tables...Loading tables...Loading tables...Loading tables...Loading tables...Loading tables...Loading tables...Loading tables.. tables...Loading tables.. tables...Loading tables.. tables...Loading tables.. tables...Loadingoading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading toading tables...Loading tables...Loading t.</h1>
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
-            {isLoadingTables ? <p><svg className="inline animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>Loading tables...</p> : (<>
-                <button onClick={() => syncTables()} className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Refresh</button>
-                <table className="table-fixed">
-                    <thead className="bg-indigo-200">
-                        <tr>
-                            <th className="w-1/6">Id</th>
-                            <th className="w-1/6">Tischnummer</th>
-                            <th className="w-1/6"><svg xmlns="http://www.w3.org/2000/svg" className="inline h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg> Anzahl der Personen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tables.map((table, index) => (<tr key={index}>
-                            <td>{table.id}</td>
-                            <td className="text-right">{table.tableNumber}</td>
-                            <td className="text-right">{table.capacity}</td>
-                        </tr>))}
-                    </tbody>
-                </table>
-            </>)}
+        <div className="text-darkgrey">
+            <h1 className="text-2xl text-headline-black font-semibold mb-5">Tische</h1>
+            <div className="flex justify-between items-end mb-5">
+                <div>
+                    {/* Filter TODO: Add Dropdown */}
+                    <button className="text-lightgrey text-sm border border-border-grey rounded-xl mr-4 py-2 px-6">
+                        Personenanzahl
+                        <span className="text-headline-black font-semibold mx-3">Alle</span>
+                        <span><FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon></span>
+                    </button>
+                    {/* Filter End */}
+                    <button className="text-lightgrey text-sm border border-border-grey rounded-xl mr-4 py-2 px-6">
+                        Erstellt von
+                        <span className="text-headline-black font-semibold mx-3">Admin</span>
+                        <span><FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon></span>
+                    </button>
+                </div>
+                <div className="flex items-end">
+                    <p className="text-lightgrey mr-3">14 Tische</p>
+                    <button className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-8">
+                        <FontAwesomeIcon icon={faPlus} className="text-sm mr-3"></FontAwesomeIcon>
+                        Tisch hinzufügen
+                    </button>
+                </div>
+            </div>
+            <table className="table-fixed text-left min-w-full">
+                <thead className="bg-white-lightgrey">
+                    <tr className="text-darkgrey text-xs tracking-widest uppercase">
+                        <th className="text-center w-1/12 py-5">
+                            <input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
+                        </th>
+                        <th className="w-2/12">
+                            Tischnummer
+                            <FontAwesomeIcon icon={faSort} className="ml-2"></FontAwesomeIcon>
+                        </th>
+                        <th className="w-3/12">
+                            <FontAwesomeIcon icon={faUsers} className="mr-2"></FontAwesomeIcon>
+                            Personenanzahl
+                            <FontAwesomeIcon icon={faSort} className="ml-2"></FontAwesomeIcon>
+                        </th>
+                        <th className="w-3/12">Erstellt von</th>
+                        <th className="w-2/12">Aktionen</th>
+                        <th className="w-1/12 text-center">
+                            <button onClick={() => syncTables()}>
+                                <FontAwesomeIcon icon={faSyncAlt}></FontAwesomeIcon>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody className="divide-y divide-border-grey">
+                    {isLoadingTables ?
+                        (<tr className="text-lightgrey">
+                            <td className="flex items-center">
+                                {/* TODO: Design Loading */}
+                                <FontAwesomeIcon icon={faCircleNotch} className="animate-spin mr-3"></FontAwesomeIcon>
+                                <p className="text-semibold">Loading Tables</p>
+                            </td>
+                        </tr>)
+                        :
+                        (<>
+                            {
+                                tables.map((table, index) => (<tr key={index}>
+                                    <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
+                                    <td>{table.id}</td>
+                                    <td>{table.tableNumber}</td>
+                                    <td>{table.capacity}</td>
+                                    <td className="text-lightgrey">
+                                        <button className="mr-5">
+                                            <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
+                                            Bearbeiten
+                                        </button>
+                                        {/* TODO: Dropdown */}
+                                        <button>
+                                            <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
+                                        </button>
+                                    </td>
+                                </tr>))
+                            }
+                        </>)}
+                </tbody>
+            </table>
         </div>
     )
 }

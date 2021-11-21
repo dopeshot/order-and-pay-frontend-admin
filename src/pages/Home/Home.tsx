@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 export const Home: React.FunctionComponent = () => {
     return (
         <div>
-            <h3 className="text-lg font-bold">HomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHomeHome</h3>
-            <Link to="/tables">Hello</Link>
+            <h3 className="text-2xl font-bold">Welcome</h3>
+            <Link to="/tables">Gehe zu Tabellen</Link>
         </div>
     )
 }

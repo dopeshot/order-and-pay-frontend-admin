@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {
-  BrowserRouter as Router, Route, Switch, Redirect
+  BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
 import { useActions } from '../../overmind';
 import { Example } from '../../pages/Example/Example';
