@@ -1,5 +1,7 @@
 import { toggleSidebar } from "../../services/utilities"
 import logo from '../../img/logo.png'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSearch } from "@fortawesome/free-solid-svg-icons"
 
 export const Topbar: React.FunctionComponent = () => {
     return (
@@ -11,9 +13,14 @@ export const Topbar: React.FunctionComponent = () => {
             <img src={logo} alt="logo" className="max-w-full" />
             {/* Logo End */}
             <div className="container">
-                <div className="search-wrapper inline-block relative">
-                    <input type="text" placeholder="Search..." className="border border-border-grey rounded-xl focus-visible:border-primary-blue placeholder-lightgrey w-auto md:w-80 py-2 pl-12"></input>
-                </div>
+                <form>
+                    <div className="relative">
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-4">
+                            <FontAwesomeIcon icon={faSearch} className="text-lightgrey text-sm"></FontAwesomeIcon>
+                        </div>
+                        <input type="text" placeholder="Search..." className="text-darkgrey border border-border-grey rounded-xl focus-visible:border-primary-blue placeholder-lightgrey w-auto md:w-80 py-2 pl-12" />
+                    </div>
+                </form>
             </div>
         </div>
     )

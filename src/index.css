@@ -31,13 +31,8 @@ body {
     @apply bg-active-grey text-primary-blue font-semibold border-l-4 border-primary-blue;
 }
 
-/** Search **/
-.search-wrapper::before {
-    font-family: "Font Awesome 5 Free";
-    content: "\f002";
-    @apply absolute text-lightgrey text-sm font-black top-3 left-5 
-}
 
+/*** Search ***/
 input::placeholder {
     font-size: 15px;
 }

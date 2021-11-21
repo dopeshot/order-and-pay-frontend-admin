@@ -1,3 +1,5 @@
+import { faChair, faHome, faReceipt, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { NavLink } from "react-router-dom"
 
 export const Sidebar: React.FunctionComponent = () => {
@@ -9,18 +11,18 @@ export const Sidebar: React.FunctionComponent = () => {
                     <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
                         <span className="bg-white-lightgrey pr-3">Betrieb</span>
                     </h5>
-                    {/* Heading End */}
                 </div>
+                {/* Heading End */}
                 <ul>
                     <li>
                         <NavLink to="/home" className="block hover:bg-active-grey w-full h-full py-2 px-6">
-                            <i className="fa fa-home text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <FontAwesomeIcon icon={faHome} className="text-lg text-center mr-5" style={{ width: "24px" }}></FontAwesomeIcon>
                             <span>Dashboard</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/order" className="block hover:bg-active-grey w-full h-full py-2 px-6">
-                            <i className="fa fa-receipt text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <FontAwesomeIcon icon={faReceipt} className="text-lg text-center mr-5" style={{ width: "24px" }}></FontAwesomeIcon>
                             <span>Bestellungen</span>
                         </NavLink>
                     </li>
@@ -32,18 +34,18 @@ export const Sidebar: React.FunctionComponent = () => {
                     <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
                         <span className="bg-white-lightgrey pr-3">Konfiguration</span>
                     </h5>
-                    {/* Heading End */}
                 </div>
+                {/* Heading End */}
                 <ul>
                     <li>
                         <NavLink to="/tables" className="block hover:bg-active-grey w-full h-full py-2 px-6">
-                            <i className="fa fa-chair text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <FontAwesomeIcon icon={faChair} className="text-lg text-center mr-5" style={{ width: "24px" }}></FontAwesomeIcon>
                             <span>Tische</span>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink to="/menu" className="block hover:bg-active-grey w-full h-full py-2 px-6">
-                            <i className="fa fa-utensils text-lg text-center mr-5" style={{ width: "24px" }}></i>
+                            <FontAwesomeIcon icon={faUtensils} className="text-lg text-center mr-5" style={{ width: "24px" }}></FontAwesomeIcon>
                             <span>Menü</span>
                         </NavLink>
                     </li>
