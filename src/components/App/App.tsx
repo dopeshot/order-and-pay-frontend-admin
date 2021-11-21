@@ -23,7 +23,7 @@ export const App: React.FunctionComponent = () => {
           <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
             <Sidebar />
             <div className="flex-1 overflow-y-auto">
-              <div className="container md:max-w-full">
+              <div className="container md:max-w-full mt-12">
               {/* Content Start */}
               <Switch>
                 <Route exact path="/tables" component={Tables} />
