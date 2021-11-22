@@ -1,4 +1,4 @@
-import { faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faChevronDown, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
@@ -14,9 +14,11 @@ export const Tables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const { syncTables, toggleMoreOptions, deleteTable } = useActions().tables
+    const { syncTables, toggleMoreOptions, changeTable, deleteTable, setIsEdit } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
+    const [tableNumber, setTableNumber] = useState("")
+    const [tableCapacity, setTableCapacity] = useState(0)
 
     useEffect(() => {
         if (!hasLoadedTablesOnce)
@@ -80,22 +82,42 @@ export const Tables: React.FunctionComponent = () => {
                         !isLoadingTables &&
                         tables.map((table, index) => (<tr key={index}>
                             <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
-                            <td className="font-roboto font-semibold">{table.tableNumber}</td>
+                            <td className="font-roboto font-semibold">
+                                {table.isEdit ?
+                                    <input type="text" id="tablenumber" name="tablenumber" value={tableNumber} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
+                                    : table.tableNumber
+                                }
+                            </td>
                             { /* TODO: Add icons depending of the person count */}
-                            <td className="font-roboto font-semibold">{table.capacity}</td>
+                            <td className="font-roboto font-semibold">
+                                {table.isEdit ?
+                                    <input type="number" id="tablecapacity" name="tablecapacity" value={tableCapacity} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
+                                    : table.capacity
+                                }
+                            </td>
                             <td>
                                 <h5 className="font-semibold text-sm h-3">{table.createdBy}</h5>
                                 <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
                             </td>
                             <td className="text-lightgrey">
-                                <button className="mr-5">
-                                    <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
+                                {table.isEdit ? <button onClick={() => {
+                                    changeTable({ id: table.id, tableNumber: tableNumber, capacity: tableCapacity, updatedAt: new Date(), createdBy: "Da Burger" })
+                                    setIsEdit(table.id)
+                                }} className="text-primary-blue font-semibold mr-5">
+                                    <FontAwesomeIcon icon={faCheck} className="mr-2"></FontAwesomeIcon>
+                                    Speichern
+                                </button> : <button onClick={() => {
+                                    setIsEdit(table.id)
+                                    setTableNumber(table.id)
+                                    setTableCapacity(table.capacity)
+                                }} className="mr-5">
+                                    <FontAwesomeIcon icon={faEdit} className="mr-2"></FontAwesomeIcon>
                                     Bearbeiten
-                                </button>
+                                </button>}
                                 <div className="relative inline-block">
                                     {/* When dropdown open click outside close it */}
                                     {table.isMoreOptionsOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table.id)}></div>}
-                                    
+
                                     <button onClick={() => { toggleMoreOptions(table.id) }}>
                                         <FontAwesomeIcon icon={faEllipsisV} className="mx-4"></FontAwesomeIcon>
                                     </button>
@@ -114,11 +136,13 @@ export const Tables: React.FunctionComponent = () => {
                     }
                 </tbody>
             </table>
-            {isLoadingTables &&
+            {
+                isLoadingTables &&
                 <>
                     <FontAwesomeIcon icon={faCircleNotch} className="animate-spin mr-3"></FontAwesomeIcon>
                     <p className="text-semibold">Loading Tables</p>
-                </>}
-        </div>
+                </>
+            }
+        </div >
     )
 }

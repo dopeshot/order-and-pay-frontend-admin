@@ -16,9 +16,18 @@ export const addTable = async ({ state }: Context, table: Table) => {
     state.tables.tables = [...state.tables.tables, table]
 }
 
+export const changeTable = async ({ state }: Context, table: Table) => {
+    const tableToChange = state.tables.tables.find(e => e.id === table.id)!
+    Object.assign(tableToChange, table)
+}
+
+export const setIsEdit = async ({ state }: Context, id: string) => {
+    const tableToChange = state.tables.tables.find(e => e.id === id)!
+    tableToChange.isEdit = !tableToChange.isEdit
+}
+
 export const toggleMoreOptions = async({ state }: Context, id: string) => {
     console.log("Modal open for: " + id)
-    //state.tables.tables = state.tables.tables.map(table => ({...table, isMoreOptionsOpen: false}))
     const table = state.tables.tables.find(table => table.id === id)!
     table.isMoreOptionsOpen = !table.isMoreOptionsOpen
 }
@@ -28,3 +37,5 @@ export const deleteTable = async({ state, actions }: Context, id: string) => {
     // Delete table
     state.tables.tables = state.tables.tables.filter(table => table.id !== id)
 }
+
+

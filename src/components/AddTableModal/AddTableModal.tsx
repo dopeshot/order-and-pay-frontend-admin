@@ -25,7 +25,7 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
                     <div className="bg-white mb-5">
                         <h1 className="text-headline-black text-2xl font-semibold mb-4">Neuer Tisch</h1>
                         <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Tischnummer</label>
-                        <input type="text" id="tablenumber" name="tablenumber" value={tableNumber} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={16} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-full mb-5 pl-4 py-2 sm:w-1/2" />
+                        <input type="text" id="tablenumber" name="tablenumber" value={tableNumber} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-full mb-5 pl-4 py-2 sm:w-1/2" />
 
                         <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Personenanzahl</label>
                         <input type="number" pattern="[0-9]*" id="tablenumber" name="tablenumber" value={peopleCount || ''} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setPeopleCount(parseInt(event.target.value))} min={1} max={100} placeholder="2" className="font-roboto border border-border-grey rounded-xl w-full pl-4 py-2 mb-3 sm:w-1/2 sm:mb-0" />

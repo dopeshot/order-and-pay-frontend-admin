@@ -4,7 +4,8 @@ export type Table = {
     capacity: number,
     updatedAt: Date,
     createdBy: string,
-    isMoreOptionsOpen?: boolean
+    isMoreOptionsOpen?: boolean,
+    isEdit?: boolean
 }
 
 export type State = {
