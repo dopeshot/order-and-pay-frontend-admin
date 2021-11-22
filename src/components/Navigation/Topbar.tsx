@@ -2,9 +2,10 @@ import { faBars, faBell, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import avatar from '../../img/avatar.png'
 import logo from '../../img/logo.png'
-import { toggleSidebar } from "../../services/utilities"
+import { useActions } from "../../overmind"
 
 export const Topbar: React.FunctionComponent = () => {
+    const { toggleSidebar } = useActions().app
     return (
         <div className="flex items-center bg-white shadow pl-3 md:pl-8" style={{ height: "64px" }}>
             <button className="cursor-pointer mr-7" onClick={() => toggleSidebar()}>
