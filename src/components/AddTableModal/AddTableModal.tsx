@@ -40,7 +40,7 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
                     </div>
                     <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                         <button onClick={() => {
-                            addTable({ id: "mongoid", tableNumber: tableNumber, capacity: peopleCount!, updatedAt: new Date(), createdBy: "Da Burger" })
+                            addTable({ id: Math.random().toString(), tableNumber: tableNumber, capacity: peopleCount!, updatedAt: new Date(), createdBy: "Da Burger" })
                             setDisplayModal(false)
                         }} className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-9 sm:mt-0 sm:w-auto">
                             <FontAwesomeIcon icon={faCheck} className="text-sm mr-3"></FontAwesomeIcon>

@@ -5,8 +5,17 @@ import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
 import { useActions, useAppState } from "../../overmind"
 
 export const Tables: React.FunctionComponent = () => {
-    const { tables, isLoadingTables, hasLoadedTablesOnce } = useAppState().tables
-    const { syncTables } = useActions().tables
+    const {
+        tables: {
+            tables, isLoadingTables, hasLoadedTablesOnce
+        },
+        app: {
+            languageLocale
+        }
+    } = useAppState()
+
+    const { syncTables, toggleMoreOptions, deleteTable } = useActions().tables
+
     const [displayModal, setDisplayModal] = useState(false)
 
     useEffect(() => {
@@ -17,7 +26,7 @@ export const Tables: React.FunctionComponent = () => {
 
     return (
         <div className="text-darkgrey">
-            {displayModal && <AddTableModal setDisplayModal={setDisplayModal} /> }
+            {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
             <h1 className="text-2xl text-headline-black font-semibold mb-5">Tische</h1>
             <div className="flex justify-between items-end mb-5">
                 <div>
@@ -67,54 +76,49 @@ export const Tables: React.FunctionComponent = () => {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-border-grey">
-                    {isLoadingTables ?
-                        (<tr className="text-lightgrey">
-                            <td className="flex items-center">
-                                {/* TODO: Design Loading */}
-                                <FontAwesomeIcon icon={faCircleNotch} className="animate-spin mr-3"></FontAwesomeIcon>
-                                <p className="text-semibold">Loading Tables</p>
+                    {
+                        !isLoadingTables &&
+                        tables.map((table, index) => (<tr key={index}>
+                            <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
+                            <td className="font-roboto font-semibold">{table.tableNumber}</td>
+                            { /* TODO: Add icons depending of the person count */}
+                            <td className="font-roboto font-semibold">{table.capacity}</td>
+                            <td>
+                                <h5 className="font-semibold text-sm h-3">{table.createdBy}</h5>
+                                <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
                             </td>
-                        </tr>)
-                        :
-                        (<>
-                            {
-                                tables.map((table, index) => (<tr key={index}>
-                                    <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
-                                    <td className="font-roboto font-semibold">{table.tableNumber}</td>
-                                    { /* TODO: Add icons depending of the person count */}
-                                    <td className="font-roboto font-semibold">{table.capacity}</td>
-                                    <td>
-                                        <h5 className="font-semibold text-sm h-3">{table.createdBy}</h5>
-                                        <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString('de-DE')}</small>
-                                    </td>
-                                    <td className="text-lightgrey">
-                                        <button className="mr-5">
-                                            <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
-                                            Bearbeiten
-                                        </button>
-                                        {/* TODO: Dropdown */}
-                                        <div className="relative inline-block">
-                                            {/* TODO: When dropdown open click outside close it */}
-                                            {/*<div onClick={() => showHideElement('#table-delete-dropdown')} className="hidden fixed inset-0 h-full w-full z-10"></div>*/}
+                            <td className="text-lightgrey">
+                                <button className="mr-5">
+                                    <FontAwesomeIcon icon={faEdit} className="mr-3"></FontAwesomeIcon>
+                                    Bearbeiten
+                                </button>
+                                <div className="relative inline-block">
+                                    {/* TODO: When dropdown open click outside close it */}
+                                    {/*<div onClick={() => showHideElement('#table-delete-dropdown')} className="hidden fixed inset-0 h-full w-full z-10"></div>*/}
 
-                                            <button onClick={() => showHideElement('#table-delete-dropdown')}>
-                                                <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
+                                    <button onClick={() => { toggleMoreOptions(table.id) }}>
+                                        <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
+                                    </button>
+                                    {table.isMoreOptionsOpen && <div id="table-delete-dropdown" className="absolute origin-top-right right-0 z-20 bg-white rounded-lg shadow mt-2 w-30" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
+                                        <div className="py-1" role="none">
+                                            <button onClick={() => deleteTable(table.id)} className="block text-darkgrey text-sm px-4 py-2" role="menuitem" tabIndex={-1} id="menu-item-0">
+                                                <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3"></FontAwesomeIcon>
+                                                Löschen
                                             </button>
-                                            <div id="table-delete-dropdown" className="hidden absolute origin-top-right right-0 z-20 bg-white rounded-lg shadow mt-2 w-30" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
-                                                <div className="py-1" role="none">
-                                                    <button className="block text-darkgrey text-sm px-4 py-2" role="menuitem" tabIndex={-1} id="menu-item-0">
-                                                        <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3"></FontAwesomeIcon>
-                                                        Löschen
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
-                                    </td>
-                                </tr>))
-                            }
-                        </>)}
+                                    </div>}
+                                </div>
+                            </td>
+                        </tr>))
+
+                    }
                 </tbody>
             </table>
+            {isLoadingTables &&
+                <>
+                    <FontAwesomeIcon icon={faCircleNotch} className="animate-spin mr-3"></FontAwesomeIcon>
+                    <p className="text-semibold">Loading Tables</p>
+                </>}
         </div>
     )
 }

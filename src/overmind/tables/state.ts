@@ -3,7 +3,8 @@ export type Table = {
     tableNumber: string,
     capacity: number,
     updatedAt: Date,
-    createdBy: string
+    createdBy: string,
+    isMoreOptionsOpen?: boolean
 }
 
 export type State = {
