@@ -93,11 +93,11 @@ export const Tables: React.FunctionComponent = () => {
                                     Bearbeiten
                                 </button>
                                 <div className="relative inline-block">
-                                    {/* TODO: When dropdown open click outside close it */}
-                                    {/*<div onClick={() => showHideElement('#table-delete-dropdown')} className="hidden fixed inset-0 h-full w-full z-10"></div>*/}
-
+                                    {/* When dropdown open click outside close it */}
+                                    {table.isMoreOptionsOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table.id)}></div>}
+                                    
                                     <button onClick={() => { toggleMoreOptions(table.id) }}>
-                                        <FontAwesomeIcon icon={faEllipsisV}></FontAwesomeIcon>
+                                        <FontAwesomeIcon icon={faEllipsisV} className="mx-4"></FontAwesomeIcon>
                                     </button>
                                     {table.isMoreOptionsOpen && <div id="table-delete-dropdown" className="absolute origin-top-right right-0 z-20 bg-white rounded-lg shadow mt-2 w-30" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
                                         <div className="py-1" role="none">
