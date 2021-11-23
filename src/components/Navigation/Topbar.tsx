@@ -33,7 +33,7 @@ export const Topbar: React.FunctionComponent = () => {
                         {/* TODO: Message Dropdown */}
                         <img src={avatar} className="w-10 h-10 mr-3" alt="Avatar"></img>
                         <div className="flex flex-col justify-center">
-                            <h6 className="text-darkgrey font-semibold leading-3">Da Burger</h6>
+                            <h6 className="text-darkgrey font-semibold leading-5">Da Burger</h6>
                             <small className="text-lightgrey text-xs">Admin</small>
                         </div>
                     </div>
