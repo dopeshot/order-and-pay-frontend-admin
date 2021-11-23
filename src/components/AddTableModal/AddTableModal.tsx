@@ -1,7 +1,8 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useActions } from "../../overmind"
+import { PrimaryButton } from "../PrimaryButton.tsx/PrimaryButton"
+import { SecondaryButton } from "../SecondaryButton.tsx/SecondaryButton"
 
 export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dispatch<React.SetStateAction<boolean>> }> = ({ setDisplayModal }) => {
 
@@ -39,16 +40,11 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
                         </div>
                     </div>
                     <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
-                        <button onClick={() => {
+                        <PrimaryButton icon={faCheck} content="Speichern" onClick={() => {
                             addTable({ id: Math.random().toString(), tableNumber: tableNumber, capacity: peopleCount!, updatedAt: new Date(), createdBy: "Da Burger" })
                             setDisplayModal(false)
-                        }} className="bg-primary-blue text-white font-semibold border border-transparent rounded-xl py-2 px-9 sm:mt-0 sm:w-auto">
-                            <FontAwesomeIcon icon={faCheck} className="text-sm mr-3"></FontAwesomeIcon>
-                            Speichern
-                        </button>
-                        <button type="button" onClick={() => setDisplayModal(false)} className="text-primary-blue font-semibold mt-2 py-2 sm:mt-0 sm:py-0">
-                            Abbrechen
-                        </button>
+                        }}></PrimaryButton>
+                        <SecondaryButton content="Abbrechen" onClick={() => setDisplayModal(false)}></SecondaryButton>
                     </div>
                 </div>
                 {/* Modal End */}
