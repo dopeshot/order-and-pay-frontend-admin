@@ -33,6 +33,15 @@ body {
     @apply bg-active-grey text-primary-blue font-semibold border-primary-blue;
 }
 
+.sidebar-content-overlay {
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 64px);
+    background-color: black;
+    opacity: 50%;
+    pointer-events: revert;
+}
+
 
 /*** Search ***/
 
