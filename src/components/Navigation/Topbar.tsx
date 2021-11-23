@@ -19,7 +19,7 @@ export const Topbar: React.FunctionComponent = () => {
                     <span className="absolute flex items-center inset-y-0 left-0 pl-4">
                         <FontAwesomeIcon icon={faSearch} className="text-lightgrey text-sm"></FontAwesomeIcon>
                     </span>
-                    <input type="text" placeholder="Search..." className="text-darkgrey border border-border-grey rounded-xl focus-visible:border-primary-blue placeholder-lightgrey w-auto md:w-80 py-2 pl-12" />
+                    <input type="search" placeholder="Search..." className="rounded-xl placeholder-lightgrey w-auto md:w-80 py-2 pl-12" />
                 </div>
                 <div className="flex">
                     <button className="cursor-pointer w-10 h-10 rounded-full hover:bg-gray-200 focus:bg-gray-200 mr-4">

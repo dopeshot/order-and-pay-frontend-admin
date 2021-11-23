@@ -2,16 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary-color: #0967d2;
+    --border-grey: #e4e7eb;
+}
+
 :focus-visible {
-    outline: #0967D2 auto 1px;
+    outline: var(--primary-color) auto 1px;
 }
 
 /*** Font ***/
 
 body {
-    font-family: "sofia-pro", ui-sans-serif, system-ui, "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "sofia-pro", ui-sans-serif, system-ui, "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto",
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
 }
-
 
 /**** Sidebar ****/
 
@@ -37,9 +43,27 @@ body {
     @apply bg-active-grey text-primary-blue font-semibold border-primary-blue;
 }
 
-
 /*** Search ***/
+input[type="search"] {
+    outline: var(--border-grey) solid 1px;
+}
+
+input:focus-visible {
+    outline: var(--primary-color) auto 1px;
+}
 
 input::placeholder {
     font-size: 15px;
+}
+
+input::-webkit-search-cancel-button {
+    position: relative;
+    right: 1rem;
+
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='SvgjsSvg1001' width='288' height='288' xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs'%3E%3Cdefs id='SvgjsDefs1002'%3E%3C/defs%3E%3Cg id='SvgjsG1008' transform='matrix(1,0,0,1,0,0)'%3E%3Csvg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' class='svg-inline--fa fa-times fa-w-11' data-icon='times' data-prefix='fas' viewBox='0 0 352 512' width='288' height='288'%3E%3Cpath fill='%230967d2' d='M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z' class='colorcurrentColor svgShape'%3E%3C/path%3E%3C/svg%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
