@@ -33,7 +33,7 @@ export const Sidebar: React.FunctionComponent = () => {
 
     return (
         <>
-            <nav style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 1, transform: !layoutIsSideBarOpen && isMobile ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
+            <nav style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 1, transform: !layoutIsSideBarOpen && isMobile ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-x-auto transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
                 {sidebarContent.map((sidebarItem, i) => <div key={i} className="text-darkgrey mt-16">
                     <div className="mx-6">
                         <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
