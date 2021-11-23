@@ -42,7 +42,7 @@ export const Sidebar: React.FunctionComponent = () => {
                     </div>
                     <ul>
                         {sidebarItem.items.map((sidebarAtom, i) => <li key={i}>
-                            <NavLink to={sidebarAtom.path} className="whitespace-nowrap block border-l-4 border-transparent hover:bg-active-grey w-full h-full py-2 px-5">
+                            <NavLink to={sidebarAtom.path} onClick={() => isMobile && closeSidebar()} className="whitespace-nowrap block border-l-4 border-transparent hover:bg-active-grey w-full h-full py-2 px-5">
                                 <FontAwesomeIcon icon={sidebarAtom.icon} className="text-lg text-center mr-5" style={{ width: "24px" }}></FontAwesomeIcon>
                                 <span className={`transition-opacity duration-500 ease-in-out ${layoutIsSideBarOpen ? `opacity-100` : `opacity-0`}`}>{sidebarAtom.title}</span>
                             </NavLink>
