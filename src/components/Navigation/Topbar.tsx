@@ -2,13 +2,14 @@ import { faBars, faBell, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import avatar from '../../img/avatar.png'
 import logo from '../../img/logo.png'
-import { useActions } from "../../overmind"
+import { useActions, useAppState } from "../../overmind"
 
 export const Topbar: React.FunctionComponent = () => {
     const { toggleSidebar } = useActions().app
+    const { isMobile } = useAppState().app
     return (
         <div className="flex items-center bg-white shadow pr-3 md:pr-8 pl-5" style={{ height: "64px" }}>
-            <button className="cursor-pointer w-10 h-10 rounded-full  hover:bg-gray-200 focus:bg-gray-200 mr-7" onClick={() => toggleSidebar()}>
+            <button className="cursor-pointer w-10 h-10 rounded-full  hover:bg-gray-200 focus:bg-gray-200 md:mr-7" onClick={() => toggleSidebar()}>
                 <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
             </button>
             {/* Logo */}
@@ -22,7 +23,10 @@ export const Topbar: React.FunctionComponent = () => {
                     <input type="search" placeholder="Search..." className="rounded-xl placeholder-lightgrey w-auto md:w-80 py-2 pl-12" />
                 </div>
                 <div className="flex">
-                    <button className="cursor-pointer w-10 h-10 rounded-full hover:bg-gray-200 focus:bg-gray-200 mr-4">
+                    {isMobile && <button className="cursor-pointer w-10 h-10 rounded-full mr-2 hover:bg-gray-200 focus:bg-gray-200 md:mr-4">
+                        <FontAwesomeIcon icon={faSearch} className="text-lightgrey"></FontAwesomeIcon>
+                    </button>}
+                    <button className="cursor-pointer w-10 h-10 rounded-full mr-2 hover:bg-gray-200 focus:bg-gray-200 md:mr-4">
                         <FontAwesomeIcon icon={faBell} className="text-lightgrey"></FontAwesomeIcon>
                     </button>
                     <div className="flex">
