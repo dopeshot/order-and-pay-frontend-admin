@@ -1,5 +1,5 @@
 export type Table = {
-    id: string,
+    _id: string,
     tableNumber: string,
     capacity: number,
     updatedAt: Date,

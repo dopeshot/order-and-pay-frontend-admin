@@ -15,7 +15,7 @@ export const Tables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const { loadTables, toggleMoreOptions, changeTable, deleteTable, setIsEdit } = useActions().tables
+    const { loadTables, deleteTable, toggleMoreOptions, changeTable, setIsEdit } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
@@ -29,7 +29,7 @@ export const Tables: React.FunctionComponent = () => {
         <div className="text-darkgrey">
             {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
             <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
-            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">14 Gesamt</p>
+            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{tables.length} Gesamt</p>
             <div className="flex sm:justify-end items-end mb-5">
                 {/* Filter TODO: Add Dropdown
                 <div>
@@ -98,14 +98,14 @@ export const Tables: React.FunctionComponent = () => {
                             </td>
                             <td className="text-lightgrey">
                                 {table.isEdit ? <button onClick={() => {
-                                    changeTable({ id: table.id, tableNumber: tableNumber, capacity: tableCapacity, updatedAt: new Date(), createdBy: "Da Burger" })
-                                    setIsEdit(table.id)
+                                    changeTable({ _id: table._id, tableNumber: tableNumber, capacity: tableCapacity, updatedAt: new Date(), createdBy: "Da Burger" })
+                                    setIsEdit(table._id)
                                 }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
                                     <FontAwesomeIcon icon={faCheck} className="mr-2"></FontAwesomeIcon>
                                     Speichern
                                 </button> : <button onClick={() => {
-                                    setIsEdit(table.id)
-                                    setTableNumber(table.id)
+                                    setIsEdit(table._id)
+                                    setTableNumber(table._id)
                                     setTableCapacity(table.capacity)
                                 }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
                                     <FontAwesomeIcon icon={faEdit} className="mr-2"></FontAwesomeIcon>
@@ -113,14 +113,14 @@ export const Tables: React.FunctionComponent = () => {
                                 </button>}
                                 <div className="relative inline-block">
                                     {/* When dropdown open click outside close it */}
-                                    {table.isMoreOptionsOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table.id)}></div>}
+                                    {table.isMoreOptionsOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table._id)}></div>}
 
-                                    <button className="hover:text-gray-500 focus:hover:text-gray-500" onClick={() => { toggleMoreOptions(table.id) }}>
+                                    <button className="hover:text-gray-500 focus:hover:text-gray-500" onClick={() => { toggleMoreOptions(table._id) }}>
                                         <FontAwesomeIcon icon={faEllipsisV} className="mx-4"></FontAwesomeIcon>
                                     </button>
                                     {table.isMoreOptionsOpen && <div id="table-delete-dropdown" className="absolute origin-top-right right-0 z-20 bg-white rounded-lg shadow mt-2 w-30" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
                                         <div className="py-1" role="none">
-                                            <button onClick={() => deleteTable(table.id)} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" role="menuitem" tabIndex={-1} id="menu-item-0">
+                                            <button onClick={() => deleteTable(table._id)} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" role="menuitem" tabIndex={-1} id="menu-item-0">
                                                 <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3"></FontAwesomeIcon>
                                                 Löschen
                                             </button>

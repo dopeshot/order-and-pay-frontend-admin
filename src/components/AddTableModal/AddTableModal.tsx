@@ -11,7 +11,7 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
     const [tableNumber, setTableNumber] = useState("")
     const [peopleCount, setPeopleCount] = useState<number>()
 
-    const { addTable } = useActions().tables
+    const { createTable } = useActions().tables
 
     return (
         <div className="fixed z-10 inset-0" aria-labelledby="add-table" role="dialog" aria-modal="true">
@@ -41,7 +41,7 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
                     </div>
                     <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                         <PrimaryButton icon={faCheck} content="Speichern" onClick={() => {
-                            addTable({ id: Math.random().toString(), tableNumber: tableNumber, capacity: peopleCount!, updatedAt: new Date(), createdBy: "Da Burger" })
+                            createTable({ tableNumber: tableNumber, capacity: peopleCount! })
                             setDisplayModal(false)
                         }}></PrimaryButton>
                         <SecondaryButton content="Abbrechen" onClick={() => setDisplayModal(false)}></SecondaryButton>
