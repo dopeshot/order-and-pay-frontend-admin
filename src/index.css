@@ -7,14 +7,17 @@
 }
 
 /*** Font ***/
+
 body {
     font-family: "sofia-pro", ui-sans-serif, system-ui, "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+
 /**** Sidebar ****/
+
 .sidebar {
+    transition-property: all;
     max-width: 250px;
-    transition: 1s;
     flex: 1 1 auto;
     @apply bg-white-lightgrey;
 }
@@ -27,16 +30,16 @@ body {
 .sidebar-closed {
     flex: 74px 0 0;
     max-width: 74px;
-    transition: 1s;
     @apply bg-white-lightgrey;
 }
 
 .active {
-    @apply bg-active-grey text-primary-blue font-semibold border-l-4 border-primary-blue;
+    @apply bg-active-grey text-primary-blue font-semibold border-primary-blue;
 }
 
 
 /*** Search ***/
+
 input::placeholder {
     font-size: 15px;
 }
