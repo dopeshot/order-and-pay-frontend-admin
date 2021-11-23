@@ -10,12 +10,10 @@ export type Table = {
 
 export type State = {
     isLoadingTables: boolean,
-    hasLoadedTablesOnce: boolean,
     tables: Table[]
 }
 
 export const state: State = {
     isLoadingTables: false,
-    hasLoadedTablesOnce: false,
     tables: []
 }

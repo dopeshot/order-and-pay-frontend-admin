@@ -1,14 +1,13 @@
 import { Context } from ".."
 import { Table } from "./state"
 
-export const syncTables = async ({ state }: Context) => {
-    state.tables.hasLoadedTablesOnce = true
+export const loadTables = async ({ state, effects }: Context) => {
     state.tables.isLoadingTables = true
-    state.tables.tables = await new Promise<Table[]>((resolve) => {
-        setTimeout(() => {
-            resolve([{ id: "1", tableNumber: "1", capacity: 4, updatedAt: new Date(), createdBy: "Admin" }, { id: "2", tableNumber: "2", capacity: 2, updatedAt: new Date(), createdBy: "Admin" }, { id: "3", tableNumber: "3", capacity: 4, updatedAt: new Date(), createdBy: "Admin" }])
-        }, 20)
-    })
+    try {
+        state.tables.tables = await effects.tables.getTables()
+    } catch(error) {
+        console.error(error)
+    }
     state.tables.isLoadingTables = false
 }
 

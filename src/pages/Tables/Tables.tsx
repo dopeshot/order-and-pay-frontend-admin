@@ -8,24 +8,22 @@ import { useActions, useAppState } from "../../overmind"
 export const Tables: React.FunctionComponent = () => {
     const {
         tables: {
-            tables, isLoadingTables, hasLoadedTablesOnce
+            tables, isLoadingTables
         },
         app: {
             languageLocale
         }
     } = useAppState()
 
-    const { syncTables, toggleMoreOptions, changeTable, deleteTable, setIsEdit } = useActions().tables
+    const { loadTables, toggleMoreOptions, changeTable, deleteTable, setIsEdit } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
     const [tableCapacity, setTableCapacity] = useState(0)
 
     useEffect(() => {
-        if (!hasLoadedTablesOnce)
-            syncTables()
-    }, [syncTables, hasLoadedTablesOnce])
-
+        loadTables()
+    }, [loadTables])
 
     return (
         <div className="text-darkgrey">
@@ -70,7 +68,7 @@ export const Tables: React.FunctionComponent = () => {
                         <th className="pr-20 lg:pr-0">Erstellt von</th>
                         <th className="pr-10 lg:pr-0">Aktionen</th>
                         <th className="text-center pr-5">
-                            <button className="hover:text-gray-900 focus:hover:text-gray-900" onClick={() => syncTables()}>
+                            <button className="hover:text-gray-900 focus:hover:text-gray-900" onClick={() => loadTables()}>
                                 <FontAwesomeIcon icon={faSyncAlt}></FontAwesomeIcon>
                             </button>
                         </th>
