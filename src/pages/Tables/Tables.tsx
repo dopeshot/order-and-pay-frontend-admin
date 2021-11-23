@@ -31,7 +31,7 @@ export const Tables: React.FunctionComponent = () => {
         <div className="text-darkgrey">
             {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
             <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
-            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">14 Tische</p>
+            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">14 Gesamt</p>
             <div className="flex sm:justify-end items-end mb-5">
                 {/* Filter TODO: Add Dropdown
                 <div>

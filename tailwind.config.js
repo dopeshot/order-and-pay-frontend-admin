@@ -46,7 +46,6 @@ module.exports = {
     extend: {
       backgroundColor: ['checked, group-focus'],
       borderColor: ['checked, group-focus'],
-      textColor: ['group-focus']
     }
   },
   plugins: [],
