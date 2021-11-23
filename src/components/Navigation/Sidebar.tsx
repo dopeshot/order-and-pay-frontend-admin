@@ -5,17 +5,8 @@ import { NavLink } from "react-router-dom"
 import { useActions, useAppState } from "../../overmind"
 
 export const Sidebar: React.FunctionComponent = () => {
-    const { layoutIsSideBarOpen } = useAppState().app
+    const { layoutIsSideBarOpen, isMobile } = useAppState().app
     const { closeSidebar } = useActions().app
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-
-    const handleResize = () => {
-        setIsMobile(window.innerWidth < 768)
-    }
-
-    useEffect(() => {
-        window.addEventListener("resize", handleResize)
-    })
 
     const sidebarContent = [{
         title: 'Betrieb',
