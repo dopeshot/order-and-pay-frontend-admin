@@ -105,7 +105,7 @@ export const Tables: React.FunctionComponent = () => {
                                     Speichern
                                 </button> : <button onClick={() => {
                                     setIsEdit(table._id)
-                                    setTableNumber(table._id)
+                                    setTableNumber(table.tableNumber)
                                     setTableCapacity(table.capacity)
                                 }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
                                     <FontAwesomeIcon icon={faEdit} className="mr-2"></FontAwesomeIcon>
