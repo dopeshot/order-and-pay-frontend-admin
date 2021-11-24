@@ -25,6 +25,22 @@ export const createTable = async ({ tableNumber, capacity }: { tableNumber: stri
     return await {...newTable, updatedAt: new Date(newTable.updatedAt)}
 }
 
+export const updateTable = async ({ id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number}): Promise<Table> => {
+    const data = await fetch(`${Config.api.baseApiUrl}/tables/${id}`, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            tableNumber: parseInt(tableNumber), // TODO MC: Here we have to discuss if numbers or strings
+            capacity,
+            createdBy: "Demo"
+        })
+    })
+
+    const updatedTable = await data.json()
+    return await {...updatedTable, updatedAt: new Date(updatedTable.updatedAt)}
+}
 
 export const deleteTable = async (id: string): Promise<void> => {
     await await fetch(`${Config.api.baseApiUrl}/tables/${id}`, {

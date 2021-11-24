@@ -15,7 +15,7 @@ export const Tables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const { loadTables, deleteTable, toggleMoreOptions, changeTable, setIsEdit } = useActions().tables
+    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
@@ -98,8 +98,7 @@ export const Tables: React.FunctionComponent = () => {
                             </td>
                             <td className="text-lightgrey">
                                 {table.isEdit ? <button onClick={() => {
-                                    changeTable({ _id: table._id, tableNumber: tableNumber, capacity: tableCapacity, updatedAt: new Date(), createdBy: "Da Burger" })
-                                    setIsEdit(table._id)
+                                    updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity})
                                 }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
                                     <FontAwesomeIcon icon={faCheck} className="mr-2"></FontAwesomeIcon>
                                     Speichern

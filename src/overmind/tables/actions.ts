@@ -1,5 +1,4 @@
 import { Context } from ".."
-import { Table } from "./state"
 
 export const loadTables = async ({ state, effects }: Context) => {
     state.tables.isLoadingTables = true
@@ -31,9 +30,16 @@ export const deleteTable = async ({state, effects}: Context, id: string) => {
     }
 }
 
-export const changeTable = async ({ state }: Context, table: Table) => {
-    const tableToChange = state.tables.tables.find(e => e._id === table._id)!
-    Object.assign(tableToChange, table)
+export const updateTable = async ({state, effects, actions}: Context, { id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number}) => {
+    try {
+        const updatedTable = await effects.tables.updateTable({ id, tableNumber, capacity })
+        const oldTable = state.tables.tables.find(table => table._id === id)!
+        oldTable.capacity = updatedTable.capacity
+        oldTable.tableNumber = updatedTable.tableNumber
+    } catch(error) {
+        console.error(error)
+    }
+    actions.tables.setIsEdit(id)
 }
 
 export const setIsEdit = async ({ state }: Context, id: string) => {
