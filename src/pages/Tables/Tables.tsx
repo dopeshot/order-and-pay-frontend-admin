@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
 import { PrimaryButton } from "../../components/PrimaryButton.tsx/PrimaryButton"
 import { useActions, useAppState } from "../../overmind"
+import { TableDokument } from "../../overmind/tables/state"
 
 export const Tables: React.FunctionComponent = () => {
     const {
@@ -30,7 +31,7 @@ export const Tables: React.FunctionComponent = () => {
             {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
             <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
             <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{tables.length} Gesamt</p>
-            <div className="flex sm:justify-end items-end mb-5">
+            <div className="flex lg:justify-end mt-5 mb-5 lg:mt-0">
                 {/* Filter TODO: Add Dropdown
                 <div>
                     
@@ -46,9 +47,7 @@ export const Tables: React.FunctionComponent = () => {
                         <span><FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon></span>
                     </button>
                 </div>*/}
-                <div className="flex items-end">
-                    <PrimaryButton icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
-                </div>
+                <PrimaryButton icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
             </div>
             <table className="table-auto text-left whitespace-nowrap min-w-full">
                 <thead className="bg-white-lightgrey">
@@ -77,7 +76,7 @@ export const Tables: React.FunctionComponent = () => {
                 <tbody className="divide-y divide-border-grey">
                     {
                         !isLoadingTables &&
-                        tables.map((table, index) => (<tr key={index}>
+                        tables.map((table: TableDokument, index: number) => (<tr key={index}>
                             <td className="text-center py-4"><input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" /></td>
                             <td className="font-roboto font-semibold">
                                 {table.isEdit ?
@@ -98,7 +97,7 @@ export const Tables: React.FunctionComponent = () => {
                             </td>
                             <td className="text-lightgrey">
                                 {table.isEdit ? <button onClick={() => {
-                                    updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity})
+                                    updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity })
                                 }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
                                     <FontAwesomeIcon icon={faCheck} className="mr-2"></FontAwesomeIcon>
                                     Speichern

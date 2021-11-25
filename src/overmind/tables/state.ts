@@ -3,10 +3,15 @@ export type Table = {
     tableNumber: string,
     capacity: number,
     updatedAt: Date,
-    createdBy: string,
+    createdBy: string
+}
+
+export type TableHelper = {
     isMoreOptionsOpen?: boolean,
     isEdit?: boolean
 }
+
+export type TableDokument = Table & TableHelper
 
 export type State = {
     isLoadingTables: boolean,

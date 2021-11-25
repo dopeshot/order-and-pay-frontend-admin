@@ -1,4 +1,5 @@
 import { Context } from ".."
+import { TableDokument } from "./state"
 
 export const loadTables = async ({ state, effects }: Context) => {
     state.tables.isLoadingTables = true
@@ -43,12 +44,12 @@ export const updateTable = async ({state, effects, actions}: Context, { id, tabl
 }
 
 export const setIsEdit = async ({ state }: Context, id: string) => {
-    const tableToChange = state.tables.tables.find(e => e._id === id)!
+    const tableToChange: TableDokument = state.tables.tables.find(e => e._id === id)!
     tableToChange.isEdit = !tableToChange.isEdit
 }
 
 export const toggleMoreOptions = async({ state }: Context, id: string) => {
-    const table = state.tables.tables.find(table => table._id === id)!
+    const table: TableDokument = state.tables.tables.find(table => table._id === id)!
     table.isMoreOptionsOpen = !table.isMoreOptionsOpen
 }
 
