@@ -7,7 +7,7 @@ type ButtonProps = {
     onClick: (values: any) => void
 }
 
-export const PrimaryButton: React.FunctionComponent<ButtonProps> = (props: ButtonProps) => {
+export const PrimaryButton: React.FunctionComponent<ButtonProps> = (props) => {
     return (
         <button type="button" onClick={props.onClick} className="group bg-primary-blue hover:bg-primary-blue-hover focus:shadow-focus text-white font-semibold border border-transparent rounded-xl py-2 px-8">
             <FontAwesomeIcon icon={props.icon} className="group-hover:text-primary-blue-hover-icon text-sm mr-3" />
