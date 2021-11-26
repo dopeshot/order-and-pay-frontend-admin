@@ -15,7 +15,7 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
 
     const [tableNumber, setTableNumber] = useState("")
     const [peopleCount, setPeopleCount] = useState<number>()
-    const [error, setError] = useState(false)
+    const [error] = useState(false)
 
     const { createTable } = useActions().tables
 

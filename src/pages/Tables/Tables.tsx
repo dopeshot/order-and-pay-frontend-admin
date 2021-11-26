@@ -1,4 +1,4 @@
-import { faCheck, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTimesCircle, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
@@ -22,7 +22,7 @@ export const Tables: React.FunctionComponent = () => {
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
     const [tableCapacity, setTableCapacity] = useState(0)
-    const [error, setError] = useState(false)
+    const [error] = useState(false)
 
     const errorList: string[] = [
         "Your password must be at least 8 characters",
