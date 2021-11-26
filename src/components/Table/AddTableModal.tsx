@@ -1,9 +1,9 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { useActions } from "../../overmind"
-import { ErrorBanner } from "../ErrorBanner/ErrorBanner"
-import { PrimaryButton } from "../PrimaryButton.tsx/PrimaryButton"
-import { SecondaryButton } from "../SecondaryButton.tsx/SecondaryButton"
+import { ErrorBanner } from "../Errors/ErrorBanner"
+import { PrimaryButton } from "../Buttons/PrimaryButton"
+import { SecondaryButton } from "../Buttons/SecondaryButton"
 
 type TableModalProps = {
     setDisplayModal: React.Dispatch<React.SetStateAction<boolean>>

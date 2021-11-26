@@ -2,7 +2,7 @@ import { faBars, faBell, faSearch } from "@fortawesome/free-solid-svg-icons"
 import avatar from '../../img/avatar.png'
 import logo from '../../img/logo.png'
 import { useActions, useAppState } from "../../overmind"
-import { IconButton } from "../IconButton/IconButton"
+import { IconButton } from "../Buttons/IconButton"
 import { Search } from "../Search/Search"
 
 export const Topbar: React.FunctionComponent = () => {
