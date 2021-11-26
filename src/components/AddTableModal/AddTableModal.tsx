@@ -1,15 +1,21 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { useActions } from "../../overmind"
+import { ErrorBanner } from "../ErrorBanner/ErrorBanner"
 import { PrimaryButton } from "../PrimaryButton.tsx/PrimaryButton"
 import { SecondaryButton } from "../SecondaryButton.tsx/SecondaryButton"
 
 export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dispatch<React.SetStateAction<boolean>> }> = ({ setDisplayModal }) => {
 
     const peopleCountTemplates = [2, 4, 6]
+    const errorList: string[] = [
+        "Your password must be at least 8 characters",
+        "Your password must include at least one pro wrestling finishing move"
+    ]
 
     const [tableNumber, setTableNumber] = useState("")
     const [peopleCount, setPeopleCount] = useState<number>()
+    const [error, setError] = useState(false)
 
     const { createTable } = useActions().tables
 
@@ -25,6 +31,7 @@ export const AddTableModal: React.FunctionComponent<{ setDisplayModal: React.Dis
                 <div className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all w-full px-8 py-8 sm:align-middle sm:max-w-md sm:my-8 sm:p-10">
                     <div className="bg-white mb-5">
                         <h1 className="text-headline-black text-2xl font-semibold mb-4">Neuer Tisch</h1>
+                        {error && <ErrorBanner headlineContent="There where 2 Errors with your submittion" listContent={errorList} />}
                         <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Tischnummer</label>
                         <input type="text" id="tablenumber" name="tablenumber" value={tableNumber} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-full mb-5 pl-4 py-2 sm:w-1/2" />
 

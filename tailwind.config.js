@@ -38,7 +38,9 @@ module.exports = {
         'darkgrey': '#52606D',
         'active-grey': "#E8EEF5",
         'modal-bg-blue': '#132144',
-        'danger-red': '#EF4E4E'
+        'danger-red': '#EF4E4E',
+        'dark-danger-red': '#CF1124',
+        'darker-danger-red': '#AB091E'
       },
     },
   },

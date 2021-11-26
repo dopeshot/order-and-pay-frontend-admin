@@ -1,7 +1,8 @@
-import { faCheck, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTimesCircle, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { AddTableModal } from "../../components/AddTableModal/AddTableModal"
+import { ErrorBanner } from "../../components/ErrorBanner/ErrorBanner"
 import { PrimaryButton } from "../../components/PrimaryButton.tsx/PrimaryButton"
 import { useActions, useAppState } from "../../overmind"
 import { TableDokument } from "../../overmind/tables/state"
@@ -21,6 +22,12 @@ export const Tables: React.FunctionComponent = () => {
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
     const [tableCapacity, setTableCapacity] = useState(0)
+    const [error, setError] = useState(false)
+
+    const errorList: string[] = [
+        "Your password must be at least 8 characters",
+        "Your password must include at least one pro wrestling finishing move"
+    ]
 
     useEffect(() => {
         loadTables()
@@ -31,10 +38,10 @@ export const Tables: React.FunctionComponent = () => {
             {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
             <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
             <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{tables.length} Gesamt</p>
+            {error && <ErrorBanner headlineContent="There where 2 Errors with your submittion" listContent={errorList} />}
             <div className="flex lg:justify-end mt-5 mb-5 lg:mt-0">
                 {/* Filter TODO: Add Dropdown
                 <div>
-                    
                     <button className="text-lightgrey text-sm border border-border-grey rounded-xl mr-4 py-2 px-6">
                         Personenanzahl
                         <span className="text-headline-black font-semibold mx-3">Alle</span>
