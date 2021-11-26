@@ -6,7 +6,7 @@ export type ErrorBannerProps = {
     listContent: string[]
 }
 
-export const ErrorBanner: React.FunctionComponent<ErrorBannerProps> = (props: ErrorBannerProps) => {
+export const ErrorBanner: React.FunctionComponent<ErrorBannerProps> = (props) => {
     return (
         <div className="flex items-baseline bg-danger-red bg-opacity-10 rounded-lg my-4 py-4 px-6">
             <FontAwesomeIcon icon={faTimesCircle} className="text-danger-red mr-3" />
