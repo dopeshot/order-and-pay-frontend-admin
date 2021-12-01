@@ -16,6 +16,7 @@
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "axios": "^0.24.0",
+    "formik": "^2.2.9",
     "overmind": "^28.0.1",
     "overmind-react": "^29.0.1",
     "react": "^17.0.2",

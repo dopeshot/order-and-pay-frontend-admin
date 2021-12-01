@@ -13,7 +13,7 @@ export const ErrorBanner: React.FunctionComponent<ErrorBannerProps> = (props) =>
             <div>
                 <h4 className="text-darker-danger-red font-semibold mb-1">{props.headlineContent}</h4>
                 <ul className="list-disc text-dark-danger-red ml-10">
-                    {props.listContent.map((li, index) => (<li key={index}>{li}</li>))}
+                    {props.listContent && props.listContent.map((li, index) => (<li key={index}>{li}</li>))}
                 </ul>
             </div>
         </div>

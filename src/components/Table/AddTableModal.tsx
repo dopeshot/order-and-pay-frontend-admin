@@ -1,6 +1,6 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
-import { useActions } from "../../overmind"
+import { useActions, useAppState } from "../../overmind"
 import { ErrorBanner } from "../Errors/ErrorBanner"
 import { PrimaryButton } from "../Buttons/PrimaryButton"
 import { SecondaryButton } from "../Buttons/SecondaryButton"
@@ -11,14 +11,11 @@ type TableModalProps = {
 
 export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) => {
     const peopleCountTemplates = [2, 4, 6]
-    const errorList: string[] = [
-        "Your password must be at least 8 characters",
-        "Your password must include at least one pro wrestling finishing move"
-    ]
 
     const [tableNumber, setTableNumber] = useState("")
     const [peopleCount, setPeopleCount] = useState<number>()
-    const [error] = useState(false)
+
+    const { modalErrors, hasModalError } = useAppState().tables
 
     const { createTable } = useActions().tables
 
@@ -36,7 +33,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                         <h1 className="text-headline-black text-2xl font-semibold mb-4">Neuer Tisch</h1>
 
                         {/* Error Banner */}
-                        {error && <ErrorBanner headlineContent="There where 2 Errors with your submittion" listContent={errorList} />}
+                        {hasModalError && <ErrorBanner headlineContent={`There where ${modalErrors.length} Errors with your submission`} listContent={modalErrors} />}
 
                         {/* Tablenumber Input with Label */}
                         <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Tischnummer</label>
@@ -58,8 +55,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                     <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                         {/* Save and Cancel Buttons */}
                         <PrimaryButton icon={faCheck} content="Speichern" onClick={() => { 
-                            createTable({ tableNumber: tableNumber, capacity: peopleCount! })
-                            props.setDisplayModal(false)
+                            createTable({ tableNumber: tableNumber, capacity: peopleCount!, setDisplayModal: props.setDisplayModal })
                         }} />
                         <SecondaryButton content="Abbrechen" onClick={() => props.setDisplayModal(false)} />
                     </div>

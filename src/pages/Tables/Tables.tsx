@@ -11,7 +11,7 @@ import { TableDokument } from "../../overmind/tables/state"
 export const Tables: React.FunctionComponent = () => {
     const {
         tables: {
-            tables, isLoadingTables
+            tables, isLoadingTables, tableErrors, hasTableError
         },
         app: {
             languageLocale
@@ -23,12 +23,6 @@ export const Tables: React.FunctionComponent = () => {
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
     const [tableCapacity, setTableCapacity] = useState(0)
-    const [error] = useState(false)
-
-    const errorList: string[] = [
-        "Your password must be at least 8 characters",
-        "Your password must include at least one pro wrestling finishing move"
-    ]
 
     useEffect(() => {
         loadTables()
@@ -41,10 +35,10 @@ export const Tables: React.FunctionComponent = () => {
 
             {/* Headline */}
             <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
-            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{tables.length} Gesamt</p>
+            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{!isLoadingTables ? tables.length : 0} Gesamt</p>
 
             {/* Error Banner */}
-            {error && <ErrorBanner headlineContent="There where 2 Errors with your submission" listContent={errorList} />}
+            {hasTableError && <ErrorBanner headlineContent={`There where ${tableErrors.length} Errors with your submission`} listContent={tableErrors} />}
 
             {/* Add Table */}
             <div className="flex lg:justify-end mt-5 mb-5 lg:mt-0">
@@ -91,7 +85,7 @@ export const Tables: React.FunctionComponent = () => {
                             {/* Tablenumber */}
                             <td className="font-roboto font-semibold">
                                 {table.isEdit ?
-                                    <input type="text" id="tablenumber" name="tablenumber" value={tableNumber} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
+                                    <input type="text" id="tablenumber" name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
                                     : table.tableNumber}
                             </td>
 
@@ -99,7 +93,7 @@ export const Tables: React.FunctionComponent = () => {
                             {/* TODO: Add icons depending of the person count */}
                             <td className="font-roboto font-semibold">
                                 {table.isEdit ?
-                                    <input type="number" id="tablecapacity" name="tablecapacity" value={tableCapacity} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
+                                    <input type="number" id="tablecapacity" name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
                                     : table.capacity}
                             </td>
 
@@ -116,13 +110,13 @@ export const Tables: React.FunctionComponent = () => {
                                     <button onClick={() => { updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity }) }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
                                         <FontAwesomeIcon icon={faCheck} className="mr-2" />
                                         Speichern
-                                    </button> 
-                                    : 
-                                    <button onClick={() => { setIsEdit(table._id); setTableNumber(table.tableNumber); setTableCapacity(table.capacity)}} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
+                                    </button>
+                                    :
+                                    <button onClick={() => { setIsEdit(table._id); setTableNumber(table.tableNumber); setTableCapacity(table.capacity) }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
                                         <FontAwesomeIcon icon={faEdit} className="mr-2" />
                                         Bearbeiten
                                     </button>}
-                                
+
                                 {/* Delete */}
                                 <div className="relative inline-block">
                                     {/* When dropdown open click outside close it */}
@@ -130,7 +124,7 @@ export const Tables: React.FunctionComponent = () => {
 
                                     {/* Icon */}
                                     <IconButton icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { toggleMoreOptions(table._id) }} />
-                                    
+
                                     {/* Dropdown */}
                                     {table.isMoreOptionsOpen && <div id="table-delete-dropdown" className="absolute origin-top-right right-5 z-20 bg-white rounded-lg shadow mt-2 w-30" tabIndex={-1}>
                                         <div className="py-1">
