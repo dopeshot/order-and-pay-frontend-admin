@@ -43,7 +43,7 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
     try {
         const response = await effects.tables.updateTable({ id, tableNumber, capacity })
         const updatedTable = { ...response.data, updatedAt: new Date(response.data.updatedAt) }
-        const oldTable = state.tables.tables.find(table => table._id === id)!
+        const oldTable = state.tables.tables.find((table: Table) => table._id === id)!
         oldTable.capacity = updatedTable.capacity
         oldTable.tableNumber = updatedTable.tableNumber
         state.tables.tableErrors = []
@@ -61,7 +61,7 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
 export const deleteTable = async ({ state, effects }: Context, id: string) => {
     try {
         await effects.tables.deleteTable(id)
-        state.tables.tables = state.tables.tables.filter(table => table._id !== id)
+        state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
         state.tables.tableErrors = []
     } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -73,12 +73,12 @@ export const deleteTable = async ({ state, effects }: Context, id: string) => {
 }
 
 export const setIsEdit = async ({ state }: Context, id: string) => {
-    const tableToChange: TableDokument = state.tables.tables.find(e => e._id === id)!
+    const tableToChange: TableDokument = state.tables.tables.find((table: Table) => table._id === id)!
     tableToChange.isEdit = !tableToChange.isEdit
 }
 
 export const toggleMoreOptions = async ({ state }: Context, id: string) => {
-    const table: TableDokument = state.tables.tables.find(table => table._id === id)!
+    const table: TableDokument = state.tables.tables.find((table: Table) => table._id === id)!
     table.isMoreOptionsOpen = !table.isMoreOptionsOpen
 }
 
