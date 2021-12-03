@@ -1,6 +1,5 @@
-import axios from "axios"
 import { Context } from ".."
-import { formatErrors } from "../../services/error"
+import { generateErrorMessage } from "../../services/error"
 import { Table, TableDokument } from "./state"
 
 export const loadTables = async ({ state, effects }: Context) => {
@@ -11,11 +10,7 @@ export const loadTables = async ({ state, effects }: Context) => {
         state.tables.tables = table
         state.tables.tableErrors = []
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            state.tables.tableErrors = formatErrors(error.response?.data.message)
-        } else {
-            console.error(error)
-        }
+        generateErrorMessage(state, error, "tableErrors")
     }
     state.tables.isLoadingTables = false
 }
@@ -29,11 +24,7 @@ export const createTable = async ({ state, effects }: Context, { tableNumber, ca
         state.tables.modalErrors = []
         setDisplayModal(false)
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            state.tables.modalErrors = formatErrors(error.response?.data.message)
-        } else {
-            console.error(error)
-        }
+        generateErrorMessage(state, error, "modalErrors")
     }
     state.tables.isLoadingTables = false
 }
@@ -48,11 +39,7 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
         oldTable.tableNumber = updatedTable.tableNumber
         state.tables.tableErrors = []
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            state.tables.tableErrors = formatErrors(error.response?.data.message)
-        } else {
-            console.error(error)
-        }
+        generateErrorMessage(state, error, "tableErrors")
     }
     actions.tables.setIsEdit(id)
     state.tables.isLoadingTables = false
@@ -64,11 +51,7 @@ export const deleteTable = async ({ state, effects }: Context, id: string) => {
         state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
         state.tables.tableErrors = []
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            state.tables.tableErrors = formatErrors(error.response?.data.message)
-        } else {
-            console.error(error)
-        }
+        generateErrorMessage(state, error, "tableErrors")
     }
 }
 
