@@ -42,7 +42,7 @@ export const Tables: React.FunctionComponent = () => {
 
             {/* Add Table */}
             <div className="flex lg:justify-end mt-5 mb-5 lg:mt-0">
-                <PrimaryButton icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
+                <PrimaryButton type="button" icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
             </div>
 
             {/* Table */}
