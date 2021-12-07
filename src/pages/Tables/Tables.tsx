@@ -38,7 +38,7 @@ export const Tables: React.FunctionComponent = () => {
             <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{!isLoadingTables ? tables.length : 0} Gesamt</p>
 
             {/* Error Banner */}
-            {hasTableError && <ErrorBanner headlineContent={`There where ${tableErrors.length} Errors with your submission`} listContent={tableErrors} />}
+            {hasTableError && <ErrorBanner headlineContent={`There ${tableErrors.length > 1 ? "were" : "is"} ${tableErrors.length} ${tableErrors.length > 1 ? "Errors" : "Error"}`} listContent={tableErrors} />}
 
             {/* Add Table */}
             <div className="flex lg:justify-end mt-5 mb-5 lg:mt-0">

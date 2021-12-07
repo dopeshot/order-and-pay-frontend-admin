@@ -46,7 +46,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                         <h1 className="text-headline-black text-2xl font-semibold mb-4">Neuer Tisch</h1>
 
                         {/* Error Banner */}
-                        {hasModalError && <ErrorBanner headlineContent={`There where ${modalErrors.length} Errors with your submission`} listContent={modalErrors} />}
+                        {hasModalError && <ErrorBanner headlineContent={`There ${modalErrors.length > 1 ? "were" : "is"} ${modalErrors.length} ${modalErrors.length > 1 ? "Errors" : "Error"}`} listContent={modalErrors} />}
 
                         {/* Tablenumber Input with Label */}
                         <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Tischnummer</label>
