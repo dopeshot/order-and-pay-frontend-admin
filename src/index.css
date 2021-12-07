@@ -11,7 +11,6 @@
 }
 
 /*** Font ***/
-
 body {
     font-family: "sofia-pro", ui-sans-serif, system-ui, "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto",
         "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
@@ -19,7 +18,6 @@ body {
 }
 
 /**** Sidebar ****/
-
 .sidebar {
     transition-property: all;
     max-width: 250px;
@@ -51,8 +49,16 @@ body {
     pointer-events: revert;
 }
 
-/*** Search ***/
+/* Tooltips */
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    transform: translateX(calc(100% + 10px));
 
+    @apply fixed bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 left-0 py-2 px-5;
+}
+
+
+/*** Search ***/
 input[type="search"] {
     outline: var(--border-grey) solid 1px;
 }
@@ -76,13 +82,8 @@ input::-webkit-search-cancel-button {
     background-size: contain;
 }
 
-.tooltip:hover::after {
-    content: attr(data-tooltip);
-    transform: translateX(calc(100% + 10px));
 
-    @apply fixed bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 left-0 py-2 px-5;
-}
-
+/*** Table ***/
 .gradient-icon {
     -webkit-mask-image: linear-gradient(270deg, transparent 0.5px, red 7px);
 }
