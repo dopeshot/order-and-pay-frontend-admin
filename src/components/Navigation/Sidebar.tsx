@@ -33,7 +33,7 @@ export const Sidebar: React.FunctionComponent = () => {
 
     return (
         <>
-            <nav style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 1, transform: !layoutIsSideBarOpen ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-y-auto transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
+            <nav style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 1, transform: !layoutIsSideBarOpen ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-y-auto overflow-x-hidden transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
                 {sidebarContent.map((sidebarItem, i) => <div key={i} className="text-darkgrey mt-16">
                     <div className="mx-6">
                         {/* Headline */}
@@ -43,8 +43,8 @@ export const Sidebar: React.FunctionComponent = () => {
                     </div>
                     <ul>
                         {/* NavLink Items */}
-                        {sidebarItem.items.map((sidebarAtom, i) => <li className={layoutIsSmallSidebar ? "tooltip relative": ""} data-tooltip={sidebarAtom.title} key={i}>
-                            <NavLink to={sidebarAtom.path} onClick={() => isMobile && closeSidebar()} className="whitespace-nowrap block border-l-4 border-transparent hover:bg-active-grey w-full h-full py-2 px-5">
+                        {sidebarItem.items.map((sidebarAtom, i) => <li key={i}>
+                            <NavLink to={sidebarAtom.path} onClick={() => isMobile && closeSidebar()} data-tooltip={sidebarAtom.title} className={`${layoutIsSmallSidebar ? "tooltip": ""} whitespace-nowrap block border-l-4 border-transparent hover:bg-active-grey w-full h-full py-2 px-5`}>
                                 <FontAwesomeIcon icon={sidebarAtom.icon} className="text-lg text-center mr-5" style={{ width: "24px" }} />
                                 <span className={`transition-opacity duration-500 ease-in-out ${layoutIsSideBarOpen ? `opacity-100` : `opacity-0`}`}>{sidebarAtom.title}</span>
                             </NavLink>

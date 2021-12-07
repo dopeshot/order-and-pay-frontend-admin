@@ -81,5 +81,5 @@ input::-webkit-search-cancel-button {
     content: attr(data-tooltip);
     transform: translateX(calc(100% + 10px));
 
-    @apply absolute bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 top-0 right-0 py-2 px-5
+    @apply fixed bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 left-0 py-2 px-5
 }
