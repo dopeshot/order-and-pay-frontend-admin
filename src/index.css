@@ -76,3 +76,10 @@ input::-webkit-search-cancel-button {
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+.tooltip:hover::after {
+    content: attr(data-tooltip);
+    transform: translateX(calc(100% + 10px));
+
+    @apply absolute bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 top-0 right-0 py-2 px-5
+}
