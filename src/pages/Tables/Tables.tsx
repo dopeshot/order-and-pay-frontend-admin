@@ -1,10 +1,10 @@
-import { faCheck, faCircleNotch, faEdit, faEllipsisV, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
-import { AddTableModal } from "../../components/Table/AddTableModal"
-import { ErrorBanner } from "../../components/Errors/ErrorBanner"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { PrimaryButton } from "../../components/Buttons/PrimaryButton"
+import { ErrorBanner } from "../../components/Errors/ErrorBanner"
+import { AddTableModal } from "../../components/Table/AddTableModal"
 import { useActions, useAppState } from "../../overmind"
 import { TableDokument } from "../../overmind/tables/state"
 
@@ -53,7 +53,7 @@ export const Tables: React.FunctionComponent = () => {
                         <th className="text-center py-5 px-5">
                             <input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
-                        <th className="pr-10 lg:pr-0">
+                        <th className="pr-10">
                             Tischnummer
                             <FontAwesomeIcon icon={faSort} className="ml-2" />
                         </th>
@@ -83,7 +83,7 @@ export const Tables: React.FunctionComponent = () => {
                             </td>
 
                             {/* Tablenumber */}
-                            <td className="font-roboto font-semibold">
+                            <td className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
                                     <input type="text" id="tablenumber" name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
                                     : table.tableNumber}
@@ -91,14 +91,18 @@ export const Tables: React.FunctionComponent = () => {
 
                             {/* Table Capacity */}
                             {/* TODO: Add icons depending of the person count */}
-                            <td className="font-roboto font-semibold">
+                            <td className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
                                     <input type="number" id="tablecapacity" name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
-                                    : table.capacity}
+                                    :
+                                    <div className="flex items-center">
+                                        <p className="mr-5" style={{minWidth: "30px"}}>{table.capacity}</p>
+                                        {[...Array(table.capacity < 20 ? table.capacity : 20)].map((e, i) => <FontAwesomeIcon key={i} icon={faMale} className="text-lightgrey mr-2" />)}
+                                    </div>}
                             </td>
 
                             {/* Created by */}
-                            <td>
+                            <td className="pr-4">
                                 <h5 className="font-semibold text-sm h-3">{table.createdBy}</h5>
                                 <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
                             </td>
