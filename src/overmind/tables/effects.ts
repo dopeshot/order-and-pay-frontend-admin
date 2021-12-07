@@ -9,7 +9,7 @@ export const createTable = ({ tableNumber, capacity }: { tableNumber: string, ca
     createdBy: "Demo"
 })
 
-export const updateTable = ({ id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number }) => request.put<Table>(`/tables/${id}`, {
+export const updateTable = ({ id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number }) => request.patch<Table>(`/tables/${id}`, {
     tableNumber: tableNumber,
     capacity,
     createdBy: "Demo"
