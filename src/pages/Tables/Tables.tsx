@@ -6,12 +6,12 @@ import { PrimaryButton } from "../../components/Buttons/PrimaryButton"
 import { ErrorBanner } from "../../components/Errors/ErrorBanner"
 import { AddTableModal } from "../../components/Table/AddTableModal"
 import { useActions, useAppState } from "../../overmind"
-import { TableDokument } from "../../overmind/tables/state"
+import { TableDocument } from "../../overmind/tables/state"
 
 export const Tables: React.FunctionComponent = () => {
     const {
         tables: {
-            tables, isLoadingTables, tableErrors, hasTableError
+            tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll
         },
         app: {
             isMobile,
@@ -19,7 +19,7 @@ export const Tables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit } = useActions().tables
+    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit, toggleChecked, bulkTableSelection } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
@@ -28,6 +28,13 @@ export const Tables: React.FunctionComponent = () => {
     useEffect(() => {
         loadTables()
     }, [loadTables])
+
+    // function toggle(source: any) {
+    //     const checkboxes: any = document.getElementsByName('table-checkbox') // NOT ALLOWED!
+    //     for (let i = 0, n = checkboxes.length; i < n; i++) {
+    //         checkboxes[i].checked = source.checked;
+    //     }
+    // }
 
     return (
         <div className="text-darkgrey">
@@ -52,7 +59,7 @@ export const Tables: React.FunctionComponent = () => {
                 <thead className="bg-white-lightgrey">
                     <tr className="text-darkgrey text-xs tracking-widest uppercase">
                         <th className="text-center py-5 px-5">
-                            <input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
+                            <input type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent"  />
                         </th>
                         <th className="pr-10">
                             Tischnummer
@@ -77,10 +84,10 @@ export const Tables: React.FunctionComponent = () => {
                 {/* Table Header End */}
                 <tbody className="divide-y divide-border-grey">
                     {!isLoadingTables &&
-                        tables.map((table: TableDokument, index: number) => (<tr key={index}>
+                        tables.map((table: TableDocument, index: number) => (<tr key={index}>
                             {/* Checkbox */}
                             <td className="text-center py-4">
-                                <input type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
+                                <input checked={table.isChecked} onChange={() => toggleChecked(table._id)} type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                             </td>
 
                             {/* Tablenumber */}

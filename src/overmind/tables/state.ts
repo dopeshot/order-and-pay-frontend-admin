@@ -9,11 +9,18 @@ export type Table = {
 }
 
 export type TableHelper = {
-    isMoreOptionsOpen?: boolean,
-    isEdit?: boolean,
+    isMoreOptionsOpen: boolean,
+    isEdit: boolean,
+    isChecked: boolean
 }
 
-export type TableDokument = Table & TableHelper
+export const InitialTableHelper = {
+    isChecked: false, 
+    isMoreOptionsOpen: false, 
+    isEdit: false
+}
+
+export type TableDocument = Table & TableHelper
 
 export type State = {
     isLoadingTables: boolean,
@@ -21,14 +28,16 @@ export type State = {
     tableErrors: string[],
     hasModalError: boolean,
     hasTableError: boolean,
-    tables: Table[]
+    isCheckedAll: boolean,
+    tables: TableDocument[]
 }
 
 export const state: State = {
     isLoadingTables: false,
+    tables: [],
     modalErrors: [],
     tableErrors: [],
     hasModalError: derived((state: State) => state.modalErrors.length !== 0),
     hasTableError: derived((state: State) => state.tableErrors.length !== 0),
-    tables: []
+    isCheckedAll: derived((state: State) => !state.tables.some(table => !table.isChecked))
 }
