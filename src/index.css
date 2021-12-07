@@ -10,13 +10,13 @@
     outline: var(--primary-color) auto 1px;
 }
 
-
 /*** Font ***/
 
 body {
-    font-family: "sofia-pro", ui-sans-serif, system-ui, "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: "sofia-pro", ui-sans-serif, system-ui, "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto",
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
 }
-
 
 /**** Sidebar ****/
 
@@ -51,7 +51,6 @@ body {
     pointer-events: revert;
 }
 
-
 /*** Search ***/
 
 input[type="search"] {
@@ -81,5 +80,9 @@ input::-webkit-search-cancel-button {
     content: attr(data-tooltip);
     transform: translateX(calc(100% + 10px));
 
-    @apply fixed bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 left-0 py-2 px-5
+    @apply fixed bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 left-0 py-2 px-5;
+}
+
+.gradient-icon {
+    -webkit-mask-image: linear-gradient(270deg, transparent 0.5px, red 7px);
 }

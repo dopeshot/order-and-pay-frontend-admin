@@ -14,6 +14,7 @@ export const Tables: React.FunctionComponent = () => {
             tables, isLoadingTables, tableErrors, hasTableError
         },
         app: {
+            isMobile,
             languageLocale
         }
     } = useAppState()
@@ -90,14 +91,14 @@ export const Tables: React.FunctionComponent = () => {
                             </td>
 
                             {/* Table Capacity */}
-                            {/* TODO: Add icons depending of the person count */}
                             <td className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
                                     <input type="number" id="tablecapacity" name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
                                     :
-                                    <div className="flex items-center">
-                                        <p className="mr-5" style={{minWidth: "30px"}}>{table.capacity}</p>
-                                        {[...Array(table.capacity < 20 ? table.capacity : 20)].map((e, i) => <FontAwesomeIcon key={i} icon={faMale} className="text-lightgrey mr-2" />)}
+                                    isMobile ? table.capacity : <div className="flex items-center">
+                                        <p className="mr-5" style={{ minWidth: "30px" }}>{table.capacity}</p>
+                                        {[...Array(table.capacity < 20 ? table.capacity : 19)].map((e, i) => <FontAwesomeIcon key={i} icon={faMale} className="text-lightgrey mr-2" />)}
+                                        {table.capacity > 20 ? <FontAwesomeIcon icon={faMale} className="gradient-icon text-lightgrey mr-2" /> : ""}
                                     </div>}
                             </td>
 
