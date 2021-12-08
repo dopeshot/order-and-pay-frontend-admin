@@ -1,4 +1,4 @@
-import { Context } from ".."
+import { config, Context } from ".."
 import { generateErrorMessage } from "../../services/error"
 import { InitialTableHelper, Table, TableDocument } from "./state"
 
@@ -7,7 +7,7 @@ export const loadTables = async ({ state, effects }: Context) => {
     try {
         const response = await effects.tables.getTables()
         const tables = response.data.map<TableDocument>((table: Table) => ({ ...table, updatedAt: new Date(table.updatedAt), ...InitialTableHelper }))
-        state.tables.tables = tables
+        state.tables.tables = tables.sort((a, b) => a.tableNumber.localeCompare(b.tableNumber))
         state.tables.tableErrors = []
     } catch (error) {
         generateErrorMessage(state, error, "tableErrors")
@@ -72,13 +72,40 @@ export const toggleChecked = async ({ state }: Context, id: string) => {
 
 export const bulkTableSelection = async ({ state }: Context) => {
     let someTableIsChecked = false
-    let setTablesTo = true 
+    let setTablesTo = true
 
-    if(state.tables.tables.some(table => table.isChecked))
+    if (state.tables.tables.some(table => table.isChecked))
         someTableIsChecked = true
 
-    if(someTableIsChecked)
+    if (someTableIsChecked)
         setTablesTo = false
 
     state.tables.tables.forEach(table => table.isChecked = setTablesTo)
+}
+
+export const sortTable = async ({ state }: Context, sortedField: typeof config.state.tables.sort.currentField) => {
+    // If you click again
+    if (state.tables.sort.currentField === sortedField) {
+        if (state.tables.sort.currentField === 'tableNumber')
+            state.tables.sort.sortDirection.tableNumber = state.tables.sort.sortDirection.tableNumber === 'ASC' ? 'DESC' : 'ASC'
+        else if (state.tables.sort.currentField === 'capacity')
+            state.tables.sort.sortDirection.capacity = state.tables.sort.sortDirection.capacity === 'ASC' ? 'DESC' : 'ASC'
+    }
+
+    state.tables.sort.currentField = sortedField
+
+    switch (state.tables.sort.currentField) {
+        case 'capacity':
+            if (state.tables.sort.sortDirection.capacity === 'ASC')
+                state.tables.tables = state.tables.tables.sort((a, b) => b.capacity - a.capacity)
+            else
+                state.tables.tables = state.tables.tables.sort((a, b) => a.capacity - b.capacity)
+            break;
+        case 'tableNumber':
+            if (state.tables.sort.sortDirection.tableNumber === 'ASC')
+                state.tables.tables = state.tables.tables.sort((a, b) => a.tableNumber.localeCompare(b.tableNumber))
+            else
+                state.tables.tables = state.tables.tables.sort((a, b) => b.tableNumber.localeCompare(a.tableNumber))
+            break;
+    }
 }

@@ -29,7 +29,14 @@ export type State = {
     hasModalError: boolean,
     hasTableError: boolean,
     isCheckedAll: boolean,
-    tables: TableDocument[]
+    tables: TableDocument[],
+    sort: {
+        currentField: String,
+        sortDirection: {
+            tableNumber: 'ASC' | 'DESC',
+            capacity: 'ASC' | 'DESC'
+        }
+    }
 }
 
 export const state: State = {
@@ -39,5 +46,12 @@ export const state: State = {
     tableErrors: [],
     hasModalError: derived((state: State) => state.modalErrors.length !== 0),
     hasTableError: derived((state: State) => state.tableErrors.length !== 0),
-    isCheckedAll: derived((state: State) => !state.tables.some(table => !table.isChecked))
+    isCheckedAll: derived((state: State) => !state.tables.some(table => !table.isChecked)),
+    sort: {
+        currentField: 'tableNumber',
+        sortDirection: {
+            tableNumber: 'ASC',
+            capacity: 'ASC'
+        }
+    }
 }

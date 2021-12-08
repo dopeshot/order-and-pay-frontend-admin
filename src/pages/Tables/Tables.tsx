@@ -1,4 +1,4 @@
-import { faCheck, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSort, faSyncAlt, faTrash, faUsers } from "@fortawesome/free-solid-svg-icons"
+import { faArrowDown, faArrowUp, faCheck, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
@@ -11,7 +11,7 @@ import { TableDocument } from "../../overmind/tables/state"
 export const Tables: React.FunctionComponent = () => {
     const {
         tables: {
-            tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll
+            tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll, sort
         },
         app: {
             isMobile,
@@ -19,7 +19,7 @@ export const Tables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit, toggleChecked, bulkTableSelection } = useActions().tables
+    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit, toggleChecked, bulkTableSelection, sortTable } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
@@ -52,16 +52,19 @@ export const Tables: React.FunctionComponent = () => {
                 <thead className="bg-white-lightgrey">
                     <tr className="text-darkgrey text-xs tracking-widest uppercase">
                         <th className="text-center py-5 px-5">
-                            <input type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent"  />
+                            <input type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
                         <th className="pr-10">
-                            Tischnummer
-                            <FontAwesomeIcon icon={faSort} className="ml-2" />
+                             <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase" onClick={() => sortTable('tableNumber')}>
+                                Tischnummer
+                                {sort.currentField === 'tableNumber' && <FontAwesomeIcon icon={sort.sortDirection.tableNumber === 'ASC' ? faArrowUp : faArrowDown} className="ml-2" />}
+                            </button> 
                         </th>
                         <th className="pr-10 lg:pr-0">
-                            <FontAwesomeIcon icon={faUsers} className="mr-2" />
-                            Personenanzahl
-                            <FontAwesomeIcon icon={faSort} className="ml-2" />
+                             <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase" onClick={() => sortTable('capacity')}>
+                                Personenanzahl
+                                {sort.currentField === 'capacity' && <FontAwesomeIcon icon={sort.sortDirection.capacity === 'ASC' ? faArrowUp : faArrowDown} className="ml-2" />}
+                            </button>
                         </th>
                         <th className="pr-20 lg:pr-0">
                             Erstellt von
