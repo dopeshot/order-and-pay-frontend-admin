@@ -29,13 +29,6 @@ export const Tables: React.FunctionComponent = () => {
         loadTables()
     }, [loadTables])
 
-    // function toggle(source: any) {
-    //     const checkboxes: any = document.getElementsByName('table-checkbox') // NOT ALLOWED!
-    //     for (let i = 0, n = checkboxes.length; i < n; i++) {
-    //         checkboxes[i].checked = source.checked;
-    //     }
-    // }
-
     return (
         <div className="text-darkgrey">
             {/* Add Table Modal */}
