@@ -1,4 +1,4 @@
-import { faArrowUp, faCheck, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp, faCheck, faChevronDown, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
@@ -11,7 +11,7 @@ import { TableDocument } from "../../overmind/tables/state"
 export const Tables: React.FunctionComponent = () => {
     const {
         tables: {
-            tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll, sort
+            tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll, checkedCount, sort
         },
         app: {
             isMobile,
@@ -19,11 +19,12 @@ export const Tables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit, toggleChecked, bulkTableSelection, sortTable } = useActions().tables
+    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit, toggleChecked, bulkTableSelection, sortTable, bulkDelete } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
     const [tableNumber, setTableNumber] = useState("")
     const [tableCapacity, setTableCapacity] = useState(0)
+    const [bulkDropdown, setBulkDropdown] = useState(false)
 
     useEffect(() => {
         loadTables()
@@ -36,13 +37,32 @@ export const Tables: React.FunctionComponent = () => {
 
             {/* Headline */}
             <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
-            <p className="text-lightgrey mr-3 mb-4 sm:mb-0">{!isLoadingTables ? tables.length : 0} Gesamt</p>
+            <p className="text-lightgrey mr-3 mb-4">{!isLoadingTables ? tables.length : 0} Gesamt</p>
 
             {/* Error Banner */}
             {hasTableError && <ErrorBanner headlineContent={`There ${tableErrors.length > 1 ? "were" : "is"} ${tableErrors.length} ${tableErrors.length > 1 ? "Errors" : "Error"}`} listContent={tableErrors} />}
 
-            {/* Add Table */}
-            <div className="flex lg:justify-end mt-5 mb-5 lg:mt-0">
+            {/* Add Table and Filters */}
+            <div className="sm:flex lg:justify-between mt-5 mb-5 lg:mt-0">
+                <div className="relative inline-block text-lightgrey">
+                    {/* When dropdown open click outside close it */}
+                    {bulkDropdown && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setBulkDropdown(!bulkDropdown)}></div>}
+
+                    <button className="border rounded-lg mr-5 mb-3 sm:mb-0 py-2 px-5" type="button" onClick={() => setBulkDropdown(!bulkDropdown)}>
+                        <span className="text-darkgrey font-semibold pr-2">{checkedCount === (!isLoadingTables && tables.length) ? "Alle" : checkedCount}</span> 
+                        Markiert
+                        <FontAwesomeIcon className="ml-6" icon={faChevronDown} />
+                    </button>
+
+                    {bulkDropdown && <div className="absolute origin-top-right z-20 bg-white rounded-lg shadow mt-0 sm:mt-2 w-36" tabIndex={-1}>
+                        <div className="py-1">
+                            <button type="button" onClick={() => bulkDelete()} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
+                                <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3" />
+                                Alle Löschen
+                            </button>
+                        </div>
+                    </div>}
+                </div>
                 <PrimaryButton type="button" icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
             </div>
 
@@ -55,15 +75,15 @@ export const Tables: React.FunctionComponent = () => {
                             <input type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
                         <th className="pr-10">
-                             <button id="button-table" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('tableNumber')}>
+                            <button id="button-table" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('tableNumber')}>
                                 Tischnummer
-                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "tableNumber" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.tableNumber === 'ASC' ? 'rotate-0': `rotate-180`}`} />
-                            </button> 
+                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "tableNumber" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.tableNumber === 'ASC' ? 'rotate-0' : `rotate-180`}`} />
+                            </button>
                         </th>
                         <th className="pr-10 lg:pr-0">
-                             <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('capacity')}>
+                            <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('capacity')}>
                                 Personenanzahl
-                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "capacity" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.capacity === 'ASC' ? 'rotate-0': `rotate-180`}`} />
+                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "capacity" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.capacity === 'ASC' ? 'rotate-0' : `rotate-180`}`} />
                             </button>
                         </th>
                         <th className="pr-20 lg:pr-0">

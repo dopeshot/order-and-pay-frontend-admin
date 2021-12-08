@@ -29,6 +29,7 @@ export type State = {
     hasModalError: boolean,
     hasTableError: boolean,
     isCheckedAll: boolean,
+    checkedCount: number,
     tables: TableDocument[],
     sort: {
         currentField: String,
@@ -47,6 +48,7 @@ export const state: State = {
     hasModalError: derived((state: State) => state.modalErrors.length !== 0),
     hasTableError: derived((state: State) => state.tableErrors.length !== 0),
     isCheckedAll: derived((state: State) => !state.tables.some(table => !table.isChecked)),
+    checkedCount: derived((state: State) => state.tables.filter(table => table.isChecked).length),
     sort: {
         currentField: 'tableNumber',
         sortDirection: {
