@@ -1,4 +1,4 @@
-import { faArrowDown, faArrowUp, faCheck, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp, faCheck, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
@@ -55,15 +55,15 @@ export const Tables: React.FunctionComponent = () => {
                             <input type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
                         <th className="pr-10">
-                             <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase" onClick={() => sortTable('tableNumber')}>
+                             <button id="button-table" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('tableNumber')}>
                                 Tischnummer
-                                {sort.currentField === 'tableNumber' && <FontAwesomeIcon icon={sort.sortDirection.tableNumber === 'ASC' ? faArrowUp : faArrowDown} className="ml-2" />}
+                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "tableNumber" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.tableNumber === 'ASC' ? 'rotate-0': `rotate-180`}`} />
                             </button> 
                         </th>
                         <th className="pr-10 lg:pr-0">
-                             <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase" onClick={() => sortTable('capacity')}>
+                             <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('capacity')}>
                                 Personenanzahl
-                                {sort.currentField === 'capacity' && <FontAwesomeIcon icon={sort.sortDirection.capacity === 'ASC' ? faArrowUp : faArrowDown} className="ml-2" />}
+                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "capacity" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.capacity === 'ASC' ? 'rotate-0': `rotate-180`}`} />
                             </button>
                         </th>
                         <th className="pr-20 lg:pr-0">
