@@ -18,6 +18,7 @@
     "axios": "^0.24.0",
     "cypress": "^9.1.1",
     "formik": "^2.2.9",
+    "istanbul-lib-coverage": "^3.2.0",
     "overmind": "^28.0.1",
     "overmind-react": "^29.0.1",
     "react": "^17.0.2",
@@ -36,6 +37,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:table": "cypress run --spec cypress/integration/tables/**/*.spec.js",
+    "cc:instrument": "nyc instrument --compact=false src instrumented",
     "cc:report": "nyc report --reporter=text-summary"
   },
   "eslintConfig": {
@@ -62,6 +64,7 @@
     "@types/react-router-dom": "^5.3.2",
     "@types/webfontloader": "^1.6.33",
     "autoprefixer": "^9.8.8",
+    "babel-plugin-istanbul": "^6.1.1",
     "nyc": "^15.1.0",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
