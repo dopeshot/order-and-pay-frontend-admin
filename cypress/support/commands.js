@@ -1,25 +1,20 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+const api = `${Cypress.env("apiUrl")}`
+
+/* Table */
+const tableStub = {
+    "_id": "61b0c0ae5f663549ece58312",
+    "createdBy": "Demo",
+    "tableNumber": "7",
+    "capacity": 2,
+    "createdAt": "2021-12-08T14:26:54.121Z"
+}
+
+Cypress.Commands.add('getTables', () => {
+    cy.intercept('GET', `${api}/tables`, { fixture: 'tables.json' }).as('getTables')
+})
+
+Cypress.Commands.add('addTable', () => {
+    cy.intercept('POST', `${api}/tables`, {
+        body: tableStub,
+    }).as('getTables')
+})

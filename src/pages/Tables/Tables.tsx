@@ -63,7 +63,7 @@ export const Tables: React.FunctionComponent = () => {
                         </div>
                     </div>}
                 </div>
-                <PrimaryButton type="button" icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
+                <PrimaryButton id="table-add" type="button" icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
             </div>
 
             {/* Table */}

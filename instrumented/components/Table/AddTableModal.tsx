@@ -37,11 +37,11 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
             <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
                 {/* Background overlay */}
-                <div className="fixed inset-0 bg-modal-bg-blue bg-opacity-50 transition-opacity" aria-hidden="true" onClick={() => props.setDisplayModal(false)} />
+                <div id="table-modal-background" className="fixed inset-0 bg-modal-bg-blue bg-opacity-50 transition-opacity" aria-hidden="true" onClick={() => props.setDisplayModal(false)} />
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
                 {/* Modal */}
-                <div className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all w-full px-8 py-8 sm:align-middle sm:max-w-md sm:my-8 sm:p-10">
+                <div id="table-modal" className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all w-full px-8 py-8 sm:align-middle sm:max-w-md sm:my-8 sm:p-10">
                     <div className="bg-white mb-5">
                         <h1 className="text-headline-black text-2xl font-semibold mb-4">Neuer Tisch</h1>
 
@@ -67,11 +67,11 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                     </div>
                     <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                         {/* Save and Cancel Buttons */}
-                        <PrimaryButton type="submit" icon={faCheck} content="Speichern" onClick={() => {
+                        <PrimaryButton id="table-save" type="submit" icon={faCheck} content="Speichern" onClick={() => {
                             createTable({ tableNumber: tableNumber, capacity: peopleCount!, setDisplayModal: props.setDisplayModal })
                             validate()
                         }} />
-                        <SecondaryButton content="Abbrechen" onClick={() => props.setDisplayModal(false)} />
+                        <SecondaryButton id="table-cancel" content="Abbrechen" onClick={() => props.setDisplayModal(false)} />
                     </div>
                 </div>
                 {/* Modal End */}
