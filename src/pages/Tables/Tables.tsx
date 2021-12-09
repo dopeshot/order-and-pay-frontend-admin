@@ -168,10 +168,10 @@ export const Tables: React.FunctionComponent = () => {
                 </tbody>
             </table>
             {isLoadingTables &&
-                <>
+                <div id="table-spinner">
                     <FontAwesomeIcon icon={faCircleNotch} className="animate-spin mr-3" />
                     <p className="text-semibold">Loading Tables</p>
-                </>}
+                </div>}
         </div>
     )
 }
