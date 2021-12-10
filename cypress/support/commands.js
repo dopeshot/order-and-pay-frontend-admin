@@ -16,5 +16,5 @@ Cypress.Commands.add('getTables', () => {
 Cypress.Commands.add('addTable', () => {
     cy.intercept('POST', `${api}/tables`, {
         body: tableStub,
-    }).as('getTables')
+    }).as('addTable')
 })

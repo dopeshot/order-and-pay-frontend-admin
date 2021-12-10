@@ -59,7 +59,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                         {/* Peoplecount Quick */}
                         <div className="flex sm:inline-flex sm:justify-between sm:w-1/2 sm:pl-3">
                             {peopleCountTemplates.map((peopleCountTemplate, index) => (
-                                <button key={`ppl_${index}${peopleCountTemplate}`} onClick={() => setPeopleCount(peopleCountTemplate)} className={`flex justify-center items-center hover:bg-primary-blue-hover focus:bg-primary-blue-hover focus:shadow-focus hover:text-white focus:text-white border border-primary-blue ${peopleCount === peopleCountTemplate ? `bg-primary-blue text-white` : `text-primary-blue`} rounded-full mr-4 sm:mr-0`} style={{ minWidth: "50px", minHeight: "50px" }}>
+                                <button id={`peoplecount-quick-${index}`} key={`ppl_${index}${peopleCountTemplate}`} onClick={() => setPeopleCount(peopleCountTemplate)} className={`flex justify-center items-center hover:bg-primary-blue-hover focus:bg-primary-blue-hover focus:shadow-focus hover:text-white focus:text-white border border-primary-blue ${peopleCount === peopleCountTemplate ? `bg-primary-blue text-white` : `text-primary-blue`} rounded-full mr-4 sm:mr-0`} style={{ minWidth: "50px", minHeight: "50px" }}>
                                     <p className="font-semibold font-roboto">{peopleCountTemplate}</p>
                                 </button>
                             ))}

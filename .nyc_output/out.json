@@ -1,6 +1,6 @@
 {
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\state.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\state.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/state.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/state.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -21,10 +21,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c2e9bbd8b22e3ccd33903af8fa3aa59ecb8e28df"
+    "hash": "d85c1f83c05e1e8936735baa5c4e8d9abdad904b"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\actions.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\actions.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/actions.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/actions.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -105,10 +105,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "4fffbdd3eb2c644118b8e0a3f8976be1d6bb44c3"
+    "hash": "ef1bdf2c20e41fe11aa1fbc433da9d6dbdbc0d4c"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\effects.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\effects.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/effects.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/effects.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -225,10 +225,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "9aa880f50347d70bc5b2c484917a5b78bd2dd53d"
+    "hash": "dab698cac85fd93e21a4a5f1566114aff1358081"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\index.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\index.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/index.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -236,10 +236,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5b31bd7581f1fa36856bb1828f202902de1a9e71"
+    "hash": "477640adf0410ed21fe0512ec501713be73dc2fc"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\state.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\state.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/state.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/state.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -477,7 +477,7 @@
       "4": 32,
       "5": 18,
       "6": 32,
-      "7": 110
+      "7": 112
     },
     "f": {
       "0": 18,
@@ -485,14 +485,14 @@
       "2": 32,
       "3": 18,
       "4": 32,
-      "5": 110
+      "5": 112
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "bad00fa78de297a11651f0bd0bc6503a43587f00"
+    "hash": "fab1f66f8b707fcc6f18d5c91e2a9cb370e06841"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\error.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\error.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/error.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/error.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -826,10 +826,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "2301fc72947d1ec7dead6a19d415abc2cfa88f7a"
+    "hash": "18b2f101423b987e67aa24aa7d04006cdef861e7"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\actions.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\actions.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/actions.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/actions.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2758,9 +2758,9 @@
       "2": 14,
       "3": 14,
       "4": 14,
-      "5": 82,
+      "5": 84,
       "6": 14,
-      "7": 76,
+      "7": 70,
       "8": 14,
       "9": 0,
       "10": 14,
@@ -2848,8 +2848,8 @@
     },
     "f": {
       "0": 14,
-      "1": 82,
-      "2": 76,
+      "1": 84,
+      "2": 70,
       "3": 4,
       "4": 0,
       "5": 0,
@@ -2920,10 +2920,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c10f2dba6868993fb0d091c7c03edff6eb280f5b"
+    "hash": "53c4d8a12100be20be789b70d7bd44cb2cf7bf58"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\config.global.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\config.global.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/config.global.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/config.global.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2944,10 +2944,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "dc9891f9b39ea3bd1c289fbe19b9f148e771cdca"
+    "hash": "f80a0204a05927ee19a99fac595843278394308b"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\axios.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\axios.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/axios.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/axios.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2968,10 +2968,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f5b57c9767f3dc32371a472d4fb02e4c3dd11447"
+    "hash": "5a0aa19aad2fd150282f53dfdd13e04b0a7b05f1"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\effects.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\effects.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/effects.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/effects.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3290,10 +3290,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "abb5ca15a0c20561ab862489c9f06373fbe585af"
+    "hash": "3387619b1260f915be4b83652ef4080b2bd7b73c"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\index.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\index.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/index.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -3301,10 +3301,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3feb6556fd537146ab69e7eb6891252f159b68a6"
+    "hash": "e9da8f9e8e05215568a26c66a9ead2c26fafe43a"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\state.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\state.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/state.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/state.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3445,10 +3445,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "1c7ab7f5eee24cae99c2458b380b2fc6995b0429"
+    "hash": "3b8b9430cb2c9425efbcf9cb68dc9460a9925ee7"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\actions.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\actions.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/actions.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/actions.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3648,10 +3648,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "c6d6ea27e31aa354dd5d3eb6ee48aba87c2a8f80"
+    "hash": "b05269b391316b387aaf59a504bc9f694dfe05ee"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\index.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\index.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/index.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -3659,10 +3659,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ad6f0f16f0b4be05bd6742be9916eea23da04cd0"
+    "hash": "ca8ce61e46197c51078cf4d8b268ac2cd7fdc703"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\index.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\index.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/index.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/index.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3705,10 +3705,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "bf839c01ff574151a59596fca67044934b5c14d0"
+    "hash": "5c76691561e6cd0e80e14ac7a130dc562beeeafb"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Example\\Example.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Example\\Example.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Example/Example.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Example/Example.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -3856,10 +3856,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "94031a3c0a41f7a145305ae0240063ba69226ff6"
+    "hash": "58b08775bbf6f4b186864539b9265302c010165d"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Home\\Home.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Home\\Home.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Home/Home.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Home/Home.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -3918,10 +3918,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "38b08381f15779c2223d1a64c8ba0c93689fbefe"
+    "hash": "9f684d22d53299bf2d39dc04744e08d9a9c5a616"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\IconButton.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\IconButton.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/IconButton.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/IconButton.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -3973,17 +3973,17 @@
     "branchMap": {},
     "s": {
       "0": 14,
-      "1": 552
+      "1": 556
     },
     "f": {
-      "0": 552
+      "0": 556
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "719641a7bf845c2ca6b9e7df1f7d61422c3e76b2"
+    "hash": "f4329d6c420fa225085c1c1288edce8e45af33f8"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\PrimaryButton.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\PrimaryButton.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/PrimaryButton.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/PrimaryButton.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4042,10 +4042,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "0cb56dbfb24fc60d475fb26ba017521c03894309"
+    "hash": "12fe9cdb0922722601f0fe9ad6607fae1a0b8055"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Errors\\ErrorBanner.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Errors\\ErrorBanner.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Errors/ErrorBanner.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Errors/ErrorBanner.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4182,10 +4182,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "a080de8518667eef5713513da2041b3dc38ea716"
+    "hash": "d607fb3344b8a597dca957989f61451cf48e6a17"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\SecondaryButton.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\SecondaryButton.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/SecondaryButton.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/SecondaryButton.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4244,10 +4244,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3bb1b298ea5e6ef1c9dd6f92655f1bafc90ba8f5"
+    "hash": "66d6eaae9bd9f9822e94825e8f3bfe0a132a17d4"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Table\\AddTableModal.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Table\\AddTableModal.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Table/AddTableModal.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Table/AddTableModal.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4996,10 +4996,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "e9ceb63f3f4bba098f103e5855310d2dfa7a4164"
+    "hash": "494c5d8e734dcf3884fba5bf7e2c171dc4a7c098"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Tables\\Tables.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Tables\\Tables.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Tables/Tables.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Tables/Tables.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -6705,11 +6705,11 @@
       "15": 0,
       "16": 0,
       "17": 0,
-      "18": 420,
+      "18": 424,
       "19": 0,
       "20": 0,
       "21": 0,
-      "22": 2592,
+      "22": 2616,
       "23": 0,
       "24": 0,
       "25": 0,
@@ -6729,11 +6729,11 @@
       "7": 0,
       "8": 0,
       "9": 0,
-      "10": 420,
+      "10": 424,
       "11": 0,
       "12": 0,
       "13": 0,
-      "14": 2592,
+      "14": 2616,
       "15": 0,
       "16": 0,
       "17": 0,
@@ -6799,7 +6799,7 @@
       ],
       "14": [
         0,
-        420
+        424
       ],
       "15": [
         0,
@@ -6807,7 +6807,7 @@
       ],
       "16": [
         0,
-        420
+        424
       ],
       "17": [
         0,
@@ -6815,26 +6815,26 @@
       ],
       "18": [
         0,
-        420
+        424
       ],
       "19": [
-        420,
+        424,
         0
       ],
       "20": [
         0,
-        420
+        424
       ],
       "21": [
         0,
-        420
+        424
       ],
       "22": [
-        420,
+        424,
         0
       ],
       "23": [
-        420,
+        424,
         0
       ],
       "24": [
@@ -6843,10 +6843,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3e2b878ed6eb47f701e03005f956c3aa97b1c791"
+    "hash": "2c7a1b57693dffa91540ea17eb26577e8c9021da"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Sidebar.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Sidebar.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Sidebar.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Sidebar.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7246,11 +7246,11 @@
         "loc": {
           "start": {
             "line": 47,
-            "column": 149
+            "column": 190
           },
           "end": {
             "line": 47,
-            "column": 185
+            "column": 226
           }
         },
         "type": "cond-expr",
@@ -7258,21 +7258,21 @@
           {
             "start": {
               "line": 47,
-              "column": 172
+              "column": 213
             },
             "end": {
               "line": 47,
-              "column": 181
+              "column": 222
             }
           },
           {
             "start": {
               "line": 47,
-              "column": 183
+              "column": 224
             },
             "end": {
               "line": 47,
-              "column": 185
+              "column": 226
             }
           }
         ],
@@ -7415,10 +7415,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8573249c063e2e8d59765eb8b5bf1c354d473ffb"
+    "hash": "060172a473a69f61ba7eac699903a9d5eacb99f3"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Search\\Search.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Search\\Search.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Search/Search.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Search/Search.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7477,10 +7477,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "8f4101f7511ba8984fb81b8860a22ed899566096"
+    "hash": "a589f5d6ea8d86752952b2e9257d8ee3f30c80a0"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Topbar.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Topbar.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Topbar.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Topbar.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7711,10 +7711,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "db7db003c89f46ae40c239272165d90a0af0700e"
+    "hash": "ca02333a68389aaca21e73f75c8809b8798f4206"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\App\\App.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\App\\App.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/App/App.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/App/App.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7831,10 +7831,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "1e35d400900c7fffe92797a87e4858255e9cef1d"
+    "hash": "bd589cf6c52af631b73792ca70b8e86441d66703"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\reportWebVitals.ts": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\reportWebVitals.ts",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/reportWebVitals.ts": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/reportWebVitals.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -8066,10 +8066,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3b36ad5099c122504969a88fad7a7b7ec497a2b4"
+    "hash": "6cecfb6fcc64829e824839693b0f22875e38729b"
   },
-  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\index.tsx": {
-    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\index.tsx",
+  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/index.tsx": {
+    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/index.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -8134,6 +8134,6 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "7282ab5bf9124b35f296fb9aa64e9809ece7091c"
+    "hash": "ebf410c6330ad92e8f398c5ea89a4533d6187317"
   }
 }
