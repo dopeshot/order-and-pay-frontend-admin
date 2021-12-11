@@ -1,6 +1,6 @@
 {
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/state.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/state.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\state.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\state.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -16,15 +16,15 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 14
+      "0": 1
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "d85c1f83c05e1e8936735baa5c4e8d9abdad904b"
+    "hash": "c2e9bbd8b22e3ccd33903af8fa3aa59ecb8e28df"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/actions.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/actions.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\actions.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\actions.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -95,20 +95,20 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14,
-      "3": 12
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 0
     },
     "f": {
-      "0": 14
+      "0": 1
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ef1bdf2c20e41fe11aa1fbc433da9d6dbdbc0d4c"
+    "hash": "4fffbdd3eb2c644118b8e0a3f8976be1d6bb44c3"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/effects.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/effects.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\effects.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\effects.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -213,22 +213,22 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14,
+      "0": 1,
+      "1": 1,
+      "2": 0,
       "3": 0,
       "4": 0
     },
     "f": {
-      "0": 14,
+      "0": 1,
       "1": 0
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "dab698cac85fd93e21a4a5f1566114aff1358081"
+    "hash": "9aa880f50347d70bc5b2c484917a5b78bd2dd53d"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/index.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/example/index.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\index.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\example\\index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -236,10 +236,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "477640adf0410ed21fe0512ec501713be73dc2fc"
+    "hash": "5b31bd7581f1fa36856bb1828f202902de1a9e71"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/state.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/state.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\state.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\state.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -470,29 +470,29 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 18,
-      "3": 28,
-      "4": 32,
-      "5": 18,
-      "6": 32,
-      "7": 112
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 2,
+      "4": 2,
+      "5": 1,
+      "6": 2,
+      "7": 4
     },
     "f": {
-      "0": 18,
-      "1": 28,
-      "2": 32,
-      "3": 18,
-      "4": 32,
-      "5": 112
+      "0": 1,
+      "1": 2,
+      "2": 2,
+      "3": 1,
+      "4": 2,
+      "5": 4
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "fab1f66f8b707fcc6f18d5c91e2a9cb370e06841"
+    "hash": "bad00fa78de297a11651f0bd0bc6503a43587f00"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/error.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/error.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\error.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\error.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -792,11 +792,11 @@
       }
     },
     "s": {
-      "0": 14,
+      "0": 1,
       "1": 0,
       "2": 0,
       "3": 0,
-      "4": 14,
+      "4": 1,
       "5": 0,
       "6": 0,
       "7": 0,
@@ -826,10 +826,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "18b2f101423b987e67aa24aa7d04006cdef861e7"
+    "hash": "2301fc72947d1ec7dead6a19d415abc2cfa88f7a"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/actions.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/actions.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\actions.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\actions.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2753,28 +2753,28 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14,
-      "3": 14,
-      "4": 14,
-      "5": 84,
-      "6": 14,
-      "7": 70,
-      "8": 14,
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 1,
+      "5": 4,
+      "6": 1,
+      "7": 3,
+      "8": 1,
       "9": 0,
-      "10": 14,
-      "11": 14,
-      "12": 4,
-      "13": 4,
-      "14": 4,
-      "15": 4,
-      "16": 4,
-      "17": 4,
-      "18": 4,
+      "10": 1,
+      "11": 1,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
       "19": 0,
-      "20": 4,
-      "21": 14,
+      "20": 0,
+      "21": 1,
       "22": 0,
       "23": 0,
       "24": 0,
@@ -2787,26 +2787,26 @@
       "31": 0,
       "32": 0,
       "33": 0,
-      "34": 14,
+      "34": 1,
       "35": 0,
       "36": 0,
       "37": 0,
       "38": 0,
       "39": 0,
       "40": 0,
-      "41": 14,
+      "41": 1,
       "42": 0,
       "43": 0,
       "44": 0,
-      "45": 14,
+      "45": 1,
       "46": 0,
       "47": 0,
       "48": 0,
-      "49": 14,
+      "49": 1,
       "50": 0,
       "51": 0,
       "52": 0,
-      "53": 14,
+      "53": 1,
       "54": 0,
       "55": 0,
       "56": 0,
@@ -2816,7 +2816,7 @@
       "60": 0,
       "61": 0,
       "62": 0,
-      "63": 14,
+      "63": 1,
       "64": 0,
       "65": 0,
       "66": 0,
@@ -2836,7 +2836,7 @@
       "80": 0,
       "81": 0,
       "82": 0,
-      "83": 14,
+      "83": 1,
       "84": 0,
       "85": 0,
       "86": 0,
@@ -2847,10 +2847,10 @@
       "91": 0
     },
     "f": {
-      "0": 14,
-      "1": 84,
-      "2": 70,
-      "3": 4,
+      "0": 1,
+      "1": 4,
+      "2": 3,
+      "3": 0,
       "4": 0,
       "5": 0,
       "6": 0,
@@ -2920,10 +2920,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "53c4d8a12100be20be789b70d7bd44cb2cf7bf58"
+    "hash": "c10f2dba6868993fb0d091c7c03edff6eb280f5b"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/config.global.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/config.global.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\config.global.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\config.global.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2939,15 +2939,15 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 14
+      "0": 1
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f80a0204a05927ee19a99fac595843278394308b"
+    "hash": "dc9891f9b39ea3bd1c289fbe19b9f148e771cdca"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/axios.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/services/axios.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\axios.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\services\\axios.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -2963,15 +2963,15 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 14
+      "0": 1
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5a0aa19aad2fd150282f53dfdd13e04b0a7b05f1"
+    "hash": "f5b57c9767f3dc32371a472d4fb02e4c3dd11447"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/effects.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/effects.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\effects.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\effects.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3266,22 +3266,22 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14,
-      "3": 4,
-      "4": 14,
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 0,
+      "4": 1,
       "5": 0,
-      "6": 14,
+      "6": 1,
       "7": 0,
-      "8": 14,
+      "8": 1,
       "9": 0,
       "10": 0,
       "11": 0
     },
     "f": {
-      "0": 14,
-      "1": 4,
+      "0": 1,
+      "1": 0,
       "2": 0,
       "3": 0,
       "4": 0,
@@ -3290,10 +3290,10 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3387619b1260f915be4b83652ef4080b2bd7b73c"
+    "hash": "abb5ca15a0c20561ab862489c9f06373fbe585af"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/index.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/tables/index.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\index.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\tables\\index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -3301,10 +3301,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "e9da8f9e8e05215568a26c66a9ead2c26fafe43a"
+    "hash": "3feb6556fd537146ab69e7eb6891252f159b68a6"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/state.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/state.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\state.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\state.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3428,27 +3428,27 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 14
+      "0": 1,
+      "1": 1
     },
     "f": {
-      "0": 14
+      "0": 1
     },
     "b": {
       "0": [
         0,
-        14
+        1
       ],
       "1": [
-        14,
-        14
+        1,
+        1
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "3b8b9430cb2c9425efbcf9cb68dc9460a9925ee7"
+    "hash": "1c7ab7f5eee24cae99c2458b380b2fc6995b0429"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/actions.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/actions.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\actions.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\actions.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3631,27 +3631,27 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14,
+      "0": 1,
+      "1": 1,
+      "2": 1,
       "3": 0,
-      "4": 14,
+      "4": 1,
       "5": 0,
-      "6": 14,
+      "6": 1,
       "7": 0
     },
     "f": {
-      "0": 14,
+      "0": 1,
       "1": 0,
       "2": 0,
       "3": 0
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "b05269b391316b387aaf59a504bc9f694dfe05ee"
+    "hash": "c6d6ea27e31aa354dd5d3eb6ee48aba87c2a8f80"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/index.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/app/index.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\index.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\app\\index.ts",
     "statementMap": {},
     "fnMap": {},
     "branchMap": {},
@@ -3659,10 +3659,10 @@
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ca8ce61e46197c51078cf4d8b268ac2cd7fdc703"
+    "hash": "ad6f0f16f0b4be05bd6742be9916eea23da04cd0"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/index.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/overmind/index.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\index.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\overmind\\index.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -3698,17 +3698,17 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14
+      "0": 1,
+      "1": 1,
+      "2": 1
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "5c76691561e6cd0e80e14ac7a130dc562beeeafb"
+    "hash": "bf839c01ff574151a59596fca67044934b5c14d0"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Example/Example.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Example/Example.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Example\\Example.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Example\\Example.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -3840,7 +3840,7 @@
       }
     },
     "s": {
-      "0": 14,
+      "0": 1,
       "1": 0,
       "2": 0,
       "3": 0
@@ -3856,10 +3856,10 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "58b08775bbf6f4b186864539b9265302c010165d"
+    "hash": "94031a3c0a41f7a145305ae0240063ba69226ff6"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Home/Home.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Home/Home.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Home\\Home.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Home\\Home.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -3910,7 +3910,7 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
+      "0": 1,
       "1": 0
     },
     "f": {
@@ -3918,28 +3918,28 @@
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "9f684d22d53299bf2d39dc04744e08d9a9c5a616"
+    "hash": "38b08381f15779c2223d1a64c8ba0c93689fbefe"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/IconButton.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/IconButton.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\IconButton.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\IconButton.tsx",
     "statementMap": {
       "0": {
         "start": {
-          "line": 10,
+          "line": 11,
           "column": 68
         },
         "end": {
-          "line": 16,
+          "line": 17,
           "column": 1
         }
       },
       "1": {
         "start": {
-          "line": 11,
+          "line": 12,
           "column": 4
         },
         "end": {
-          "line": 15,
+          "line": 16,
           "column": 5
         }
       }
@@ -3949,41 +3949,41 @@
         "name": "(anonymous_0)",
         "decl": {
           "start": {
-            "line": 10,
+            "line": 11,
             "column": 68
           },
           "end": {
-            "line": 10,
+            "line": 11,
             "column": 69
           }
         },
         "loc": {
           "start": {
-            "line": 10,
+            "line": 11,
             "column": 79
           },
           "end": {
-            "line": 16,
+            "line": 17,
             "column": 1
           }
         },
-        "line": 10
+        "line": 11
       }
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 556
+      "0": 1,
+      "1": 18
     },
     "f": {
-      "0": 556
+      "0": 18
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "f4329d6c420fa225085c1c1288edce8e45af33f8"
+    "hash": "f71e2e095dee9efb0a7727adc29bba5e62bb8d5e"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/PrimaryButton.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/PrimaryButton.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\PrimaryButton.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\PrimaryButton.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4034,18 +4034,18 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 174
+      "0": 1,
+      "1": 6
     },
     "f": {
-      "0": 174
+      "0": 6
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "12fe9cdb0922722601f0fe9ad6607fae1a0b8055"
+    "hash": "0cb56dbfb24fc60d475fb26ba017521c03894309"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Errors/ErrorBanner.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Errors/ErrorBanner.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Errors\\ErrorBanner.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Errors\\ErrorBanner.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4167,7 +4167,7 @@
       }
     },
     "s": {
-      "0": 14,
+      "0": 1,
       "1": 0,
       "2": 0
     },
@@ -4182,28 +4182,28 @@
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "d607fb3344b8a597dca957989f61451cf48e6a17"
+    "hash": "a080de8518667eef5713513da2041b3dc38ea716"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/SecondaryButton.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Buttons/SecondaryButton.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\SecondaryButton.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Buttons\\SecondaryButton.tsx",
     "statementMap": {
       "0": {
         "start": {
-          "line": 8,
+          "line": 9,
           "column": 69
         },
         "end": {
-          "line": 14,
+          "line": 15,
           "column": 1
         }
       },
       "1": {
         "start": {
-          "line": 9,
+          "line": 10,
           "column": 4
         },
         "end": {
-          "line": 13,
+          "line": 14,
           "column": 5
         }
       }
@@ -4213,41 +4213,41 @@
         "name": "(anonymous_0)",
         "decl": {
           "start": {
-            "line": 8,
+            "line": 9,
             "column": 69
           },
           "end": {
-            "line": 8,
+            "line": 9,
             "column": 70
           }
         },
         "loc": {
           "start": {
-            "line": 8,
+            "line": 9,
             "column": 80
           },
           "end": {
-            "line": 14,
+            "line": 15,
             "column": 1
           }
         },
-        "line": 8
+        "line": 9
       }
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 42
+      "0": 1,
+      "1": 0
     },
     "f": {
-      "0": 42
+      "0": 0
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "66d6eaae9bd9f9822e94825e8f3bfe0a132a17d4"
+    "hash": "913af780be8b77ee0e38cfb94eb04f3635f14b36"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Table/AddTableModal.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Table/AddTableModal.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Table\\AddTableModal.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Table\\AddTableModal.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -4262,11 +4262,11 @@
       "1": {
         "start": {
           "line": 14,
-          "column": 33
+          "column": 30
         },
         "end": {
           "line": 14,
-          "column": 42
+          "column": 39
         }
       },
       "2": {
@@ -4282,11 +4282,11 @@
       "3": {
         "start": {
           "line": 17,
-          "column": 42
+          "column": 36
         },
         "end": {
           "line": 17,
-          "column": 60
+          "column": 54
         }
       },
       "4": {
@@ -4372,31 +4372,31 @@
       "12": {
         "start": {
           "line": 40,
-          "column": 159
+          "column": 164
         },
         "end": {
           "line": 40,
-          "column": 187
+          "column": 192
         }
       },
       "13": {
         "start": {
           "line": 53,
-          "column": 163
+          "column": 186
         },
         "end": {
           "line": 53,
-          "column": 197
+          "column": 220
         }
       },
       "14": {
         "start": {
           "line": 57,
-          "column": 182
+          "column": 196
         },
         "end": {
           "line": 57,
-          "column": 226
+          "column": 237
         }
       },
       "15": {
@@ -4412,11 +4412,11 @@
       "16": {
         "start": {
           "line": 62,
-          "column": 132
+          "column": 142
         },
         "end": {
           "line": 62,
-          "column": 167
+          "column": 171
         }
       },
       "17": {
@@ -4426,7 +4426,7 @@
         },
         "end": {
           "line": 71,
-          "column": 133
+          "column": 130
         }
       },
       "18": {
@@ -4442,11 +4442,11 @@
       "19": {
         "start": {
           "line": 74,
-          "column": 94
+          "column": 98
         },
         "end": {
           "line": 74,
-          "column": 122
+          "column": 126
         }
       }
     },
@@ -4552,21 +4552,21 @@
         "decl": {
           "start": {
             "line": 40,
-            "column": 153
+            "column": 158
           },
           "end": {
             "line": 40,
-            "column": 154
+            "column": 159
           }
         },
         "loc": {
           "start": {
             "line": 40,
-            "column": 159
+            "column": 164
           },
           "end": {
             "line": 40,
-            "column": 187
+            "column": 192
           }
         },
         "line": 40
@@ -4576,21 +4576,21 @@
         "decl": {
           "start": {
             "line": 53,
-            "column": 115
+            "column": 138
           },
           "end": {
             "line": 53,
-            "column": 116
+            "column": 139
           }
         },
         "loc": {
           "start": {
             "line": 53,
-            "column": 163
+            "column": 186
           },
           "end": {
             "line": 53,
-            "column": 197
+            "column": 220
           }
         },
         "line": 53
@@ -4600,21 +4600,21 @@
         "decl": {
           "start": {
             "line": 57,
-            "column": 134
+            "column": 148
           },
           "end": {
             "line": 57,
-            "column": 135
+            "column": 149
           }
         },
         "loc": {
           "start": {
             "line": 57,
-            "column": 182
+            "column": 196
           },
           "end": {
             "line": 57,
-            "column": 226
+            "column": 237
           }
         },
         "line": 57
@@ -4624,11 +4624,11 @@
         "decl": {
           "start": {
             "line": 61,
-            "column": 54
+            "column": 51
           },
           "end": {
             "line": 61,
-            "column": 55
+            "column": 52
           }
         },
         "loc": {
@@ -4648,21 +4648,21 @@
         "decl": {
           "start": {
             "line": 62,
-            "column": 126
+            "column": 136
           },
           "end": {
             "line": 62,
-            "column": 127
+            "column": 137
           }
         },
         "loc": {
           "start": {
             "line": 62,
-            "column": 132
+            "column": 142
           },
           "end": {
             "line": 62,
-            "column": 167
+            "column": 171
           }
         },
         "line": 62
@@ -4672,17 +4672,17 @@
         "decl": {
           "start": {
             "line": 70,
-            "column": 113
+            "column": 117
           },
           "end": {
             "line": 70,
-            "column": 114
+            "column": 118
           }
         },
         "loc": {
           "start": {
             "line": 70,
-            "column": 119
+            "column": 123
           },
           "end": {
             "line": 73,
@@ -4696,21 +4696,21 @@
         "decl": {
           "start": {
             "line": 74,
-            "column": 88
+            "column": 92
           },
           "end": {
             "line": 74,
-            "column": 89
+            "column": 93
           }
         },
         "loc": {
           "start": {
             "line": 74,
-            "column": 94
+            "column": 98
           },
           "end": {
             "line": 74,
-            "column": 122
+            "column": 126
           }
         },
         "line": 74
@@ -4829,11 +4829,11 @@
         "loc": {
           "start": {
             "line": 53,
-            "column": 86
+            "column": 109
           },
           "end": {
             "line": 53,
-            "column": 103
+            "column": 126
           }
         },
         "type": "binary-expr",
@@ -4841,21 +4841,21 @@
           {
             "start": {
               "line": 53,
-              "column": 86
+              "column": 109
             },
             "end": {
               "line": 53,
-              "column": 97
+              "column": 120
             }
           },
           {
             "start": {
               "line": 53,
-              "column": 101
+              "column": 124
             },
             "end": {
               "line": 53,
-              "column": 103
+              "column": 126
             }
           }
         ],
@@ -4865,11 +4865,11 @@
         "loc": {
           "start": {
             "line": 57,
-            "column": 105
+            "column": 122
           },
           "end": {
             "line": 57,
-            "column": 122
+            "column": 136
           }
         },
         "type": "binary-expr",
@@ -4877,21 +4877,21 @@
           {
             "start": {
               "line": 57,
-              "column": 105
+              "column": 122
             },
             "end": {
               "line": 57,
-              "column": 116
+              "column": 130
             }
           },
           {
             "start": {
               "line": 57,
-              "column": 120
+              "column": 134
             },
             "end": {
               "line": 57,
-              "column": 122
+              "column": 136
             }
           }
         ],
@@ -4901,11 +4901,11 @@
         "loc": {
           "start": {
             "line": 62,
-            "column": 352
+            "column": 356
           },
           "end": {
             "line": 62,
-            "column": 440
+            "column": 438
           }
         },
         "type": "cond-expr",
@@ -4913,21 +4913,21 @@
           {
             "start": {
               "line": 62,
-              "column": 390
+              "column": 388
             },
             "end": {
               "line": 62,
-              "column": 418
+              "column": 416
             }
           },
           {
             "start": {
               "line": 62,
-              "column": 421
+              "column": 419
             },
             "end": {
               "line": 62,
-              "column": 440
+              "column": 438
             }
           }
         ],
@@ -4935,43 +4935,43 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 46,
-      "2": 46,
-      "3": 42,
-      "4": 42,
-      "5": 42,
-      "6": 42,
-      "7": 42,
-      "8": 4,
-      "9": 4,
+      "0": 1,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
       "10": 0,
-      "11": 42,
-      "12": 2,
-      "13": 4,
-      "14": 2,
-      "15": 126,
-      "16": 2,
-      "17": 4,
-      "18": 4,
-      "19": 1
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "16": 0,
+      "17": 0,
+      "18": 0,
+      "19": 0
     },
     "f": {
-      "0": 46,
-      "1": 4,
-      "2": 4,
+      "0": 0,
+      "1": 0,
+      "2": 0,
       "3": 0,
-      "4": 2,
-      "5": 4,
-      "6": 2,
-      "7": 126,
-      "8": 2,
-      "9": 4,
-      "10": 1
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0
     },
     "b": {
       "0": [
-        42,
+        0,
         0
       ],
       "1": [
@@ -4983,23 +4983,23 @@
         0
       ],
       "3": [
-        42,
-        18
+        0,
+        0
       ],
       "4": [
-        42,
-        26
+        0,
+        0
       ],
       "5": [
-        16,
-        110
+        0,
+        0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "494c5d8e734dcf3884fba5bf7e2c171dc4a7c098"
+    "hash": "bb4a3353d27c1ee9f6692c2ca7d024706159ec11"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Tables/Tables.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/pages/Tables/Tables.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Tables\\Tables.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\pages\\Tables\\Tables.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -5134,11 +5134,11 @@
       "13": {
         "start": {
           "line": 66,
-          "column": 116
+          "column": 120
         },
         "end": {
           "line": 66,
-          "column": 137
+          "column": 141
         }
       },
       "14": {
@@ -5204,21 +5204,21 @@
       "20": {
         "start": {
           "line": 112,
-          "column": 188
+          "column": 222
         },
         "end": {
           "line": 112,
-          "column": 222
+          "column": 256
         }
       },
       "21": {
         "start": {
           "line": 119,
-          "column": 198
+          "column": 227
         },
         "end": {
           "line": 119,
-          "column": 244
+          "column": 273
         }
       },
       "22": {
@@ -5234,41 +5234,41 @@
       "23": {
         "start": {
           "line": 138,
-          "column": 61
+          "column": 106
         },
         "end": {
           "line": 138,
-          "column": 142
+          "column": 187
         }
       },
       "24": {
         "start": {
           "line": 143,
-          "column": 61
+          "column": 106
         },
         "end": {
           "line": 143,
-          "column": 82
+          "column": 127
         }
       },
       "25": {
         "start": {
           "line": 143,
-          "column": 83
+          "column": 128
         },
         "end": {
           "line": 143,
-          "column": 117
+          "column": 162
         }
       },
       "26": {
         "start": {
           "line": 143,
-          "column": 118
+          "column": 163
         },
         "end": {
           "line": 143,
-          "column": 150
+          "column": 195
         }
       },
       "27": {
@@ -5284,21 +5284,21 @@
       "28": {
         "start": {
           "line": 154,
-          "column": 111
+          "column": 161
         },
         "end": {
           "line": 154,
-          "column": 139
+          "column": 189
         }
       },
       "29": {
         "start": {
           "line": 159,
-          "column": 67
+          "column": 114
         },
         "end": {
           "line": 159,
-          "column": 89
+          "column": 136
         }
       }
     },
@@ -5428,21 +5428,21 @@
         "decl": {
           "start": {
             "line": 66,
-            "column": 110
+            "column": 114
           },
           "end": {
             "line": 66,
-            "column": 111
+            "column": 115
           }
         },
         "loc": {
           "start": {
             "line": 66,
-            "column": 116
+            "column": 120
           },
           "end": {
             "line": 66,
-            "column": 137
+            "column": 141
           }
         },
         "line": 66
@@ -5596,21 +5596,21 @@
         "decl": {
           "start": {
             "line": 112,
-            "column": 140
+            "column": 174
           },
           "end": {
             "line": 112,
-            "column": 141
+            "column": 175
           }
         },
         "loc": {
           "start": {
             "line": 112,
-            "column": 188
+            "column": 222
           },
           "end": {
             "line": 112,
-            "column": 222
+            "column": 256
           }
         },
         "line": 112
@@ -5620,21 +5620,21 @@
         "decl": {
           "start": {
             "line": 119,
-            "column": 150
+            "column": 179
           },
           "end": {
             "line": 119,
-            "column": 151
+            "column": 180
           }
         },
         "loc": {
           "start": {
             "line": 119,
-            "column": 198
+            "column": 227
           },
           "end": {
             "line": 119,
-            "column": 244
+            "column": 273
           }
         },
         "line": 119
@@ -5668,21 +5668,21 @@
         "decl": {
           "start": {
             "line": 138,
-            "column": 53
+            "column": 98
           },
           "end": {
             "line": 138,
-            "column": 54
+            "column": 99
           }
         },
         "loc": {
           "start": {
             "line": 138,
-            "column": 59
+            "column": 104
           },
           "end": {
             "line": 138,
-            "column": 144
+            "column": 189
           }
         },
         "line": 138
@@ -5692,21 +5692,21 @@
         "decl": {
           "start": {
             "line": 143,
-            "column": 53
+            "column": 98
           },
           "end": {
             "line": 143,
-            "column": 54
+            "column": 99
           }
         },
         "loc": {
           "start": {
             "line": 143,
-            "column": 59
+            "column": 104
           },
           "end": {
             "line": 143,
-            "column": 152
+            "column": 197
           }
         },
         "line": 143
@@ -5740,21 +5740,21 @@
         "decl": {
           "start": {
             "line": 154,
-            "column": 103
+            "column": 153
           },
           "end": {
             "line": 154,
-            "column": 104
+            "column": 154
           }
         },
         "loc": {
           "start": {
             "line": 154,
-            "column": 109
+            "column": 159
           },
           "end": {
             "line": 154,
-            "column": 141
+            "column": 191
           }
         },
         "line": 154
@@ -5764,21 +5764,21 @@
         "decl": {
           "start": {
             "line": 159,
-            "column": 61
+            "column": 108
           },
           "end": {
             "line": 159,
-            "column": 62
+            "column": 109
           }
         },
         "loc": {
           "start": {
             "line": 159,
-            "column": 67
+            "column": 114
           },
           "end": {
             "line": 159,
-            "column": 89
+            "column": 136
           }
         },
         "line": 159
@@ -6309,7 +6309,7 @@
             },
             "end": {
               "line": 112,
-              "column": 347
+              "column": 381
             }
           },
           {
@@ -6329,11 +6329,11 @@
         "loc": {
           "start": {
             "line": 112,
-            "column": 98
+            "column": 132
           },
           "end": {
             "line": 112,
-            "column": 128
+            "column": 162
           }
         },
         "type": "cond-expr",
@@ -6341,21 +6341,21 @@
           {
             "start": {
               "line": 112,
-              "column": 112
+              "column": 146
             },
             "end": {
               "line": 112,
-              "column": 123
+              "column": 157
             }
           },
           {
             "start": {
               "line": 112,
-              "column": 126
+              "column": 160
             },
             "end": {
               "line": 112,
-              "column": 128
+              "column": 162
             }
           }
         ],
@@ -6381,7 +6381,7 @@
             },
             "end": {
               "line": 119,
-              "column": 358
+              "column": 387
             }
           },
           {
@@ -6401,11 +6401,11 @@
         "loc": {
           "start": {
             "line": 119,
-            "column": 104
+            "column": 133
           },
           "end": {
             "line": 119,
-            "column": 138
+            "column": 167
           }
         },
         "type": "cond-expr",
@@ -6413,21 +6413,21 @@
           {
             "start": {
               "line": 119,
-              "column": 120
+              "column": 149
             },
             "end": {
               "line": 119,
-              "column": 133
+              "column": 162
             }
           },
           {
             "start": {
               "line": 119,
-              "column": 136
+              "column": 165
             },
             "end": {
               "line": 119,
-              "column": 138
+              "column": 167
             }
           }
         ],
@@ -6687,29 +6687,29 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 140,
-      "2": 140,
-      "3": 140,
-      "4": 140,
-      "5": 140,
-      "6": 140,
-      "7": 140,
-      "8": 14,
-      "9": 140,
+      "0": 1,
+      "1": 6,
+      "2": 6,
+      "3": 6,
+      "4": 6,
+      "5": 6,
+      "6": 6,
+      "7": 6,
+      "8": 1,
+      "9": 6,
       "10": 0,
       "11": 0,
       "12": 0,
-      "13": 9,
+      "13": 0,
       "14": 0,
       "15": 0,
       "16": 0,
       "17": 0,
-      "18": 424,
+      "18": 8,
       "19": 0,
       "20": 0,
       "21": 0,
-      "22": 2616,
+      "22": 38,
       "23": 0,
       "24": 0,
       "25": 0,
@@ -6719,21 +6719,21 @@
       "29": 0
     },
     "f": {
-      "0": 140,
-      "1": 14,
+      "0": 6,
+      "1": 1,
       "2": 0,
       "3": 0,
       "4": 0,
-      "5": 9,
+      "5": 0,
       "6": 0,
       "7": 0,
       "8": 0,
       "9": 0,
-      "10": 424,
+      "10": 8,
       "11": 0,
       "12": 0,
       "13": 0,
-      "14": 2616,
+      "14": 38,
       "15": 0,
       "16": 0,
       "17": 0,
@@ -6742,15 +6742,15 @@
     },
     "b": {
       "0": [
-        140,
-        26
+        6,
+        0
       ],
       "1": [
-        96,
-        44
+        4,
+        2
       ],
       "2": [
-        140,
+        6,
         0
       ],
       "3": [
@@ -6762,44 +6762,44 @@
         0
       ],
       "5": [
-        140,
+        6,
         0
       ],
       "6": [
-        28,
-        112
+        2,
+        4
       ],
       "7": [
-        140,
-        96
+        6,
+        4
       ],
       "8": [
-        140,
+        6,
         0
       ],
       "9": [
         0,
-        140
+        6
       ],
       "10": [
-        140,
+        6,
         0
       ],
       "11": [
-        140,
+        6,
         0
       ],
       "12": [
-        140,
+        6,
         0
       ],
       "13": [
-        140,
-        96
+        6,
+        4
       ],
       "14": [
         0,
-        424
+        8
       ],
       "15": [
         0,
@@ -6807,7 +6807,7 @@
       ],
       "16": [
         0,
-        424
+        8
       ],
       "17": [
         0,
@@ -6815,38 +6815,38 @@
       ],
       "18": [
         0,
-        424
+        8
       ],
       "19": [
-        424,
+        8,
         0
       ],
       "20": [
         0,
-        424
+        8
       ],
       "21": [
         0,
-        424
+        8
       ],
       "22": [
-        424,
+        8,
         0
       ],
       "23": [
-        424,
+        8,
         0
       ],
       "24": [
-        140,
-        44
+        6,
+        2
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "2c7a1b57693dffa91540ea17eb26577e8c9021da"
+    "hash": "a7eedf75701d6bf12772d13415f5ee3100fcbe2d"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Sidebar.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Sidebar.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Sidebar.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Sidebar.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7362,38 +7362,38 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 28,
-      "2": 28,
-      "3": 28,
-      "4": 28,
-      "5": 56,
-      "6": 112,
+      "0": 1,
+      "1": 2,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 4,
+      "6": 8,
       "7": 0,
       "8": 0
     },
     "f": {
-      "0": 28,
-      "1": 56,
-      "2": 112,
+      "0": 2,
+      "1": 4,
+      "2": 8,
       "3": 0,
       "4": 0
     },
     "b": {
       "0": [
         0,
-        28
+        2
       ],
       "1": [
         0,
         0
       ],
       "2": [
-        28,
+        2,
         0
       ],
       "3": [
-        56,
+        4,
         0
       ],
       "4": [
@@ -7402,23 +7402,23 @@
       ],
       "5": [
         0,
-        112
+        8
       ],
       "6": [
-        112,
+        8,
         0
       ],
       "7": [
-        28,
-        28,
+        2,
+        2,
         0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "060172a473a69f61ba7eac699903a9d5eacb99f3"
+    "hash": "fe368ad2565251c09c764b033381eef831e71b33"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Search/Search.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Search/Search.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Search\\Search.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Search\\Search.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7469,18 +7469,18 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 28
+      "0": 1,
+      "1": 2
     },
     "f": {
-      "0": 28
+      "0": 2
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "a589f5d6ea8d86752952b2e9257d8ee3f30c80a0"
+    "hash": "8f4101f7511ba8984fb81b8860a22ed899566096"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Topbar.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/Navigation/Topbar.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Topbar.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\Navigation\\Topbar.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7690,31 +7690,31 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 28,
-      "2": 28,
-      "3": 28,
+      "0": 1,
+      "1": 2,
+      "2": 2,
+      "3": 2,
       "4": 0,
       "5": 0,
       "6": 0
     },
     "f": {
-      "0": 28,
+      "0": 2,
       "1": 0,
       "2": 0,
       "3": 0
     },
     "b": {
       "0": [
-        28,
+        2,
         0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ca02333a68389aaca21e73f75c8809b8798f4206"
+    "hash": "db7db003c89f46ae40c239272165d90a0af0700e"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/App/App.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/components/App/App.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\App\\App.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\components\\App\\App.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -7819,22 +7819,22 @@
     },
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 28,
-      "2": 28,
-      "3": 14,
-      "4": 28
+      "0": 1,
+      "1": 2,
+      "2": 2,
+      "3": 1,
+      "4": 2
     },
     "f": {
-      "0": 28,
-      "1": 14
+      "0": 2,
+      "1": 1
     },
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "bd589cf6c52af631b73792ca70b8e86441d66703"
+    "hash": "1e35d400900c7fffe92797a87e4858255e9cef1d"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/reportWebVitals.ts": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/reportWebVitals.ts",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\reportWebVitals.ts": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\reportWebVitals.ts",
     "statementMap": {
       "0": {
         "start": {
@@ -8042,8 +8042,8 @@
       }
     },
     "s": {
-      "0": 14,
-      "1": 14,
+      "0": 1,
+      "1": 1,
       "2": 0,
       "3": 0,
       "4": 0,
@@ -8052,24 +8052,24 @@
       "7": 0
     },
     "f": {
-      "0": 14,
+      "0": 1,
       "1": 0
     },
     "b": {
       "0": [
         0,
-        14
+        1
       ],
       "1": [
-        14,
+        1,
         0
       ]
     },
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "6cecfb6fcc64829e824839693b0f22875e38729b"
+    "hash": "3b36ad5099c122504969a88fad7a7b7ec497a2b4"
   },
-  "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/index.tsx": {
-    "path": "/Users/joy/Documents/projekte/013_web_orderAndPay/order-and-pay-frontend-admin/src/index.tsx",
+  "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\index.tsx": {
+    "path": "C:\\Users\\joy-j\\Desktop\\orderAndPay\\order-and-pay-frontend-admin\\src\\index.tsx",
     "statementMap": {
       "0": {
         "start": {
@@ -8125,15 +8125,15 @@
     "fnMap": {},
     "branchMap": {},
     "s": {
-      "0": 14,
-      "1": 14,
-      "2": 14,
-      "3": 14,
-      "4": 14
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 1
     },
     "f": {},
     "b": {},
     "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    "hash": "ebf410c6330ad92e8f398c5ea89a4533d6187317"
+    "hash": "7282ab5bf9124b35f296fb9aa64e9809ece7091c"
   }
 }

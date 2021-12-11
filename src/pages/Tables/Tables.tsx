@@ -63,7 +63,7 @@ export const Tables: React.FunctionComponent = () => {
                         </div>
                     </div>}
                 </div>
-                <PrimaryButton id="table-add" type="button" icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
+                <PrimaryButton dataCy="table-add" type="button" icon={faPlus} content="Tisch hinzufügen" onClick={() => setDisplayModal(true)}></PrimaryButton>
             </div>
 
             {/* Table */}
@@ -100,23 +100,23 @@ export const Tables: React.FunctionComponent = () => {
                 {/* Table Header End */}
                 <tbody className="divide-y divide-border-grey">
                     {!isLoadingTables &&
-                        tables.map((table: TableDocument, index: number) => (<tr id={`table-table-row-${index}`} key={index}>
+                        tables.map((table: TableDocument, index: number) => (<tr data-cy={`table-table-row`} key={index}>
                             {/* Checkbox */}
                             <td className="text-center py-4">
                                 <input checked={table.isChecked} onChange={() => toggleChecked(table._id)} type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                             </td>
 
                             {/* Tablenumber */}
-                            <td className="font-roboto font-semibold pr-4">
+                            <td data-cy={`table-table-tablenumber-${index}`} className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
-                                    <input type="text" id={`tablenumber-${index}`} name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
+                                    <input type="text" data-cy={`table-table-tablenumber-input-${index}`} name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
                                     : table.tableNumber}
                             </td>
 
                             {/* Table Capacity */}
-                            <td className="font-roboto font-semibold pr-4">
+                            <td data-cy={`table-table-capacity-${index}`} className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
-                                    <input type="number" id={`tablecapacity-${index}`} name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
+                                    <input type="number" data-cy={`table-table-capacity-input-${index}`} name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
                                     :
                                     isMobile ? table.capacity : <div className="flex items-center">
                                         <p className="mr-5" style={{ minWidth: "30px" }}>{table.capacity}</p>
@@ -135,12 +135,12 @@ export const Tables: React.FunctionComponent = () => {
                             <td className="text-lightgrey">
                                 {/* Edit */}
                                 {table.isEdit ?
-                                    <button onClick={() => { updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity }) }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
+                                    <button data-cy={`table-table-save-button-${index}`} onClick={() => { updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity }) }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
                                         <FontAwesomeIcon icon={faCheck} className="mr-2" />
                                         Speichern
                                     </button>
                                     :
-                                    <button onClick={() => { setIsEdit(table._id); setTableNumber(table.tableNumber); setTableCapacity(table.capacity) }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
+                                    <button data-cy={`table-table-edit-button-${index}`} onClick={() => { setIsEdit(table._id); setTableNumber(table.tableNumber); setTableCapacity(table.capacity) }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
                                         <FontAwesomeIcon icon={faEdit} className="mr-2" />
                                         Bearbeiten
                                     </button>}
@@ -151,12 +151,12 @@ export const Tables: React.FunctionComponent = () => {
                                     {table.isMoreOptionsOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table._id)}></div>}
 
                                     {/* Icon */}
-                                    <IconButton icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { toggleMoreOptions(table._id) }} />
+                                    <IconButton dataCy={`table-table-delete-iconbutton-${index}`} icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { toggleMoreOptions(table._id) }} />
 
                                     {/* Dropdown */}
-                                    {table.isMoreOptionsOpen && <div id="table-delete-dropdown" className="absolute origin-top-right right-5 z-20 bg-white rounded-lg shadow mt-2 w-30" tabIndex={-1}>
+                                    {table.isMoreOptionsOpen && <div data-cy={`table-table-delete-dropdown-${index}`} className="absolute origin-top-right right-5 z-20 bg-white rounded-lg shadow mt-2 w-30" tabIndex={-1}>
                                         <div className="py-1">
-                                            <button onClick={() => deleteTable(table._id)} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
+                                            <button data-cy={`table-table-delete-button-${index}`} onClick={() => deleteTable(table._id)} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
                                                 <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3" />
                                                 Löschen
                                             </button>
