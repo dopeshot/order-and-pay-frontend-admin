@@ -32,7 +32,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-table-row"]').should('have.length', 4)
     })
 
-    it.only('should load tables again when click on loadicon', () => {
+    it('should load tables again when click on loadicon', () => {
       const interception = interceptIndefinitely(api, { fixture: 'tables.json' })
 
       cy.get('[data-cy="table-table-load-iconbutton"]').click()

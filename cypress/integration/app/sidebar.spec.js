@@ -1,5 +1,6 @@
 describe('Sidebar', () => {
     beforeEach(() => {
+        cy.getTables()
         cy.visit('/tables')
     })
 

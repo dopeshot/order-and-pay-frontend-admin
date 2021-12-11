@@ -1,4 +1,8 @@
 describe('Navigate in App', () => {
+    beforeEach(() => {
+        cy.getTables()
+    })
+
     it('should open dashboard', () => {
         cy.visit('/home')
         cy.contains('Welcome')
