@@ -31,6 +31,18 @@ describe('Api Endpoints', () => {
       cy.wait('@getTables')
       cy.get('[data-cy="table-table-row"]').should('have.length', 4)
     })
+
+    it.only('should load tables again when click on loadicon', () => {
+      const interception = interceptIndefinitely(api, { fixture: 'tables.json' })
+
+      cy.get('[data-cy="table-table-load-iconbutton"]').click()
+
+      cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
+        interception.sendResponse()
+        cy.get('[data-cy="table-spinner"]').should('not.exist')
+        cy.get('[data-cy="table-table-row"]').should('be.visible')
+      })
+    })
   })
 
   describe('Create Table', () => {
