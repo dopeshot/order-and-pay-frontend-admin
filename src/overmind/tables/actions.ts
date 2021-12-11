@@ -113,12 +113,12 @@ export const sortTable = async ({ state }: Context, sortedField: typeof config.s
 export const bulkDelete = async ({ state, effects }: Context) => {
     try {
         await state.tables.tables.forEach(e => {
-            if(e.isChecked) {
+            if (e.isChecked) {
                 effects.tables.deleteTable(e._id)
                 state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== e._id)
             }
         })
-        
+
         state.tables.tableErrors = []
     } catch (error) {
         generateErrorMessage(state, error, "tableErrors")

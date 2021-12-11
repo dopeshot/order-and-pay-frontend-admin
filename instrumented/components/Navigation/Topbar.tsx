@@ -12,7 +12,7 @@ export const Topbar: React.FunctionComponent = () => {
     return (
         <div className="flex items-center bg-white shadow pr-3 md:pr-8 pl-5" style={{ height: "64px" }}>
             {/* Hamburger Button */}
-            <IconButton icon={faBars} textColor="text-darkgrey" onClick={() => toggleSidebar()} />
+            <IconButton dataCy="topbar-hamburger-button" icon={faBars} textColor="text-darkgrey" onClick={() => toggleSidebar()} />
 
             {/* Logo */}
             <img src={logo} alt="logo" className="hidden md:block max-w-full mr-7" />

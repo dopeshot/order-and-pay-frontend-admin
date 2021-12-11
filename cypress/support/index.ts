@@ -14,8 +14,36 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands.ts'
 import '@cypress/code-coverage/support'
+/// <reference types="cypress" />
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            /**
+             * Custom command to intercept all getTables request 
+             * @example cy.getTables()
+             */
+            getTables(): void
+
+            /**
+             * Custom command to intercept all addTable request
+             * @example cy.addTable()
+             */
+            addTable(): void
+
+            /**
+            * Custom command to intercept all patchTable request 
+            * @example cy.getTables()
+            */
+            patchTable(): void
+
+            /**
+             * Custom command to intercept all deleteTable request
+             * @example cy.getTables()
+             */
+            deleteTable(): void
+        }
+    }
+}

@@ -1,44 +1,30 @@
 [
   {
-    "_id": "61b0c0ae5f663549ece58312",
-    "createdBy": "Demo",
-    "tableNumber": "1",
-    "capacity": 2,
-    "createdAt": "2021-12-08T14:26:54.121Z"
+    "_id": "61b23bdec814b40d2499ef7c",
+    "tableNumber": "7",
+    "capacity": 10,
+    "updatedAt": "2021-12-09T17:24:46.990Z",
+    "createdBy": "Demo"
   },
   {
-    "_id": "61b0c0ae5f663549ece58312",
-    "createdBy": "Demo",
-    "tableNumber": "2",
-    "capacity": 3,
-    "createdAt": "2021-12-08T14:26:54.121Z"
-  },
-  {
-    "_id": "61b0c0ae5f663549ece58312",
-    "createdBy": "Demo",
-    "tableNumber": "3",
-    "capacity": 6,
-    "createdAt": "2021-12-08T14:26:54.121Z"
-  },
-  {
-    "_id": "61b0c0ae5f663549ece58312",
-    "createdBy": "Demo",
-    "tableNumber": "4",
-    "capacity": 7,
-    "createdAt": "2021-12-08T14:26:54.121Z"
-  },
-  {
-    "_id": "61b0c0ae5f663549ece58312",
-    "createdBy": "Demo",
+    "_id": "61b26b5068b9261a60d66fdf",
     "tableNumber": "5",
-    "capacity": 10,
-    "createdAt": "2021-12-08T14:26:54.121Z"
+    "capacity": 1,
+    "updatedAt": "2021-12-09T20:47:12.562Z",
+    "createdBy": "12"
   },
   {
-    "_id": "61b0c0ae5f663549ece58312",
-    "createdBy": "Demo",
-    "tableNumber": "6",
-    "capacity": 10,
-    "createdAt": "2021-12-08T14:26:54.121Z"
+    "_id": "61b4704b401f0f201c33c433",
+    "tableNumber": "23",
+    "capacity": 4,
+    "updatedAt": "2021-12-11T09:32:59.608Z",
+    "createdBy": "Demo"
+  },
+  {
+    "_id": "61b470f3401f0f201c33c438",
+    "tableNumber": "2",
+    "capacity": 4,
+    "updatedAt": "2021-12-11T09:52:38.880Z",
+    "createdBy": "Demo"
   }
 ]

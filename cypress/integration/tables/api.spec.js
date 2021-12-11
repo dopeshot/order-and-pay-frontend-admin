@@ -1,4 +1,6 @@
 import { interceptIndefinitely } from '../../support/utils.ts';
+import table from '../../fixtures/table.json'
+import updateTable from '../../fixtures/update-table.json'
 
 const api = `${Cypress.env("apiUrl")}/tables`
 
@@ -14,21 +16,20 @@ describe('Api Endpoints', () => {
 
   describe('Get Tables', () => {
     it('should show the loading spinner when load table data and hide afterwards', () => {
-      const interception = interceptIndefinitely(api)
+      const interception = interceptIndefinitely(api, { fixture: 'tables.json' })
 
-      cy.getTables()
       cy.visit('/tables')
 
       cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
         interception.sendResponse()
         cy.get('[data-cy="table-spinner"]').should('not.exist')
         cy.get('[data-cy="table-table-row"]').should('be.visible')
-      });
+      })
     })
 
     it('should list all tables', () => {
       cy.wait('@getTables')
-      cy.get('[data-cy="table-table-row"]').should('have.length', 6)
+      cy.get('[data-cy="table-table-row"]').should('have.length', 4)
     })
   })
 
@@ -42,21 +43,25 @@ describe('Api Endpoints', () => {
     })
 
     it('should create one table using only input', () => {
-      cy.get('[data-cy="table-modal-tablenumber-input"]').type('7')
-      cy.get('[data-cy="table-modal-capacity-input"]').type('2')
+      cy.get('[data-cy="table-table-row"]').should('have.length', 4)
+
+      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity)
 
       cy.get('[data-cy="table-save"]').click()
       cy.wait('@addTable')
-      cy.get('[data-cy="table-table-row"]').should('have.length', 7)
+      cy.get('[data-cy="table-table-row"]').should('have.length', 5)
     })
 
     it('should create one table using input and quick people count', () => {
-      cy.get('[data-cy="table-modal-tablenumber-input"]').type('7')
+      cy.get('[data-cy="table-table-row"]').should('have.length', 4)
+
+      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
       cy.get('[data-cy="capacity-quick-2"]').click()
 
       cy.get('[data-cy="table-save"]').click()
       cy.wait('@addTable')
-      cy.get('[data-cy="table-table-row"]').should('have.length', 7)
+      cy.get('[data-cy="table-table-row"]').should('have.length', 5)
     })
 
     it('should close add table modal because of clicking outside the element', () => {
@@ -81,14 +86,14 @@ describe('Api Endpoints', () => {
     it('should edit the first table', () => {
       cy.get('[data-cy="table-table-edit-button-0"]').click()
 
-      cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(10)
-      cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(20)
-      
+      cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
+      cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity)
+
       cy.get('[data-cy="table-table-save-button-0"]').click()
       cy.wait('@patchTable')
 
-      cy.get('[data-cy="table-table-tablenumber-0"]').contains(10)
-      cy.get('[data-cy="table-table-capacity-0"]').contains(20)
+      cy.get('[data-cy="table-table-tablenumber-0"]').contains(updateTable.tableNumber)
+      cy.get('[data-cy="table-table-capacity-0"]').contains(updateTable.capacity)
     })
   })
 
@@ -100,12 +105,13 @@ describe('Api Endpoints', () => {
     })
 
     it('should delete the first table', () => {
+      cy.get('[data-cy="table-table-row"]').should('have.length', 4)
       cy.get('[data-cy="table-table-delete-iconbutton-0"').click()
 
       cy.get('[data-cy="table-table-delete-button-0"]').click()
       cy.wait('@deleteTable')
 
-      //cy.get('[data-cy="table-table-row"]).should('have.length', 5)
+      cy.get('[data-cy="table-table-row"]').should('have.length', 3)
     })
   })
 })

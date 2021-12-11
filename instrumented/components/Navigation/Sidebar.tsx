@@ -38,7 +38,7 @@ export const Sidebar: React.FunctionComponent = () => {
                     <div className="mx-6">
                         {/* Headline */}
                         <h5 className="sidebar-heading text-darkgrey text-xs uppercase font-semibold tracking-wider border-b border-lightgrey">
-                            <span className={`bg-white-lightgrey pr-3 transition duration-500 ease-in-out ${layoutIsSideBarOpen ? `opacity-100` : `opacity-0`}`}>{sidebarItem.title}</span>
+                            <span data-cy="sidebar-headline-span" className={`bg-white-lightgrey pr-3 transition duration-500 ease-in-out ${layoutIsSideBarOpen ? `opacity-100` : `opacity-0`}`}>{sidebarItem.title}</span>
                         </h5>
                     </div>
                     <ul>
@@ -46,7 +46,7 @@ export const Sidebar: React.FunctionComponent = () => {
                         {sidebarItem.items.map((sidebarAtom, i) => <li key={i}>
                             <NavLink to={sidebarAtom.path} onClick={() => isMobile && closeSidebar()} data-cy={`sidebar-${sidebarAtom.title}`} data-tooltip={sidebarAtom.title} className={`${layoutIsSmallSidebar ? "tooltip": ""} whitespace-nowrap block border-l-4 border-transparent hover:bg-active-grey w-full h-full py-2 px-5`}>
                                 <FontAwesomeIcon icon={sidebarAtom.icon} className="text-lg text-center mr-5" style={{ width: "24px" }} />
-                                <span className={`transition-opacity duration-500 ease-in-out ${layoutIsSideBarOpen ? `opacity-100` : `opacity-0`}`}>{sidebarAtom.title}</span>
+                                <span data-cy="sidebar-item-span" className={`transition-opacity duration-500 ease-in-out ${layoutIsSideBarOpen ? `opacity-100` : `opacity-0`}`}>{sidebarAtom.title}</span>
                             </NavLink>
                         </li>)}
                     </ul>
