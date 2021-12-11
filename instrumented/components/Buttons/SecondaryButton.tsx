@@ -1,6 +1,5 @@
 
 type ButtonProps = {
-    id?: string,
     content: string,
     dataCy?: string,
     onClick: (values: any) => void
