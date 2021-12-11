@@ -100,7 +100,7 @@ export const Tables: React.FunctionComponent = () => {
                 {/* Table Header End */}
                 <tbody className="divide-y divide-border-grey">
                     {!isLoadingTables &&
-                        tables.map((table: TableDocument, index: number) => (<tr key={index}>
+                        tables.map((table: TableDocument, index: number) => (<tr id={`table-table-row-${index}`} key={index}>
                             {/* Checkbox */}
                             <td className="text-center py-4">
                                 <input checked={table.isChecked} onChange={() => toggleChecked(table._id)} type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
@@ -109,14 +109,14 @@ export const Tables: React.FunctionComponent = () => {
                             {/* Tablenumber */}
                             <td className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
-                                    <input type="text" id="tablenumber" name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
+                                    <input type="text" id={`tablenumber-${index}`} name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
                                     : table.tableNumber}
                             </td>
 
                             {/* Table Capacity */}
                             <td className="font-roboto font-semibold pr-4">
                                 {table.isEdit ?
-                                    <input type="number" id="tablecapacity" name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
+                                    <input type="number" id={`tablecapacity-${index}`} name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
                                     :
                                     isMobile ? table.capacity : <div className="flex items-center">
                                         <p className="mr-5" style={{ minWidth: "30px" }}>{table.capacity}</p>
