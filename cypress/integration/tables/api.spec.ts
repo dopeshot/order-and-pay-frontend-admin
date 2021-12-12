@@ -116,7 +116,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-table-delete-dropdown-0"]').should('be.visible')
     })
 
-    it.only('should close delete dropdown for the first table when click outside', () => {
+    it('should close delete dropdown for the first table when click outside', () => {
       // Open dropdown
       cy.get('[data-cy="table-table-delete-iconbutton-0"]').click()
 

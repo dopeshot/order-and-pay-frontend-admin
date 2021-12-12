@@ -103,7 +103,7 @@ describe('Bulk Actions', () => {
             cy.get('[data-cy="table-table-row"]').should('have.length', tables.length - 2)
         })
 
-        it.only('should delete all tables when all are marked', () => {
+        it('should delete all tables when all are marked', () => {
             cy.get('[data-cy="table-table-row"]').should('have.length', tables.length)
 
             // Mark all as checked
