@@ -16,6 +16,7 @@
 // Import commands.js using ES2015 syntax:
 import './commands.ts'
 import '@cypress/code-coverage/support'
+
 /// <reference types="cypress" />
 
 declare global {
@@ -44,6 +45,12 @@ declare global {
              * @example cy.getTables()
              */
             deleteTable(): void
+
+            /**
+             * Custom command to intercept all getTables request for testing the capacity icons
+             * @example cy.getCapacityTables()
+             */
+            getCapacityTables(): void
         }
     }
 }

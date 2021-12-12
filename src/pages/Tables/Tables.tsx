@@ -120,8 +120,8 @@ export const Tables: React.FunctionComponent = () => {
                                     :
                                     isMobile ? table.capacity : <div className="flex items-center">
                                         <p className="mr-5" style={{ minWidth: "30px" }}>{table.capacity}</p>
-                                        {[...Array(table.capacity < 20 ? table.capacity : 19)].map((e, i) => <FontAwesomeIcon key={i} icon={faMale} className="text-lightgrey mr-2" />)}
-                                        {table.capacity > 20 ? <FontAwesomeIcon icon={faMale} className="gradient-icon text-lightgrey mr-2" /> : ""}
+                                        {[...Array(table.capacity <= 20 ? table.capacity : 20)].map((e, i) => <span data-cy={`table-table-capacityicon-${index}`}><FontAwesomeIcon key={i} icon={faMale} className="text-lightgrey mr-2" /></span>)}
+                                        {table.capacity > 20 ? <span data-cy={`table-table-capacityicon-${index}-last`}><FontAwesomeIcon icon={faMale} className="gradient-icon text-lightgrey mr-2" /></span> : ""}
                                     </div>}
                             </td>
 

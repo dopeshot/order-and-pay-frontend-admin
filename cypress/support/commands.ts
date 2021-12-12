@@ -24,4 +24,11 @@ Cypress.Commands.add('deleteTable', () => {
     }).as('deleteTable')
 })
 
+Cypress.Commands.add('getCapacityTables', () => {
+    cy.intercept('GET', `${api}/tables`, {
+        fixture: 'capacity-tables.json'
+    }).as('getCapacityTables')
+})
+
+
 export { }

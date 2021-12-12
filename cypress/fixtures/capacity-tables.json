@@ -1,0 +1,23 @@
+[
+    {
+        "_id": "61b5ece5ea1b467e90e321fe",
+        "tableNumber": "1",
+        "capacity": 2,
+        "updatedAt": "2021-12-12T12:36:53.254Z",
+        "createdBy": "Demo"
+    },
+    {
+        "_id": "61b5ecedea1b467e90e32200",
+        "tableNumber": "2",
+        "capacity": 20,
+        "updatedAt": "2021-12-12T12:37:01.442Z",
+        "createdBy": "Demo"
+    },
+    {
+        "_id": "61b5ecf4ea1b467e90e32204",
+        "tableNumber": "3",
+        "capacity": 21,
+        "updatedAt": "2021-12-12T12:37:08.165Z",
+        "createdBy": "Demo"
+    }
+]
