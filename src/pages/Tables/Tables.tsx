@@ -46,17 +46,17 @@ export const Tables: React.FunctionComponent = () => {
             <div className="sm:flex lg:justify-between mt-5 mb-5 lg:mt-0">
                 <div className="relative inline-block text-lightgrey">
                     {/* When dropdown open click outside close it */}
-                    {bulkDropdown && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setBulkDropdown(!bulkDropdown)}></div>}
+                    {bulkDropdown && <div data-cy="table-bulk-dropdown-background" className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setBulkDropdown(!bulkDropdown)}></div>}
 
-                    <button className="border rounded-lg mr-5 mb-3 sm:mb-0 py-2 px-5" type="button" onClick={() => setBulkDropdown(!bulkDropdown)}>
+                    <button data-cy="table-bulk-dropdown-button" className="border rounded-lg mr-5 mb-3 sm:mb-0 py-2 px-5" type="button" onClick={() => setBulkDropdown(!bulkDropdown)}>
                         <span className="text-darkgrey font-semibold pr-2">{checkedCount === (!isLoadingTables && tables.length) ? "Alle" : checkedCount}</span>
                         Markiert
                         <FontAwesomeIcon className="ml-6" icon={faChevronDown} />
                     </button>
 
-                    {bulkDropdown && <div className="absolute origin-top-right z-20 bg-white rounded-lg shadow mt-0 sm:mt-2 w-36" tabIndex={-1}>
+                    {bulkDropdown && <div data-cy="table-bulk-dropdown" className="absolute origin-top-right z-20 bg-white rounded-lg shadow mt-0 sm:mt-2 w-36" tabIndex={-1}>
                         <div className="py-1">
-                            <button type="button" onClick={() => bulkDelete()} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
+                            <button data-cy="table-bulk-dropdown-delete-button" type="button" onClick={() => bulkDelete()} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
                                 <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3" />
                                 Alle Löschen
                             </button>
@@ -148,7 +148,7 @@ export const Tables: React.FunctionComponent = () => {
                                 {/* Delete */}
                                 <div className="relative inline-block">
                                     {/* When dropdown open click outside close it */}
-                                    {table.isMoreOptionsOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table._id)}></div>}
+                                    {table.isMoreOptionsOpen && <div data-cy={`table-table-delete-background-${index}`} className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table._id)}></div>}
 
                                     {/* Icon */}
                                     <IconButton dataCy={`table-table-delete-iconbutton-${index}`} icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { toggleMoreOptions(table._id) }} />

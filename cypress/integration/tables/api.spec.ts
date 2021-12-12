@@ -116,6 +116,15 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-table-delete-dropdown-0"]').should('be.visible')
     })
 
+    it.only('should close delete dropdown for the first table when click outside', () => {
+      // Open dropdown
+      cy.get('[data-cy="table-table-delete-iconbutton-0"]').click()
+
+      cy.get('[data-cy="table-table-delete-background-0"]').click()
+
+      cy.get('[data-cy="table-table-delete-dropdown-0"]').should('not.exist')
+    })
+
     it('should delete the first table', () => {
       cy.get('[data-cy="table-table-row"]').should('have.length', 4)
       cy.get('[data-cy="table-table-delete-iconbutton-0"').click()

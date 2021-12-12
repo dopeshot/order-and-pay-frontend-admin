@@ -1,7 +1,6 @@
 describe('Navigation Ui', () => {
     beforeEach(() => {
-        cy.getTables()
-        cy.visit('/tables')
+        cy.visit('/')
     })
 
     describe('Desktop Sidebar', () => {
@@ -13,7 +12,7 @@ describe('Navigation Ui', () => {
         })
 
         it('should open sidebar', () => {
-            /* Close sidebar */
+            // Close sidebar
             cy.get('[data-cy="topbar-hamburger-button"]').click()
 
             cy.get('[data-cy="topbar-hamburger-button"]').click()
