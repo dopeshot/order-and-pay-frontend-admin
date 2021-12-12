@@ -17,6 +17,12 @@ export const updateTable = ({ id, tableNumber, capacity }: { id: string, tableNu
 
 export const deleteTable = (id: string): Promise<void> => request.delete(`/tables/${id}`)
 
+export const bulkDelete = (idArray: string[]): Promise<void> => request.delete('/tables/bulk/delete', {
+    data: {
+        ids: idArray
+    }
+})
+
 export const getTablesMock = async (): Promise<Table[]> => {
     return await new Promise<Table[]>((resolve) => {
         setTimeout(() => {
