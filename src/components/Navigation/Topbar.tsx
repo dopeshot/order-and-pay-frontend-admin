@@ -16,16 +16,16 @@ export const Topbar: React.FunctionComponent = () => {
 
             {/* Logo */}
             <img src={logo} alt="logo" className="hidden md:block max-w-full mr-7" />
- 
+
             <div className="flex flex-grow justify-end md:justify-between">
                 {/* Search Desktop */}
                 <Search />
                 <div className="flex">
                     {/* Search Mobile */}
-                    {isMobile && <IconButton icon={faSearch} textColor="text-lightgrey" onClick={() => ""} />}
+                    {isMobile && <IconButton dataCy="topbar-search-iconbutton" icon={faSearch} textColor="text-lightgrey" onClick={() => ""} />}
 
                     {/* Notification */}
-                    <IconButton icon={faBell} textColor="text-lightgrey" onClick={() => ""} />
+                    <IconButton dataCy="topbar-notification-iconbutton" icon={faBell} textColor="text-lightgrey" onClick={() => ""} />
 
                     {/* Account */}
                     <div className="flex">

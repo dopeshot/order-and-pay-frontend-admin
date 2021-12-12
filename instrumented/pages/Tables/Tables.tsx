@@ -49,7 +49,7 @@ export const Tables: React.FunctionComponent = () => {
                     {bulkDropdown && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setBulkDropdown(!bulkDropdown)}></div>}
 
                     <button className="border rounded-lg mr-5 mb-3 sm:mb-0 py-2 px-5" type="button" onClick={() => setBulkDropdown(!bulkDropdown)}>
-                        <span className="text-darkgrey font-semibold pr-2">{checkedCount === (!isLoadingTables && tables.length) ? "Alle" : checkedCount}</span> 
+                        <span className="text-darkgrey font-semibold pr-2">{checkedCount === (!isLoadingTables && tables.length) ? "Alle" : checkedCount}</span>
                         Markiert
                         <FontAwesomeIcon className="ml-6" icon={faChevronDown} />
                     </button>
@@ -93,7 +93,7 @@ export const Tables: React.FunctionComponent = () => {
                             Aktionen
                         </th>
                         <th className="text-center">
-                            <IconButton icon={faSyncAlt} textColor="text-darkgrey" onClick={() => loadTables()} />
+                            <IconButton dataCy="table-table-load-iconbutton" icon={faSyncAlt} textColor="text-darkgrey" onClick={() => loadTables()} />
                         </th>
                     </tr>
                 </thead>

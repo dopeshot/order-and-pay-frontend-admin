@@ -1,4 +1,4 @@
-describe('Sidebar', () => {
+describe('Navigation', () => {
     beforeEach(() => {
         cy.getTables()
         cy.visit('/tables')
@@ -44,6 +44,20 @@ describe('Sidebar', () => {
             cy.get('[data-cy="sidebar-content-overlay"]').click({ force: true })
 
             cy.get('[data-cy="sidebar"]').should('have.class', 'sidebar-closed')
+        })
+    })
+
+    describe('Mobile Topbar', () => {
+        beforeEach(() => {
+            cy.viewport('iphone-8')
+        })
+
+        it('should open full search (in the future)', () => {
+            cy.get('[data-cy="topbar-search-iconbutton"]').click()
+        })
+
+        it('should open notification dropdown (in the future)', () => {
+            cy.get('[data-cy="topbar-notification-iconbutton"]').click()
         })
     })
 })
