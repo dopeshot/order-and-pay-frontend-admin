@@ -1,4 +1,4 @@
-import { interceptIndefinitely } from '../../support/utils.ts';
+import { interceptIndefinitely } from '../../support/utils';
 import table from '../../fixtures/table.json'
 import updateTable from '../../fixtures/update-table.json'
 
@@ -58,7 +58,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-table-row"]').should('have.length', 4)
 
       cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
-      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity)
+      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
 
       cy.get('[data-cy="table-save"]').click()
       cy.wait('@addTable')
@@ -99,7 +99,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-table-edit-button-0"]').click()
 
       cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
-      cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity)
+      cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
 
       cy.get('[data-cy="table-table-save-button-0"]').click()
       cy.wait('@patchTable')
@@ -127,3 +127,5 @@ describe('Api Endpoints', () => {
     })
   })
 })
+
+export { }

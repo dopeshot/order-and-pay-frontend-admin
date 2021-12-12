@@ -14,7 +14,9 @@ describe('Navigate in App', () => {
     })
 
     it('should open table page', () => {
-        cy.get('[data-cy="sidebar-Tische"]').click('')
+        cy.get('[data-cy="sidebar-Tische"]').click()
         cy.contains('Tische')
     })
 })
+
+export { }

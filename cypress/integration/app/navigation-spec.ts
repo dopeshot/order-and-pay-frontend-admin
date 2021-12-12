@@ -1,4 +1,4 @@
-describe('Navigation', () => {
+describe('Navigation Ui', () => {
     beforeEach(() => {
         cy.getTables()
         cy.visit('/tables')
@@ -61,3 +61,5 @@ describe('Navigation', () => {
         })
     })
 })
+
+export { }

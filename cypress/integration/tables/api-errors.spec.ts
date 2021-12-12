@@ -1,6 +1,6 @@
 const api = `${Cypress.env("apiUrl")}/tables`
 
-describe('Error Handling', () => {
+describe('Api Error Handling', () => {
     beforeEach(() => {
         cy.getTables()
         cy.addTable()
@@ -10,4 +10,7 @@ describe('Error Handling', () => {
         cy.visit('/tables')
     })
 
+
 })
+
+export { }
