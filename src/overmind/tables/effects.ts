@@ -23,6 +23,7 @@ export const bulkDelete = (idArray: string[]): Promise<void> => request.delete('
     }
 })
 
+/* istanbul ignore next */
 export const getTablesMock = async (): Promise<Table[]> => {
     return await new Promise<Table[]>((resolve) => {
         setTimeout(() => {
