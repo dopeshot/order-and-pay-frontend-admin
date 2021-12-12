@@ -72,7 +72,7 @@ export const Tables: React.FunctionComponent = () => {
                 <thead className="bg-white-lightgrey">
                     <tr className="text-darkgrey text-xs tracking-widest uppercase">
                         <th className="text-center py-5 px-5">
-                            <input type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
+                            <input data-cy={`table-table-checkbox-allcheck`} type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
                         <th className="pr-10">
                             <button id="button-table" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('tableNumber')}>
@@ -103,7 +103,7 @@ export const Tables: React.FunctionComponent = () => {
                         tables.map((table: TableDocument, index: number) => (<tr data-cy={`table-table-row`} key={index}>
                             {/* Checkbox */}
                             <td className="text-center py-4">
-                                <input checked={table.isChecked} onChange={() => toggleChecked(table._id)} type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
+                                <input data-cy={`table-table-checkbox-${index}`} checked={table.isChecked} onChange={() => toggleChecked(table._id)} type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                             </td>
 
                             {/* Tablenumber */}
