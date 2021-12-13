@@ -38,3 +38,26 @@ export function getTableNumberAsArray() {
             .then(() => resolve(tableNumbers))
     })
 }
+
+export function getCapacitiesAsArray() {
+    const capacities: number[] = []
+
+    return new Cypress.Promise(resolve => {
+        cy.get('[data-cy="table-table-row"]')
+            .children()
+            .each(($el, $index) => {
+                if ($index == 2)
+                    capacities.push(parseInt($el.text()))
+
+                if ($index == 7)
+                    capacities.push(parseInt($el.text()))
+
+                if ($index == 12)
+                    capacities.push(parseInt($el.text()))
+
+                if ($index == 17)
+                    capacities.push(parseInt($el.text()))
+            })
+            .then(() => resolve(capacities))
+    })
+}

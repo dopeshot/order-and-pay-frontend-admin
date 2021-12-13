@@ -97,9 +97,9 @@ export const sortTable = async ({ state }: Context, sortedField: typeof config.s
     switch (state.tables.sort.currentField) {
         case 'capacity':
             if (state.tables.sort.sortDirection.capacity === 'ASC')
-                state.tables.tables = state.tables.tables.sort((a, b) => b.capacity - a.capacity)
-            else
                 state.tables.tables = state.tables.tables.sort((a, b) => a.capacity - b.capacity)
+            else
+                state.tables.tables = state.tables.tables.sort((a, b) => b.capacity - a.capacity)
             break;
         case 'tableNumber':
             if (state.tables.sort.sortDirection.tableNumber === 'ASC')
