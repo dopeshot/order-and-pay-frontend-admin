@@ -75,15 +75,15 @@ export const Tables: React.FunctionComponent = () => {
                             <input data-cy={`table-table-checkbox-allcheck`} type="checkbox" checked={isCheckedAll} onChange={() => bulkTableSelection()} className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
                         </th>
                         <th className="pr-10">
-                            <button id="button-table" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('tableNumber')}>
+                            <button data-cy="table-tablenumber-sort-button" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('tableNumber')}>
                                 Tischnummer
-                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "tableNumber" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.tableNumber === 'ASC' ? 'rotate-0' : `rotate-180`}`} />
+                                <FontAwesomeIcon data-cy="table-tablenumber-sort-icon" icon={faArrowUp} className={`ml-2 ${sort.currentField !== "tableNumber" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.tableNumber === 'ASC' ? 'rotate-0' : `rotate-180`}`} />
                             </button>
                         </th>
                         <th className="pr-10 lg:pr-0">
-                            <button type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('capacity')}>
+                            <button data-cy="table-capacity-sort-button" type="button" className="text-darkgrey text-xs font-semibold tracking-widest uppercase group" onClick={() => sortTable('capacity')}>
                                 Personenanzahl
-                                <FontAwesomeIcon icon={faArrowUp} className={`ml-2 ${sort.currentField !== "capacity" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.capacity === 'ASC' ? 'rotate-0' : `rotate-180`}`} />
+                                <FontAwesomeIcon data-cy="table-capacity-sort-icon" icon={faArrowUp} className={`ml-2 ${sort.currentField !== "capacity" ? `opacity-0 group-hover:opacity-50` : ``} transform-gpu transition-transform duration-200	ease-linear ${sort.sortDirection.capacity === 'ASC' ? 'rotate-0' : `rotate-180`}`} />
                             </button>
                         </th>
                         <th className="pr-20 lg:pr-0">
