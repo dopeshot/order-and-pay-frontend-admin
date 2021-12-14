@@ -7,10 +7,13 @@ export type FormErrorProps = {
 }
 
 export const FormError: React.FunctionComponent<FormErrorProps> = (props) => {
+
     return (
-        <div className="flex items-center text-danger-red mb-5">
-            <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />
-            <ErrorMessage name={props.field} component="span" className="text-sm font-semibold" />
-        </div>
+        <ErrorMessage name={props.field} >
+            {errorMessage => <div className="flex items-center text-danger-red mb-5 ">
+                <FontAwesomeIcon icon={faExclamationCircle} className="mr-2" />
+                <span className="text-sm font-semibold">{errorMessage}</span>
+            </div>}
+        </ErrorMessage>
     )
 }

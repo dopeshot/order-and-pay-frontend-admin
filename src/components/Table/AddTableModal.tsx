@@ -45,7 +45,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                 {/* Modal */}
                 <div data-cy="table-modal" className="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all w-full px-8 py-8 sm:align-middle sm:max-w-md sm:my-8 sm:p-10">
                     <Formik initialValues={initialValues} validationSchema={addTableSchema} onSubmit={submitForm}>
-                        {({ errors, setFieldValue, values }) => (
+                        {({ errors, setFieldValue, values, touched, dirty, isValid }) => (
                             <Form>
                                 <div className="bg-white mb-5">
                                     <h1 className="text-headline-black text-2xl font-semibold mb-4">Neuer Tisch</h1>
@@ -55,12 +55,12 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
 
                                     {/* Tablenumber Input with Label */}
                                     <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Tischnummer</label>
-                                    <Field type="text" data-cy="table-modal-tablenumber-input" name="tableNumber" id="tableNumber" placeholder="A1" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 ${errors.tableNumber ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red mb-2' : 'border border-border-grey mb-5'}`} />
-                                    {errors.tableNumber && <FormError field="tableNumber"> {console.log(errors.tableNumber)}</FormError>}
+                                    <Field type="text" data-cy="table-modal-tablenumber-input" name="tableNumber" id="tableNumber" placeholder="A1" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 ${errors.tableNumber && touched.tableNumber ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red mb-2' : 'border border-border-grey mb-5'}`} />
+                                    <FormError field="tableNumber" />
 
                                     {/* Capacity Input with Label */}
                                     <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Personenanzahl</label>
-                                    <Field type="number" data-cy="table-modal-capacity-input" name="capacity" id="capacity" placeholder="2" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 sm:mb-0 ${errors.capacity ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red' : 'border border-border-grey mb-3'}`} />
+                                    <Field type="number" data-cy="table-modal-capacity-input" name="capacity" id="capacity" placeholder="2" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 sm:mb-0 ${errors.capacity && touched.capacity ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red' : 'border border-border-grey mb-3'}`} />
 
                                     {/* Capacity Quick */}
                                     <div className="flex mb-2 sm:inline-flex sm:justify-between sm:w-1/2 sm:pl-3">
@@ -71,11 +71,11 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                                         ))}
                                     </div>
 
-                                    {errors.capacity && <FormError field="capacity" />}
+                                    <FormError field="capacity" />
                                 </div>
                                 <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                                     {/* Save and Cancel Buttons */}
-                                    <PrimaryButton type="submit" icon={faCheck}>Speichern</PrimaryButton>
+                                    <PrimaryButton disabled={!(dirty && isValid)} type="submit" icon={faCheck}>Speichern</PrimaryButton>
                                     <SecondaryButton dataCy="table-cancel" content="Abbrechen" onClick={() => props.setDisplayModal(false)} />
                                 </div>
                             </Form>
