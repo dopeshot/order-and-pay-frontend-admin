@@ -29,8 +29,7 @@ export const createTable = async ({ state, effects }: Context, { tableNumber, ca
     state.tables.isLoadingTables = false
 }
 
-export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number }) => {
-    state.tables.isLoadingTables = true
+export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity, setIsEdit }: { id: string, tableNumber: string, capacity: number, setIsEdit: (action: boolean) => void }) => {
     try {
         const response = await effects.tables.updateTable({ id, tableNumber, capacity })
         const updatedTable = { ...response.data, updatedAt: new Date(response.data.updatedAt) }
@@ -38,11 +37,10 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
         oldTable.capacity = updatedTable.capacity
         oldTable.tableNumber = updatedTable.tableNumber
         state.tables.tableErrors = []
+        setIsEdit(false)
     } catch (error) {
         generateErrorMessage(state, error, "tableErrors")
     }
-    actions.tables.setIsEdit(id)
-    state.tables.isLoadingTables = false
 }
 
 export const deleteTable = async ({ state, effects }: Context, id: string) => {
@@ -56,13 +54,15 @@ export const deleteTable = async ({ state, effects }: Context, id: string) => {
 }
 
 export const setIsEdit = async ({ state }: Context, id: string) => {
-    const tableToChange: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
-    tableToChange.isEdit = !tableToChange.isEdit
+    console.error("DEPRECATED")
+    // const tableToChange: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
+    // tableToChange.isEdit = !tableToChange.isEdit
 }
 
 export const toggleMoreOptions = async ({ state }: Context, id: string) => {
-    const table: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
-    table.isMoreOptionsOpen = !table.isMoreOptionsOpen
+    console.error("DEPRECATED")
+    // const table: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
+    // table.isMoreOptionsOpen = !table.isMoreOptionsOpen
 }
 
 export const toggleChecked = async ({ state }: Context, id: string) => {

@@ -9,14 +9,12 @@ export type Table = {
 }
 
 export type TableHelper = {
-    isMoreOptionsOpen: boolean,
-    isEdit: boolean,
     isChecked: boolean
 }
 
 export const InitialTableHelper = {
-    isChecked: false, 
-    isMoreOptionsOpen: false, 
+    isChecked: false,
+    isMoreOptionsOpen: false,
     isEdit: false
 }
 
@@ -47,7 +45,7 @@ export const state: State = {
     tableErrors: [],
     hasModalError: derived((state: State) => state.modalErrors.length !== 0),
     hasTableError: derived((state: State) => state.tableErrors.length !== 0),
-    isCheckedAll: derived((state: State) => !state.tables.some(table => !table.isChecked)),
+    isCheckedAll: derived((state: State) => state.tables.length !== 0 && !state.tables.some(table => !table.isChecked)),
     checkedCount: derived((state: State) => state.tables.filter(table => table.isChecked).length),
     sort: {
         currentField: 'tableNumber',

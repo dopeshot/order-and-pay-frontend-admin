@@ -1,29 +1,22 @@
-import { faArrowUp, faCheck, faChevronDown, faCircleNotch, faEdit, faEllipsisV, faMale, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp, faChevronDown, faCircleNotch, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { PrimaryButton } from "../../components/Buttons/PrimaryButton"
 import { ErrorBanner } from "../../components/Errors/ErrorBanner"
 import { AddTableModal } from "../../components/Table/AddTableModal"
+import { TableItem } from "../../components/Table/TableItem"
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
 
 export const Tables: React.FunctionComponent = () => {
     const {
-        tables: {
-            tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll, checkedCount, sort
-        },
-        app: {
-            isMobile,
-            languageLocale
-        }
-    } = useAppState()
+        tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll, checkedCount, sort
+    } = useAppState().tables
 
-    const { loadTables, deleteTable, toggleMoreOptions, updateTable, setIsEdit, toggleChecked, bulkTableSelection, sortTable, bulkDelete } = useActions().tables
+    const { loadTables, bulkTableSelection, sortTable, bulkDelete } = useActions().tables
 
     const [displayModal, setDisplayModal] = useState(false)
-    const [tableNumber, setTableNumber] = useState("")
-    const [tableCapacity, setTableCapacity] = useState(0)
     const [bulkDropdown, setBulkDropdown] = useState(false)
 
     useEffect(() => {
@@ -49,7 +42,7 @@ export const Tables: React.FunctionComponent = () => {
                     {bulkDropdown && <div data-cy="table-bulk-dropdown-background" className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setBulkDropdown(!bulkDropdown)}></div>}
 
                     <button data-cy="table-bulk-dropdown-button" className="border rounded-lg mr-5 mb-3 sm:mb-0 py-2 px-5" type="button" onClick={() => setBulkDropdown(!bulkDropdown)}>
-                        <span className="text-darkgrey font-semibold pr-2">{checkedCount === (!isLoadingTables && tables.length) ? "Alle" : checkedCount}</span>
+                        <span className="text-darkgrey font-semibold pr-2">{!isLoadingTables && isCheckedAll ? "Alle" : checkedCount}</span>
                         Markiert
                         <FontAwesomeIcon className="ml-6" icon={faChevronDown} />
                     </button>
@@ -100,71 +93,7 @@ export const Tables: React.FunctionComponent = () => {
                 {/* Table Header End */}
                 <tbody className="divide-y divide-border-grey">
                     {!isLoadingTables &&
-                        tables.map((table: TableDocument, index: number) => (<tr data-cy={`table-table-row`} key={index}>
-                            {/* Checkbox */}
-                            <td className="text-center py-4">
-                                <input data-cy={`table-table-checkbox-${index}`} checked={table.isChecked} onChange={() => toggleChecked(table._id)} type="checkbox" className="bg-checkbox-grey border border-transparent checked:bg-primary-blue checked:border-transparent" />
-                            </td>
-
-                            {/* Tablenumber */}
-                            <td data-cy={`table-table-tablenumber-${index}`} className="font-roboto font-semibold pr-4">
-                                {table.isEdit ?
-                                    <input type="text" data-cy={`table-table-tablenumber-input-${index}`} name="tablenumber" value={tableNumber ? tableNumber : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableNumber(event.target.value)} minLength={1} maxLength={8} placeholder="A1" className="font-roboto border border-border-grey rounded-xl w-28 pl-4 py-2" />
-                                    : table.tableNumber}
-                            </td>
-
-                            {/* Table Capacity */}
-                            <td data-cy={`table-table-capacity-${index}`} className="font-roboto font-semibold pr-4">
-                                {table.isEdit ?
-                                    <input type="number" data-cy={`table-table-capacity-input-${index}`} name="tablecapacity" value={tableCapacity ? tableCapacity : ""} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setTableCapacity(parseInt(event.target.value))} min={1} max={100} placeholder="4" className="font-roboto border border-border-grey rounded-xl w-20 pl-4 py-2" />
-                                    :
-                                    isMobile ? table.capacity : <div className="flex items-center">
-                                        <p className="mr-5" style={{ minWidth: "30px" }}>{table.capacity}</p>
-                                        {[...Array(table.capacity <= 20 ? table.capacity : 20)].map((e, i) => <span key={i} data-cy={`table-table-capacityicon-${index}`}><FontAwesomeIcon icon={faMale} className="text-lightgrey mr-2" /></span>)}
-                                        {table.capacity > 20 ? <span data-cy={`table-table-capacityicon-${index}-last`}><FontAwesomeIcon icon={faMale} className="gradient-icon text-lightgrey mr-2" /></span> : ""}
-                                    </div>}
-                            </td>
-
-                            {/* Created by */}
-                            <td className="pr-4">
-                                <h5 className="font-semibold text-sm h-3">{table.createdBy}</h5>
-                                <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
-                            </td>
-
-                            {/* Actions */}
-                            <td className="text-lightgrey">
-                                {/* Edit */}
-                                {table.isEdit ?
-                                    <button data-cy={`table-table-save-button-${index}`} onClick={() => { updateTable({ id: table._id, tableNumber: tableNumber, capacity: tableCapacity }) }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
-                                        <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                                        Speichern
-                                    </button>
-                                    :
-                                    <button data-cy={`table-table-edit-button-${index}`} onClick={() => { setIsEdit(table._id); setTableNumber(table.tableNumber); setTableCapacity(table.capacity) }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
-                                        <FontAwesomeIcon icon={faEdit} className="mr-2" />
-                                        Bearbeiten
-                                    </button>}
-
-                                {/* Delete */}
-                                <div className="relative inline-block">
-                                    {/* When dropdown open click outside close it */}
-                                    {table.isMoreOptionsOpen && <div data-cy={`table-table-delete-background-${index}`} className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => toggleMoreOptions(table._id)}></div>}
-
-                                    {/* Icon */}
-                                    <IconButton dataCy={`table-table-delete-iconbutton-${index}`} icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { toggleMoreOptions(table._id) }} />
-
-                                    {/* Dropdown */}
-                                    {table.isMoreOptionsOpen && <div data-cy={`table-table-delete-dropdown-${index}`} className="absolute origin-top-right right-5 z-20 bg-white rounded-lg shadow mt-2 w-30" tabIndex={-1}>
-                                        <div className="py-1">
-                                            <button data-cy={`table-table-delete-button-${index}`} onClick={() => deleteTable(table._id)} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
-                                                <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3" />
-                                                Löschen
-                                            </button>
-                                        </div>
-                                    </div>}
-                                </div>
-                            </td>
-                        </tr>))}
+                        tables.map((table: TableDocument, index: number) => <TableItem key={table._id} index={index} table={table} />)}
                 </tbody>
             </table>
             {isLoadingTables &&
