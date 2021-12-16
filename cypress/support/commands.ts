@@ -30,5 +30,27 @@ Cypress.Commands.add('getCapacityTables', () => {
     }).as('getCapacityTables')
 })
 
+Cypress.Commands.add('addDuplicateTable', () => {
+    cy.intercept('POST', `${api}/tables`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This table number already exists",
+            "error": "Conflict"
+        }
+    }).as('addDuplicateTable')
+})
+
+Cypress.Commands.add('addTableUnknownError', () => {
+    cy.intercept('POST', `${api}/tables`, {
+        statusCode: 500
+    }).as('addTableUnknownError')
+})
+
+Cypress.Commands.add('getTableDatabaseDown', () => {
+    cy.intercept('GET', `${api}/tables`, {
+        forceNetworkError: true
+    }).as('getTableDatabaseDown')
+})
 
 export { }

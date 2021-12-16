@@ -51,6 +51,24 @@ declare global {
              * @example cy.getCapacityTables()
              */
             getCapacityTables(): void
+
+            /**
+             * Custom command to intercept all addTables duplicate errror request
+             * @example cy.addDuplicateTable()
+             */
+            addDuplicateTable(): void
+
+            /**
+             * Custom command to intercept all addTables errror request
+             * @example cy.addTableUnknownError()
+             */
+            addTableUnknownError(): void
+
+            /**
+             * Custom command to intercept all getTable errror request database down
+             * @example cy.getTableDatabaseDown()
+             */
+            getTableDatabaseDown(): void
         }
     }
 }

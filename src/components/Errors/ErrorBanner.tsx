@@ -8,7 +8,7 @@ export type ErrorBannerProps = {
 
 export const ErrorBanner: React.FunctionComponent<ErrorBannerProps> = (props) => {
     return (
-        <div className="flex items-baseline bg-danger-red bg-opacity-10 rounded-lg my-4 py-4 px-6">
+        <div data-cy="error-banner" className="flex items-baseline bg-danger-red bg-opacity-10 rounded-lg my-4 py-4 px-6">
             <FontAwesomeIcon icon={faTimesCircle} className="text-danger-red mr-3" />
             <div>
                 <h4 className="text-darker-danger-red font-semibold mb-1">{props.headlineContent}</h4>

@@ -53,10 +53,14 @@ describe('Navigation Ui', () => {
 
         it('should open full search (in the future)', () => {
             cy.get('[data-cy="topbar-search-iconbutton"]').click()
+
+            // TODO: Implement when feature ready
         })
 
         it('should open notification dropdown (in the future)', () => {
             cy.get('[data-cy="topbar-notification-iconbutton"]').click()
+
+            // TODO: Implement when feature ready
         })
     })
 })
