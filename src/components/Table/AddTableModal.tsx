@@ -2,6 +2,7 @@ import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { Field, Form, Formik } from "formik"
 import * as yup from 'yup'
 import { useActions, useAppState } from "../../overmind"
+import { DisabledButton } from "../Buttons/DisabledButton"
 import { PrimaryButton } from "../Buttons/PrimaryButton"
 import { SecondaryButton } from "../Buttons/SecondaryButton"
 import { ErrorBanner } from "../Errors/ErrorBanner"
@@ -75,7 +76,8 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                                 </div>
                                 <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                                     {/* Save and Cancel Buttons */}
-                                    <PrimaryButton dataCy="table-save" type="submit" icon={(dirty && isValid) ? faCheck : faTimes}>Speichern</PrimaryButton>
+                                    {(dirty && isValid) ? <PrimaryButton dataCy="table-save" type="submit" icon={faCheck}>Speichern</PrimaryButton>
+                                        : <DisabledButton dataCy="table-disabled" type="submit" icon={faTimes}>Speichern</DisabledButton>}
                                     <SecondaryButton dataCy="table-cancel" content="Abbrechen" onClick={() => props.setDisplayModal(false)} />
                                 </div>
                             </Form>
