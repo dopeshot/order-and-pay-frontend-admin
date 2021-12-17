@@ -1,4 +1,4 @@
-import { faCheck, faEdit, faEllipsisV, faMale, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faEdit, faEllipsisV, faMale, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { useActions, useAppState } from "../../overmind"
@@ -29,6 +29,7 @@ export const TableItem: React.FC<TableItemType> = (props) => {
     const [editTableNumber, setEditTableNumber] = useState(table.tableNumber)
     const [editCapacity, setEditCapacity] = useState(table.capacity)
     const [isMoreOptionsOpen, setIsMoreOptionsOpen] = useState(false)
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
 
     return (<tr data-cy={`table-table-row`}>
         {/* Checkbox */}
@@ -65,8 +66,11 @@ export const TableItem: React.FC<TableItemType> = (props) => {
         <td className="text-lightgrey">
             {/* Edit */}
             {isEdit ?
-                <button data-cy={`table-table-save-button-${index}`} onClick={() => { updateTable({ id: table._id, tableNumber: editTableNumber, capacity: editCapacity, setIsEdit }) }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
-                    <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                <button data-cy={`table-table-save-button-${index}`} onClick={() => {
+                    setIsLoadingButton(true)
+                    updateTable({ id: table._id, tableNumber: editTableNumber, capacity: editCapacity, setIsEdit, setIsLoadingButton })
+                }} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
+                    <FontAwesomeIcon icon={isLoadingButton ? faSpinner : faCheck} className={`${isLoadingButton ? "animate-spin" : ""} mr-2`} />
                     Speichern
                 </button>
                 :
