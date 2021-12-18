@@ -53,4 +53,15 @@ Cypress.Commands.add('getTableDatabaseDown', () => {
     }).as('getTableDatabaseDown')
 })
 
+Cypress.Commands.add('changeToDuplicateTable', () => {
+    cy.intercept('PATCH', `${api}/tables/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This table number already exists",
+            "error": "Conflict"
+        }
+    }).as('changeToDuplicateTable')
+})
+
 export { }

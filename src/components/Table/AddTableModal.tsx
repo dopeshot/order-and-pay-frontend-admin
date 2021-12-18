@@ -59,7 +59,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
 
                                     {/* Tablenumber Input with Label */}
                                     <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Tischnummer</label>
-                                    <Field type="text" data-cy="table-modal-tablenumber-input" name="tableNumber" id="tableNumber" placeholder="A1" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 ${errors.tableNumber && touched.tableNumber ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red mb-2 focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey mb-5'}`} />
+                                    <Field type="text" data-cy="table-modal-tablenumber-input" name="tableNumber" id="tableNumber" placeholder="A1" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 ${errors.tableNumber && touched.tableNumber ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red mb-2 focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey mb-2'}`} />
                                     <div className="mb-5">
                                         <FormError dataCy="table-modal-tablenumber-input-error" field="tableNumber" />
                                     </div>
@@ -83,7 +83,6 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                                 </div>
                                 <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                                     {/* Save and Cancel Buttons */}
-                                    {console.log(dirty && isValid)}
                                     <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} buttonType="primary" disabled={!(dirty && isValid)}>Speichern</Button>
                                     <Button dataCy="table-cancel" type="button" buttonType="secondary" onClick={() => props.setDisplayModal(false)}>Abbrechen</Button>
                                 </div>

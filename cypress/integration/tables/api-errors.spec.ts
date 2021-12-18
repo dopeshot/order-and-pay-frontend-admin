@@ -1,3 +1,5 @@
+import tables from '../../fixtures/tables.json'
+
 const api = `${Cypress.env("apiUrl")}/tables`
 
 describe('Api Error Handling', () => {
@@ -17,6 +19,7 @@ describe('Api Error Handling', () => {
 
     describe('Table Add Errors', () => {
         beforeEach(() => {
+            cy.getTables()
             cy.visit('/tables')
 
             cy.get('[data-cy="table-add"]').contains('Tisch hinzufügen').click()
@@ -35,82 +38,115 @@ describe('Api Error Handling', () => {
             // TODO: Implement when feature ready
         })
 
-        it.skip('should handle create duplicate tableNumber', () => {
+        it('should handle create duplicate tableNumber', () => {
             cy.addDuplicateTable()
             cy.visit('/tables')
             cy.get('[data-cy="table-add"]').contains('Tisch hinzufügen').click()
 
             cy.get('[data-cy="table-modal-tablenumber-input"]').type("a1")
+            cy.get('[data-cy="table-modal-capacity-input"]').type("20")
 
             cy.get('[data-cy="table-save"]').click()
 
-            // TODO: Implement when feature ready
+            cy.get('[data-cy="error-banner"]').should('be.visible').contains('This table number already exists')
         })
 
         it('should handle tableNumber to long (over 8 letters)', () => {
             cy.get('[data-cy="table-modal-tablenumber-input"]').type("123456789")
             cy.get('[data-cy="table-modal"]').click()
 
-            cy.get('[data-cy="table-modal-tablenumber-input-error"]').should('be.visible')
-            cy.get('[data-cy="table-modal-tablenumber-input-error"]').contains('Table number cannot be greater than 8 letters')
+            cy.get('[data-cy="table-modal-tablenumber-input-error"]').should('be.visible').contains('Table number cannot be greater than 8 letters')
         })
 
         it('should handle tableNumber can not be empty', () => {
             cy.get('[data-cy="table-modal-tablenumber-input"]').click()
             cy.get('[data-cy="table-modal"]').click()
 
-            cy.get('[data-cy="table-modal-tablenumber-input-error"]').should('be.visible')
-            cy.get('[data-cy="table-modal-tablenumber-input-error"]').contains('Table number must be defined')
+            cy.get('[data-cy="table-modal-tablenumber-input-error"]').should('be.visible').contains('Table number must be defined')
         })
 
         it('should handle capacity to big (over 100)', () => {
             cy.get('[data-cy="table-modal-capacity-input"]').clear().type("101")
             cy.get('[data-cy="table-modal"]').click()
 
-            cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible')
-            cy.get('[data-cy="table-modal-capacity-input-error"]').contains('Capacity cannot be greater than 100')
+            cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible').contains('Capacity cannot be greater than 100')
         })
 
         it('should handle capacity can not be 0', () => {
             cy.get('[data-cy="table-modal-capacity-input"]').clear().type("0")
             cy.get('[data-cy="table-modal"]').click()
 
-            cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible')
-            cy.get('[data-cy="table-modal-capacity-input-error"]').contains('Capacity must be greater than 1')
+            cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible').contains('Capacity must be greater than 1')
         })
 
         it('should handle capacity can not be empty', () => {
             cy.get('[data-cy="table-modal-capacity-input"]').clear().click()
             cy.get('[data-cy="table-modal"]').click()
 
-            cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible')
-            cy.get('[data-cy="table-modal-capacity-input-error"]').contains('Capacity must be defined')
+            cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible').contains('Capacity must be defined')
         })
     })
 
     describe('Table Edit Errors', () => {
-        it('should handle edit duplicate tableNumber', () => {
+        beforeEach(() => {
+            cy.getTables()
+            cy.visit('/tables')
+        })
 
+        it('should handle edit duplicate tableNumber', () => {
+            cy.changeToDuplicateTable()
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
+
+            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear().type(tables[1].tableNumber)
+
+            cy.get('[data-cy="table-table-save-button-0"]').click()
+
+            cy.get('[data-cy="error-banner"]').should('be.visible').contains('This table number already exists')
         })
 
         it('should handle tableNumber to long (over 8 letters)', () => {
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
 
+            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear().type("123456789")
+            cy.get('[data-cy="table-table-save-button-0"]').click()
+
+            cy.get('[data-cy="table-table-tablenumber-error"]').should('be.visible').contains('Table number cannot be greater than 8 letters')
         })
 
         it('should handle tableNumber can not be empty', () => {
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
 
+            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear()
+            cy.get('[data-cy="table-table-save-button-0"]').click()
+
+            cy.get('[data-cy="table-table-tablenumber-error"]').should('be.visible').contains('Table number must be defined')
         })
 
         it('should handle capacity to big (over 100)', () => {
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
 
+            cy.get('[data-cy="table-table-capacity-input-0"]').clear().type("101")
+            cy.get('[data-cy="table-table-save-button-0"]').click()
+
+            cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Capacity cannot be greater than 100')
         })
 
         it('should handle capacity can not be 0', () => {
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
 
+            cy.get('[data-cy="table-table-capacity-input-0"]').clear().type("0")
+            cy.get('[data-cy="table-table-save-button-0"]').click()
+
+            cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Capacity must be greater than 1')
         })
 
         it('should handle capacity can not be empty', () => {
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
 
+            cy.get('[data-cy="table-table-capacity-input-0"]').clear()
+            cy.get('[data-cy="table-table-save-button-0"]').click()
+
+            cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Capacity must be defined')
         })
     })
 })

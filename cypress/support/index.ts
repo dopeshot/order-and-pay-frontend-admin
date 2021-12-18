@@ -69,6 +69,12 @@ declare global {
              * @example cy.getTableDatabaseDown()
              */
             getTableDatabaseDown(): void
+
+            /**
+             * Custom command to intercept all change table errror request when patch leads to duplicate table
+             * @example cy.changeToDuplicateTable()
+             */
+            changeToDuplicateTable(): void
         }
     }
 }

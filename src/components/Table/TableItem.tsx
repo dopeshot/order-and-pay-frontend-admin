@@ -93,7 +93,7 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                 <td className="text-lightgrey">
                     {/* Edit */}
                     {isEdit ?
-                        <button data-cy={`table-table-save-button-${index}`} onClick={() => submitForm()} className={`text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5 ${!(dirty && isValid) ? "opacity-70" : "opacity-100"}`}>
+                        <button data-cy={`table-table-save-button-${index}`} onClick={() => submitForm()} className={`text-primary-blue font-semibold mr-5 ${!isValid ? "opacity-70" : "opacity-100 hover:text-primary-blue-hover focus:text-primary-blue-hover "}`}>
                             <FontAwesomeIcon icon={isLoadingButton ? faSpinner : faCheck} className={`${isLoadingButton ? "animate-spin" : ""} mr-2`} />
                             Speichern
                         </button>
