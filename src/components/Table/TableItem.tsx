@@ -33,6 +33,9 @@ export const TableItem: React.FC<TableItemType> = (props) => {
     }
 
     const submitChanges = ({ _id, tableNumber, capacity }: typeof initialValues) => {
+        if (isLoadingButton)
+            return
+
         setIsLoadingButton(true)
         updateTable({ id: _id, tableNumber, capacity, setIsEdit, setIsLoadingButton })
     }
