@@ -93,7 +93,7 @@ export const Tables: React.FunctionComponent = () => {
                 {/* Table Header End */}
                 <tbody className="divide-y divide-border-grey">
                     {!isLoadingTables &&
-                        tables.map((table: TableDocument, index: number) => <TableItem key={table._id} index={index} table={table} />)}
+                        tables.map((table: TableDocument, index: number) => <TableItem key={table._id} index={index} id={table._id} />)}
                 </tbody>
             </table>
             {isLoadingTables &&

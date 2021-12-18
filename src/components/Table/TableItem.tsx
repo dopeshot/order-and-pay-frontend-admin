@@ -1,6 +1,7 @@
 import { faCheck, faEdit, faEllipsisV, faMale, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field, Formik } from "formik"
+import React from "react"
 import { useState } from "react"
 import * as yup from 'yup'
 import { useActions, useAppState } from "../../overmind"
@@ -9,22 +10,20 @@ import { IconButton } from "../Buttons/IconButton"
 
 type TableItemType = {
     index: number
-    table: TableDocument
+    id: string
 }
 
-export const TableItem: React.FC<TableItemType> = (props) => {
-    const {
-        index,
-        table
-    } = props
-
+export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => {
     const {
         app: {
             isMobile,
             languageLocale
         }
     } = useAppState()
+
     const { deleteTable, updateTable, toggleChecked } = useActions().tables
+
+    const table = useAppState<TableDocument>(state => state.tables.tables.find(table => table._id === id)!)
 
     const initialValues = {
         _id: table._id,
@@ -120,4 +119,4 @@ export const TableItem: React.FC<TableItemType> = (props) => {
             }
         </Formik>
     </tr >)
-}
+})
