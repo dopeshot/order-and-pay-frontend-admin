@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
 import { IconButton } from "../Buttons/IconButton"
+import { FormError } from "../Errors/FormError"
 
 type TableItemType = {
     index: number
@@ -56,18 +57,24 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
         </td>
 
         <Formik initialValues={initialValues} onSubmit={submitChanges} validationSchema={editTableSchema} >
-            {({ errors, setFieldValue, values, touched, dirty, isValid, submitForm }) => (<>{/* MC: Do NOT put a form tag around!!! This is not working in tables! https://stackoverflow.com/questions/45815205/input-cannot-appear-as-a-child-of-tr*/}
+            {({ errors, touched, dirty, isValid, submitForm }) => (<>{/* MC: Do NOT put a form tag around!!! This is not working in tables! https://stackoverflow.com/questions/45815205/input-cannot-appear-as-a-child-of-tr*/}
                 {/* Tablenumber */}
                 <td data-cy={`table-table-tablenumber-${index}`} className="font-roboto font-semibold pr-4">
                     {isEdit ?
-                        <Field type="text" data-cy={`table-table-tablenumber-input-${index}`} name="tableNumber" placeholder="A1" className={`font-roboto border rounded-xl w-28 pl-4 py-2 ${errors.tableNumber && touched.tableNumber ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border-border-grey'}`} />
+                        <div className="flex items-center">
+                            <Field type="text" data-cy={`table-table-tablenumber-input-${index}`} name="tableNumber" placeholder="A1" className={`font-roboto border rounded-xl w-28 mr-3 pl-4 py-2 ${errors.tableNumber && touched.tableNumber ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border-border-grey'}`} />
+                            <FormError field="tableNumber" dataCy="table-table-tablenumber-error" />
+                        </div>
                         : table.tableNumber}
                 </td>
 
                 {/* Table Capacity */}
                 <td data-cy={`table-table-capacity-${index}`} className="font-roboto font-semibold pr-4">
                     {isEdit ?
-                        <Field type="number" data-cy={`table-table-capacity-input-${index}`} name="capacity" placeholder="4" className={`font-roboto border rounded-xl w-20 pl-4 py-2 ${errors.capacity && touched.capacity ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border-border-grey'}`} />
+                        <div className="flex items-center">
+                            <Field type="number" data-cy={`table-table-capacity-input-${index}`} name="capacity" placeholder="4" className={`font-roboto border rounded-xl w-20 mr-3 pl-4 py-2 ${errors.capacity && touched.capacity ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border-border-grey'}`} />
+                            <FormError field="capacity" dataCy="table-table-capacity-error" />
+                        </div>
                         :
                         isMobile ? table.capacity : <div className="flex items-center">
                             <p className="mr-5" style={{ minWidth: "30px" }}>{table.capacity}</p>
@@ -86,7 +93,7 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                 <td className="text-lightgrey">
                     {/* Edit */}
                     {isEdit ?
-                        <button data-cy={`table-table-save-button-${index}`} onClick={() => submitForm()} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
+                        <button data-cy={`table-table-save-button-${index}`} onClick={() => submitForm()} className={`text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5 ${!(dirty && isValid) ? "opacity-70" : "opacity-100"}`}>
                             <FontAwesomeIcon icon={isLoadingButton ? faSpinner : faCheck} className={`${isLoadingButton ? "animate-spin" : ""} mr-2`} />
                             Speichern
                         </button>
