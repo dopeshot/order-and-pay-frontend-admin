@@ -1,9 +1,9 @@
-import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { Field, Form, Formik } from "formik"
+import { useState } from "react"
 import * as yup from 'yup'
 import { useActions, useAppState } from "../../overmind"
-import { PrimaryButton } from "../Buttons/PrimaryButton"
-import { SecondaryButton } from "../Buttons/SecondaryButton"
+import { Button } from "../Buttons/Button"
 import { ErrorBanner } from "../Errors/ErrorBanner"
 import { FormError } from "../Errors/FormError"
 
@@ -17,6 +17,8 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
     const { modalErrors, hasModalError } = useAppState().tables
     const { createTable } = useActions().tables
 
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
+
     const initialValues = {
         tableNumber: "",
         capacity: ""
@@ -28,9 +30,11 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
     })
 
     const submitForm = (values: any) => {
+        setIsLoadingButton(true)
         createTable({
             ...values,
-            setDisplayModal: props.setDisplayModal
+            setDisplayModal: props.setDisplayModal,
+            setIsLoadingButton
         })
     }
 
@@ -75,8 +79,8 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                                 </div>
                                 <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                                     {/* Save and Cancel Buttons */}
-                                    <PrimaryButton dataCy="table-save" type="submit" icon={(dirty && isValid) ? faCheck : faTimes}>Speichern</PrimaryButton>
-                                    <SecondaryButton dataCy="table-cancel" content="Abbrechen" onClick={() => props.setDisplayModal(false)} />
+                                    <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} buttonType="primary" disabled={(dirty && isValid)}>Speichern</Button>
+                                    <Button dataCy="table-cancel" type="button" buttonType="secondary" onClick={() => props.setDisplayModal(false)}>Abbrechen</Button>
                                 </div>
                             </Form>
                         )}

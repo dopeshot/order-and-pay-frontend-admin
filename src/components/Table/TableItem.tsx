@@ -1,4 +1,4 @@
-import { faCheck, faEdit, faEllipsisV, faMale, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faEdit, faEllipsisV, faMale, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field, Formik } from "formik"
 import { useState } from "react"
@@ -33,7 +33,8 @@ export const TableItem: React.FC<TableItemType> = (props) => {
     }
 
     const submitChanges = ({ _id, tableNumber, capacity }: typeof initialValues) => {
-        updateTable({ id: _id, tableNumber, capacity, setIsEdit })
+        setIsLoadingButton(true)
+        updateTable({ id: _id, tableNumber, capacity, setIsEdit, setIsLoadingButton })
     }
 
     const editTableSchema = yup.object().shape({
@@ -44,6 +45,7 @@ export const TableItem: React.FC<TableItemType> = (props) => {
 
     const [isEdit, setIsEdit] = useState(false)
     const [isMoreOptionsOpen, setIsMoreOptionsOpen] = useState(false)
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
 
     return (<tr data-cy={`table-table-row`}>
         {/* Checkbox */}
@@ -83,7 +85,7 @@ export const TableItem: React.FC<TableItemType> = (props) => {
                     {/* Edit */}
                     {isEdit ?
                         <button data-cy={`table-table-save-button-${index}`} onClick={() => submitForm()} className="text-primary-blue hover:text-primary-blue-hover focus:text-primary-blue-hover font-semibold mr-5">
-                            <FontAwesomeIcon icon={faCheck} className="mr-2" />
+                            <FontAwesomeIcon icon={isLoadingButton ? faSpinner : faCheck} className={`${isLoadingButton ? "animate-spin" : ""} mr-2`} />
                             Speichern
                         </button>
                         :

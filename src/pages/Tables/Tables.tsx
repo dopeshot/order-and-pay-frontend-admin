@@ -1,8 +1,8 @@
 import { faArrowUp, faChevronDown, faCircleNotch, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
+import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { PrimaryButton } from "../../components/Buttons/PrimaryButton"
 import { ErrorBanner } from "../../components/Errors/ErrorBanner"
 import { AddTableModal } from "../../components/Table/AddTableModal"
 import { TableItem } from "../../components/Table/TableItem"
@@ -56,7 +56,7 @@ export const Tables: React.FunctionComponent = () => {
                         </div>
                     </div>}
                 </div>
-                <PrimaryButton dataCy="table-add" type="button" icon={faPlus} onClick={() => setDisplayModal(true)}>Tisch hinzufügen</PrimaryButton>
+                <Button dataCy="table-add" type="button" icon={faPlus} buttonType="primary" onClick={() => setDisplayModal(true)}>Tisch hinzufügen</Button>
             </div>
 
             {/* Table */}

@@ -15,8 +15,7 @@ export const loadTables = async ({ state, effects }: Context) => {
     state.tables.isLoadingTables = false
 }
 
-export const createTable = async ({ state, effects }: Context, { tableNumber, capacity, setDisplayModal }: { tableNumber: string, capacity: number, setDisplayModal: (value: boolean) => void }) => {
-    state.tables.isLoadingTables = true
+export const createTable = async ({ state, effects }: Context, { tableNumber, capacity, setDisplayModal, setIsLoadingButton }: { tableNumber: string, capacity: number, setDisplayModal: (value: boolean) => void, setIsLoadingButton: (value: boolean) => void }) => {
     try {
         const response = await effects.tables.createTable({ tableNumber, capacity })
         const newTable = { ...response.data, updatedAt: new Date(response.data.updatedAt), ...InitialTableHelper }
@@ -26,10 +25,10 @@ export const createTable = async ({ state, effects }: Context, { tableNumber, ca
     } catch (error) {
         generateErrorMessage(state, error, "modalErrors")
     }
-    state.tables.isLoadingTables = false
+    setIsLoadingButton(false)
 }
 
-export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity, setIsEdit }: { id: string, tableNumber: string, capacity: number, setIsEdit: (action: boolean) => void }) => {
+export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity, setIsEdit, setIsLoadingButton }: { id: string, tableNumber: string, capacity: number, setIsEdit: (action: boolean) => void, setIsLoadingButton: (value: boolean) => void }) => {
     try {
         const response = await effects.tables.updateTable({ id, tableNumber, capacity })
         const updatedTable = { ...response.data, updatedAt: new Date(response.data.updatedAt) }
@@ -41,6 +40,7 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
     } catch (error) {
         generateErrorMessage(state, error, "tableErrors")
     }
+    setIsLoadingButton(false)
 }
 
 export const deleteTable = async ({ state, effects }: Context, id: string) => {
