@@ -53,18 +53,6 @@ export const deleteTable = async ({ state, effects }: Context, id: string) => {
     }
 }
 
-export const setIsEdit = async ({ state }: Context, id: string) => {
-    console.error("DEPRECATED")
-    // const tableToChange: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
-    // tableToChange.isEdit = !tableToChange.isEdit
-}
-
-export const toggleMoreOptions = async ({ state }: Context, id: string) => {
-    console.error("DEPRECATED")
-    // const table: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
-    // table.isMoreOptionsOpen = !table.isMoreOptionsOpen
-}
-
 export const toggleChecked = async ({ state }: Context, id: string) => {
     const table: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
     table.isChecked = !table.isChecked

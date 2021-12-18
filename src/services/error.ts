@@ -5,10 +5,12 @@ export const formatErrors = (data: string | string[]): string[] => {
     if (typeof data === 'string') {
         return [data];
     }
+    /* istanbul ignore next */
     return data
 };
 
 export const generateErrorMessage = (state: typeof config.state, error: any, position: "tableErrors" | "modalErrors") => {
+    /* istanbul ignore else */
     if (axios.isAxiosError(error) && error.response) {
         state.tables[position] = formatErrors(error.response.data.message)
     } else if (axios.isAxiosError(error)) {

@@ -16,7 +16,7 @@ describe('Api Endpoints', () => {
 
   describe('Get Tables', () => {
     it('should show the loading spinner when load table data and hide afterwards', () => {
-      const interception = interceptIndefinitely(api, { fixture: 'tables.json' })
+      const interception = interceptIndefinitely('GET', api, { fixture: 'tables.json' })
 
       cy.visit('/tables')
 
@@ -33,7 +33,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should load tables again when click on loadicon', () => {
-      const interception = interceptIndefinitely(api, { fixture: 'tables.json' })
+      const interception = interceptIndefinitely('GET', api, { fixture: 'tables.json' })
 
       cy.get('[data-cy="table-table-load-iconbutton"]').click()
 
@@ -85,19 +85,47 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-cancel"]').click()
       cy.get('[data-cy="table-modal"]').should('not.exist')
     })
+
+    it('should have disabled state when inputs are wrong', () => {
+      cy.get('[data-cy="table-modal-capacity-input"]').type("0")
+      cy.get('[data-cy="table-modal"]').click()
+
+      cy.get('[data-cy="table-save"]').should('have.class', 'opacity-80')
+    })
+
+    it('should have disabled state when inputs are empty', () => {
+      cy.get('[data-cy="table-save"]').should('have.class', 'opacity-80')
+
+      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
+
+      cy.get('[data-cy="table-save"]').should('not.have.class', 'opacity-80')
+    })
+
+    it('should have loading icon when sending', () => {
+      interceptIndefinitely('POST', api, { fixture: 'table.json' })
+
+      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
+
+      cy.get('[data-cy="table-save"] svg').should('be.visible').then(() => {
+        cy.get('[data-cy="table-save"]').click()
+        cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
+      })
+    })
   })
 
   describe('Update Table', () => {
-    it('should change to edit mode for the first table', () => {
+    beforeEach(() => {
       cy.get('[data-cy="table-table-edit-button-0"]').click()
+    })
 
+    it('should change to edit mode for the first table', () => {
       cy.get('[data-cy="table-table-tablenumber-input-0"]').should('be.visible')
       cy.get('[data-cy="table-table-capacity-input-0"]').should('be.visible')
     })
 
     it('should edit the first table', () => {
-      cy.get('[data-cy="table-table-edit-button-0"]').click()
-
       cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
       cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
 
@@ -106,6 +134,27 @@ describe('Api Endpoints', () => {
 
       cy.get('[data-cy="table-table-tablenumber-0"]').contains(updateTable.tableNumber)
       cy.get('[data-cy="table-table-capacity-0"]').contains(updateTable.capacity)
+    })
+
+    it('should have disabled state when inputs are wrong', () => {
+      cy.get('[data-cy="table-table-tablenumber-input-0"]').clear()
+      cy.get('[data-cy="table-table-save-button-0"]').should('have.class', 'opacity-70')
+
+      cy.get('[data-cy="table-table-tablenumber-input-0"]').type(updateTable.tableNumber)
+
+      cy.get('[data-cy="table-table-save-button-0"]').should('not.have.class', 'opacity-70')
+    })
+
+    it('should have loading icon when sending', () => {
+      interceptIndefinitely('PATCH', api, { fixture: 'table.json' })
+
+      cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
+      cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
+
+      cy.get('[data-cy="table-table-save-button-0"] svg').should('be.visible').then(() => {
+        cy.get('[data-cy="table-table-save-button-0"]').click()
+        cy.get('[data-cy="table-table-save-button-0"] svg').should('have.class', 'fa-spinner')
+      })
     })
   })
 
