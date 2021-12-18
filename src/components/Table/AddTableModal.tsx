@@ -1,4 +1,4 @@
-import { faCheck, faSpinner } from "@fortawesome/free-solid-svg-icons"
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { Field, Form, Formik } from "formik"
 import { useState } from "react"
 import * as yup from 'yup'
