@@ -17,27 +17,25 @@ export const App: React.FunctionComponent = () => {
   }, [loadClient])
 
   return (
-      <Router basename="/admin">
-        <div className="h-screen">
-          <Topbar />
-          <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
-            <Sidebar />
-            <div className="flex-1 overflow-y-auto">
-              <div className="container md:max-w-full mt-12">
-              {/* Content Start */}
-              <Switch>
-                <Route exact path="/tables" component={Tables} />
-                <Route exact path="/example" component={Example} />
-                <Route exact path="/home" component={Home} />
-                <Route exact path="/">
-                  <Redirect to="/home" />
-                </Route>
-              </Switch>
-              {/* Content End */}
-              </div>
-            </div>
+    <Router basename="/admin">
+      <div className="h-screen">
+        <Topbar />
+        <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
+          <Sidebar />
+          <div className="flex-1 overflow-y-auto">
+            {/* Content Start */}
+            <Switch>
+              <Route exact path="/tables" component={Tables} />
+              <Route exact path="/example" component={Example} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+            </Switch>
+            {/* Content End */}
           </div>
         </div>
-      </Router>
+      </div>
+    </Router>
   )
 }

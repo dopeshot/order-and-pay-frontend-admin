@@ -56,7 +56,6 @@ body {
     @apply fixed bg-active-grey text-darkgrey text-center text-sm font-semibold rounded-lg translate-x-12 z-50 left-0 py-2 px-5;
 }
 
-
 /*** Search ***/
 input[type="search"] {
     outline: var(--border-grey) solid 1px;
@@ -81,8 +80,12 @@ input::-webkit-search-cancel-button {
     background-size: contain;
 }
 
-
 /*** Table ***/
 .gradient-icon {
     -webkit-mask-image: linear-gradient(270deg, transparent 0.5px, red 7px);
+}
+
+.bg-table-empty {
+    background-position: right -150px center;
+    background-image: url(img/chair.svg);
 }
