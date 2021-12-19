@@ -25,19 +25,6 @@ describe('Api Error Handling', () => {
             cy.get('[data-cy="table-add"]').contains('Tisch hinzufügen').click()
         })
 
-        it.skip('should handle unknown error', () => {
-            cy.addTableUnknownError()
-            cy.visit('/tables')
-
-            cy.get('[data-cy="table-add"]').contains('Tisch hinzufügen').click()
-
-            cy.get('[data-cy="table-modal-tablenumber-input"]').type("a1")
-
-            cy.get('[data-cy="table-save"]').click()
-
-            // TODO: Implement when feature ready
-        })
-
         it('should handle create duplicate tableNumber', () => {
             cy.addDuplicateTable()
             cy.visit('/tables')
@@ -149,6 +136,7 @@ describe('Api Error Handling', () => {
             cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Capacity must be defined')
         })
     })
+
 })
 
 export { }
