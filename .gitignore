@@ -10,6 +10,7 @@
 /cypress/videos
 /.nyc_output
 /instrumented
+/cypress/screenshots
 
 # production
 /build
