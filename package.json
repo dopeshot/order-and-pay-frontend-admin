@@ -30,7 +30,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "craco -r @cypress/instrument-cra start",
+    "start": "craco start",
+    "start:cc": "craco -r @cypress/instrument-cra start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
