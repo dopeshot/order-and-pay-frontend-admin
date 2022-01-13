@@ -12,6 +12,6 @@ export const toggleSidebar = ({ state }: Context): void => {
     state.app.layoutIsSideBarOpen = !state.app.layoutIsSideBarOpen
 }
 
-export const closeSidebar = ({state}: Context): void => {
+export const closeSidebar = ({ state }: Context): void => {
     state.app.layoutIsSideBarOpen = false
 }
