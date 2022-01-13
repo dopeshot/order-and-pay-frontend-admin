@@ -1,4 +1,5 @@
 import tables from '../../fixtures/tables.json'
+import table from '../../fixtures/table.json'
 
 const api = `${Cypress.env("apiUrl")}/tables`
 
@@ -12,11 +13,37 @@ describe('Api Error Handling', () => {
             cy.get('[data-cy="error-banner"]').contains(`Cannot connect to ${api}!`)
         })
 
-        it('should handle when tables are empty', () => {
+        it('should show empty table content when tables are empty', () => {
             cy.getEmptyTables()
             cy.visit('/tables')
 
             cy.contains('Erstelle Tische').should('be.visible')
+        })
+
+        it('should display table list when after creating a table on empty table content', () => {
+            cy.getEmptyTables()
+            cy.addTable()
+            cy.visit('/tables')
+
+            cy.contains('Tisch hinzufügen').click()
+
+            cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
+            cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
+
+            cy.get('[data-cy="table-save"]').click()
+            cy.wait('@addTable')
+            cy.get('[data-cy="table-table-row"]').should('have.length', 1)
+        })
+
+        it('should have not have class bg-table-empty when switch to mobile', () => {
+            cy.getEmptyTables()
+            cy.viewport('iphone-8')
+            cy.visit('/tables')
+
+            cy.get('[data-cy="empty-tables-background"]').should('not.have.class', 'bg-table-empty')
+
+            cy.viewport(1920, 1080)
+            cy.get('[data-cy="empty-tables-background"]').should('have.class', 'bg-table-empty')
         })
     })
 

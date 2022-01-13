@@ -18,7 +18,7 @@ export const EmptyTables: React.FunctionComponent = () => {
         <>
             {/* Add Table Modal */}
             {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
-            <div className={`bg-no-repeat ${!isMobile ? 'bg-table-empty' : ""} flex flex-col justify-center`} style={{ height: "calc(100vh - 64px)" }}>
+            <div data-cy="empty-tables-background" className={`bg-no-repeat ${!isMobile ? 'bg-table-empty' : ""} flex flex-col justify-center`} style={{ height: "calc(100vh - 64px)" }}>
                 <div className="container flex flex-col items-center md:block mb-44 md:mb-20">
                     {isMobile &&
                         <div className="flex items-center justify-center bg-primary-blue rounded-full w-24 h-24 mb-5">
