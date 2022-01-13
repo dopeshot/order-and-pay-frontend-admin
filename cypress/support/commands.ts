@@ -6,6 +6,10 @@ Cypress.Commands.add('getTables', () => {
     }).as('getTables')
 })
 
+Cypress.Commands.add('getEmptyTables', () => {
+    cy.intercept('GET', `${api}/tables`, []).as('getEmptyTables')
+})
+
 Cypress.Commands.add('addTable', () => {
     cy.intercept('POST', `${api}/tables`, {
         fixture: 'table.json'

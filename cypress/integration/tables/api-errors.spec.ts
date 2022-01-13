@@ -12,8 +12,11 @@ describe('Api Error Handling', () => {
             cy.get('[data-cy="error-banner"]').contains(`Cannot connect to ${api}!`)
         })
 
-        it.skip('should handle when tables are empty', () => {
-            // TODO: Implement when feature ready
+        it('should handle when tables are empty', () => {
+            cy.getEmptyTables()
+            cy.visit('/tables')
+
+            cy.contains('Erstelle Tische').should('be.visible')
         })
     })
 

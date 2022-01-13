@@ -29,6 +29,12 @@ declare global {
             getTables(): void
 
             /**
+             * Custom command to intercept all getTables request with empty response
+             * @example cy.getEmptyTables()
+             */
+            getEmptyTables(): void
+
+            /**
              * Custom command to intercept all addTable request
              * @example cy.addTable()
              */
