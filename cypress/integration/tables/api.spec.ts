@@ -103,12 +103,13 @@ describe('Api Endpoints', () => {
     })
 
     it('should have loading icon when sending', () => {
-      interceptIndefinitely('POST', api, { fixture: 'table.json' })
+      const interception = interceptIndefinitely('POST', api, { fixture: 'table.json' })
 
       cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
       cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
 
       cy.get('[data-cy="table-save"] svg').should('be.visible').then(() => {
+        interception.sendResponse()
         cy.get('[data-cy="table-save"]').click()
         cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
       })
