@@ -5,7 +5,7 @@ export type Table = {
     tableNumber: string,
     capacity: number,
     updatedAt: Date,
-    createdBy: string
+    author: string
 }
 
 export type TableHelper = {

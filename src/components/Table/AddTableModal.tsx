@@ -66,7 +66,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
 
                                     {/* Capacity Input with Label */}
                                     <label className="block text-darkgrey text-sm font-semibold pb-2" htmlFor="tablenumber">Personenanzahl</label>
-                                    <Field type="number" data-cy="table-modal-capacity-input" name="capacity" id="capacity" placeholder="2" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 sm:mb-0 ${errors.capacity && touched.capacity ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey mb-3'}`} />
+                                    <Field type="number" data-cy="table-modal-capacity-input" name="capacity" id="capacity" placeholder="2" className={`font-roboto rounded-xl w-full pl-4 py-2 sm:w-1/2 sm:mb-0 ${errors.capacity && touched.capacity ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey mb-3'}`} />
 
                                     {/* Capacity Quick */}
                                     <div className="flex mb-2 sm:inline-flex sm:justify-between sm:w-1/2 sm:pl-3">
