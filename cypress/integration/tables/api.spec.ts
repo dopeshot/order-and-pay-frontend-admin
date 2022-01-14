@@ -109,9 +109,9 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
 
       cy.get('[data-cy="table-save"] svg').should('be.visible').then(() => {
-        interception.sendResponse()
         cy.get('[data-cy="table-save"]').click()
         cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
+        interception.sendResponse()
       })
     })
   })
@@ -147,7 +147,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should have loading icon when sending', () => {
-      interceptIndefinitely('PATCH', api, { fixture: 'table.json' })
+      const interception = interceptIndefinitely('PATCH', api, { fixture: 'table.json' })
 
       cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
       cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
@@ -155,6 +155,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-table-save-button-0"] svg').should('be.visible').then(() => {
         cy.get('[data-cy="table-table-save-button-0"]').click()
         cy.get('[data-cy="table-table-save-button-0"] svg').should('have.class', 'fa-spinner')
+        interception.sendResponse()
       })
     })
   })
