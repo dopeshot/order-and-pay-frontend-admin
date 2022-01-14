@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+    "types": [
+      "cypress"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,6 +25,7 @@
   },
   "include": [
     "src",
-    "craco.config.js"
+    "craco.config.js",
+    "**/*.ts"
   ]
 }

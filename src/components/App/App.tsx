@@ -1,26 +1,41 @@
 import { useEffect } from 'react';
 import {
-  BrowserRouter as Router, Route, Switch
+  BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
 import { useActions } from '../../overmind';
 import { Example } from '../../pages/Example/Example';
 import { Home } from '../../pages/Home/Home';
-import { Navigation } from '../Navigation/Navigation';
+import { Tables } from '../../pages/Tables/Tables';
+import { Sidebar } from '../Navigation/Sidebar';
+import { Topbar } from '../Navigation/Topbar';
 
 export const App: React.FunctionComponent = () => {
   const { loadClient } = useActions().example
 
-    useEffect(() => {
-      loadClient()
-    }, [loadClient])
-  
+  useEffect(() => {
+    loadClient()
+  }, [loadClient])
+
   return (
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact path="/example" component={Example} />
-        <Route exact path="/" component={Home} />
-      </Switch>
+    <Router basename="/admin">
+      <div className="h-screen">
+        <Topbar />
+        <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
+          <Sidebar />
+          <div className="flex-1 overflow-y-auto">
+            {/* Content Start */}
+            <Switch>
+              <Route exact path="/tables" component={Tables} />
+              <Route exact path="/example" component={Example} />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+            </Switch>
+            {/* Content End */}
+          </div>
+        </div>
+      </div>
     </Router>
   )
 }

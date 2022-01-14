@@ -1,5 +1,10 @@
+import { Link } from "react-router-dom"
+
 export const Home: React.FunctionComponent = () => {
     return (
-        <h3 className="text-lg font-bold">Home</h3>
+        <div className="container mt-12">
+            <h3 className="text-2xl font-bold">Welcome</h3>
+            <Link to="/tables">Gehe zu Tabellen</Link>
+        </div>
     )
 }

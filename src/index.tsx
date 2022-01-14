@@ -6,6 +6,16 @@ import { App } from './components/App/App';
 import { config } from './overmind';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import WebFont from 'webfontloader';
+
+const WebFontConfig = {
+  typekit: {
+    id: 'azv0mmk',
+    api: 'https://use.typekit.net/'
+  }
+}
+
+WebFont.load(WebFontConfig);
 
 const overmind = createOvermind(config, {
   devtools: true
