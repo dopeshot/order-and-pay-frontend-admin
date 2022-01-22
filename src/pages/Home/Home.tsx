@@ -23,7 +23,7 @@ export const Home: React.FunctionComponent = () => {
             <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
                 {(formik) => (
                     <Form>
-                        <TextInput name="title" placeholder="Hello" labelText="Titel" helperText="Hello" />
+                        <TextInput name="title" placeholder="Hello" labelText="Titel" helperText="Hello" labelRequired />
                     </Form>
                 )}
             </Formik>
