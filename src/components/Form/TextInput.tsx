@@ -3,15 +3,25 @@ import { HTMLInputTypeAttribute } from "react"
 import { FormError } from "../Errors/FormError"
 
 type TextInputProps = {
+    /** Gives the input a unique name */
     name: string
+    /** Hints at what goes into a field. */
     placeholder: string
+    /** Inform users what the corresponding input fields mean. */
     labelText: string
+    /** When set Required * will be seen  */
     labelRequired?: boolean
+    /** Provides assistance on how to fill out a field. Helper text is optional. */
     helperText?: string
+    /** Icon at the end of the input */
     icon?: string
+    /** Input type for example text or email */
     type?: HTMLInputTypeAttribute
 }
 
+/**
+ * Text Input, can only be used with Formik
+ */
 export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelText, labelRequired = false, helperText, icon, type = "text" }) => {
     return (
         <>
