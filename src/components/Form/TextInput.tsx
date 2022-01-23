@@ -1,6 +1,6 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Field } from "formik"
+import { Field, FieldProps } from "formik"
 import { HTMLInputTypeAttribute } from "react"
 import { FormError } from "../Errors/FormError"
 
@@ -28,11 +28,11 @@ export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelTe
     return (
         <>
             <label className="text-darkgrey text-sm font-semibold" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
-            <Field type={type} name={name}>{(props: any) => (
+            <Field type={type} name={name}>{(props: FieldProps<any>) => (
                 <>
-                    <div className="relative flex flex-col justify-center">
+                    <div className="relative flex flex-col justify-center my-1">
                         {icon && <FontAwesomeIcon icon={icon} className={`absolute right-6 ${props.meta.error && props.meta.touched ? "text-danger-red" : "text-darkgrey"}`} />}
-                        <input type={type} placeholder={placeholder} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 my-1 ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
+                        <input type={type} placeholder={placeholder} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${icon ? "pr-10" : ""} ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
                     </div>
                     {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey">{helperText}</p>}
                 </>
