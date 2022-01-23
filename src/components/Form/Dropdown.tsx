@@ -1,8 +1,9 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field, FieldProps } from "formik";
 import { useState } from "react";
+import { FormError } from "../Errors/FormError";
 
 type DropdownProps = {
     /** Gives the toggle a unique name */
@@ -33,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
         <>
             <label className="block text-darkgrey text-sm font-semibold mb-1" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
             <Field name={name}>{(props: FieldProps<any>) => (
-                <div className="relative text-lightgrey">
+                <div className="relative">
                     {/* When dropdown open click outside close it */}
                     {isOpen && <div className="fixed cursor-pointer inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setIsOpen(false)}></div>}
 
@@ -44,14 +45,16 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
 
                     {isOpen && <div className="absolute bg-white rounded-lg shadow z-20 w-full py-2" tabIndex={-1}>
                         {options.map(option => (
-                            <button key={option.label} onClick={() => props.form.setFieldValue(props.field.name, option.label)} className={`flex text-darkgrey hover:bg-white-lightgrey focus:hover:text-gray-500 text-sm w-full px-4 py-2`} tabIndex={-1}>
+                            <button key={option.label} type="button" onClick={() => props.form.setFieldValue(props.field.name, option.label)} className={`flex items-center text-sm w-full px-4 py-2 ${props.field.value === option.label ? "bg-primary-blue text-white justify-between" : "text-darkgrey hover:bg-white-lightgrey"}`} tabIndex={-1}>
                                 {option.label}
+                                {props.field.value === option.label ? <FontAwesomeIcon className="ml-6" icon={faCheck} /> : <></>}
                             </button>
                         ))}
                     </div>}
                 </div>
             )}</Field>
             <p data-cy={`${name}-helpertext`} className="text-lightgrey">{helperText}</p>
+            <FormError field={name} />
         </>
     )
 }

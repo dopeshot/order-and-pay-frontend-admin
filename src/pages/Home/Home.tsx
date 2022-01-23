@@ -8,7 +8,7 @@ export const Home: React.FunctionComponent = () => {
     const initialValues = {
         title: "",
         toggle: false,
-        test: true
+        test: null,
     }
 
     const submitForm = (values: typeof initialValues) => {
