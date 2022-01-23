@@ -27,12 +27,12 @@ type TextInputProps = {
 export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelText, labelRequired = false, helperText, icon, type = "text" }) => {
     return (
         <>
-            <label className="text-darkgrey text-sm font-semibold" htmlFor="tablenumber">{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
+            <label className="text-darkgrey text-sm font-semibold" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
             <Field type={type} name={name}>{(props: any) => (
                 <>
                     <div className="relative flex flex-col justify-center">
                         {icon && <FontAwesomeIcon icon={icon} className={`absolute right-6 ${props.meta.error && props.meta.touched ? "text-danger-red" : "text-darkgrey"}`} />}
-                        <input type="text" placeholder={placeholder} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 my-1 ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
+                        <input type={type} placeholder={placeholder} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 my-1 ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
                     </div>
                     {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey">{helperText}</p>}
                 </>
