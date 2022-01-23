@@ -1,7 +1,6 @@
 import { mount } from '@cypress/react'
 import { Form, Formik } from "formik"
 import 'tailwindcss/dist/tailwind.min.css'
-import * as yup from 'yup'
 import { Toggle } from './Toggle'
 
 const initialValues = {
@@ -12,17 +11,11 @@ const submitForm = (values: typeof initialValues) => {
     console.log(values);
 }
 
-const schema = yup.object().shape({
-    title: yup.string().required("Title is required"),
-})
-
 const Wrapper: React.FC = ({ children }) => {
-    return <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={schema} >
+    return <Formik initialValues={initialValues} onSubmit={submitForm} >
         {(formik) => (
             <Form>
-                <div className="w-80">
-                    {children}
-                </div>
+                {children}
             </Form>
         )}
     </Formik>
