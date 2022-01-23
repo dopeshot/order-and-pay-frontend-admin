@@ -4,7 +4,7 @@ import { ErrorMessage } from "formik"
 
 export type FormErrorProps = {
     field: string
-    dataCy: string
+    dataCy?: string
 }
 
 export const FormError: React.FunctionComponent<FormErrorProps> = (props) => {

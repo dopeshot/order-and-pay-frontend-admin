@@ -1,7 +1,8 @@
+import { faEuroSign } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
-import { TextInput } from "../../components/Form/TextInput"
 import * as yup from 'yup'
+import { TextInput } from "../../components/Form/TextInput"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
@@ -23,7 +24,9 @@ export const Home: React.FunctionComponent = () => {
             <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
                 {(formik) => (
                     <Form>
-                        <TextInput name="title" placeholder="Hello" labelText="Titel" helperText="Hello" />
+                        <div className="w-32">
+                            <TextInput name="title" placeholder="Hello" labelText="Titel" helperText="Hello" labelRequired icon={faEuroSign} />
+                        </div>
                     </Form>
                 )}
             </Formik>
