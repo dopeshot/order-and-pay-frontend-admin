@@ -16,12 +16,13 @@ describe('Api Endpoints', () => {
 
   describe('Get Tables', () => {
     it('should show the loading spinner when load table data and hide afterwards', () => {
-      const interception = interceptIndefinitely('GET', api, { fixture: 'tables.json' })
+      const interception = interceptIndefinitely('GET', api, 'getTableIndefinitely', { fixture: 'tables.json' })
 
       cy.visit('/tables')
 
       cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
         interception.sendResponse()
+        cy.wait('@getTableIndefinitely')
         cy.get('[data-cy="table-spinner"]').should('not.exist')
         cy.get('[data-cy="table-table-row"]').should('be.visible')
       })
@@ -33,12 +34,13 @@ describe('Api Endpoints', () => {
     })
 
     it('should load tables again when click on loadicon', () => {
-      const interception = interceptIndefinitely('GET', api, { fixture: 'tables.json' })
+      const interception = interceptIndefinitely('GET', api, 'getTableIndefinitely', { fixture: 'tables.json' })
 
       cy.get('[data-cy="table-table-load-iconbutton"]').click()
 
       cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
         interception.sendResponse()
+        cy.wait('@getTableIndefinitely')
         cy.get('[data-cy="table-spinner"]').should('not.exist')
         cy.get('[data-cy="table-table-row"]').should('be.visible')
       })
@@ -103,7 +105,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should have loading icon when sending', () => {
-      const interception = interceptIndefinitely('POST', api, { fixture: 'table.json' })
+      const interception = interceptIndefinitely('POST', api, "createTableIndefinitely", { fixture: 'table.json' })
 
       cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
       cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
@@ -112,6 +114,7 @@ describe('Api Endpoints', () => {
         cy.get('[data-cy="table-save"]').click()
         cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
         interception.sendResponse()
+        cy.wait('@createTableIndefinitely')
       })
     })
   })
@@ -147,7 +150,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should have loading icon when sending', () => {
-      const interception = interceptIndefinitely('PATCH', api, { fixture: 'table.json' })
+      const interception = interceptIndefinitely('PATCH', `${api}/**`, 'patchTableIndefinitely', { fixture: 'table.json' })
 
       cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
       cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
@@ -156,6 +159,7 @@ describe('Api Endpoints', () => {
         cy.get('[data-cy="table-table-save-button-0"]').click()
         cy.get('[data-cy="table-table-save-button-0"] svg').should('have.class', 'fa-spinner')
         interception.sendResponse()
+        cy.wait('@patchTableIndefinitely')
       })
     })
   })
