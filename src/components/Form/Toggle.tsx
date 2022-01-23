@@ -19,20 +19,20 @@ type ToggleProps = {
  * Toggle, can only be used with Formik
  */
 export const Toggle: React.FC<ToggleProps> = ({ name, labelText, labelOn, labelOff, helperText, labelRequired = false }) => {
-    const { setFieldValue } = useFormikContext();
+    const { setFieldValue } = useFormikContext()
 
     return (
         <>
             <label className="text-darkgrey text-sm font-semibold" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
             <Field name={name}>{(props: FieldProps<any>) => (
                 <div className="flex items-center">
-                    <div onClick={() => setFieldValue(name, !props.field.value)} className={`w-14 h-7 flex items-center bg-gray-300 rounded-full p-1 duration-300 ease-in-out my-1 ${props.field.value ? "bg-primary-blue" : ""}`}>
-                        <div className={`bg-white w-5 h-5 rounded-full shadow-md transform duration-300 ease-in-out ${props.field.value ? "translate-x-7" : ""}`}></div>
+                    <div data-cy={`${name}-clickdiv`} onClick={() => setFieldValue(name, !props.field.value)} className={`w-14 h-7 flex items-center bg-gray-300 rounded-full p-1 duration-300 ease-in-out my-1 ${props.field.value ? "bg-primary-blue" : ""}`}>
+                        <div data-cy={`${name}-ball`} className={`bg-white w-5 h-5 rounded-full shadow-md transform duration-300 ease-in-out ${props.field.value ? "translate-x-7" : ""}`}></div>
                     </div>
-                    <p className="text-darkgrey text-sm font-semibold pl-2">{props.field.value ? labelOn : labelOff}</p>
+                    <p data-cy={`${name}-labeltext`} className="text-darkgrey text-sm font-semibold pl-2">{props.field.value ? labelOn : labelOff}</p>
                 </div>
             )}</Field>
-            <p className="text-lightgrey">{helperText}</p>
+            <p data-cy={`${name}-helpertext`} className="text-lightgrey">{helperText}</p>
         </>
     )
 }
