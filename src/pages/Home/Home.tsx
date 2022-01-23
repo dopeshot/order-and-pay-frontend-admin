@@ -1,12 +1,12 @@
-import { faEuroSign } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
-import { TextInput } from "../../components/Form/TextInput"
+import { Toggle } from "../../components/Form/Toggle"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
-        title: ""
+        title: "",
+        toggle: false
     }
 
     const submitForm = (values: typeof initialValues) => {
@@ -24,8 +24,8 @@ export const Home: React.FunctionComponent = () => {
             <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
                 {(formik) => (
                     <Form>
-                        <div className="w-32">
-                            <TextInput name="title" placeholder="Hello" labelText="Titel" helperText="Hello" labelRequired icon={faEuroSign} />
+                        <div className="">
+                            <Toggle name="toggle" labelText="Ist das Gericht gerade verfügbar?" helperText="Wenn du diese Option setzt " labelOff="nicht aktiv" labelOn="aktiv" />
                         </div>
                     </Form>
                 )}
