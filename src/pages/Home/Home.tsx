@@ -1,12 +1,14 @@
+import { faTimes, faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
-import { Toggle } from "../../components/Form/Toggle"
+import { Dropdown } from "../../components/Form/Dropdown"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
         title: "",
-        toggle: false
+        toggle: false,
+        test: true
     }
 
     const submitForm = (values: typeof initialValues) => {
@@ -14,8 +16,26 @@ export const Home: React.FunctionComponent = () => {
     }
 
     const Schema = yup.object().shape({
-        title: yup.string().required("Title is required"),
+        test: yup.string().required("Title is required"),
     })
+
+    const options = [
+        {
+            id: 1,
+            label: "rot",
+            icon: faTimes
+        },
+        {
+            id: 2,
+            label: "grün",
+            icon: faYinYang
+        },
+        {
+            id: 3,
+            label: "gelb",
+            icon: faWineGlass
+        }
+    ]
 
     return (
         <div className="container mt-12">
@@ -24,8 +44,8 @@ export const Home: React.FunctionComponent = () => {
             <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
                 {(formik) => (
                     <Form>
-                        <div className="">
-                            <Toggle name="toggle" labelText="Ist das Gericht gerade verfügbar?" helperText="Wenn du diese Option setzt " labelOff="nicht aktiv" labelOn="aktiv" />
+                        <div className="w-52">
+                            <Dropdown name="test" labelText="Text" options={options} placeholder="Test" />
                         </div>
                     </Form>
                 )}
