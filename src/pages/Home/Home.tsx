@@ -1,4 +1,3 @@
-import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
@@ -15,25 +14,8 @@ export const Home: React.FunctionComponent = () => {
     }
 
     const Schema = yup.object().shape({
-        title: yup.string().max(240).required("Title is required"),
+        test: yup.string().max(240).required("Title is required"),
     })
-
-    const options = [
-        {
-            id: 1,
-            label: "rot"
-        },
-        {
-            id: 2,
-            label: "grün fdkjfksjflksdfjlsdfjskdfjkdfjsdfjslkdfösdfk",
-            icon: faYinYang
-        },
-        {
-            id: 3,
-            label: "gelb",
-            icon: faWineGlass
-        }
-    ]
 
     return (
         <div className="container mt-12">
@@ -43,7 +25,7 @@ export const Home: React.FunctionComponent = () => {
                 {(formik) => (
                     <Form>
                         <div className="">
-                            <Textarea name="title" placeholder="Placeholder" labelRequired labelText="Textarea" helperText="nice" rows={20} maxLength={240} />
+                            <Textarea name="test" placeholder="Placeholder" labelRequired labelText="Textarea" helperText="nice" rows={2} maxLength={240} />
                         </div>
                         <button type="submit" className="bg-primary-blue text-white px-4 py-2 rounded-lg">Submit</button>
                     </Form>
