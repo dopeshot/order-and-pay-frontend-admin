@@ -25,13 +25,13 @@ export const Checkbox: React.FC<CheckboxProps> = ({ name, labelText, helperText,
         <>
             <h5 className="block text-darkgrey text-sm font-semibold">{labelText}</h5>
             {options.map((option) => (
-                <label key={option.id} className="block  my-1">
+                <label data-cy={`${name}-option-${option.id}`} key={option.id} className="block  my-1">
                     <Field type="checkbox" className="mr-1" name={name} value={`${option.id}`} />
-                    {option.icon && <FontAwesomeIcon className="text-lightgrey" icon={option.icon} style={{ minWidth: "20px" }} />}
+                    {option.icon && <FontAwesomeIcon className="text-lightgrey mr-1" icon={option.icon} style={{ minWidth: "20px" }} />}
                     <span className="text-darkgrey text-sm font-semibold">{option.label}</span>
                 </label>
             ))}
-            <p className="text-lightgrey font-semibold text-sm mb-4">{helperText}</p>
+            <p data-cy={`${name}-helpertext`} className="text-lightgrey font-semibold text-sm mb-4">{helperText}</p>
         </>
     )
 }
