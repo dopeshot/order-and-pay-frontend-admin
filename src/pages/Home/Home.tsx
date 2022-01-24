@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
-import { Toggle } from "../../components/Form/Toggle"
+import { Textarea } from "../../components/Form/Textarea"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
@@ -25,8 +25,9 @@ export const Home: React.FunctionComponent = () => {
                 {(formik) => (
                     <Form>
                         <div className="">
-                            <Toggle name="toggle" labelText="Ist das Gericht gerade verfügbar?" helperText="Wenn du diese Option setzt " labelOff="nicht aktiv" labelOn="aktiv" />
+                            <Textarea name="title" placeholder="Placeholder" labelRequired labelText="Textarea" helperText="nice" rows={20} maxLength={240} />
                         </div>
+                        <button type="submit" className="bg-primary-blue text-white px-4 py-2 rounded-lg">Submit</button>
                     </Form>
                 )}
             </Formik>
