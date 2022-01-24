@@ -1,3 +1,4 @@
+import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
@@ -5,8 +6,8 @@ import { Textarea } from "../../components/Form/Textarea"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
-        title: "",
-        toggle: false
+        test: "",
+        helllo: ""
     }
 
     const submitForm = (values: typeof initialValues) => {
@@ -16,6 +17,23 @@ export const Home: React.FunctionComponent = () => {
     const Schema = yup.object().shape({
         title: yup.string().max(240).required("Title is required"),
     })
+
+    const options = [
+        {
+            id: 1,
+            label: "rot"
+        },
+        {
+            id: 2,
+            label: "grün fdkjfksjflksdfjlsdfjskdfjkdfjsdfjslkdfösdfk",
+            icon: faYinYang
+        },
+        {
+            id: 3,
+            label: "gelb",
+            icon: faWineGlass
+        }
+    ]
 
     return (
         <div className="container mt-12">
