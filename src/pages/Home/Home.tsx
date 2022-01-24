@@ -14,7 +14,7 @@ export const Home: React.FunctionComponent = () => {
     }
 
     const Schema = yup.object().shape({
-        title: yup.string().required("Title is required"),
+        title: yup.string().max(240).required("Title is required"),
     })
 
     return (
