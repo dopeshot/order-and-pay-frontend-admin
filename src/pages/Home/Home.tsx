@@ -9,7 +9,9 @@ import { TextInput } from "../../components/Form/TextInput"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
-        ids: []
+        ids: [],
+        e: "",
+        d: ""
     }
 
     const submitForm = (values: typeof initialValues) => {
@@ -46,8 +48,8 @@ export const Home: React.FunctionComponent = () => {
                     <Form>
                         <div className="w-full">
                             <Checkbox name="ids" labelText="Text" options={options} helperText="Hello" />
-                            <TextInput name="ids" labelText="Text" placeholder="ddd" helperText="Hello" />
-                            <Dropdown name="ids" labelText="Text" placeholder="ff" options={options} helperText="Hello" />
+                            <TextInput name="d" labelText="Text" placeholder="ddd" helperText="Hello" />
+                            <Dropdown name="e" labelText="Text" placeholder="ff" options={options} helperText="Hello" />
 
                             <Button buttonType="primary" type="submit">Submit</Button>
                         </div>

@@ -1,4 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field } from "formik"
 
 type CheckboxProps = {
@@ -24,8 +25,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({ name, labelText, helperText,
         <>
             <h5 className="block text-darkgrey text-sm font-semibold">{labelText}</h5>
             {options.map((option) => (
-                <label key={option.id} className="block my-1">
+                <label key={option.id} className="block  my-1">
                     <Field type="checkbox" className="mr-1" name={name} value={`${option.id}`} />
+                    {option.icon && <FontAwesomeIcon className="text-lightgrey" icon={option.icon} style={{ minWidth: "20px" }} />}
                     <span className="text-darkgrey text-sm font-semibold">{option.label}</span>
                 </label>
             ))}
