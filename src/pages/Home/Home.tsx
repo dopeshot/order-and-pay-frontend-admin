@@ -18,8 +18,8 @@ export const Home: React.FunctionComponent = () => {
         console.log(values);
     }
 
-    const Schema = yup.object().shape({
-        test: yup.string().required('Hello')
+    const schema = yup.object().shape({
+        e: yup.string().required('Hello')
     })
 
     const options = [
@@ -43,7 +43,7 @@ export const Home: React.FunctionComponent = () => {
         <div className="container mt-12">
             <h3 className="text-2xl font-bold">Welcome</h3>
             <Link to="/tables">Gehe zu Tabellen</Link>
-            <Formik initialValues={initialValues} onSubmit={submitForm} >
+            <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={schema} >
                 {(formik) => (
                     <Form>
                         <div className="w-full">
