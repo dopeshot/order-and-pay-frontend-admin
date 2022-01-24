@@ -1,6 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { Field, FieldProps } from "formik"
-import { FormError } from "../Errors/FormError"
+import { Field } from "formik"
 
 type CheckboxProps = {
     /** Gives the input a unique name */
@@ -20,16 +19,17 @@ type CheckboxProps = {
 /**
  * Checkbox, can only be used with Formik
  */
-export const Checkbox: React.FC<CheckboxProps> = ({ name, labelText, helperText }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({ name, labelText, helperText, options }) => {
     return (
         <>
-            <label className="text-darkgrey text-sm font-semibold" htmlFor={name}>{labelText}</label>
-            <Field name={name}>{(props: FieldProps<any>) => (
-                <>
-                    {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey">{helperText}</p>}
-                </>
-            )}</Field>
-            <FormError field={name} />
+            <h5 className="block text-darkgrey text-sm font-semibold">{labelText}</h5>
+            {options.map((option) => (
+                <label key={option.id} className="block my-1">
+                    <Field type="checkbox" className="mr-1" name={name} value={`${option.id}`} />
+                    <span className="text-darkgrey text-sm font-semibold">{option.label}</span>
+                </label>
+            ))}
+            <p className="text-lightgrey font-semibold text-sm mb-4">{helperText}</p>
         </>
     )
 }

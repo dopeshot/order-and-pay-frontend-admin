@@ -47,8 +47,8 @@ module.exports = {
   },
   variants: {
     extend: {
-      backgroundColor: ['checked, group-focus'],
-      borderColor: ['checked, group-focus']
+      backgroundColor: ['group-focus'],
+      borderColor: ['group-focus']
     }
   },
   plugins: [],

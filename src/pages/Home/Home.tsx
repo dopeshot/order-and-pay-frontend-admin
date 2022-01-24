@@ -2,11 +2,12 @@ import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
-import { Dropdown } from "../../components/Form/Dropdown"
+import { Button } from "../../components/Buttons/Button"
+import { Checkbox } from "../../components/Form/Checkbox"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
-        test: ""
+        ids: []
     }
 
     const submitForm = (values: typeof initialValues) => {
@@ -38,11 +39,12 @@ export const Home: React.FunctionComponent = () => {
         <div className="container mt-12">
             <h3 className="text-2xl font-bold">Welcome</h3>
             <Link to="/tables">Gehe zu Tabellen</Link>
-            <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
+            <Formik initialValues={initialValues} onSubmit={submitForm} >
                 {(formik) => (
                     <Form>
-                        <div className="w-56">
-                            <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
+                        <div className="w-full">
+                            <Checkbox name="ids" labelText="Text" options={options} helperText="Hello" />
+                            <Button buttonType="primary" type="submit">Submit</Button>
                         </div>
                     </Form>
                 )}
