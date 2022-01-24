@@ -43,7 +43,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
                         <FontAwesomeIcon className={`ml-6 transform-gpu transition-transform duration-200 ease-linear ${isOpen ? "-rotate-180" : "rotate-0"}`} icon={faChevronDown} />
                     </button>
 
-                    {isOpen && <div data-cy={`${name}-dropdown-menu`} className="absolute bg-white rounded-lg shadow z-10 w-full py-2" tabIndex={-1}>
+                    {isOpen && <div data-cy={`${name}-dropdown-menu`} className="absolute bg-white rounded-lg shadow-dropdown z-10 w-full py-2" tabIndex={-1}>
                         {options.map(option => (
                             <button key={option.id} data-cy={`${name}-dropdown-option-${option.id}`} type="button" onClick={() => {
                                 props.form.setFieldValue(props.field.name, option.id)
