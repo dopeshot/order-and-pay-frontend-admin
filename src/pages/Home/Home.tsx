@@ -7,7 +7,7 @@ import { Dropdown } from "../../components/Form/Dropdown"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
-        test: null,
+        test: ""
     }
 
     const submitForm = (values: typeof initialValues) => {
@@ -15,10 +15,7 @@ export const Home: React.FunctionComponent = () => {
     }
 
     const Schema = yup.object().shape({
-        test: yup.object().shape({
-            id: yup.number().required(),
-            label: yup.string().required()
-        }).nullable().required('This field is required.')
+        test: yup.string().required('Hello')
     })
 
     const options = [
@@ -28,7 +25,7 @@ export const Home: React.FunctionComponent = () => {
         },
         {
             id: 2,
-            label: "grün",
+            label: "grün fdkjfksjflksdfjlsdfjskdfjkdfjsdfjslkdfösdfk",
             icon: faYinYang
         },
         {
