@@ -43,6 +43,8 @@ export const Home: React.FunctionComponent = () => {
                     <Form>
                         <div className="w-56">
                             <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
+                            <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
+                            <button type="submit">Submit</button>
                         </div>
                     </Form>
                 )}
