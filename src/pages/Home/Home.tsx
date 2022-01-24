@@ -1,8 +1,7 @@
-import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
-import { Dropdown } from "../../components/Form/Dropdown"
+import { Textarea } from "../../components/Form/Textarea"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
@@ -15,26 +14,8 @@ export const Home: React.FunctionComponent = () => {
     }
 
     const Schema = yup.object().shape({
-        test: yup.string().required('Hello'),
-        helllo: yup.string().required('ff')
+        test: yup.string().max(240).required("Title is required"),
     })
-
-    const options = [
-        {
-            id: 1,
-            label: "rot"
-        },
-        {
-            id: 2,
-            label: "grün fdkjfksjflksdfjlsdfjskdfjkdfjsdfjslkdfösdfk",
-            icon: faYinYang
-        },
-        {
-            id: 3,
-            label: "gelb",
-            icon: faWineGlass
-        }
-    ]
 
     return (
         <div className="container mt-12">
@@ -43,11 +24,10 @@ export const Home: React.FunctionComponent = () => {
             <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
                 {(formik) => (
                     <Form>
-                        <div className="w-56">
-                            <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
-                            <Dropdown name="helllo" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
-                            <button type="submit">Submit</button>
+                        <div className="">
+                            <Textarea name="test" placeholder="Placeholder" labelRequired labelText="Textarea" helperText="nice" rows={2} maxLength={240} />
                         </div>
+                        <button type="submit" className="bg-primary-blue text-white px-4 py-2 rounded-lg">Submit</button>
                     </Form>
                 )}
             </Formik>
