@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FormError } from "../Errors/FormError";
 
 type DropdownProps = {
-    /** Gives the toggle a unique name */
+    /** Gives the dropdown a unique name */
     name: string
     /** Provide label text */
     labelText: string
@@ -20,7 +20,7 @@ type DropdownProps = {
     }[]
     /** When set Required * will be seen */
     labelRequired?: boolean
-    /** Provide text that is used alongside the control label for additional help. */
+    /** Provide text that is used for additional help. */
     helperText?: string
 }
 
