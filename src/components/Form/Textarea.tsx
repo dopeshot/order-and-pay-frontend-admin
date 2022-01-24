@@ -28,7 +28,7 @@ export const Textarea: React.FC<TextareaProps> = ({ name, placeholder, labelText
                 <>
                     <div className="flex justify-between">
                         <label className="text-darkgrey text-sm font-semibold" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
-                        {maxLength && <span className="text-lightgrey">{props.field.value.length}/{maxLength}</span>}
+                        {maxLength && <span className="text-lightgrey" data-cy={`${name}-character-count`}>{props.field.value.length}/{maxLength}</span>}
                     </div>
                     <div>
                         <textarea placeholder={placeholder} {...props.field} rows={rows} className={`font-roboto rounded-xl p-2 w-full ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`}>
