@@ -17,7 +17,15 @@
  */
 module.exports = (on: Cypress.PluginEvents, config: Cypress.ConfigOptions) => {
   require('@cypress/code-coverage/task')(on, config)
+
+  // @ts-ignore
+  if (config.testingType === 'component') {
+    require('@cypress/react/plugins/react-scripts')(on, config)
+  }
+
   return config
 }
-
 export { }
+export { }
+export { }
+
