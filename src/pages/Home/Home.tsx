@@ -2,7 +2,6 @@ import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
-import { Button } from "../../components/Buttons/Button"
 import { Dropdown } from "../../components/Form/Dropdown"
 
 export const Home: React.FunctionComponent = () => {
@@ -44,7 +43,6 @@ export const Home: React.FunctionComponent = () => {
                     <Form>
                         <div className="w-56">
                             <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
-                            <Button buttonType="primary" type="submit" className="mt-5">Hello</Button>
                         </div>
                     </Form>
                 )}
