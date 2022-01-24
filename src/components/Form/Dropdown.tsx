@@ -16,7 +16,7 @@ type DropdownProps = {
     options: {
         id: number
         label: string
-        icon: IconProp
+        icon?: IconProp
     }[]
     /** When set Required * will be seen */
     labelRequired?: boolean
@@ -34,26 +34,27 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
         <>
             <label className="block text-darkgrey text-sm font-semibold mb-1" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
             <Field name={name}>{(props: FieldProps<any>) => (
-                <div className="relative">
+                <div className="relative mb-1">
                     {/* When dropdown open click outside close it */}
                     {isOpen && <div className="fixed cursor-pointer inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setIsOpen(false)}></div>}
 
-                    <button className="relative flex items-center justify-between border rounded-lg bg-white mr-5 mb-3 z-30 sm:mb-0 py-2 px-5 w-full" type="button" onClick={() => setIsOpen(!isOpen)}>
-                        {props.field.value ? options.find(option => option.label === props.field.value)?.label : placeholder}
+                    <button className={`relative flex items-center justify-between rounded-lg truncate mr-5 z-30 sm:mb-0 py-2 px-5 w-full ${props.meta.error && props.meta.touched ? "text-danger-red bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red" : "border border-border-grey bg-white"} ${!props.field.value ? "text-lightgrey" : "text-darkgrey"}`} type="button" onClick={() => setIsOpen(!isOpen)}>
+                        {props.field.value ? options.find(option => option.label === props.field.value.label)?.label : <span className={`${props.meta.error && props.meta.touched ? "text-lightgrey" : ""}`}>{placeholder}</span>}
                         <FontAwesomeIcon className={`ml-6 transform-gpu transition-transform duration-200 ease-linear ${isOpen ? "-rotate-180" : "rotate-0"}`} icon={faChevronDown} />
                     </button>
 
                     {isOpen && <div className="absolute bg-white rounded-lg shadow z-20 w-full py-2" tabIndex={-1}>
                         {options.map(option => (
-                            <button key={option.label} type="button" onClick={() => props.form.setFieldValue(props.field.name, option.label)} className={`flex items-center text-sm w-full px-4 py-2 ${props.field.value === option.label ? "bg-primary-blue text-white justify-between" : "text-darkgrey hover:bg-white-lightgrey"}`} tabIndex={-1}>
+                            <button key={option.label} type="button" onClick={() => props.form.setFieldValue(props.field.name, option)} className={`flex items-center w-full px-5 py-2 truncate ${props.field.value === option.label ? `bg-primary-blue text-white ${option.icon ? "" : "justify-between"}` : "text-darkgrey hover:bg-white-lightgrey"}`} tabIndex={-1}>
+                                {option.icon && <FontAwesomeIcon className="mr-1" icon={option.icon} style={{ width: "20px" }} />}
                                 {option.label}
-                                {props.field.value === option.label ? <FontAwesomeIcon className="ml-6" icon={faCheck} /> : <></>}
+                                {props.field.value === option.label ? <FontAwesomeIcon className="ml-auto" icon={faCheck} /> : <></>}
                             </button>
                         ))}
                     </div>}
+                    {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey">{helperText}</p>}
                 </div>
             )}</Field>
-            <p data-cy={`${name}-helpertext`} className="text-lightgrey">{helperText}</p>
             <FormError field={name} />
         </>
     )

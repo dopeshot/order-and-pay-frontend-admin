@@ -1,13 +1,12 @@
-import { faTimes, faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
+import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import * as yup from 'yup'
+import { Button } from "../../components/Buttons/Button"
 import { Dropdown } from "../../components/Form/Dropdown"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
-        title: "",
-        toggle: false,
         test: null,
     }
 
@@ -16,14 +15,16 @@ export const Home: React.FunctionComponent = () => {
     }
 
     const Schema = yup.object().shape({
-        test: yup.string().required("Title is required"),
+        test: yup.object().shape({
+            id: yup.number().required(),
+            label: yup.string().required()
+        }).nullable().required('This field is required.')
     })
 
     const options = [
         {
             id: 1,
-            label: "rot",
-            icon: faTimes
+            label: "rot"
         },
         {
             id: 2,
@@ -44,8 +45,9 @@ export const Home: React.FunctionComponent = () => {
             <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
                 {(formik) => (
                     <Form>
-                        <div className="w-52">
-                            <Dropdown name="test" labelText="Text" options={options} placeholder="Test" />
+                        <div className="w-56">
+                            <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
+                            <Button buttonType="primary" type="submit" className="mt-5">Hello</Button>
                         </div>
                     </Form>
                 )}
