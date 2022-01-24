@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import * as yup from 'yup'
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
+import { Dropdown } from "../../components/Form/Dropdown"
+import { TextInput } from "../../components/Form/TextInput"
 
 export const Home: React.FunctionComponent = () => {
     const initialValues = {
@@ -44,6 +46,9 @@ export const Home: React.FunctionComponent = () => {
                     <Form>
                         <div className="w-full">
                             <Checkbox name="ids" labelText="Text" options={options} helperText="Hello" />
+                            <TextInput name="ids" labelText="Text" placeholder="ddd" helperText="Hello" />
+                            <Dropdown name="ids" labelText="Text" placeholder="ff" options={options} helperText="Hello" />
+
                             <Button buttonType="primary" type="submit">Submit</Button>
                         </div>
                     </Form>
