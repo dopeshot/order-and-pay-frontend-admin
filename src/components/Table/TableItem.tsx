@@ -1,8 +1,7 @@
 import { faCheck, faEdit, faEllipsisV, faMale, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field, Formik } from "formik"
-import React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
 import * as yup from 'yup'
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
@@ -110,7 +109,7 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                         {isMoreOptionsOpen && <div data-cy={`table-table-delete-background-${index}`} className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setIsMoreOptionsOpen(false)}></div>}
 
                         {/* Icon */}
-                        <IconButton dataCy={`table-table-delete-iconbutton-${index}`} icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { setIsMoreOptionsOpen(true) }} />
+                        <IconButton dataCy={`table-table-delete-iconbutton-${index}`} icon={faEllipsisV} textColor="text-lightgrey" onClick={() => { setIsMoreOptionsOpen(true) }} className="mr-2 md:mr-4" />
 
                         {/* Dropdown */}
                         {isMoreOptionsOpen && <div data-cy={`table-table-delete-dropdown-${index}`} className="absolute origin-top-right right-5 z-20 bg-white rounded-lg shadow mt-2 w-30" tabIndex={-1}>
