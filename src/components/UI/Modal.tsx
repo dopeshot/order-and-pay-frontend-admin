@@ -2,9 +2,13 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { IconButton } from "../Buttons/IconButton"
 
 type TextareaProps = {
+    /** Is in the header of the modal, the title */
     modalHeading: string
+    /** Is in the header of the modal, the subtitle. This is optional */
     modalLabel?: string
+    /** State for Modal */
     open: boolean
+    /** Setter for State from Modal */
     setIsOpen: (value: boolean) => void
 }
 
@@ -27,14 +31,14 @@ export const Modal: React.FC<TextareaProps> = ({ modalHeading, modalLabel, open,
                             <div className="flex justify-between">
                                 <div>
                                     <h5 className="text-darkgrey font-semibold">{modalLabel}</h5>
-                                    <h2 className="text-headline-black text-2xl font-semibold mb-3">{modalHeading}</h2>
+                                    <h2 className="text-headline-black text-2xl font-semibold mb-2">{modalHeading}</h2>
                                 </div>
                                 <IconButton onClick={() => setIsOpen(false)} icon={faTimes}></IconButton>
                             </div>
 
                             {children}
                         </div>
-                        {/* Modal End */}
+                        {/* Modal Content End */}
                     </div>
                 </div>
             }
