@@ -110,8 +110,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
       cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
 
-      cy.get('[data-cy="table-save"] svg').should('be.visible').then(() => {
-        cy.get('[data-cy="table-save"]').click()
+      cy.get('[data-cy="table-save"] svg').click().then(() => {
         cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
         interception.sendResponse()
         cy.wait('@createTableIndefinitely')
@@ -155,11 +154,11 @@ describe('Api Endpoints', () => {
       cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
       cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
 
-      cy.get('[data-cy="table-table-save-button-0"] svg').should('be.visible').then(() => {
-        cy.get('[data-cy="table-table-save-button-0"]').click()
+      cy.get('[data-cy="table-table-save-button-0"] svg').click().then(() => {
         cy.get('[data-cy="table-table-save-button-0"] svg').should('have.class', 'fa-spinner')
         interception.sendResponse()
         cy.wait('@patchTableIndefinitely')
+        cy.get('[data-cy="table-table-save-button-0"]').should('not.exist')
       })
     })
   })
