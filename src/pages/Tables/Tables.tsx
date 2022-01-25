@@ -93,7 +93,7 @@ export const Tables: React.FunctionComponent = () => {
                                 Aktionen
                             </th>
                             <th className="text-center">
-                                <IconButton dataCy="table-table-load-iconbutton" icon={faSyncAlt} textColor="text-darkgrey" onClick={() => loadTables()} />
+                                <IconButton dataCy="table-table-load-iconbutton" icon={faSyncAlt} textColor="text-darkgrey" onClick={() => loadTables()} className="mr-2 md:mr-4" />
                             </th>
                         </tr>
                     </thead>
