@@ -31,6 +31,8 @@ module.exports = {
         'primary-blue': '#0967D2',
         'primary-blue-hover': '#0552B5',
         'primary-blue-hover-icon': '#47A3F3',
+        'secondary-blue': '#C5E0FB',
+        'secondary-blue-hover': '#BDD4F0',
         'dark-blue': "#03449E",
         'headline-black': '#1F2933',
         'white-lightgrey': '#F5F7FA',
