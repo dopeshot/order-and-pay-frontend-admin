@@ -15,7 +15,7 @@ type ListItemProps = {
 /**
  * List, should have List as parent
  */
-export const ListItemProps: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, children }) => {
+export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, children }) => {
     return (
         <div>
             {children}
