@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Button } from "../../components/Buttons/Button"
 import { Modal } from "../../components/UI/Modal"
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons"
+import { Button } from "../../components/Buttons/Button"
 
 export const Home: React.FunctionComponent = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -19,7 +20,7 @@ export const Home: React.FunctionComponent = () => {
                     <Button buttonType="primary" type="button" onClick={() => setIsOpen(true)}>Open</Button>
                 </div>
             </Modal>
-            <Button buttonType="primary" type="button" onClick={() => setIsOpen(true)}>Open</Button>
+            <Button onClick={() => setIsOpen(true)} className="text-darkgrey hover:text-darkgrey" icon={faChevronLeft}>Open</Button>
         </div>
     )
 }

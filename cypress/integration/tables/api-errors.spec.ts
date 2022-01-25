@@ -1,5 +1,5 @@
-import tables from '../../fixtures/tables.json'
 import table from '../../fixtures/table.json'
+import tables from '../../fixtures/tables.json'
 
 const api = `${Cypress.env("apiUrl")}/tables`
 
@@ -170,3 +170,4 @@ describe('Api Error Handling', () => {
 })
 
 export { }
+

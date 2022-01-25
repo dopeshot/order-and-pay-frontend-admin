@@ -1,10 +1,11 @@
-import { faCheck, faEdit, faEllipsisV, faMale, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faEdit, faEllipsisV, faMale, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field, Formik } from "formik"
 import React, { useState } from "react"
 import * as yup from 'yup'
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
+import { Button } from "../Buttons/Button"
 import { IconButton } from "../Buttons/IconButton"
 import { FormError } from "../Errors/FormError"
 
@@ -93,15 +94,10 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                 <td className="text-lightgrey">
                     {/* Edit */}
                     {isEdit ?
-                        <button data-cy={`table-table-save-button-${index}`} onClick={() => submitForm()} className={`text-primary-blue font-semibold mr-5 ${!isValid ? "opacity-70" : "opacity-100 hover:text-primary-blue-hover focus:text-primary-blue-hover "}`}>
-                            <FontAwesomeIcon icon={isLoadingButton ? faSpinner : faCheck} className={`${isLoadingButton ? "animate-spin" : ""} mr-2`} />
-                            Speichern
-                        </button>
+                        <Button dataCy={`table-table-save-button-${index}`} disabled={!isValid} loading={isLoadingButton} kind="tertiary" icon={faCheck} onClick={() => submitForm()} className="mr-5">Speichern</Button>
                         :
-                        <button data-cy={`table-table-edit-button-${index}`} onClick={() => { setIsEdit(true) }} className="hover:text-gray-500 focus:hover:text-gray-500 mr-5">
-                            <FontAwesomeIcon icon={faEdit} className="mr-2" />
-                            Bearbeiten
-                        </button>}
+                        <Button dataCy={`table-table-edit-button-${index}`} kind="tertiary" onClick={() => { setIsEdit(true) }} icon={faEdit} className="text-lightgrey hover:text-darkgrey focus:hover:text-darkgrey mr-5">Bearbeiten</Button>
+                    }
 
                     {/* Delete */}
                     <div className="relative inline-block">
