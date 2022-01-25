@@ -35,7 +35,6 @@ export const Modal: React.FC<TextareaProps> = ({ modalHeading, modalLabel, open,
                                 </div>
                                 <IconButton onClick={() => setIsOpen(false)} icon={faTimes}></IconButton>
                             </div>
-
                             {children}
                         </div>
                         {/* Modal Content End */}
