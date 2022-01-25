@@ -27,7 +27,7 @@ export const EmptyTables: React.FunctionComponent = () => {
                     <h1 className="text-4xl text-primary-blue font-semibold mb-3">Erstelle Tische</h1>
                     <p className="text-lg text-darkgrey text-center md:text-left mb-4">Um QR-Codes und Bestellungen zu bearbeiten, <br className="hidden sm:block" /> musst du wissen wo deine Kundschaft sitzt. </p>
                     <div className="w-full sm:w-max">
-                        <Button icon={faPlus} type="button" buttonType="primary" className="w-full" onClick={() => setDisplayModal(true)}> Tisch hinzufügen</Button>
+                        <Button icon={faPlus} type="button" className="w-full" onClick={() => setDisplayModal(true)}> Tisch hinzufügen</Button>
                     </div>
                 </div>
             </div >
