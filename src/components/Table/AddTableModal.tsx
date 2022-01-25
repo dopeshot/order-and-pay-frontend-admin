@@ -83,8 +83,10 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                                 </div>
                                 <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                                     {/* Save and Cancel Buttons */}
-                                    <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} disabled={!(dirty && isValid)}>Speichern</Button>
-                                    <Button dataCy="table-cancel" kind="secondary" onClick={() => props.setDisplayModal(false)}>Abbrechen</Button>
+                                    <div>
+                                        <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} disabled={!(dirty && isValid)}>Speichern</Button>
+                                    </div>
+                                    <Button dataCy="table-cancel" kind="tertiary" className="mt-2 sm:mt-0" onClick={() => props.setDisplayModal(false)}>Abbrechen</Button>
                                 </div>
                             </Form>
                         )}
