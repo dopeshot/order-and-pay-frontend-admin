@@ -1,6 +1,6 @@
 
 export const enum TagTypesEnum {
-    red = 'red-500',
+    red = 'red-600',
     purple = "indigo-500",
     pink = "pink-500",
     lightblue = "primary-blue-hover-icon",
