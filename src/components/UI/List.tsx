@@ -8,7 +8,7 @@ type ListProps = {
  */
 export const List: React.FC<ListProps> = ({ lines, children }) => {
     return (
-        <div className={lines ? "" : ""}>
+        <div className={`${lines ? "lines-list" : ""} mb-4`}>
             {children}
         </div>
     )
