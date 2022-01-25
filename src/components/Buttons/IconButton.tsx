@@ -9,10 +9,10 @@ type IconButtonProps = {
     className?: string
 }
 
-export const IconButton: React.FunctionComponent<IconButtonProps> = (props) => {
+export const IconButton: React.FunctionComponent<IconButtonProps> = ({ icon, dataCy, onClick, className = "", textColor = "text-darkgrey" }) => {
     return (
-        <button data-cy={props.dataCy} type="button" onClick={props.onClick} className={`cursor-pointer hover:bg-gray-200 focus:bg-gray-200 rounded-full w-10 h-10 ${props.className ? props.className : ""}`}>
-            <FontAwesomeIcon icon={props.icon} className={props.textColor ?? `text-darkgrey`} />
+        <button data-cy={dataCy} type="button" onClick={onClick} className={`cursor-pointer hover:bg-gray-200 focus:bg-gray-200 rounded-full w-10 h-10 ${className}`}>
+            <FontAwesomeIcon icon={icon} className={textColor} />
         </button>
     )
 }
