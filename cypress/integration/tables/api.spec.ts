@@ -1,6 +1,6 @@
+import table from '../../fixtures/table.json';
+import updateTable from '../../fixtures/update-table.json';
 import { interceptIndefinitely } from '../../support/utils';
-import table from '../../fixtures/table.json'
-import updateTable from '../../fixtures/update-table.json'
 
 const api = `${Cypress.env("apiUrl")}/tables`
 
@@ -142,11 +142,11 @@ describe('Api Endpoints', () => {
 
     it('should have disabled state when inputs are wrong', () => {
       cy.get('[data-cy="table-table-tablenumber-input-0"]').clear()
-      cy.get('[data-cy="table-table-save-button-0"]').should('have.class', 'opacity-70')
+      cy.get('[data-cy="table-table-save-button-0"]').should('have.class', 'text-opacity-60')
 
       cy.get('[data-cy="table-table-tablenumber-input-0"]').type(updateTable.tableNumber)
 
-      cy.get('[data-cy="table-table-save-button-0"]').should('not.have.class', 'opacity-70')
+      cy.get('[data-cy="table-table-save-button-0"]').should('not.have.class', 'text-opacity-60')
     })
 
     it('should have loading icon when sending', () => {
@@ -192,4 +192,5 @@ describe('Api Endpoints', () => {
   })
 })
 
-export { }
+export { };
+

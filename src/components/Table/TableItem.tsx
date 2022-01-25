@@ -94,9 +94,9 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                 <td className="text-lightgrey">
                     {/* Edit */}
                     {isEdit ?
-                        <Button data-cy={`table-table-save-button-${index}`} kind="tertiary" icon={faCheck} onClick={() => submitForm()} className="mr-5">Speichern</Button>
+                        <Button dataCy={`table-table-save-button-${index}`} disabled={!isValid} loading={isLoadingButton} kind="tertiary" icon={faCheck} onClick={() => submitForm()} className="mr-5">Speichern</Button>
                         :
-                        <Button data-cy={`table-table-edit-button-${index}`} kind="tertiary" onClick={() => { setIsEdit(true) }} icon={faEdit} className="text-lightgrey hover:text-darkgrey focus:hover:text-darkgrey mr-5">Bearbeiten</Button>
+                        <Button dataCy={`table-table-edit-button-${index}`} kind="tertiary" onClick={() => { setIsEdit(true) }} icon={faEdit} className="text-lightgrey hover:text-darkgrey focus:hover:text-darkgrey mr-5">Bearbeiten</Button>
                     }
 
                     {/* Delete */}
