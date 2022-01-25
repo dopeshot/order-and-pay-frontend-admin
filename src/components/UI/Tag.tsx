@@ -12,7 +12,7 @@ export const enum TagTypesEnum {
     dark = "gray-900",
 }
 
-type TextareaProps = {
+type TagProps = {
     /** Is in the header of the modal, the title */
     title: string
     /** Is in the header of the modal, the subtitle. This is optional */
@@ -22,7 +22,7 @@ type TextareaProps = {
 /**
  * Tag
  */
-export const Tag: React.FC<TextareaProps> = ({ title, type = TagTypesEnum.blue }) => {
+export const Tag: React.FC<TagProps> = ({ title, type = TagTypesEnum.blue }) => {
     return (
         <div className={`inline-block bg-${type} bg-opacity-20 rounded-full px-3 ml-2`}>
             <p className={`text-${type} text-sm font-semibold`}>{title}</p>
