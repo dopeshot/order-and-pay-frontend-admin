@@ -57,7 +57,7 @@ describe('Dropdown', () => {
     beforeEach(() => {
         mount(<Wrapper>
             <Dropdown name={data.name} options={data.options} placeholder={data.placeholder} labelText={data.labelText} helperText={data.helperText} />
-            <Button data-cy="test-button" buttonType="primary" type="submit" className="mt-2">Hello</Button>
+            <Button type="submit" className="mt-2">Hello</Button>
         </Wrapper>)
     })
 
