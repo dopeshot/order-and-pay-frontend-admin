@@ -3,6 +3,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 
+// MC: should seperate types for link and button
 export type ButtonProps = {
     kind?: "primary" | "secondary" | "tertiary"
     icon?: IconProp
