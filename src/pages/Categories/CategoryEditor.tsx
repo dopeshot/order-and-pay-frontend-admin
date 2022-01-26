@@ -1,7 +1,8 @@
-import { faCheck, faCheckDouble, faCog, faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCheckDouble, faCog, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FieldArray, Form, Formik } from "formik"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
+import { IconButton } from "../../components/Buttons/IconButton"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
@@ -42,8 +43,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 {({ values }) => (
                     <Form>
                         {/* General */}
-                        < h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
-                        <div className="w-auto" style={{ maxWidth: "500px" }}>
+                        <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
+                        <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
                             <TextInput name="image" placeholder="Gebe die Url für ein passendes Bild ein..." labelText="Titelbild" />
                             <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
                             <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired />
@@ -67,14 +68,18 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                             <>
                                                 <ListItem title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
                                                     <p className="text-darkgrey ml-8">{value.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
+                                                    <IconButton icon={faTrash} className="mr-7" onClick={() => ""} />
                                                 </ListItem>
                                                 {values.choices[index].options.map((option) => (
-                                                    <ListItem title={option.name} icon={faCog} indent></ListItem>
+                                                    <ListItem title={option.name} icon={faCog} indent>
+                                                        <p className="ml-auto mr-4">{(option.price / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
+                                                        <IconButton icon={faTrash} className="mr-7" onClick={() => ""} />
+                                                    </ListItem>
                                                 ))}
                                             </>
-
                                         ))
                                     ) :
+                                        // JS:TODO: Add no data component
                                         <p className="text-lightgrey">Du hast noch keine Auswahlmöglichkeiten. Füge neue Auswahlmöglichkeiten hinzu!</p>
                                     }
                                 </List>
