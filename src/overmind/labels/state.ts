@@ -6,7 +6,6 @@ export type Label = {
 
 export type State = {
     isLoadingLabels: boolean
-    isLoadingCreateLabel: boolean
     isLoadingEditLabel: boolean
     isLoadingDeleteLabel: boolean
     labels: Label[]
@@ -14,7 +13,6 @@ export type State = {
 
 export const state: State = {
     isLoadingLabels: false,
-    isLoadingCreateLabel: false,
     isLoadingEditLabel: false,
     isLoadingDeleteLabel: false,
     labels: []
