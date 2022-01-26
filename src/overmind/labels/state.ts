@@ -7,11 +7,13 @@ export type Label = {
 export type State = {
     isLoadingLabels: boolean
     isLoadingCreateLabel: boolean
+    isLoadingEditLabel: boolean
     labels: Label[]
 }
 
 export const state: State = {
     isLoadingLabels: false,
     isLoadingCreateLabel: false,
+    isLoadingEditLabel: false,
     labels: []
 }
