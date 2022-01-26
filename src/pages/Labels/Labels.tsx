@@ -1,7 +1,8 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
+import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
@@ -38,11 +39,12 @@ export const Labels: React.FC = () => {
             title: Math.random().toString()
         })}>Create Label</Button>
         <List lines>
-            {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp}></ListItem>)}
+            {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => console.log("List")}>
+                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => console.log("trash me")} />
+            </ListItem>)}
         </List>
 
         <Modal modalLabel="label" modalHeading="heading" open={modalOpen} onDissmis={() => setModalOpen(false)}>
-
         </Modal>
     </div>
 }
