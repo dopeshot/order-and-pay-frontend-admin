@@ -42,17 +42,13 @@ export const updateLabel = async ({ state, effects }: Context, { id, label }: { 
     }
 }
 
-export const deleteLabel = async ({ state, effects }: Context, id: string) => {
-    // Backoff when already loading
-    if (state.labels.isLoadingDeleteLabel)
-        return
-
-    state.labels.isLoadingDeleteLabel = true
+export const deleteLabel = async ({ state, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.labels.deleteLabel(id)
         state.labels.labels = state.labels.labels.filter(label => label._id !== id)
+        return true
     } catch (error) {
         console.error(error)
+        return false
     }
-    state.labels.isLoadingDeleteLabel = false
 }

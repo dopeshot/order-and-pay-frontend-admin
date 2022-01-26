@@ -15,7 +15,7 @@ import { Label } from "../../overmind/labels/state"
 
 export const Labels: React.FC = () => {
     // Get hooks to manipulate global state
-    const { getAllLabels, createLabel, updateLabel } = useActions().labels
+    const { getAllLabels, createLabel, updateLabel, deleteLabel } = useActions().labels
 
     // Get global state
     const { labels, isLoadingLabels } = useAppState().labels
@@ -73,6 +73,12 @@ export const Labels: React.FC = () => {
             setModalEditData(null)
     }
 
+    const handleDelete = async (event: any, id: string) => {
+        // This prevents the event from bubbling up the DOM to the parent node where you open edit
+        event.stopPropagation()
+
+        deleteLabel(id)
+    }
 
     return < div className="container md:max-w-full mt-12" >
         <div className="flex flex-col md:flex-row md:justify-between">
@@ -89,7 +95,7 @@ export const Labels: React.FC = () => {
                 setModalEditData(label)
                 setModalOpen(true)
             }}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => console.log("trash")} />
+                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={(event) => handleDelete(event, label._id)} />
             </ListItem>)}
         </List>
 
