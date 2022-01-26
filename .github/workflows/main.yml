@@ -31,7 +31,7 @@ jobs:
           start: npm run start:cc
           wait-on: 'http://localhost:3000'  
           install: false
-          command: cypress:ct --run
+          command: npm run cypress:ct --run
           
         
       - name: Archive report
