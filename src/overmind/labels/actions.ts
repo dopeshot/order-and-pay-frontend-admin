@@ -1,7 +1,13 @@
 import { Context } from ".."
 
-export const loadClient = async ({ state, effects }: Context) => {
-    state.example.isLoadingPosts = true
-    state.example.posts = await effects.example.jsonPlaceholder.getPosts()
-    state.example.isLoadingPosts = false
+export const getAllLabels = async ({ state, effects }: Context) => {
+    state.labels.isLoadingLabels = true
+    try {
+        const response = await effects.labels.getLabels()
+        const labels = response.data
+        state.labels.labels = labels
+    } catch (error) {
+        console.error(error)
+    }
+    state.labels.isLoadingLabels = false
 }
