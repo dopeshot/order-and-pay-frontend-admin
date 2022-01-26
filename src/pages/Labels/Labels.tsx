@@ -1,5 +1,8 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { useEffect } from "react"
 import { Button } from "../../components/Buttons/Button"
+import { List } from "../../components/UI/List"
+import { ListItem } from "../../components/UI/ListItem"
 import { useActions, useAppState } from "../../overmind"
 
 export const Labels: React.FC = () => {
@@ -17,9 +20,12 @@ export const Labels: React.FC = () => {
     return <div className="container md:max-w-full mt-12">
         <h1>Labels Page</h1>
         <Button kind="primary" onClick={() => createLabel({
-            icon: "nice",
+            icon: "user",
             title: Math.random().toString()
         })}>Create Label</Button>
-        {labels.map((label) => <div key={label._id}>{label.title}</div>)}
+        <List lines>
+            {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp}></ListItem>)}
+
+        </List>
     </div>
 }
