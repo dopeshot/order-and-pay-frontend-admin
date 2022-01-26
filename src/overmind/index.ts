@@ -1,14 +1,15 @@
 import { IContext } from 'overmind'
 import { createActionsHook, createStateHook } from 'overmind-react'
 import { namespaced } from 'overmind/config'
-import * as example from './example'
-import * as tables from './tables'
 import * as app from './app'
-
+import * as example from './example'
+import * as labels from './labels'
+import * as tables from './tables'
 export const config = namespaced({
     example,
     tables,
-    app
+    app,
+    labels
 })
 
 export type Context = IContext<{

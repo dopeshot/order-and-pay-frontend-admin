@@ -5,6 +5,7 @@ import {
 import { useActions } from '../../overmind';
 import { Example } from '../../pages/Example/Example';
 import { Home } from '../../pages/Home/Home';
+import { Labels } from '../../pages/Labels/Labels';
 import { Tables } from '../../pages/Tables/Tables';
 import { Sidebar } from '../Navigation/Sidebar';
 import { Topbar } from '../Navigation/Topbar';
@@ -28,6 +29,7 @@ export const App: React.FunctionComponent = () => {
               <Route exact path="/tables" component={Tables} />
               <Route exact path="/example" component={Example} />
               <Route exact path="/home" component={Home} />
+              <Route exact path="/menus/labels" component={Labels} />
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
