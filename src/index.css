@@ -89,3 +89,14 @@ input::-webkit-search-cancel-button {
     background-position: right -150px center;
     background-image: url(img/chair.svg);
 }
+
+/*** Writing it like this to have better browser support. https://caniuse.com/?search=%3Anot() ***/
+.lines-list a,
+.lines-list button {
+    border-bottom: solid #E4E7EB 1px;
+}
+
+.lines-list a:last-child,
+.lines-list button:last-child {
+    border-bottom: 0;
+}
