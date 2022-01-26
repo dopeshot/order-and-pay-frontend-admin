@@ -7,6 +7,7 @@ import { Allergens } from '../../pages/Allergens/Allergens';
 import { Example } from '../../pages/Example/Example';
 import { Home } from '../../pages/Home/Home';
 import { Labels } from '../../pages/Labels/Labels';
+import { MenuEditor } from '../../pages/Menus/MenuEditor';
 import { Menus } from '../../pages/Menus/Menus';
 import { Tables } from '../../pages/Tables/Tables';
 import { Sidebar } from '../Navigation/Sidebar';
@@ -32,6 +33,8 @@ export const App: React.FunctionComponent = () => {
               <Route exact path="/example" component={Example} />
               <Route exact path="/home" component={Home} />
               <Route exact path="/menus" component={Menus} />
+              <Route path="/menus/add" component={MenuEditor} />
+              <Route path="/menus/edit/:id" component={MenuEditor} />
               <Route path="/menus/labels" component={Labels} />
               <Route path="/menus/allergens" component={Allergens} />
               <Route exact path="/">
