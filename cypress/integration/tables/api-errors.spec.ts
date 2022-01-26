@@ -5,7 +5,7 @@ const api = `${Cypress.env("apiUrl")}/tables`
 
 describe('Api Error Handling', () => {
     describe(('General Errors'), () => {
-        it('should handle it when database down', () => {
+        it.only('should handle it when database down', () => {
             cy.getTableDatabaseDown()
             cy.visit('/tables')
 
