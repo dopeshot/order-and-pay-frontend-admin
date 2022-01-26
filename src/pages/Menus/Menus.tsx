@@ -32,7 +32,7 @@ export const Menus: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Alle Menüs</h1>
-                <p className="text-lightgrey mr-3 mb-4">{!true ? [].length : 0} Gesamt</p>
+                <p className="text-lightgrey mr-3 mb-4">{!isLoadingMenus ? menus.length : 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} to="/menus/add">Menü hinzufügen</Button>
