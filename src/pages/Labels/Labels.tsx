@@ -7,7 +7,7 @@ export const Labels: React.FC = () => {
     const { getAllLabels, createLabel } = useActions().labels
 
     // Get global state
-    const { labels, isLoadingCreateLabel } = useAppState().labels
+    const { labels } = useAppState().labels
 
     // Load labels when page is loaded
     useEffect((): void => {
