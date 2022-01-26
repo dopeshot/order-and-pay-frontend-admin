@@ -1,4 +1,4 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCheckDouble, faCog, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FieldArray, Form, Formik } from "formik"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
@@ -6,16 +6,27 @@ import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { CategoryDto, ChoiceType } from "../../overmind/categories/effects"
 
 export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryid, menuid } = useParams<{ categoryid: string, menuid: string }>()
 
-    const initialValues = {
+    const initialValues: CategoryDto = {
         title: "",
         description: "",
         icon: "",
         image: "",
-        choices: [],
+        choices: [{
+            "id": 0,
+            "title": "size",
+            "default": 1,
+            "type": ChoiceType.RADIO,
+            "options": [{
+                "id": 0,
+                "name": "small",
+                "price": -200
+            }]
+        }],
         menu: menuid
     }
 
@@ -39,7 +50,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" labelRequired />
                         </div>
                         {/* Choices and Options */}
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
                             <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
                                 <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
                                 <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
@@ -52,8 +63,16 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             {arrayHelpers => (
                                 <List>
                                     {values.choices && values.choices.length > 0 ? (
-                                        values.choices.map((value) => (
-                                            <ListItem title=""></ListItem>
+                                        values.choices.map((value, index) => (
+                                            <>
+                                                <ListItem title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
+                                                    <p className="text-darkgrey ml-8">{value.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
+                                                </ListItem>
+                                                {values.choices[index].options.map((option) => (
+                                                    <ListItem title={option.name} icon={faCog} indent></ListItem>
+                                                ))}
+                                            </>
+
                                         ))
                                     ) :
                                         <p className="text-lightgrey">Du hast noch keine Auswahlmöglichkeiten. Füge neue Auswahlmöglichkeiten hinzu!</p>
@@ -62,7 +81,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             )}
                         </FieldArray>
 
-                        <Button type="submit" className="mt-52">Speichern</Button>
+                        <Button type="submit" className="mt-10">Speichern</Button>
                     </Form>
                 )}
             </Formik>
