@@ -32,6 +32,10 @@ export const Sidebar: React.FunctionComponent = () => {
             title: 'Labels',
             icon: faReceipt,
             path: '/menus/labels'
+        }, {
+            title: 'Allergens',
+            icon: faReceipt,
+            path: '/menus/allergens'
         }]
     }]
 
