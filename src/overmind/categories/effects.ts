@@ -7,13 +7,13 @@ export type CategoryDto = {
     menu: string // id ref: 'Menu'
 }
 
-type Option = {
+export type Option = {
     id: number
     name: string
     price: number
 }
 
-type Choice = {
+export type Choice = {
     id: number
     title: string
     type: ChoiceType

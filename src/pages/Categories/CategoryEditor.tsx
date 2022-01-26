@@ -4,19 +4,20 @@ import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
-import { CategoryDto, ChoiceType } from "../../overmind/categories/effects"
+import { CategoryDto, Choice, ChoiceType } from "../../overmind/categories/effects"
 
 export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryid, menuid } = useParams<{ categoryid: string, menuid: string }>()
 
-    const [modalOpenChoice, setModalOpenChoice] = useState(false)
+    const [modalOpenChoice, setModalOpenChoice] = useState(true)
     const [modalOpenOption, setModalOpenOption] = useState(false)
-    const [isEditChoice, setIsEditChoice] = useState(false)
+    const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
     const [isEditOption, setIsEditOption] = useState(false)
 
     const initialValues: CategoryDto = {
@@ -24,21 +25,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
         description: "",
         icon: "",
         image: "",
-        choices: [{
-            "id": 0,
-            "title": "size",
-            "default": 1,
-            "type": ChoiceType.RADIO,
-            "options": [{
-                "id": 0,
-                "name": "small",
-                "price": -200
-            }]
-        }],
+        choices: [],
         menu: menuid
     }
 
-    const submitForm = (values: typeof initialValues) => {
+    const submitForm = (values: CategoryDto) => {
         console.log(values)
     }
 
@@ -51,6 +42,19 @@ export const CategoryEditor: React.FunctionComponent = () => {
         if (event.stopPropagation)
             event!.stopPropagation()
     }
+
+    const dropdownOptionsChoice = [
+        {
+            id: ChoiceType.RADIO,
+            label: "Einzeln",
+            icon: faCheck
+        },
+        {
+            id: ChoiceType.CHECKBOX,
+            label: "Mehrere",
+            icon: faCheckDouble
+        }
+    ]
 
     return (
         <div className="container md:max-w-full mt-12">
@@ -67,34 +71,50 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired />
                             <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" labelRequired />
                         </div>
-                        {/* Choices and Options */}
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                            <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
-                                <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
-                                <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
-                            </div>
-                            <div className="w-full md:w-auto">
-                                <Button icon={faPlus} onClick={() => setModalOpenChoice(true)}>Neue Auswahlmöglichkeit</Button>
-                            </div>
-                        </div>
+
                         <FieldArray name="choices">
-                            {arrayHelpers => (
+                            {arrayHelpers => (<>
+                                {console.log(values)}
+                                {/* Choices and Options */}
+                                <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                    <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
+                                        <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
+                                        <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                                    </div>
+                                    <div className="w-full md:w-auto">
+                                        <Button icon={faPlus} onClick={() => {
+                                            setModalOpenChoice(true)
+                                            arrayHelpers.push({
+                                                id: 0,
+                                                title: "",
+                                                type: ChoiceType.RADIO,
+                                                options: []
+                                            })
+                                        }}>Neue Auswahlmöglichkeit</Button>
+                                    </div>
+                                </div>
+
                                 <List>
                                     {values.choices && values.choices.length > 0 ? (
-                                        values.choices.map((value, index) => (
-                                            <div key={value.id}>
+                                        values.choices.map((choice, index) => (
+                                            <div key={choice.id}>
                                                 {/* Choices Modal */}
-                                                <Modal modalHeading={isEditChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
+                                                <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
                                                     setModalOpenChoice(false)
-                                                    setIsEditChoice(false)
-                                                }}></Modal>
+                                                    setEditChoiceData(null)
+                                                }}>
+                                                    <div>
+                                                        <TextInput name={`choices.${index}.title`} labelText="Titel" placeholder="Größe, Beilagen,..." />
+                                                        <Dropdown name={`choices.${index}.type`} labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
+                                                    </div>
+                                                </Modal>
 
                                                 <ListItem onClick={() => {
-                                                    setIsEditChoice(true)
+                                                    setEditChoiceData(choice)
                                                     setModalOpenChoice(true)
-                                                }} title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
+                                                }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
                                                     <div className="flex items-center w-full">
-                                                        <p className="text-darkgrey ml-8">{value.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
+                                                        <p className="text-darkgrey ml-8">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
                                                         <Button onClick={(e) => {
                                                             preventDoubleOnClick(e)
                                                             setModalOpenOption(true)
@@ -132,6 +152,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                         <p className="text-lightgrey">Du hast noch keine Auswahlmöglichkeiten. Füge neue Auswahlmöglichkeiten hinzu!</p>
                                     }
                                 </List>
+                            </>
                             )}
                         </FieldArray>
 
