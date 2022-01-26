@@ -11,17 +11,19 @@ import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
 import { useActions, useAppState } from "../../overmind"
 import { LabelDto } from "../../overmind/labels/effects"
+import { Label } from "../../overmind/labels/state"
 
 export const Labels: React.FC = () => {
     // Get hooks to manipulate global state
-    const { getAllLabels, createLabel } = useActions().labels
+    const { getAllLabels, createLabel, updateLabel } = useActions().labels
 
     // Get global state
     const { labels, isLoadingLabels } = useAppState().labels
 
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
-    const [isLoadingCreateLabel, setIsLoadingCreateLabel] = useState(false)
+    const [modalEditData, setModalEditData] = useState<Label | null>(null)
+    const [isModalLoading, setIsModalLoading] = useState(false)
 
     // Load labels when page is loaded
     useEffect((): void => {
@@ -29,8 +31,8 @@ export const Labels: React.FC = () => {
     }, [getAllLabels])
 
     const initialValues: LabelDto = {
-        title: "",
-        icon: "user"
+        title: modalEditData?.title ?? "",
+        icon: modalEditData?.icon ?? "user"
     }
 
     const validationSchema = Yup.object().shape({
@@ -39,12 +41,38 @@ export const Labels: React.FC = () => {
     })
 
     const submitForm = async (values: LabelDto) => {
-        setIsLoadingCreateLabel(true)
-        // Close modal when create label was successful 
-        if (await createLabel(values))
+        setIsModalLoading(true)
+
+        // Check if we are editing or creating a new label
+        if (modalEditData) {
+            await updateLabel({
+                id: modalEditData._id,
+                label: values
+            })
+            // Clear modal data
+            setModalEditData(null)
             setModalOpen(false)
-        setIsLoadingCreateLabel(false)
+        }
+        else {
+            await createLabel(values)
+            setModalOpen(false)
+        }
+        setIsModalLoading(false)
     }
+
+    const handleModelDismiss = () => {
+        // Prevent closing modal when form is submitting
+        if (isModalLoading)
+            return
+
+        // Close modal
+        setModalOpen(false)
+
+        // Clear modal data if we are editing a label
+        if (modalEditData)
+            setModalEditData(null)
+    }
+
 
     return < div className="container md:max-w-full mt-12" >
         <div className="flex flex-col md:flex-row md:justify-between">
@@ -56,27 +84,21 @@ export const Labels: React.FC = () => {
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Label hinzufügen</Button>
             </div>
         </div>
-
-        <Button kind="primary" onClick={() => createLabel({
-            icon: "user",
-            title: Math.random().toString()
-        })}>Create Label</Button>
         <List lines>
-            {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => console.log("List")}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => console.log("trash me")} />
+            {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
+                setModalEditData(label)
+                setModalOpen(true)
+            }}>
+                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => console.log("trash")} />
             </ListItem>)}
         </List>
 
-        <Modal modalHeading="Neues Label hinzufügen" open={modalOpen} onDissmis={() => {
-            // Prevent closing modal when form is submitting
-            if (!isLoadingCreateLabel)
-                setModalOpen(false)
-        }}>
+        <Modal modalHeading={modalEditData ? `Label bearbeiten` : `Neues Label hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 <Form>
                     <TextInput name="title" placeholder="Gesund, Empfohlen, Lecker..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired />
                     <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <Button type="submit" loading={isLoadingCreateLabel} icon={faCheck}>Speichern</Button>
+                    <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
         </Modal>

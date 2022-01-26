@@ -29,21 +29,17 @@ export const createLabel = async ({ state, effects }: Context, label: LabelDto):
     }
 }
 
-export const updateLabel = async ({ state, effects }: Context, { id, label }: { id: string, label: LabelDto }) => {
-    // Backoff when already loading
-    if (state.labels.isLoadingEditLabel)
-        return
-
-    state.labels.isLoadingEditLabel = true
+export const updateLabel = async ({ state, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<boolean> => {
     try {
         const response = await effects.labels.updateLabel(id, label)
         const updatedLabel = response.data
         const index = state.labels.labels.findIndex(label => label._id === id)
         state.labels.labels[index] = updatedLabel
+        return true
     } catch (error) {
         console.error(error)
+        return false
     }
-    state.labels.isLoadingEditLabel = false
 }
 
 export const deleteLabel = async ({ state, effects }: Context, id: string) => {
