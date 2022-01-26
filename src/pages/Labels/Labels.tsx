@@ -4,10 +4,10 @@ import { useActions, useAppState } from "../../overmind"
 
 export const Labels: React.FC = () => {
     // Get hooks to manipulate global state
-    const { getAllLabels } = useActions().labels
+    const { getAllLabels, createLabel } = useActions().labels
 
     // Get global state
-    const { labels } = useAppState().labels
+    const { labels, isLoadingCreateLabel } = useAppState().labels
 
     // Load labels when page is loaded
     useEffect((): void => {
@@ -16,7 +16,10 @@ export const Labels: React.FC = () => {
 
     return <div className="container md:max-w-full mt-12">
         <h1>Labels Page</h1>
-        <Button kind="primary">Create Label</Button>
+        <Button kind="primary" onClick={() => createLabel({
+            icon: "nice",
+            title: Math.random().toString()
+        })}>Create Label</Button>
         {labels.map((label) => <div key={label._id}>{label.title}</div>)}
     </div>
 }
