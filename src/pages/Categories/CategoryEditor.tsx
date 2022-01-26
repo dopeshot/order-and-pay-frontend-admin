@@ -1,5 +1,6 @@
 import { faCheck, faCheckDouble, faCog, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FieldArray, Form, Formik } from "formik"
+import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
@@ -7,10 +8,16 @@ import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Modal } from "../../components/UI/Modal"
 import { CategoryDto, ChoiceType } from "../../overmind/categories/effects"
 
 export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryid, menuid } = useParams<{ categoryid: string, menuid: string }>()
+
+    const [modalOpenChoice, setModalOpenChoice] = useState(false)
+    const [modalOpenOption, setModalOpenOption] = useState(false)
+    const [isEditChoice, setIsEditChoice] = useState(false)
+    const [isEditOption, setIsEditOption] = useState(false)
 
     const initialValues: CategoryDto = {
         title: "",
@@ -67,7 +74,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                 <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
                             </div>
                             <div className="w-full md:w-auto">
-                                <Button icon={faPlus} onClick={() => ""}>Neue Auswahlmöglichkeit</Button>
+                                <Button icon={faPlus} onClick={() => setModalOpenChoice(true)}>Neue Auswahlmöglichkeit</Button>
                             </div>
                         </div>
                         <FieldArray name="choices">
@@ -76,25 +83,47 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                     {values.choices && values.choices.length > 0 ? (
                                         values.choices.map((value, index) => (
                                             <div key={value.id}>
-                                                <ListItem onClick={(e) => {
-                                                    console.log("dd")
-                                                }
-                                                } title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
+                                                {/* Choices Modal */}
+                                                <Modal modalHeading={isEditChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
+                                                    setModalOpenChoice(false)
+                                                    setIsEditChoice(false)
+                                                }}></Modal>
+
+                                                <ListItem onClick={() => {
+                                                    setIsEditChoice(true)
+                                                    setModalOpenChoice(true)
+                                                }} title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
                                                     <div className="flex items-center w-full">
                                                         <p className="text-darkgrey ml-8">{value.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
-                                                        <Button kind="tertiary" icon={faPlus} className="text-darkgrey hover:text-headline-black ml-auto mr-4">Neue Option</Button>
+                                                        <Button onClick={(e) => {
+                                                            preventDoubleOnClick(e)
+                                                            setModalOpenOption(true)
+                                                        }} kind="tertiary" icon={faPlus} className="text-darkgrey hover:text-headline-black ml-auto mr-4">Neue Option</Button>
                                                         <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
                                                             preventDoubleOnClick(e)
-                                                            console.log("ee")
+                                                            console.log("Delete Choice")
                                                         }} />
                                                     </div>
-
                                                 </ListItem>
                                                 {values.choices[index].options.map((option) => (
-                                                    <ListItem key={option.id} title={option.name} icon={faCog} indent>
-                                                        <p className="ml-auto mr-4">{(option.price / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
-                                                        <IconButton icon={faTrash} className="mr-7" onClick={() => ""} />
-                                                    </ListItem>
+                                                    <div key={option.id} >
+                                                        {/* Option Modal */}
+                                                        <Modal modalHeading={isEditOption ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={() => {
+                                                            setModalOpenOption(false)
+                                                            setIsEditOption(false)
+                                                        }}></Modal>
+
+                                                        <ListItem onClick={() => {
+                                                            setModalOpenOption(true)
+                                                            setIsEditOption(true)
+                                                        }} title={option.name} icon={faCog} indent>
+                                                            <p className="ml-auto mr-4">{(option.price / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
+                                                            <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
+                                                                preventDoubleOnClick(e)
+                                                                console.log("Delete Option")
+                                                            }} />
+                                                        </ListItem>
+                                                    </div>
                                                 ))}
                                             </div>
                                         ))
