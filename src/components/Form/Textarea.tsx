@@ -16,12 +16,14 @@ type TextareaProps = {
     maxLength?: number
     /** Specify the rows attribute for the <textarea> */
     rows?: number
+    /** Enables autofocus */
+    autoFocus?: boolean // MC: This is not tested yet!!!!!
 }
 
 /**
  * Textarea, can only be used with Formik
  */
-export const Textarea: React.FC<TextareaProps> = ({ name, placeholder, labelText, labelRequired = false, helperText, maxLength, rows = 2 }) => {
+export const Textarea: React.FC<TextareaProps> = ({ name, placeholder, labelText, labelRequired = false, helperText, maxLength, rows = 2, autoFocus = false }) => {
     return (
         <div className="mb-4">
             <Field name={name}>{(props: FieldProps<any>) => (
@@ -31,7 +33,7 @@ export const Textarea: React.FC<TextareaProps> = ({ name, placeholder, labelText
                         {maxLength && (props.field.value !== null || props.field.value !== undefined) && <span className="text-lightgrey" data-cy={`${name}-character-count`}>{props.field.value.length}/{maxLength}</span>}
                     </div>
                     <div>
-                        <textarea placeholder={placeholder} {...props.field} rows={rows} className={`font-roboto rounded-lg p-2 w-full ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`}>
+                        <textarea placeholder={placeholder} autoFocus={autoFocus} {...props.field} rows={rows} className={`font-roboto rounded-lg p-2 w-full ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`}>
                         </textarea>
                     </div>
                     {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey">{helperText}</p>}
