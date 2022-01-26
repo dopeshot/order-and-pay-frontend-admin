@@ -24,6 +24,15 @@ jobs:
         with:
           start: npm run start:cc
           wait-on: 'http://localhost:3000'  
+          
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start:cc
+          wait-on: 'http://localhost:3000'  
+          install: false
+          command: cypress:ct --run
+          
         
       - name: Archive report
         uses: actions/upload-artifact@v2
