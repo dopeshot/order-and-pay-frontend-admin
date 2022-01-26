@@ -35,6 +35,16 @@ export const CategoryEditor: React.FunctionComponent = () => {
         console.log(values)
     }
 
+    const preventDoubleOnClick = (event: any) => {
+        if (!event)
+            event = window.event
+
+        event.cancelBubble = true
+
+        if (event.stopPropagation)
+            event!.stopPropagation()
+    }
+
     return (
         <div className="container md:max-w-full mt-12">
             <h1 className="text-2xl text-headline-black font-semibold mb-5">{categoryid ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
@@ -65,18 +75,28 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                 <List>
                                     {values.choices && values.choices.length > 0 ? (
                                         values.choices.map((value, index) => (
-                                            <>
-                                                <ListItem title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
-                                                    <p className="text-darkgrey ml-8">{value.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
-                                                    <IconButton icon={faTrash} className="mr-7" onClick={() => ""} />
+                                            <div key={value.id}>
+                                                <ListItem onClick={(e) => {
+                                                    console.log("dd")
+                                                }
+                                                } title={value.title} icon={value.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
+                                                    <div className="flex items-center w-full">
+                                                        <p className="text-darkgrey ml-8">{value.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
+                                                        <Button kind="tertiary" icon={faPlus} className="text-darkgrey hover:text-headline-black ml-auto mr-4">Neue Option</Button>
+                                                        <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
+                                                            preventDoubleOnClick(e)
+                                                            console.log("ee")
+                                                        }} />
+                                                    </div>
+
                                                 </ListItem>
                                                 {values.choices[index].options.map((option) => (
-                                                    <ListItem title={option.name} icon={faCog} indent>
+                                                    <ListItem key={option.id} title={option.name} icon={faCog} indent>
                                                         <p className="ml-auto mr-4">{(option.price / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
                                                         <IconButton icon={faTrash} className="mr-7" onClick={() => ""} />
                                                     </ListItem>
                                                 ))}
-                                            </>
+                                            </div>
                                         ))
                                     ) :
                                         // JS:TODO: Add no data component
