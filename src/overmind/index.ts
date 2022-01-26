@@ -5,6 +5,7 @@ import * as allergens from './allergens'
 import * as app from './app'
 import * as example from './example'
 import * as labels from './labels'
+import * as menus from './menus'
 import * as tables from './tables'
 
 export const config = namespaced({
@@ -12,7 +13,8 @@ export const config = namespaced({
     tables,
     app,
     labels,
-    allergens
+    allergens,
+    menus
 })
 
 export type Context = IContext<{
