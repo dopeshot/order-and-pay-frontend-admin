@@ -1,5 +1,5 @@
 import { faCheck, faCheckDouble, faCog, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { FieldArray, Form, Formik } from "formik"
+import { Formik } from "formik"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
@@ -10,17 +10,17 @@ import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
-import { CategoryDto, Choice, ChoiceType } from "../../overmind/categories/effects"
+import { CategoryDto, Choice, ChoiceType, Option } from "../../overmind/categories/effects"
 
 export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryid, menuid } = useParams<{ categoryid: string, menuid: string }>()
 
-    const [modalOpenChoice, setModalOpenChoice] = useState(true)
+    const [modalOpenChoice, setModalOpenChoice] = useState(false)
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
-    const [isEditOption, setIsEditOption] = useState(false)
+    const [editOptionData, setEditOptionData] = useState<Option | null>(null)
 
-    const initialValues: CategoryDto = {
+    const initialValuesGeneral: CategoryDto = {
         title: "",
         description: "",
         icon: "",
@@ -29,8 +29,39 @@ export const CategoryEditor: React.FunctionComponent = () => {
         menu: menuid
     }
 
+    const initialValuesChoices: {
+        id: number
+        title: string
+        type: ChoiceType | ""
+        options: Option[]
+    } = {
+        id: editChoiceData?.id ?? 0,
+        title: editChoiceData?.title ?? "",
+        type: editChoiceData?.type ?? "",
+        options: []
+    }
+
     const submitForm = (values: CategoryDto) => {
-        console.log(values)
+        console.log("submit", values)
+    }
+
+    const submitFormChoices = (formikChoicesValues: typeof initialValuesChoices, formikGeneralSetFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void, formikGeneralValues: CategoryDto) => {
+        if (editChoiceData) {
+            // let choiceIndex = formikGeneralValues.choices.findIndex((choice) => choice.id == formikChoicesValues.id)
+        }
+
+        formikGeneralSetFieldValue('choices', [
+            ...formikGeneralValues.choices,
+            {
+                id: formikGeneralValues.choices.length,
+                title: formikChoicesValues.title,
+                type: formikChoicesValues.type === "radio" ? ChoiceType.RADIO : ChoiceType.CHECKBOX,
+                options: initialValuesChoices.options
+            }
+        ])
+
+        setEditChoiceData(null)
+        setModalOpenChoice(false)
     }
 
     const preventDoubleOnClick = (event: any) => {
@@ -60,9 +91,9 @@ export const CategoryEditor: React.FunctionComponent = () => {
         <div className="container md:max-w-full mt-12">
             <h1 className="text-2xl text-headline-black font-semibold mb-5">{categoryid ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
 
-            <Formik initialValues={initialValues} onSubmit={submitForm}>
-                {({ values }) => (
-                    <Form>
+            <Formik initialValues={initialValuesGeneral} onSubmit={submitForm}>
+                {(formikGeneral) => (
+                    <form onSubmit={formikGeneral.handleSubmit}>
                         {/* General */}
                         <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
                         <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
@@ -72,94 +103,83 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" labelRequired />
                         </div>
 
-                        <FieldArray name="choices">
-                            {arrayHelpers => (<>
-                                {console.log(values)}
-                                {/* Choices and Options */}
-                                <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                                    <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
-                                        <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
-                                        <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                        {/* Choices and Options */}
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
+                                <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
+                                <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                            </div>
+                            <div className="w-full md:w-auto">
+                                <Button icon={faPlus} onClick={() => {
+                                    setModalOpenChoice(true)
+                                }}>Neue Auswahlmöglichkeit</Button>
+                            </div>
+                        </div>
+
+                        {/* Choices Modal */}
+                        <Formik initialValues={initialValuesChoices} onSubmit={(formikChoicesValues) => submitFormChoices(formikChoicesValues, formikGeneral.setFieldValue, formikGeneral.values)}>
+                            {(formikChoices) => (
+                                <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
+                                    setModalOpenChoice(false)
+                                }}>
+                                    <div>
+                                        <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." />
+                                        <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
                                     </div>
-                                    <div className="w-full md:w-auto">
-                                        <Button icon={faPlus} onClick={() => {
-                                            setModalOpenChoice(true)
-                                            arrayHelpers.push({
-                                                id: 0,
-                                                title: "",
-                                                type: ChoiceType.RADIO,
-                                                options: []
-                                            })
-                                        }}>Neue Auswahlmöglichkeit</Button>
-                                    </div>
-                                </div>
-
-                                <List>
-                                    {values.choices && values.choices.length > 0 ? (
-                                        values.choices.map((choice, index) => (
-                                            <div key={choice.id}>
-                                                {/* Choices Modal */}
-                                                <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
-                                                    setModalOpenChoice(false)
-                                                    setEditChoiceData(null)
-                                                }}>
-                                                    <div>
-                                                        <TextInput name={`choices.${index}.title`} labelText="Titel" placeholder="Größe, Beilagen,..." />
-                                                        <Dropdown name={`choices.${index}.type`} labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
-                                                    </div>
-                                                </Modal>
-
-                                                <ListItem onClick={() => {
-                                                    setEditChoiceData(choice)
-                                                    setModalOpenChoice(true)
-                                                }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} background>
-                                                    <div className="flex items-center w-full">
-                                                        <p className="text-darkgrey ml-8">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
-                                                        <Button onClick={(e) => {
-                                                            preventDoubleOnClick(e)
-                                                            setModalOpenOption(true)
-                                                        }} kind="tertiary" icon={faPlus} className="text-darkgrey hover:text-headline-black ml-auto mr-4">Neue Option</Button>
-                                                        <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
-                                                            preventDoubleOnClick(e)
-                                                            console.log("Delete Choice")
-                                                        }} />
-                                                    </div>
-                                                </ListItem>
-                                                {values.choices[index].options.map((option) => (
-                                                    <div key={option.id} >
-                                                        {/* Option Modal */}
-                                                        <Modal modalHeading={isEditOption ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={() => {
-                                                            setModalOpenOption(false)
-                                                            setIsEditOption(false)
-                                                        }}></Modal>
-
-                                                        <ListItem onClick={() => {
-                                                            setModalOpenOption(true)
-                                                            setIsEditOption(true)
-                                                        }} title={option.name} icon={faCog} indent>
-                                                            <p className="ml-auto mr-4">{(option.price / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
-                                                            <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
-                                                                preventDoubleOnClick(e)
-                                                                console.log("Delete Option")
-                                                            }} />
-                                                        </ListItem>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ))
-                                    ) :
-                                        // JS:TODO: Add no data component
-                                        <p className="text-lightgrey">Du hast noch keine Auswahlmöglichkeiten. Füge neue Auswahlmöglichkeiten hinzu!</p>
-                                    }
-                                </List>
-                            </>
+                                    <Button onClick={formikChoices.handleSubmit} type="submit">Speichern</Button>
+                                </Modal>
                             )}
-                        </FieldArray>
+                        </Formik>
+
+                        <List>
+                            {formikGeneral.values.choices.map((choice) => (
+                                <>
+                                    { /* Choices List */}
+                                    <ListItem onClick={() => {
+                                        setEditChoiceData(choice)
+                                        setModalOpenChoice(true)
+                                    }} title={choice.title} icon={true ? faCheck : faCheckDouble} background>
+                                        <div className="flex items-center w-full">
+                                            <p className="text-darkgrey ml-8">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
+                                            <Button onClick={(e) => {
+                                                preventDoubleOnClick(e)
+                                                setModalOpenOption(true)
+                                            }} kind="tertiary" icon={faPlus} className="text-darkgrey hover:text-headline-black ml-auto mr-4">Neue Option</Button>
+                                            <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
+                                                preventDoubleOnClick(e)
+                                                console.log("Delete Choice")
+                                            }} />
+                                        </div>
+                                    </ListItem>
+                                    { /* Option List */}
+                                    {choice.options.map((option: Option) => (
+                                        <ListItem onClick={() => {
+                                            setModalOpenOption(true)
+                                        }} title={option.name} icon={faCog} indent>
+                                            <p className="ml-auto mr-4">{(1000 / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
+                                            <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
+                                                preventDoubleOnClick(e)
+                                                console.log("Delete Option")
+                                            }} />
+                                        </ListItem>
+                                    ))}
+                                </>
+                            ))}
+                        </List>
 
                         <Button type="submit" className="mt-10">Speichern</Button>
-                    </Form>
+                    </form>
                 )}
             </Formik>
+
+
+
+
+
+            {/* Option Modal */}
+            <Modal modalHeading={true ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={() => {
+                setModalOpenOption(false)
+            }}></Modal>
         </div >
     )
 }
