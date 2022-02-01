@@ -17,6 +17,9 @@ export type ButtonProps = {
 }
 
 export const Button: React.FC<ButtonProps> = ({ kind = "primary", icon, disabled, loading, dataCy, className, children, to, onClick, type = "button" }) => {
+    // MC: Disable button if loading, will change style as well @Joy Shall we do that? 
+    disabled = loading ? true : disabled
+
     return (<>
         {kind === "tertiary" ?
             to ?
