@@ -36,18 +36,21 @@ export const MenuEditor: React.FC = () => {
             if (!id)
                 return
 
-            // Fetch menu and set editing
-            setIsEditing(true)
-            const menu = await getMenuById(id)
+            try {
+                // Fetch menu and set editing
+                setIsEditing(true)
 
-            // Check if menu exists
-            if (!menu)
+                const menu = await getMenuById(id)
+                setMenu(menu)
+            } catch (error) {
+                console.error("Menu not found")
+                // MC: Implement error here
+
                 return
-
-            setMenu(menu)
+            }
         }
         loadMenu()
-    })
+    }, [])
 
     const initialValues: MenuDto = {
         title: menu?.title ?? "",
