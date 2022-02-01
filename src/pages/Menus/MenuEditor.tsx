@@ -1,11 +1,13 @@
 import { faArrowLeft, faCheck } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
-import { useParams } from "react-router-dom"
+import { useState } from "react"
+import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { useActions } from "../../overmind"
 import { MenuDto } from "../../overmind/menus/effects"
 
 type Params = {
@@ -14,6 +16,12 @@ type Params = {
 
 export const MenuEditor: React.FC = () => {
     const { id } = useParams<Params>()
+    const history = useHistory()
+    const { createMenu } = useActions().menus
+
+    // Component States
+    const [isLoadingSave, setIsLoadingSave] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
 
     const initialValues: MenuDto = {
         title: "",
@@ -27,7 +35,17 @@ export const MenuEditor: React.FC = () => {
     })
 
     const submitForm = async (values: MenuDto) => {
-        console.log(values)
+        setIsLoadingSave(true)
+
+        // Check if we are editing or creating a new menu
+        if (isEditing) {
+
+        } else {
+            await createMenu(values)
+            history.push("/menus")
+        }
+
+        setIsLoadingSave(false)
     }
 
     return <div className="container mt-12">
@@ -41,7 +59,7 @@ export const MenuEditor: React.FC = () => {
                 <div className="flex flex-col md:flex-row justify-between mt-4">
                     <Button kind="tertiary" type="submit" className="mb-4 order-last md:order-none">Löschen</Button>
                     <Button kind="secondary" className="ml-auto mr-0 mb-4 md:mr-4">Abbrechen</Button>
-                    <Button type="submit" kind="primary" icon={faCheck} className="mb-4" >Speichern</Button>
+                    <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="mb-4" >Speichern</Button>
                 </div>
             </Form>
         </Formik>
