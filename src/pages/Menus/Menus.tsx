@@ -44,7 +44,7 @@ export const Menus: React.FC = () => {
         </div>
         <List lines>
             {menus.map((menu) => <ListItem key={menu._id} title={menu.title} icon={faFolder} to={`/menus/edit/${menu._id}`}>
-                {menu.isActive && <Tag title="Active" type={TagTypesEnum.green} />}
+                {menu.isActive && <Tag title="Aktiv" type={TagTypesEnum.green} />}
                 <IconButton className="ml-auto mr-4" icon={faTrash} onClick={(event) => handleDelete(event, menu._id)} />
             </ListItem>)}
         </List>
