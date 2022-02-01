@@ -103,7 +103,7 @@ export const MenuEditor: React.FC = () => {
                 <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
                 <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
                 <div className="flex flex-col md:flex-row justify-between mt-4">
-                    <Button kind="tertiary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>
+                    {isEditing && <Button kind="tertiary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                     <Button kind="secondary" className="ml-auto mr-0 mb-4 md:mr-4">Abbrechen</Button>
                     <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="mb-4" >Speichern</Button>
                 </div>
