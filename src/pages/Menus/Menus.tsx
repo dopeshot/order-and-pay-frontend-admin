@@ -13,6 +13,7 @@ export const Menus: React.FC = () => {
 
     // Get global state
     const { menus, isLoadingMenus } = useAppState().menus
+    const { deleteMenu } = useActions().menus
 
     // Load labels when page is loaded
     useEffect((): void => {
@@ -25,7 +26,10 @@ export const Menus: React.FC = () => {
         event.preventDefault()
 
         // Delete the menu
-        console.log(id)
+        await deleteMenu(id)
+
+        // When menu is delete update List
+        getAllMenus()
     }
 
     return <div className="container md:max-w-full mt-12" >
