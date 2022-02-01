@@ -56,8 +56,8 @@ export const MenuEditor: React.FC = () => {
     }
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string().min(2).max(32).required("Title is required"),
-        description: Yup.string().min(0).max(240),
+        title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
+        description: Yup.string().max(240, "Die Beschreibung darf nicht länger als 240 Zeichen sein."),
         isActive: Yup.boolean()
     })
 
