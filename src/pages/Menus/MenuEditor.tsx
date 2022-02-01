@@ -19,6 +19,8 @@ type Params = {
 export const MenuEditor: React.FC = () => {
     const { id } = useParams<Params>()
     const history = useHistory()
+
+    // Get hooks to manipulate global state
     const { createMenu, getMenuById, updateMenu, deleteMenu } = useActions().menus
 
     // Component States
@@ -27,6 +29,7 @@ export const MenuEditor: React.FC = () => {
     const [isEditing, setIsEditing] = useState(false)
     const [menu, setMenu] = useState<Menu>()
 
+    // Load menu when id is set in url
     useEffect((): void => {
         async function loadMenu() {
             // Check if we are editing an existing menu
@@ -51,6 +54,7 @@ export const MenuEditor: React.FC = () => {
         description: menu?.description ?? "",
         isActive: menu?.isActive ?? false
     }
+
     const validationSchema = Yup.object().shape({
         title: Yup.string().min(2).max(32).required("Title is required"),
         description: Yup.string().min(0).max(240),
