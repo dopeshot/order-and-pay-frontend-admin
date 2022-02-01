@@ -1,4 +1,5 @@
 import { faArrowLeft, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
+import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
@@ -59,18 +60,26 @@ export const MenuEditor: React.FC = () => {
     const submitForm = async (values: MenuDto) => {
         setIsLoadingSave(true)
 
-        // Check if we are editing or creating a new menu
-        if (isEditing) {
-            await updateMenu({
-                id,
-                menu: values
-            })
-        } else {
-            await createMenu(values)
-        }
+        try {
+            // Check if we are editing or creating a new menu
+            if (isEditing) {
+                await updateMenu({
+                    id,
+                    menu: values
+                })
+            } else {
+                await createMenu(values)
+            }
 
-        setIsLoadingSave(false)
-        history.push("/menus")
+            history.push("/menus")
+        } catch (error) {
+            if (!axios.isAxiosError(error))
+                return
+
+            // MC: Put error display here (or we generalize it???)
+        } finally {
+            setIsLoadingSave(false)
+        }
     }
 
     const handleDelete = async () => {
