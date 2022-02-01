@@ -9,3 +9,5 @@ export type MenuDto = {
 
 // Get all menus
 export const getAllMenus = () => request.get<Menu[]>('/menus')
+// Create a Menu
+export const createMenu = (createMenuDto: MenuDto) => request.post<Menu>('/menus', createMenuDto)
