@@ -53,3 +53,15 @@ export const updateMenu = async ({ effects }: Context, { id, menu }: { id: strin
         return false
     }
 }
+
+// Delete menu by id action
+export const deleteMenu = async ({ effects }: Context, id: string): Promise<boolean> => {
+    try {
+        // We just await the deletion no need to update menu object
+        await effects.menus.deleteMenu(id)
+        return true
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}

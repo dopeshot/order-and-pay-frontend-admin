@@ -15,3 +15,5 @@ export const createMenu = (createMenuDto: MenuDto) => request.post<Menu>('/menus
 export const getMenuById = (id: string) => request.get<Menu>(`/menus/${id}`)
 // Update a Menu
 export const updateMenu = (id: string, createMenuDto: MenuDto) => request.patch<Menu>(`/menus/${id}`, createMenuDto)
+// Delete a menu by id 
+export const deleteMenu = (id: string) => request.delete(`/menus/${id}`)

@@ -1,4 +1,4 @@
-import { faArrowLeft, faCheck } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
@@ -18,10 +18,11 @@ type Params = {
 export const MenuEditor: React.FC = () => {
     const { id } = useParams<Params>()
     const history = useHistory()
-    const { createMenu, getMenuById, updateMenu } = useActions().menus
+    const { createMenu, getMenuById, updateMenu, deleteMenu } = useActions().menus
 
     // Component States
     const [isLoadingSave, setIsLoadingSave] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const [menu, setMenu] = useState<Menu>()
 
@@ -68,8 +69,20 @@ export const MenuEditor: React.FC = () => {
             await createMenu(values)
         }
 
-        history.push("/menus")
         setIsLoadingSave(false)
+        history.push("/menus")
+    }
+
+    const handleDelete = async () => {
+        // Check if we are editing a menu
+        if (!isEditing || !menu || !id)
+            return
+        setIsLoadingDelete(true)
+
+        await deleteMenu(menu._id)
+
+        setIsLoadingDelete(false)
+        history.push("/menus")
     }
 
     return <div className="container mt-12">
@@ -81,7 +94,7 @@ export const MenuEditor: React.FC = () => {
                 <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
                 <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
                 <div className="flex flex-col md:flex-row justify-between mt-4">
-                    <Button kind="tertiary" type="submit" className="mb-4 order-last md:order-none">Löschen</Button>
+                    <Button kind="tertiary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>
                     <Button kind="secondary" className="ml-auto mr-0 mb-4 md:mr-4">Abbrechen</Button>
                     <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="mb-4" >Speichern</Button>
                 </div>
