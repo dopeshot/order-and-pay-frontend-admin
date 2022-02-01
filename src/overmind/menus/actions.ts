@@ -1,4 +1,5 @@
 import { Context } from ".."
+import { MenuDto } from "./effects"
 
 export const getAllMenus = async ({ state, effects }: Context) => {
     // Backoff when already loading
@@ -14,4 +15,16 @@ export const getAllMenus = async ({ state, effects }: Context) => {
         console.error(error)
     }
     state.menus.isLoadingMenus = false
+}
+
+// Create menu action
+export const createMenu = async ({ effects }: Context, menu: MenuDto): Promise<boolean> => {
+    try {
+        // We just await the creation no need to update menu object
+        await effects.menus.createMenu(menu)
+        return true
+    } catch (error) {
+        console.error(error)
+        return false
+    }
 }
