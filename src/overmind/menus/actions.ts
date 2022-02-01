@@ -2,7 +2,7 @@ import { Context } from ".."
 import { MenuDto } from "./effects"
 import { Menu } from "./state"
 
-export const getAllMenus = async ({ state, effects }: Context) => {
+export const getAllMenus = async ({ state, effects }: Context): Promise<Menu[] | undefined> => {
     // Backoff when already loading
     if (state.menus.isLoadingMenus)
         return
@@ -14,6 +14,7 @@ export const getAllMenus = async ({ state, effects }: Context) => {
         state.menus.menus = menus
     } catch (error) {
         console.error(error)
+        throw (error)
     }
     state.menus.isLoadingMenus = false
 }
@@ -26,19 +27,19 @@ export const createMenu = async ({ effects }: Context, menu: MenuDto): Promise<b
         return true
     } catch (error) {
         console.error(error)
-        return false
+        throw (error)
     }
 }
 
 // Get menu by id action
-export const getMenuById = async ({ state, effects }: Context, id: string): Promise<Menu | null> => {
+export const getMenuById = async ({ state, effects }: Context, id: string): Promise<Menu> => {
     try {
         const response = await effects.menus.getMenuById(id)
         const menu = response.data
         return menu
     } catch (error) {
         console.error(error)
-        return null
+        throw (error)
     }
 }
 
@@ -50,7 +51,7 @@ export const updateMenu = async ({ effects }: Context, { id, menu }: { id: strin
         return true
     } catch (error) {
         console.error(error)
-        return false
+        throw (error)
     }
 }
 
@@ -62,6 +63,6 @@ export const deleteMenu = async ({ effects }: Context, id: string): Promise<bool
         return true
     } catch (error) {
         console.error(error)
-        return false
+        throw (error)
     }
 }
