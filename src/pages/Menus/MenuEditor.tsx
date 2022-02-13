@@ -87,11 +87,12 @@ export const MenuEditor: React.FC = () => {
 
     const handleDelete = async () => {
         // Check if we are editing a menu
-        if (!isEditing || !menu || !id)
+        if (!isEditing)
             return
+
         setIsLoadingDelete(true)
 
-        await deleteMenu(menu._id)
+        await deleteMenu(id)
 
         setIsLoadingDelete(false)
         history.push("/menus")
