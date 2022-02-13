@@ -1,56 +1,27 @@
-import { faWineGlass, faYinYang } from "@fortawesome/free-solid-svg-icons"
-import { Form, Formik } from "formik"
+import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom"
-import * as yup from 'yup'
-import { Dropdown } from "../../components/Form/Dropdown"
+import { List } from "../../components/UI/List"
+import { ListItem } from "../../components/UI/ListItem"
+
 
 export const Home: React.FunctionComponent = () => {
-    const initialValues = {
-        test: "",
-        helllo: ""
-    }
-
-    const submitForm = (values: typeof initialValues) => {
-        console.log(values);
-    }
-
-    const Schema = yup.object().shape({
-        test: yup.string().required('Hello'),
-        helllo: yup.string().required('ff')
-    })
-
-    const options = [
-        {
-            id: 1,
-            label: "rot"
-        },
-        {
-            id: 2,
-            label: "grün fdkjfksjflksdfjlsdfjskdfjkdfjsdfjslkdfösdfk",
-            icon: faYinYang
-        },
-        {
-            id: 3,
-            label: "gelb",
-            icon: faWineGlass
-        }
-    ]
-
     return (
         <div className="container mt-12">
             <h3 className="text-2xl font-bold">Welcome</h3>
             <Link to="/tables">Gehe zu Tabellen</Link>
-            <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={Schema} >
-                {(formik) => (
-                    <Form>
-                        <div className="w-56">
-                            <Dropdown name="test" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
-                            <Dropdown name="helllo" labelText="Text" options={options} placeholder="Wähle eine Farbe..." helperText="Hello" />
-                            <button type="submit">Submit</button>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
+            <List>
+                <ListItem onClick={() => console.log("Hello")} title="Hello" background></ListItem>
+                <ListItem to="/" title="Hello" icon={faTrash} indent></ListItem>
+                <ListItem title="Hello" indent></ListItem>
+                <ListItem title="Hello" indent></ListItem>
+            </List>
+
+            <List lines>
+                <ListItem to="/" title="Hello"></ListItem>
+                <ListItem title="Hello"></ListItem>
+                <ListItem title="Hello"></ListItem>
+                <ListItem title="Hello"></ListItem>
+            </List>
         </div>
     )
 }

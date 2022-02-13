@@ -1,6 +1,6 @@
+import table from '../../fixtures/table.json';
+import updateTable from '../../fixtures/update-table.json';
 import { interceptIndefinitely } from '../../support/utils';
-import table from '../../fixtures/table.json'
-import updateTable from '../../fixtures/update-table.json'
 
 const api = `${Cypress.env("apiUrl")}/tables`
 
@@ -110,8 +110,7 @@ describe('Api Endpoints', () => {
       cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
       cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
 
-      cy.get('[data-cy="table-save"] svg').should('be.visible').then(() => {
-        cy.get('[data-cy="table-save"]').click()
+      cy.get('[data-cy="table-save"] svg').click().then(() => {
         cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
         interception.sendResponse()
         cy.wait('@createTableIndefinitely')
@@ -142,11 +141,11 @@ describe('Api Endpoints', () => {
 
     it('should have disabled state when inputs are wrong', () => {
       cy.get('[data-cy="table-table-tablenumber-input-0"]').clear()
-      cy.get('[data-cy="table-table-save-button-0"]').should('have.class', 'opacity-70')
+      cy.get('[data-cy="table-table-save-button-0"]').should('have.class', 'text-opacity-60')
 
       cy.get('[data-cy="table-table-tablenumber-input-0"]').type(updateTable.tableNumber)
 
-      cy.get('[data-cy="table-table-save-button-0"]').should('not.have.class', 'opacity-70')
+      cy.get('[data-cy="table-table-save-button-0"]').should('not.have.class', 'text-opacity-60')
     })
 
     it('should have loading icon when sending', () => {
@@ -155,11 +154,11 @@ describe('Api Endpoints', () => {
       cy.get('input[data-cy="table-table-tablenumber-input-0"]').clear().type(updateTable.tableNumber)
       cy.get('input[data-cy="table-table-capacity-input-0"]').clear().type(updateTable.capacity.toString())
 
-      cy.get('[data-cy="table-table-save-button-0"] svg').should('be.visible').then(() => {
-        cy.get('[data-cy="table-table-save-button-0"]').click()
+      cy.get('[data-cy="table-table-save-button-0"] svg').click().then(() => {
         cy.get('[data-cy="table-table-save-button-0"] svg').should('have.class', 'fa-spinner')
         interception.sendResponse()
         cy.wait('@patchTableIndefinitely')
+        cy.get('[data-cy="table-table-save-button-0"]').should('not.exist')
       })
     })
   })
@@ -192,4 +191,5 @@ describe('Api Endpoints', () => {
   })
 })
 
-export { }
+export { };
+

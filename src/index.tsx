@@ -1,12 +1,17 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faAddressBook, faUser } from "@fortawesome/free-solid-svg-icons";
 import { createOvermind } from 'overmind';
 import { Provider } from 'overmind-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import WebFont from 'webfontloader';
 import { App } from './components/App/App';
+import './index.css';
 import { config } from './overmind';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
-import WebFont from 'webfontloader';
+
+// We have to predefine all icons we are using from api (they must be loaded here)
+library.add(faUser, faAddressBook);
 
 const WebFontConfig = {
   typekit: {

@@ -1,11 +1,11 @@
-import tables from '../../fixtures/tables.json'
 import table from '../../fixtures/table.json'
+import tables from '../../fixtures/tables.json'
 
 const api = `${Cypress.env("apiUrl")}/tables`
 
 describe('Api Error Handling', () => {
     describe(('General Errors'), () => {
-        it('should handle it when database down', () => {
+        it.only('should handle it when database down', () => {
             cy.getTableDatabaseDown()
             cy.visit('/tables')
 
@@ -170,3 +170,4 @@ describe('Api Error Handling', () => {
 })
 
 export { }
+

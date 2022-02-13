@@ -31,7 +31,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <>
+        <div className="mb-4">
             <label className="block text-darkgrey text-sm font-semibold mb-1" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
             <Field name={name}>{(props: FieldProps<any>) => (
                 <div className="relative mb-1">
@@ -55,10 +55,10 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
                             </button>
                         ))}
                     </div>}
-                    {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey">{helperText}</p>}
+                    {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm font-semibold mt-1">{helperText}</p>}
                 </div>
             )}</Field>
             <FormError field={name} />
-        </>
+        </div>
     )
 }

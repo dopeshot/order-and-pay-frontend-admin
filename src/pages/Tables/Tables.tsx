@@ -61,7 +61,9 @@ export const Tables: React.FunctionComponent = () => {
                             </div>
                         </div>}
                     </div>
-                    <Button dataCy="table-add" type="button" icon={faPlus} buttonType="primary" onClick={() => setDisplayModal(true)}>Tisch hinzufügen</Button>
+                    <div>
+                        <Button dataCy="table-add" type="button" icon={faPlus} onClick={() => setDisplayModal(true)}>Tisch hinzufügen</Button>
+                    </div>
                 </div>
 
                 {/* Table */}
@@ -91,7 +93,7 @@ export const Tables: React.FunctionComponent = () => {
                                 Aktionen
                             </th>
                             <th className="text-center">
-                                <IconButton dataCy="table-table-load-iconbutton" icon={faSyncAlt} textColor="text-darkgrey" onClick={() => loadTables()} />
+                                <IconButton dataCy="table-table-load-iconbutton" icon={faSyncAlt} textColor="text-darkgrey" onClick={() => loadTables()} className="mr-2 md:mr-4" />
                             </th>
                         </tr>
                     </thead>
