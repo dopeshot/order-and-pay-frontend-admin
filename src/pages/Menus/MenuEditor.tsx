@@ -8,6 +8,7 @@ import { Button } from "../../components/Buttons/Button"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { Modal } from "../../components/UI/Modal"
 import { useActions } from "../../overmind"
 import { MenuDto } from "../../overmind/menus/effects"
 import { Menu } from "../../overmind/menus/state"
@@ -27,6 +28,7 @@ export const MenuEditor: React.FC = () => {
     // Component States
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [hasDeleteModal, setHasDeleteModal] = useState(false)
     const [menu, setMenu] = useState<Menu>()
 
     // Load menu when id is set in url
@@ -107,10 +109,17 @@ export const MenuEditor: React.FC = () => {
                 <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
                 <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
                 <div className="flex flex-col md:flex-row justify-between mt-4">
-                    {isEditing && <Button kind="tertiary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                    {isEditing && <Button kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                     <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mr-0 mb-4 md:mr-4">Speichern</Button>
                 </div>
             </Form>
         </Formik>
+        <Modal modalHeading="Menü für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
+            <p>Das löschen kann nicht rückgängig gemacht werden.</p>
+            <div className="flex md:justify-between flex-col md:flex-row">
+                <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
+                <Button kind="primary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
+            </div>
+        </Modal>
     </div>
 }
