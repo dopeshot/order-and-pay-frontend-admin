@@ -99,11 +99,11 @@ describe('Dropdown', () => {
 
     it('should close dropdown when click it after its open', () => {
         // open dropdown
-        cy.get(`[data-cy="${data.name}-dropdown-button"]`).click()
+        cy.get(`[data-cy="${data.name}-dropdown-button"]`).click({ force: true })
         cy.get(`[data-cy="${data.name}-dropdown-menu"]`).should('be.visible')
 
         // close dropdown
-        cy.get(`[data-cy="${data.name}-dropdown-button"]`).click()
+        cy.get(`[data-cy="${data.name}-dropdown-button"]`).click({ force: true })
         cy.get(`[data-cy="${data.name}-dropdown-menu"]`).should('not.exist')
     })
 
