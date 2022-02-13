@@ -18,6 +18,7 @@ type Params = {
 
 export const MenuEditor: React.FC = () => {
     const { id } = useParams<Params>()
+    const isEditing = Boolean(id)
     const history = useHistory()
 
     // Get hooks to manipulate global state
@@ -26,20 +27,13 @@ export const MenuEditor: React.FC = () => {
     // Component States
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
-    const [isEditing, setIsEditing] = useState(false)
     const [menu, setMenu] = useState<Menu>()
 
     // Load menu when id is set in url
     useEffect((): void => {
         async function loadMenu() {
-            // Check if we are editing an existing menu
-            if (!id)
-                return
-
             try {
                 // Fetch menu and set editing
-                setIsEditing(true)
-
                 const menu = await getMenuById(id)
                 setMenu(menu)
             } catch (error) {
@@ -49,7 +43,9 @@ export const MenuEditor: React.FC = () => {
                 return
             }
         }
-        loadMenu()
+        // Check if we are editing an existing menu
+        if (isEditing)
+            loadMenu()
     }, [])
 
     const initialValues: MenuDto = {
@@ -103,7 +99,7 @@ export const MenuEditor: React.FC = () => {
 
     return <div className="container mt-12">
         <Button kind="tertiary" to="/menus" icon={faArrowLeft}>Zurück</Button>
-        <h1 className="text-2xl text-headline-black font-semibold">Neus Menü</h1>
+        <h1 className="text-2xl text-headline-black font-semibold">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
         <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
             <Form>
                 <TextInput name="title" labelText="Titel" placeholder="Mittagskarte, Abendmenu,..." labelRequired autoFocus />
