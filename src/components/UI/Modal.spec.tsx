@@ -26,6 +26,10 @@ describe('Tags', () => {
         it('should display dismiss icon', () => {
             cy.get('[data-cy="modal-dismiss"]').should('be.visible')
         })
+
+        it.only('should display dismiss background', () => {
+            // MC: TODO
+        })
     })
 
     describe('Content tests', () => {
