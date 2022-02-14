@@ -8,6 +8,7 @@ import { Button } from "../../components/Buttons/Button"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { Loading } from "../../components/UI/Loading"
 import { Modal } from "../../components/UI/Modal"
 import { useActions } from "../../overmind"
 import { MenuDto } from "../../overmind/menus/effects"
@@ -26,18 +27,25 @@ export const MenuEditor: React.FC = () => {
     const { createMenu, getMenuById, updateMenu, deleteMenu } = useActions().menus
 
     // Component States
+    const [isLoading, setIsLoading] = useState(isEditing)
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
     const [menu, setMenu] = useState<Menu>()
 
     // Load menu when id is set in url
-    useEffect((): void => {
+    useEffect(() => {
+        let isMounted = true;
         async function loadMenu() {
             try {
                 // Fetch menu and set editing
                 const menu = await getMenuById(id)
+
+                if (!isMounted)
+                    return
+
                 setMenu(menu)
+                setIsLoading(false)
             } catch (error) {
                 console.error("Menu not found")
                 // MC: Implement error here
@@ -48,6 +56,8 @@ export const MenuEditor: React.FC = () => {
         // Check if we are editing an existing menu
         if (isEditing)
             loadMenu()
+
+        return () => { isMounted = false }
     }, [])
 
     const initialValues: MenuDto = {
@@ -101,8 +111,8 @@ export const MenuEditor: React.FC = () => {
     }
 
     return <div className="container mt-12">
-        <div style={{ maxWidth: "500px" }}>
-            <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+        <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+        {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
             <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
             <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
                 <Form>
@@ -122,6 +132,7 @@ export const MenuEditor: React.FC = () => {
                     <Button kind="primary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
                 </div>
             </Modal>
-        </div>
+        </div>}
+
     </div>
 }
