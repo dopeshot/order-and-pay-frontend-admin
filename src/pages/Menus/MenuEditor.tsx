@@ -58,7 +58,7 @@ export const MenuEditor: React.FC = () => {
             loadMenu()
 
         return () => { isMounted = false }
-    }, [])
+    }, [getMenuById, isEditing, id])
 
     const initialValues: MenuDto = {
         title: menu?.title ?? "",
