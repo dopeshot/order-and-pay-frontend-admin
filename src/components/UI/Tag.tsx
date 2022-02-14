@@ -1,5 +1,5 @@
 
-export const enum TagTypesEnum {
+export enum TagTypesEnum {
     red = 'red-600',
     purple = "indigo-500",
     pink = "pink-500",
