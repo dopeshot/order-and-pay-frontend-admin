@@ -30,8 +30,8 @@ export const Modal: React.FC<TextareaProps> = ({ modalHeading, modalLabel, open,
                         <div className="inline-block align-bottom bg-white rounded-2xl overflow-hidden text-left shadow-xl transform transition-all w-full px-8 py-8 sm:align-middle sm:max-w-md sm:my-8 sm:p-10">
                             <div className="flex justify-between">
                                 <div>
-                                    <h5 className="text-darkgrey font-semibold">{modalLabel}</h5>
-                                    <h2 className="text-headline-black text-2xl font-semibold mb-2">{modalHeading}</h2>
+                                    <h5 className="text-darkgrey font-semibold" data-cy="modal-label">{modalLabel}</h5>
+                                    <h2 className="text-headline-black text-2xl font-semibold mb-2" data-cy="modal-heading">{modalHeading}</h2>
                                 </div>
                                 <IconButton onClick={onDissmis} icon={faTimes}></IconButton>
                             </div>
