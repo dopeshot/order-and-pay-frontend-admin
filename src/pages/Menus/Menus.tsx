@@ -1,5 +1,6 @@
-import { faFolder, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faFolder, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/UI/List"
@@ -10,6 +11,8 @@ import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/state"
 
 export const Menus: React.FC = () => {
+    const history = useHistory()
+
     // Get hooks to manipulate global state
     const { getAllMenus } = useActions().menus
 
@@ -59,6 +62,14 @@ export const Menus: React.FC = () => {
         setSelectedMenu(null)
     }
 
+    const editMenu = (event: any, menu: Menu) => {
+        // This prevents the event from bubbling up the DOM to the parent node where you open edit
+        event.stopPropagation()
+        event.preventDefault()
+
+        history.push(`/menus/${menu._id}/edit`)
+    }
+
     return <div className="container md:max-w-full mt-12" >
         <div className="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
@@ -70,9 +81,10 @@ export const Menus: React.FC = () => {
             </div>
         </div>
         <List lines>
-            {menus.map((menu) => <ListItem key={menu._id} title={menu.title} icon={faFolder} to={`/menus/edit/${menu._id}`}>
+            {menus.map((menu) => <ListItem key={menu._id} title={menu.title} icon={faFolder} to={`/menus/${menu._id}/editor`}>
                 {menu.isActive && <Tag title="Aktiv" type={TagTypesEnum.green} />}
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={(event) => openDeleteModal(event, menu)} />
+                <IconButton className="ml-auto mr-4" icon={faEdit} onClick={(event) => editMenu(event, menu)} />
+                <IconButton className="mr-4" icon={faTrash} onClick={(event) => openDeleteModal(event, menu)} />
             </ListItem>)}
         </List>
         <Modal modalHeading={`${selectedMenu?.title} löschen?`} open={hasDeleteModal} onDissmis={closeDeleteModal}>
