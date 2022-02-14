@@ -23,7 +23,7 @@ export const Modal: React.FC<TextareaProps> = ({ modalHeading, modalLabel, open,
                     <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
                         {/* Background overlay */}
-                        <div className="fixed inset-0 bg-modal-bg-blue bg-opacity-50 transition-opacity" aria-hidden="true" onClick={onDissmis} />
+                        <div className="fixed inset-0 bg-modal-bg-blue bg-opacity-50 transition-opacity" aria-hidden="true" onClick={onDissmis} data-cy="modal-dismiss-background" />
                         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
                         {/* Modal Content*/}
