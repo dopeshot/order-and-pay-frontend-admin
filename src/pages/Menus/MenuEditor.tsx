@@ -101,25 +101,27 @@ export const MenuEditor: React.FC = () => {
     }
 
     return <div className="container mt-12">
-        <Button kind="tertiary" to="/menus" icon={faArrowLeft}>Zurück</Button>
-        <h1 className="text-2xl text-headline-black font-semibold">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
-        <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
-            <Form>
-                <TextInput name="title" labelText="Titel" placeholder="Mittagskarte, Abendmenu,..." labelRequired autoFocus />
-                <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
-                <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
-                <div className="flex flex-col md:flex-row justify-between mt-4">
-                    {isEditing && <Button kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                    <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mr-0 mb-4 md:mr-4">Speichern</Button>
+        <div style={{ maxWidth: "500px" }}>
+            <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+            <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
+            <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
+                <Form>
+                    <TextInput name="title" labelText="Titel" placeholder="Mittagskarte, Abendmenu,..." labelRequired autoFocus />
+                    <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
+                    <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
+                    <div className="flex flex-col md:flex-row justify-between mt-4">
+                        {isEditing && <Button kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                        <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mr-0 mb-4 md:mr-4">Speichern</Button>
+                    </div>
+                </Form>
+            </Formik>
+            <Modal modalHeading="Menü für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
+                <p>Das löschen kann nicht rückgängig gemacht werden.</p>
+                <div className="flex md:justify-between flex-col md:flex-row">
+                    <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
+                    <Button kind="primary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
                 </div>
-            </Form>
-        </Formik>
-        <Modal modalHeading="Menü für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
-            <p>Das löschen kann nicht rückgängig gemacht werden.</p>
-            <div className="flex md:justify-between flex-col md:flex-row">
-                <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
-                <Button kind="primary" onClick={() => handleDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
-            </div>
-        </Modal>
+            </Modal>
+        </div>
     </div>
 }
