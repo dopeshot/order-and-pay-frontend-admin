@@ -18,15 +18,15 @@ describe('Tags', () => {
         })
 
         it('should display text', () => {
-            cy.get('p').should('contain', data.title)
+            cy.get('[data-cy="tag-title"]').should('contain', data.title)
         })
 
         it('should have default text color', () => {
-            cy.get('p').should('have.class', `text-${data.type}`)
+            cy.get('[data-cy="tag-title"]').should('have.class', `text-${data.type}`)
         })
 
         it('should have default background color on box', () => {
-            cy.get('div').should('have.class', `bg-${data.type}`)
+            cy.get('[data-cy="tag-box"]').should('have.class', `bg-${data.type}`)
         })
     })
 
@@ -41,11 +41,11 @@ describe('Tags', () => {
         })
 
         it('should have red text color', () => {
-            cy.get('p').should('have.class', `text-${data.type}`)
+            cy.get('[data-cy="tag-title"]').should('have.class', `text-${data.type}`)
         })
 
         it('should have red background on box', () => {
-            cy.get('div').should('have.class', `bg-${data.type}`)
+            cy.get('[data-cy="tag-box"]').should('have.class', `bg-${data.type}`)
         })
     })
 })
