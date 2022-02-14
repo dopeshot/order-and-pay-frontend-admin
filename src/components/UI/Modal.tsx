@@ -33,7 +33,7 @@ export const Modal: React.FC<TextareaProps> = ({ modalHeading, modalLabel, open,
                                     <h5 className="text-darkgrey font-semibold" data-cy="modal-label">{modalLabel}</h5>
                                     <h2 className="text-headline-black text-2xl font-semibold mb-2" data-cy="modal-heading">{modalHeading}</h2>
                                 </div>
-                                <IconButton onClick={onDissmis} icon={faTimes}></IconButton>
+                                <IconButton onClick={onDissmis} icon={faTimes} dataCy="modal-dismiss"></IconButton>
                             </div>
                             {children}
                         </div>

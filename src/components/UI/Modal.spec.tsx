@@ -22,6 +22,10 @@ describe('Tags', () => {
         it('should display modal heading', () => {
             cy.get('[data-cy="modal-heading"]').should('contain', data.modalHeading)
         })
+
+        it('should display dismiss icon', () => {
+            cy.get('[data-cy="modal-dismiss"]').should('be.visible')
+        })
     })
 
     describe('Content tests', () => {
