@@ -121,7 +121,7 @@ export const MenuEditor: React.FC = () => {
                     <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
                     <div className="flex flex-col md:flex-row justify-between mt-4">
                         {isEditing && <Button kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                        <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mr-0 mb-4 md:mr-4">Speichern</Button>
+                        <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
                     </div>
                 </Form>
             </Formik>
