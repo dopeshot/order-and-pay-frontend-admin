@@ -1,7 +1,8 @@
 import { faArrowLeft, faCheck, faEuroSign, faHamburger, faLeaf, faMagnet, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import axios from "axios"
 import { Form, Formik } from "formik"
-import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { useHistory, useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
 import { Dropdown } from "../../components/Form/Dropdown"
@@ -20,30 +21,83 @@ type Params = {
 export const Dishes: React.FC = () => {
     const { dishId } = useParams<Params>()
     const isEditing = Boolean(dishId)
+    const history = useHistory()
 
     const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingSave, setIsLoadingSave] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [dish, setDish] = useState<DishDto>()
 
-    // Get hooks to manipulate global state
+    // Global state
     const { createDish, getDishById, updateDish, deleteDish } = useActions().dishes
 
+    // Load dish when id is set in url
+    useEffect(() => {
+        let isMounted = true;
+        async function loadDish() {
+            try {
+                // Fetch dish and set editing
+                const dish = await getDishById(dishId)
+
+                if (!isMounted)
+                    return
+
+                setDish(dish)
+                setIsLoading(false)
+            } catch (error) {
+                console.error("Dish not found")
+                // MC: Implement error here
+
+                return
+            }
+        }
+        // Check if we are editing an existing menu
+        if (isEditing)
+            loadDish()
+
+        return () => { isMounted = false }
+    }, [getDishById, isEditing, dishId])
+
     const initialDishValues: DishDto = {
-        _id: dishId,
-        title: "",
-        description: "",
-        image: "",
-        isAvailable: true,
-        price: 0,
-        category: "",
-        allergens: [],
-        labels: []
+        title: dish?.title ?? "",
+        description: dish?.description ?? "",
+        image: dish?.image ?? "",
+        isActive: dish?.isActive ?? true,
+        price: dish?.price ?? 0,
+        category: dish?.category ?? "",
+        allergens: dish?.allergens ?? [],
+        labels: dish?.labels ?? []
     }
 
-    const onDishSubmit = (values: DishDto) => {
+    const onDishSubmit = async (values: DishDto) => {
+        setIsLoadingSave(true)
+        console.log(values, isEditing)
 
+        try {
+            // Check if we are editing or creating a new dish
+            if (isEditing) {
+                await updateDish({
+                    dishId,
+                    dish: values
+                })
+            } else {
+                await createDish(values)
+            }
+
+            history.push("/")
+        } catch (error) {
+            if (!axios.isAxiosError(error))
+                return
+
+            // MC: Put error display here (or we generalize it???)
+        } finally {
+            setIsLoadingSave(false)
+        }
     }
 
     const categories = [{
-        id: 1,
+        id: "620bd3ca8e70d965e0b460e3",
         label: "Burger",
         icon: faHamburger
     }]
@@ -79,14 +133,14 @@ export const Dishes: React.FC = () => {
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} onSubmit={onDishSubmit}>
                     <Form>
-                        <TextInput name="titleimage" labelText="Titelbild Url" placeholder="https://i.imgur.com/TMhXsH4.jpeg" />
+                        <TextInput name="image" labelText="Titelbild Url" placeholder="https://i.imgur.com/TMhXsH4.jpeg" />
                         <div className="flex justify-between">
                             <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
-                            <span className="w-1/4"><TextInput name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
+                            <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
                         </div>
                         <Textarea name="description" labelText="Beschreibung" placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
                         <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categories} />
-                        <Toggle name="isAvailable" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
+                        <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                         <div className="flex">
                             <div className="mr-2 sm:mr-8 md:mr-32">
                                 <Checkbox name="labels" labelText="Labels" options={labels} />
@@ -99,7 +153,7 @@ export const Dishes: React.FC = () => {
                         </div>
                         <div className="flex flex-col md:flex-row justify-between mt-10">
                             {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                            <Button type="submit" icon={faCheck} className="ml-auto mb-4">Speichern</Button>
+                            <Button type="submit" icon={faCheck} loading={isLoadingSave} className="ml-auto mb-4">Speichern</Button>
                         </div>
                     </Form>
                 </Formik>

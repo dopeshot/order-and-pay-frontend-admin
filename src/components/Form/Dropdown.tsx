@@ -14,7 +14,7 @@ type DropdownProps = {
     placeholder: string
     /** A list of options to choose from. */
     options: {
-        id: number
+        id: number | string
         label: string
         icon?: IconProp
     }[]

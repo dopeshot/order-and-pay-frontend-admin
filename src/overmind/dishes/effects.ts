@@ -1,11 +1,10 @@
 import { request } from "../../services/axios"
 
 export type DishDto = {
-    _id: string
     title: string
     description: string
     image: string
-    isAvailable: boolean
+    isActive: boolean
     price: number
     category: string // id ref: 'Category'
     allergens: string[] // id ref: 'Allergy

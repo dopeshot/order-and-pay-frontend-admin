@@ -31,10 +31,10 @@ export const getDishById = async ({ effects }: Context, id: string): Promise<Dis
 /**
  * Update one Dish by id
  */
-export const updateDish = async ({ effects }: Context, { id, dish }: { id: string, dish: DishDto }): Promise<boolean> => {
+export const updateDish = async ({ effects }: Context, { dishId, dish }: { dishId: string, dish: DishDto }): Promise<boolean> => {
     try {
         // We just await the update no need to update menu object
-        await effects.dishes.updateDish(id, dish)
+        await effects.dishes.updateDish(dishId, dish)
         return true
     } catch (error) {
         console.error(error)
