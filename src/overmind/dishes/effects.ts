@@ -17,6 +17,6 @@ export const createDish = (createDishDto: DishDto) => request.post('/dishes', cr
 // Get a dish by id
 export const getDishById = (id: string) => request.get(`/dishes/${id}`)
 // Update a dish
-export const updateDish = (id: string) => request.patch(`/dishes/${id}`)
+export const updateDish = (id: string, dish: DishDto) => request.patch(`/dishes/${id}`, dish)
 // Delete a dish
 export const deleteDish = (id: string) => request.delete(`/dishes/${id}`)
