@@ -1,4 +1,6 @@
 import { request } from "../../services/axios"
+import { Allergen } from "../allergens/state"
+import { Label } from "../labels/state"
 
 export type DishDto = {
     title: string
@@ -6,9 +8,9 @@ export type DishDto = {
     image?: string
     isActive: boolean
     price: number
-    category: string // id ref: 'Category'
-    allergens: string[] // id ref: 'Allergy
-    labels: string[] // id ref: 'Label'
+    category: CategoriesDto | string // id ref: 'Category'
+    allergens: Allergen[] // id ref: 'Allergy
+    labels: Label[] // id ref: 'Label'
 }
 
 export type Dish = DishDto & { _id: string }

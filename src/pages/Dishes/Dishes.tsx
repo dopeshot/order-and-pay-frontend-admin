@@ -1,4 +1,4 @@
-import { faArrowLeft, faCheck, faEuroSign, faLeaf, faMagnet, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
@@ -6,12 +6,12 @@ import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
-import { Dropdown, DropdownOptions } from "../../components/Form/Dropdown"
+import { ComponentOptions, Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
 import { Modal } from "../../components/UI/Modal"
-import { useActions } from "../../overmind"
+import { useActions, useAppState } from "../../overmind"
 import { DishDto } from "../../overmind/dishes/effects"
 
 type Params = {
@@ -31,27 +31,46 @@ export const Dishes: React.FC = () => {
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
     const [dish, setDish] = useState<DishDto>()
-    const [categories, setCategories] = useState<DropdownOptions[]>()
+    const [categoriesOptions, setCategoriesOptions] = useState<ComponentOptions[]>([])
+    const [labelsOptions, setLabelsOptions] = useState<ComponentOptions[]>([])
+    const [allergensOptions, setAllergensOptions] = useState<ComponentOptions[]>([])
 
     // Global State
     const { createDish, getDishById, getAllCategories, updateDish, deleteDish } = useActions().dishes
+    const { getAllLabels } = useActions().labels
+    const { getAllAllergens } = useActions().allergens
+    const { labels } = useAppState().labels
+    const { allergens } = useAppState().allergens
 
-    // Prepare Categories for Dropdown
-    const prepCategories = async () => {
+    // Prepare Categories, Labels and Allergens for Dropdown and Checkbox
+    async function prepDataOptions() {
         const categories = await getAllCategories()
-
         // TODO: add Icon idk how to do this because the types are not correct
-        const result = categories.map(categorie => ({
+        const categoriesResult = categories.map(categorie => ({
             id: categorie._id,
             label: categorie.title
         }))
+        setCategoriesOptions(categoriesResult)
 
-        setCategories(result)
+        // TODO: add Icon idk how to do this because the types are not correct
+        const labelsResult = labels.map(label => ({
+            id: label._id,
+            label: label.title
+        }))
+        setLabelsOptions(labelsResult)
+
+        // TODO: add Icon idk how to do this because the types are not correct
+        const allergensResult = allergens.map(allergens => ({
+            id: allergens._id,
+            label: allergens.title
+        }))
+        setAllergensOptions(allergensResult)
     }
 
     // Load dish when id is set in url
     useEffect(() => {
         let isMounted = true;
+
         async function loadDish() {
             try {
                 // Fetch dish and set editing
@@ -69,15 +88,20 @@ export const Dishes: React.FC = () => {
                 return
             }
         }
-        // Categories for Dropdown
-        prepCategories()
+
+        async function prepLabelsAndAllergies() {
+            await getAllLabels()
+            await getAllAllergens()
+        }
+        prepLabelsAndAllergies()
+        prepDataOptions()
 
         // Check if we are editing an existing menu
         if (isEditing)
             loadDish()
 
         return () => { isMounted = false }
-    }, [prepCategories, getDishById, isEditing, dishId])
+    }, [getDishById, isEditing, getAllCategories, getAllLabels, getAllAllergens, dishId])
 
     // Formik
     const initialDishValues: DishDto = {
@@ -147,30 +171,6 @@ export const Dishes: React.FC = () => {
         history.push("/menus")
     }
 
-    const labels = [{
-        id: 1,
-        label: "vegan",
-        icon: faLeaf
-    }, {
-        id: 2,
-        label: "vegan",
-        icon: faLeaf
-    }, {
-        id: 3,
-        label: "vegan",
-        icon: faLeaf
-    }]
-
-    const allergies = [{
-        id: 1,
-        label: "gluten",
-        icon: faMagnet
-    }, {
-        id: 2,
-        label: "gluten",
-        icon: faMagnet
-    }]
-
     return (
         <div className="container mt-12">
             <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
@@ -184,17 +184,18 @@ export const Dishes: React.FC = () => {
                             <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
                         </div>
                         <Textarea name="description" labelText="Beschreibung" maxLength={200} placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
-                        <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categories ?? []} />
+                        <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
                         <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                         <div className="flex">
-                            <div className="mr-2 sm:mr-8 md:mr-32">
-                                <Checkbox name="labels" labelText="Labels" options={labels} />
+                            {console.log(labelsOptions)}
+                            {labelsOptions.length > 0 && <div className="mr-2 sm:mr-8 md:mr-32">
+                                <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
                                 <Button kind="tertiary" to="/menus/labels" icon={faPlus} className="text-left">Label hinzufügen</Button>
-                            </div>
-                            <div>
-                                <Checkbox name="allergens" labelText="Allergenen" options={allergies} />
+                            </div>}
+                            {labelsOptions.length > 0 && <div>
+                                <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
                                 <Button kind="tertiary" to="/menus/allergens" icon={faPlus} className="text-left">Allergene hinzufügen</Button>
-                            </div>
+                            </div>}
                         </div>
                         <div className="flex flex-col md:flex-row justify-between mt-10">
                             {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}
