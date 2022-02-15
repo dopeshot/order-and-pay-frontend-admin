@@ -1,6 +1,6 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field } from "formik"
+import { ComponentOptions } from "./Dropdown"
 
 type CheckboxProps = {
     /** Gives the input a unique name */
@@ -10,11 +10,7 @@ type CheckboxProps = {
     /** Provides assistance on how to fill out a field. Helper text is optional. */
     helperText?: string
     /** A list of options to choose from. */
-    options: {
-        id: number
-        label: string
-        icon?: IconProp
-    }[]
+    options: ComponentOptions[]
 }
 
 /**
