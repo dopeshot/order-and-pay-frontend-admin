@@ -27,7 +27,7 @@ export const MenuEditor: React.FC = () => {
     const { createMenu, getMenuById, updateMenu, deleteMenu } = useActions().menus
 
     // Component States
-    const [isLoading, setIsLoading] = useState(isEditing)
+    const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
