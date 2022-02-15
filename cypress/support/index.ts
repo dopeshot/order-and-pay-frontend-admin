@@ -14,8 +14,8 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands.ts'
 import '@cypress/code-coverage/support'
+import './commands.ts'
 
 /// <reference types="cypress" />
 
@@ -81,6 +81,42 @@ declare global {
              * @example cy.changeToDuplicateTable()
              */
             changeToDuplicateTable(): void
+
+            /**
+             * Custom command to intercept all create dish requests
+             * @example cy.changeToDuplicateTable()
+             */
+            createDish(): void
+
+            /**
+             * Custom command to intercept all create dish requests give duplicate error back
+             * @example cy.changeToDuplicateTable()
+             */
+            createDishDuplicate(): void
+
+            /**
+             * Custom command to intercept all get dish by id requests
+             * @example cy.changeToDuplicateTable()
+             */
+            getDishById(): void
+
+            /**
+             * Custom command to intercept all update dish by id requests
+             * @example cy.changeToDuplicateTable()
+             */
+            updateDish(): void
+
+            /**
+             * Custom command to intercept all delete dish requests
+             * @example cy.changeToDuplicateTable()
+             */
+            deleteDish(): void
+
+            /**
+             * Custom command to intercept all get all categories request
+             * @example cy.changeToDuplicateTable()
+             */
+            getAllCategories(): void
         }
     }
 }

@@ -49,6 +49,7 @@ export const deleteTable = async ({ state, effects }: Context, id: string) => {
         state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
         state.tables.tableErrors = []
     } catch (error) {
+        /* istanbul ignore next */ // should not happen
         generateErrorMessage(state, error, "tableErrors")
     }
 }
@@ -112,6 +113,7 @@ export const bulkDelete = async ({ state, effects }: Context) => {
 
         state.tables.tableErrors = []
     } catch (error) {
+        /* istanbul ignore next */ // should not happen
         generateErrorMessage(state, error, "tableErrors")
     }
 }
