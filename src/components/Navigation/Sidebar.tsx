@@ -41,7 +41,7 @@ export const Sidebar: React.FunctionComponent = () => {
 
     return (
         <>
-            <nav data-cy="sidebar" style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 1, transform: !layoutIsSideBarOpen ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-y-auto overflow-x-hidden transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
+            <nav data-cy="sidebar" style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 100, transform: !layoutIsSideBarOpen ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-y-auto overflow-x-hidden transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
                 {sidebarContent.map((sidebarItem, i) => <div key={i} className="text-darkgrey mt-16">
                     <div className="mx-6">
                         {/* Headline */}

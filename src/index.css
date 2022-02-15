@@ -41,6 +41,7 @@ body {
 }
 
 .sidebar-content-overlay {
+    z-index: 99;
     position: absolute;
     width: 100vw;
     height: calc(100vh - 64px);
