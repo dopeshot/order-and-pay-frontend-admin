@@ -1,4 +1,4 @@
-import { faArrowLeft, faCheck, faEuroSign, faHamburger, faLeaf, faMagnet, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faEuroSign, faLeaf, faMagnet, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
@@ -6,7 +6,7 @@ import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
-import { Dropdown } from "../../components/Form/Dropdown"
+import { Dropdown, DropdownOptions } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
@@ -25,14 +25,29 @@ export const Dishes: React.FC = () => {
     const isEditing = Boolean(dishId)
     const history = useHistory()
 
+    // Local State
     const [isLoading, setIsLoading] = useState(false)
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
     const [dish, setDish] = useState<DishDto>()
+    const [categories, setCategories] = useState<DropdownOptions[]>()
 
-    // Global state
-    const { createDish, getDishById, updateDish, deleteDish } = useActions().dishes
+    // Global State
+    const { createDish, getDishById, getAllCategories, updateDish, deleteDish } = useActions().dishes
+
+    // Prepare Categories for Dropdown
+    const prepCategories = async () => {
+        const categories = await getAllCategories()
+
+        // TODO: add Icon idk how to do this because the types are not correct
+        const result = categories.map(categorie => ({
+            id: categorie._id,
+            label: categorie.title
+        }))
+
+        setCategories(result)
+    }
 
     // Load dish when id is set in url
     useEffect(() => {
@@ -54,13 +69,17 @@ export const Dishes: React.FC = () => {
                 return
             }
         }
+        // Categories for Dropdown
+        prepCategories()
+
         // Check if we are editing an existing menu
         if (isEditing)
             loadDish()
 
         return () => { isMounted = false }
-    }, [getDishById, isEditing, dishId])
+    }, [prepCategories, getDishById, isEditing, dishId])
 
+    // Formik
     const initialDishValues: DishDto = {
         title: dish?.title ?? "",
         description: dish?.description ?? "",
@@ -72,6 +91,7 @@ export const Dishes: React.FC = () => {
         labels: dish?.labels ?? []
     }
 
+    // Formik Validation
     const dishValidationSchema = Yup.object().shape({
         title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(30, "Der Titel darf nicht länger als 30 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
         description: Yup.string().min(2, "Die Beschreibung muss aus mindestens 2 Zeichen bestehen.").max(200, "Die Beschreibung darf nicht länger als 30 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
@@ -81,27 +101,26 @@ export const Dishes: React.FC = () => {
         category: Yup.string().required("Dies ist ein Pflichtfeld.")
     })
 
+    // Formik Submit Form
     const onDishSubmit = async (values: DishDto) => {
         setIsLoadingSave(true)
         let dish;
         let image;
 
-        if (values.image === "") {
+        if (values.image === "")
             ({ image, ...dish } = values)
-        } else {
+        else
             dish = values
-        }
 
         try {
             // Check if we are editing or creating a new dish
-            if (isEditing) {
+            if (isEditing)
                 await updateDish({
                     dishId,
                     dish
                 })
-            } else {
+            else
                 await createDish(dish)
-            }
 
             history.push("/")
         } catch (error) {
@@ -114,6 +133,7 @@ export const Dishes: React.FC = () => {
         }
     }
 
+    // Dish delete 
     const handleDishDelete = async () => {
         // Check if we are editing a dish
         if (!isEditing)
@@ -126,12 +146,6 @@ export const Dishes: React.FC = () => {
         setIsLoadingDelete(false)
         history.push("/menus")
     }
-
-    const categories = [{
-        id: "620bd3ca8e70d965e0b460e3",
-        label: "Burger",
-        icon: faHamburger
-    }]
 
     const labels = [{
         id: 1,
@@ -170,7 +184,7 @@ export const Dishes: React.FC = () => {
                             <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
                         </div>
                         <Textarea name="description" labelText="Beschreibung" maxLength={200} placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
-                        <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categories} />
+                        <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categories ?? []} />
                         <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                         <div className="flex">
                             <div className="mr-2 sm:mr-8 md:mr-32">

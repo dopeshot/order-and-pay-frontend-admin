@@ -5,6 +5,12 @@ import { Field, FieldProps } from "formik";
 import { useState } from "react";
 import { FormError } from "../Errors/FormError";
 
+export type DropdownOptions = {
+    id: number | string
+    label: string
+    icon?: IconProp
+}
+
 type DropdownProps = {
     /** Gives the dropdown a unique name */
     name: string
@@ -13,11 +19,7 @@ type DropdownProps = {
     /** Text that informs the user what to expect in the list of dropdown options. */
     placeholder: string
     /** A list of options to choose from. */
-    options: {
-        id: number | string
-        label: string
-        icon?: IconProp
-    }[]
+    options: DropdownOptions[]
     /** When set Required * will be seen */
     labelRequired?: boolean
     /** Provide text that is used for additional help. */

@@ -1,5 +1,5 @@
 import { Context } from ".."
-import { DishDto } from "./effects"
+import { CategoriesDto, DishDto } from "./effects"
 
 /**
  * Create new Dish
@@ -49,6 +49,20 @@ export const deleteDish = async ({ effects }: Context, id: string): Promise<bool
     try {
         await effects.dishes.deleteDish(id)
         return true
+    } catch (error) {
+        console.error(error)
+        throw (error)
+    }
+}
+
+/**
+ * Get All Categories // TODO: needs to be moved when editor is done
+ */
+export const getAllCategories = async ({ effects }: Context): Promise<CategoriesDto[]> => {
+    try {
+        const response = await effects.dishes.getAllCategories()
+        const categories = response.data
+        return categories
     } catch (error) {
         console.error(error)
         throw (error)
