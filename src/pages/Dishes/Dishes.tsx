@@ -30,7 +30,7 @@ export const Dishes: React.FC = () => {
         isAvailable: true,
         price: 0,
         category: "",
-        allergies: [],
+        allergens: [],
         labels: []
     }
 
@@ -86,11 +86,11 @@ export const Dishes: React.FC = () => {
                         <div className="flex">
                             <div className="mr-2 sm:mr-8 md:mr-32">
                                 <Checkbox name="labels" labelText="Labels" options={labels} />
-                                <Button kind="tertiary" icon={faPlus} className="text-left">Label hinzufügen</Button>
+                                <Button kind="tertiary" to="/menus/labels" icon={faPlus} className="text-left">Label hinzufügen</Button>
                             </div>
                             <div>
-                                <Checkbox name="allergies" labelText="Allergien" options={allergies} />
-                                <Button kind="tertiary" icon={faPlus} className="text-left">Allergie hinzufügen</Button>
+                                <Checkbox name="allergens" labelText="Allergenen" options={allergies} />
+                                <Button kind="tertiary" to="/menus/allergens" icon={faPlus} className="text-left">Allergene hinzufügen</Button>
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row justify-between mt-10">
