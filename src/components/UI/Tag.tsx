@@ -1,5 +1,5 @@
 
-export const enum TagTypesEnum {
+export enum TagTypesEnum {
     red = 'red-600',
     purple = "indigo-500",
     pink = "pink-500",
@@ -24,8 +24,8 @@ type TagProps = {
  */
 export const Tag: React.FC<TagProps> = ({ title, type = TagTypesEnum.blue }) => {
     return (
-        <div className={`inline-block bg-${type} bg-opacity-20 rounded-full px-3 ml-2`}>
-            <p className={`text-${type} text-sm font-semibold`}>{title}</p>
+        <div className={`inline-block bg-${type} bg-opacity-20 rounded-full px-3 ml-2`} data-cy="tag-box">
+            <p className={`text-${type} text-sm font-semibold`} data-cy="tag-title">{title}</p>
         </div>
     )
 }
