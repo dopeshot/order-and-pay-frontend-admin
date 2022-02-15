@@ -3,8 +3,14 @@ const api = `${Cypress.env("apiUrl")}/dishes`
 describe('Api Endpoints', () => {
     describe('Create dish', () => {
         beforeEach(() => {
-            cy.createDish()
+            cy.getAllAllergens()
+            cy.getAllLabels()
+            cy.getAllCategories()
             cy.visit('/menus/1/categories/1/dish')
+
+            cy.wait('@getAllAllergens')
+            cy.wait('@getAllLabels')
+            cy.wait('@getAllCategories')
         })
 
         it('should have "Neues Gericht erstellen" as headline', () => {

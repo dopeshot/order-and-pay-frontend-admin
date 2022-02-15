@@ -111,5 +111,19 @@ Cypress.Commands.add('getAllCategories', () => {
     }).as('getAllCategories')
 })
 
+Cypress.Commands.add('getAllLabels', () => {
+    cy.intercept('GET', `${api}/labels`, {
+        fixture: 'labels.json'
+    }).as('getAllLabels')
+})
+
+Cypress.Commands.add('getAllAllergens', () => {
+    cy.intercept('GET', `${api}/allergens`, {
+        fixture: 'allergens.json'
+    }).as('getAllAllergens')
+})
+
+
+
 export { }
 

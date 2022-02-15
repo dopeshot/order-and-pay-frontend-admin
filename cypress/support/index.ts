@@ -117,6 +117,18 @@ declare global {
              * @example cy.getAllCategories()
              */
             getAllCategories(): void
+
+            /**
+             * Custom command to intercept all get all allergens request
+             * @example cy.getAllAllergens()
+             */
+            getAllAllergens(): void
+
+            /**
+            * Custom command to intercept all get all labels request
+            * @example cy.getAllLabels()
+            */
+            getAllLabels(): void
         }
     }
 }
