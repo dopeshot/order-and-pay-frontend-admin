@@ -3,6 +3,7 @@ const api = `${Cypress.env("apiUrl")}/dishes`
 describe('Api Endpoints', () => {
     describe('Create dish', () => {
         beforeEach(() => {
+            cy.createDish()
             cy.visit('/menus/1/categories/1/dish')
         })
 

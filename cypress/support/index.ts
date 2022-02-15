@@ -42,13 +42,13 @@ declare global {
 
             /**
             * Custom command to intercept all patchTable request 
-            * @example cy.getTables()
+            * @example cy.patchTable()
             */
             patchTable(): void
 
             /**
              * Custom command to intercept all deleteTable request
-             * @example cy.getTables()
+             * @example cy.deleteTable()
              */
             deleteTable(): void
 
@@ -84,37 +84,37 @@ declare global {
 
             /**
              * Custom command to intercept all create dish requests
-             * @example cy.changeToDuplicateTable()
+             * @example cy.createDish()
              */
             createDish(): void
 
             /**
              * Custom command to intercept all create dish requests give duplicate error back
-             * @example cy.changeToDuplicateTable()
+             * @example cy.createDishDuplicate()
              */
             createDishDuplicate(): void
 
             /**
              * Custom command to intercept all get dish by id requests
-             * @example cy.changeToDuplicateTable()
+             * @example cy.getDishById()
              */
             getDishById(): void
 
             /**
              * Custom command to intercept all update dish by id requests
-             * @example cy.changeToDuplicateTable()
+             * @example cy.updateDish()
              */
             updateDish(): void
 
             /**
              * Custom command to intercept all delete dish requests
-             * @example cy.changeToDuplicateTable()
+             * @example cy.deleteDish()
              */
             deleteDish(): void
 
             /**
              * Custom command to intercept all get all categories request
-             * @example cy.changeToDuplicateTable()
+             * @example cy.getAllCategories()
              */
             getAllCategories(): void
         }
