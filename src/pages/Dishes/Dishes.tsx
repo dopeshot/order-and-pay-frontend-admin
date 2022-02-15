@@ -188,7 +188,6 @@ export const Dishes: React.FC = () => {
                             <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
                             <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
-                                {console.log(labelsOptions)}
                                 {labelsOptions.length > 0 && <div className="mr-2 sm:mr-8 md:mr-32">
                                     <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
                                     <Button kind="tertiary" to="/menus/labels" icon={faPlus} className="text-left">Label hinzufügen</Button>
