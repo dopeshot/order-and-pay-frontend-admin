@@ -1,3 +1,5 @@
+import dish from '../../fixtures/dish.json';
+
 const api = `${Cypress.env("apiUrl")}/dishes`
 
 describe('Api Endpoints', () => {
@@ -14,10 +16,17 @@ describe('Api Endpoints', () => {
         })
 
         it('should have "Neues Gericht erstellen" as headline', () => {
-
+            cy.contains('Neues Gericht erstellen').should('be.visible')
         })
 
         it('should create one dish', () => {
+            cy.get('input[name="image"]').type(dish.image)
+            cy.get('input[name="title"]').type(dish.title)
+            cy.get('input[name="price"]').clear().type(`${dish.price}`)
+            cy.get('textarea[name="description"]').type(dish.description)
+
+            cy.get(`[data-cy="category-dropdown-button"]`).click()
+            cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
 
         })
 
@@ -71,5 +80,5 @@ describe('Api Endpoints', () => {
     })
 })
 
-export { }
+export { };
 
