@@ -3,12 +3,14 @@ import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
+import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
 import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { Modal } from "../../components/UI/Modal"
 import { useActions } from "../../overmind"
 import { DishDto } from "../../overmind/dishes/effects"
 
@@ -70,19 +72,35 @@ export const Dishes: React.FC = () => {
         labels: dish?.labels ?? []
     }
 
+    const dishValidationSchema = Yup.object().shape({
+        title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(30, "Der Titel darf nicht länger als 30 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
+        description: Yup.string().min(2, "Die Beschreibung muss aus mindestens 2 Zeichen bestehen.").max(200, "Die Beschreibung darf nicht länger als 30 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
+        image: Yup.string().min(2, "Die Bild Url muss aus mindestens 2 Zeichen bestehen.").max(100, "Die Bild Url darf nicht länger als 100 Zeichen sein."),
+        isActive: Yup.boolean(),
+        price: Yup.number().min(0, "Der Preis muss 0 oder größer sein").required("Dies ist ein Pflichtfeld."),
+        category: Yup.string().required("Dies ist ein Pflichtfeld.")
+    })
+
     const onDishSubmit = async (values: DishDto) => {
         setIsLoadingSave(true)
-        console.log(values, isEditing)
+        let dish;
+        let image;
+
+        if (values.image === "") {
+            ({ image, ...dish } = values)
+        } else {
+            dish = values
+        }
 
         try {
             // Check if we are editing or creating a new dish
             if (isEditing) {
                 await updateDish({
                     dishId,
-                    dish: values
+                    dish
                 })
             } else {
-                await createDish(values)
+                await createDish(dish)
             }
 
             history.push("/")
@@ -94,6 +112,19 @@ export const Dishes: React.FC = () => {
         } finally {
             setIsLoadingSave(false)
         }
+    }
+
+    const handleDishDelete = async () => {
+        // Check if we are editing a dish
+        if (!isEditing)
+            return
+
+        setIsLoadingDelete(true)
+
+        await deleteDish(dishId)
+
+        setIsLoadingDelete(false)
+        history.push("/menus")
     }
 
     const categories = [{
@@ -131,14 +162,14 @@ export const Dishes: React.FC = () => {
             <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
             {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
-                <Formik enableReinitialize initialValues={initialDishValues} onSubmit={onDishSubmit}>
+                <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
                     <Form>
                         <TextInput name="image" labelText="Titelbild Url" placeholder="https://i.imgur.com/TMhXsH4.jpeg" />
                         <div className="flex justify-between">
                             <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
                             <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
                         </div>
-                        <Textarea name="description" labelText="Beschreibung" placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
+                        <Textarea name="description" labelText="Beschreibung" maxLength={200} placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
                         <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categories} />
                         <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                         <div className="flex">
@@ -152,11 +183,19 @@ export const Dishes: React.FC = () => {
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row justify-between mt-10">
-                            {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}
                             <Button type="submit" icon={faCheck} loading={isLoadingSave} className="ml-auto mb-4">Speichern</Button>
                         </div>
                     </Form>
                 </Formik>
+                {/* Delete Modal */}
+                <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
+                    <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
+                    <div className="flex md:justify-between flex-col md:flex-row">
+                        <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
+                        <Button kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
+                    </div>
+                </Modal>
             </div>}
         </div>
     )
