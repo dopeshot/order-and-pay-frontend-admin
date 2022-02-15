@@ -8,6 +8,7 @@ import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { useActions } from "../../overmind"
 import { DishDto } from "../../overmind/dishes/effects"
 
 type Params = {
@@ -21,6 +22,9 @@ export const Dishes: React.FC = () => {
     const isEditing = Boolean(dishId)
 
     const [isLoading, setIsLoading] = useState(false)
+
+    // Get hooks to manipulate global state
+    const { createDish, getDishById, updateDish, deleteDish } = useActions().dishes
 
     const initialDishValues: DishDto = {
         _id: dishId,

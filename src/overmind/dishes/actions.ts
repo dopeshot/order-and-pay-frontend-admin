@@ -45,7 +45,7 @@ export const updateDish = async ({ effects }: Context, { id, dish }: { id: strin
 /**
  * Delete one Dish by id
  */
-export const deleteMenu = async ({ effects }: Context, id: string): Promise<boolean> => {
+export const deleteDish = async ({ effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.dishes.deleteDish(id)
         return true
