@@ -177,31 +177,33 @@ export const Dishes: React.FC = () => {
             {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
-                    <Form>
-                        <TextInput name="image" labelText="Titelbild Url" placeholder="https://i.imgur.com/TMhXsH4.jpeg" />
-                        <div className="flex justify-between">
-                            <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
-                            <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
-                        </div>
-                        <Textarea name="description" labelText="Beschreibung" maxLength={200} placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
-                        <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
-                        <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
-                        <div className="flex">
-                            {console.log(labelsOptions)}
-                            {labelsOptions.length > 0 && <div className="mr-2 sm:mr-8 md:mr-32">
-                                <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
-                                <Button kind="tertiary" to="/menus/labels" icon={faPlus} className="text-left">Label hinzufügen</Button>
-                            </div>}
-                            {labelsOptions.length > 0 && <div>
-                                <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
-                                <Button kind="tertiary" to="/menus/allergens" icon={faPlus} className="text-left">Allergene hinzufügen</Button>
-                            </div>}
-                        </div>
-                        <div className="flex flex-col md:flex-row justify-between mt-10">
-                            {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}
-                            <Button type="submit" icon={faCheck} loading={isLoadingSave} className="ml-auto mb-4">Speichern</Button>
-                        </div>
-                    </Form>
+                    {({ dirty, isValid }) => (
+                        <Form>
+                            <TextInput name="image" labelText="Titelbild Url" placeholder="https://i.imgur.com/TMhXsH4.jpeg" />
+                            <div className="flex justify-between">
+                                <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
+                                <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="Hamburger, Gemischter Salat, Cola,..." icon={faEuroSign} /></span>
+                            </div>
+                            <Textarea name="description" labelText="Beschreibung" maxLength={200} placeholder="Zu jedem Burger gibt es Pommes dazu,..." />
+                            <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
+                            <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelOff="Nicht verfügbar" labelOn="Verfügbar" />
+                            <div className="flex">
+                                {console.log(labelsOptions)}
+                                {labelsOptions.length > 0 && <div className="mr-2 sm:mr-8 md:mr-32">
+                                    <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
+                                    <Button kind="tertiary" to="/menus/labels" icon={faPlus} className="text-left">Label hinzufügen</Button>
+                                </div>}
+                                {labelsOptions.length > 0 && <div>
+                                    <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
+                                    <Button kind="tertiary" to="/menus/allergens" icon={faPlus} className="text-left">Allergene hinzufügen</Button>
+                                </div>}
+                            </div>
+                            <div className="flex flex-col md:flex-row justify-between mt-10">
+                                {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}
+                                <Button type="submit" icon={faCheck} loading={isLoadingSave} disabled={!(dirty && isValid)} className="ml-auto mb-4">Speichern</Button>
+                            </div>
+                        </Form>
+                    )}
                 </Formik>
                 {/* Delete Modal */}
                 <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
