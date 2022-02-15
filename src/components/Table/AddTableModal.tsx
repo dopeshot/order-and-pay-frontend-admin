@@ -19,23 +19,29 @@ type TableModalProps = {
  * Modal for adding new Tables, with Table Add Logic
  */
 export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) => {
+    // Local Variables
     const capacityTemplates = [2, 4, 6]
 
+    // Local State
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
+
+    // Global State
     const { modalErrors, hasModalError } = useAppState().tables
     const { createTable } = useActions().tables
 
-    const [isLoadingButton, setIsLoadingButton] = useState(false)
-
+    // Formik
     const initialValues = {
         tableNumber: "",
         capacity: ""
     }
 
+    // Formik validation
     const addTableSchema = yup.object().shape({
         tableNumber: yup.string().required("Table number must be defined").min(1, "Table number must be at least 1 letter long").max(8, "Table number cannot be greater than 8 letters"),
         capacity: yup.number().required("Capacity must be defined").min(1, "Capacity must be greater than 1").max(100, "Capacity cannot be greater than 100")
     })
 
+    // Formik Submit
     const submitForm = (values: any) => {
         setIsLoadingButton(true)
         createTable({

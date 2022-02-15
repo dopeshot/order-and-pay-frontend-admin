@@ -69,37 +69,27 @@ describe('Api Error Handling', () => {
         })
 
         it('should handle tableNumber to long (over 8 letters)', () => {
-            cy.get('[data-cy="table-modal-tablenumber-input"]').type("123456789")
-            cy.get('[data-cy="table-modal"]').click()
-
+            cy.get('[data-cy="table-modal-tablenumber-input"]').type("123456789").blur()
             cy.get('[data-cy="table-modal-tablenumber-input-error"]').should('be.visible').contains('Table number cannot be greater than 8 letters')
         })
 
         it('should handle tableNumber can not be empty', () => {
-            cy.get('[data-cy="table-modal-tablenumber-input"]').click()
-            cy.get('[data-cy="table-modal"]').click()
-
+            cy.get('[data-cy="table-modal-tablenumber-input"]').click().blur()
             cy.get('[data-cy="table-modal-tablenumber-input-error"]').should('be.visible').contains('Table number must be defined')
         })
 
         it('should handle capacity to big (over 100)', () => {
-            cy.get('[data-cy="table-modal-capacity-input"]').clear().type("101")
-            cy.get('[data-cy="table-modal"]').click()
-
+            cy.get('[data-cy="table-modal-capacity-input"]').clear().type("101").blur()
             cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible').contains('Capacity cannot be greater than 100')
         })
 
         it('should handle capacity can not be 0', () => {
-            cy.get('[data-cy="table-modal-capacity-input"]').clear().type("0")
-            cy.get('[data-cy="table-modal"]').click()
-
+            cy.get('[data-cy="table-modal-capacity-input"]').clear().type("0").blur()
             cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible').contains('Capacity must be greater than 1')
         })
 
         it('should handle capacity can not be empty', () => {
-            cy.get('[data-cy="table-modal-capacity-input"]').clear().click()
-            cy.get('[data-cy="table-modal"]').click()
-
+            cy.get('[data-cy="table-modal-capacity-input"]').clear().blur()
             cy.get('[data-cy="table-modal-capacity-input-error"]').should('be.visible').contains('Capacity must be defined')
         })
     })
