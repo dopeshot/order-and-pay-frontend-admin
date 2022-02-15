@@ -9,6 +9,7 @@ export const Home: React.FunctionComponent = () => {
         <div className="container mt-12">
             <h3 className="text-2xl font-bold">Welcome</h3>
             <Link to="/tables">Gehe zu Tabellen</Link>
+            <Link className="block" to="/menus/1/categories/1/dish">Gehe zu dish erstellen</Link>
             <List>
                 <ListItem onClick={() => console.log("Hello")} title="Hello" background></ListItem>
                 <ListItem to="/" title="Hello" icon={faTrash} indent></ListItem>
