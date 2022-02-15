@@ -79,7 +79,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should close add table modal because of clicking outside the element', () => {
-      cy.get('[data-cy="table-modal-background"]').click({ force: true })
+      cy.get('body').click('left')
       cy.get('[data-cy="table-modal"]').should('not.exist')
     })
 
