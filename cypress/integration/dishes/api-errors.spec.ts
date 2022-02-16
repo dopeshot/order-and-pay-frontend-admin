@@ -2,7 +2,14 @@ describe('Api Error Handling', () => {
     // TODO: change contains when merge table refactore
     describe('Create Dish Errors', () => {
         beforeEach(() => {
+            cy.getAllAllergens()
+            cy.getAllLabels()
+            cy.getAllCategories()
             cy.visit('/menus/1/categories/1/dish')
+
+            cy.wait('@getAllAllergens')
+            cy.wait('@getAllLabels')
+            cy.wait('@getAllCategories')
         })
 
         it.skip('should handle create duplicate Dish Title', () => {
