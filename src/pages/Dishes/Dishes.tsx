@@ -121,8 +121,8 @@ export const Dishes: React.FC = () => {
     // Formik Validation
     const dishValidationSchema = Yup.object().shape({
         title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(30, "Der Titel darf nicht länger als 30 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
-        description: Yup.string().min(2, "Die Beschreibung muss aus mindestens 2 Zeichen bestehen.").max(200, "Die Beschreibung darf nicht länger als 30 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
-        image: Yup.string().min(2, "Die Bild Url muss aus mindestens 2 Zeichen bestehen.").max(100, "Die Bild Url darf nicht länger als 100 Zeichen sein."),
+        description: Yup.string().min(2, "Die Beschreibung muss aus mindestens 2 Zeichen bestehen.").max(200, "Die Beschreibung darf nicht länger als 200 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
+        image: Yup.string().min(2, "Die Titelbild-URL muss aus mindestens 2 Zeichen bestehen.").max(100, "Die Titelbild-URL darf nicht länger als 100 Zeichen sein."),
         isActive: Yup.boolean(),
         price: Yup.number().min(0, "Der Preis muss 0 oder größer sein").required("Dies ist ein Pflichtfeld."),
         category: Yup.string().required("Dies ist ein Pflichtfeld.")
