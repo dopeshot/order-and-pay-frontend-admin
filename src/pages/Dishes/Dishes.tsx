@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faArrowLeft, faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
@@ -90,16 +91,17 @@ export const Dishes: React.FC = () => {
     }, [getDishById, isEditing, getAllAllergens, getAllCategories, getAllLabels, dishId])
 
     useEffect(() => {
-        console.log("update labels")
         const allergensResult = allergens.map(allergens => ({
             id: allergens._id,
-            label: allergens.title
+            label: allergens.title,
+            icon: allergens.icon as IconProp
         }))
         setAllergensOptions(allergensResult)
 
         const labelsResult = labels.map(label => ({
             id: label._id,
-            label: label.title
+            label: label.title,
+            icon: label.icon as IconProp
         }))
         setLabelsOptions(labelsResult)
     }, [labels, allergens])

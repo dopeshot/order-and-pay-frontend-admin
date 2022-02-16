@@ -85,7 +85,6 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
 
                 {/* Created by */}
                 <td className="pr-4">
-                    {console.log(table)}
                     <h5 className="font-semibold text-sm h-3">{table.author}</h5>
                     <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
                 </td>
