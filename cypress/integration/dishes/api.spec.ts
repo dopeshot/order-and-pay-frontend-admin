@@ -85,7 +85,7 @@ describe('Api Endpoints', () => {
         })
     })
 
-    describe.only('Update dish', () => {
+    describe('Update dish', () => {
         beforeEach(() => {
             cy.getDishById()
             cy.getAllAllergens()
@@ -121,12 +121,42 @@ describe('Api Endpoints', () => {
     })
 
     describe('Delete Dish', () => {
-        it('should open delete modal when click on delete', () => {
+        beforeEach(() => {
+            cy.getDishById()
+            cy.getAllAllergens()
+            cy.getAllLabels()
+            cy.getAllCategories()
+            cy.visit(`/menus/1/categories/1/dish/${dish._id}`)
 
+            cy.wait('@getDishById')
+            cy.wait('@getAllAllergens')
+            cy.wait('@getAllLabels')
+            cy.wait('@getAllCategories')
+        })
+
+        it('should open delete modal when click on delete', () => {
+            cy.get('[data-cy="dishes-delete-button"]').click()
+            cy.contains('Dish für immer löschen?')
         })
 
         it('should delete dish when click delete on modal', () => {
+            cy.deleteDish()
+            cy.get('[data-cy="dishes-delete-button"]').click()
+            cy.get('[data-cy="dishes-modal-delete-button"]').click()
 
+            cy.wait('@deleteDish')
+            cy.url().should('include', '/admin/menus')
+        })
+
+        it('should have loading icon when deleting', () => {
+            const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { fixture: 'dish.json' })
+            cy.get('[data-cy="dishes-delete-button"]').click()
+
+            cy.get('[data-cy="dishes-modal-delete-button"]').click().then(() => {
+                cy.get('[data-cy="dishes-modal-delete-button"] svg').should('have.class', 'fa-spinner')
+                interception.sendResponse()
+                cy.wait('@deleteDishIndefinitely')
+            })
         })
     })
 })

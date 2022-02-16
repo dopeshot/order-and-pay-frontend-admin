@@ -10,6 +10,7 @@ import { ComponentOptions, Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { LabelModal } from "../../components/Labels/LabelModal"
 import { Modal } from "../../components/UI/Modal"
 import { useActions, useAppState } from "../../overmind"
 import { DishDto } from "../../overmind/dishes/effects"
@@ -30,6 +31,8 @@ export const Dishes: React.FC = () => {
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [hasLabelModal, setHasLabelModal] = useState(false)
+    const [hasAllergensModal, setHasAllergensModal] = useState(false)
     const [dish, setDish] = useState<DishDto>()
     const [categoriesOptions, setCategoriesOptions] = useState<ComponentOptions[]>([])
     const [labelsOptions, setLabelsOptions] = useState<ComponentOptions[]>([])
@@ -42,10 +45,10 @@ export const Dishes: React.FC = () => {
     const { labels } = useAppState().labels
     const { allergens } = useAppState().allergens
 
-    // Load dish when id is set in url
     useEffect(() => {
         let isMounted = true;
 
+        // Load dish when id is set in url
         async function loadDish() {
             try {
                 // Fetch dish and set editing
@@ -162,7 +165,7 @@ export const Dishes: React.FC = () => {
 
     return (
         <div className="container mt-12">
-            <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+            <Button dataCy="dishes-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
             {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
@@ -173,13 +176,13 @@ export const Dishes: React.FC = () => {
                                 <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
                                 <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="2,00" icon={faEuroSign} /></span>
                             </div>
-                            <Textarea name="description" labelText="Beschreibung" maxLength={200} placeholder="Mit Salat, Tomaten und sauren Gurken" />
+                            <Textarea name="description" labelText="Beschreibung" maxLength={200} labelRequired placeholder="Mit Salat, Tomaten und sauren Gurken" />
                             <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
                             <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
                                 {labelsOptions.length > 0 && <div className="mr-2 sm:mr-8 md:mr-32">
                                     <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
-                                    <Button kind="tertiary" to="/menus/labels" icon={faPlus} className="text-left">Label hinzufügen</Button>
+                                    <Button kind="tertiary" onClick={() => setHasLabelModal(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
                                 </div>}
                                 {labelsOptions.length > 0 && <div>
                                     <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
@@ -187,18 +190,22 @@ export const Dishes: React.FC = () => {
                                 </div>}
                             </div>
                             <div className="flex flex-col md:flex-row justify-between mt-10">
-                                {isEditing && <Button kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}
-                                <Button type="submit" icon={faCheck} loading={isLoadingSave} disabled={!(dirty && isValid)} className="ml-auto mb-4">Speichern</Button>
+                                {isEditing && <Button dataCy="dishes-delete-button" kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}
+                                <Button dataCy="dishes-save-button" type="submit" icon={faCheck} loading={isLoadingSave} disabled={!(dirty && isValid)} className="ml-auto mb-4">Speichern</Button>
                             </div>
                         </Form>
                     )}
                 </Formik>
+                {/* Label Modal */}
+                <LabelModal modalOpen={hasLabelModal} setModalOpen={setHasLabelModal} />
+
+
                 {/* Delete Modal */}
                 <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
                     <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
                     <div className="flex md:justify-between flex-col md:flex-row">
                         <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
-                        <Button kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
+                        <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
                     </div>
                 </Modal>
             </div>}
