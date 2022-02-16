@@ -4,6 +4,7 @@ import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
+import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
 import { ComponentOptions, Dropdown } from "../../components/Form/Dropdown"
@@ -187,7 +188,7 @@ export const Dishes: React.FC = () => {
                                 </div>
                                 <div>
                                     <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
-                                    <Button kind="tertiary" to="/menus/allergens" icon={faPlus} className="text-left">Allergene hinzufügen</Button>
+                                    <Button kind="tertiary" onClick={() => setHasAllergensModal(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between mt-10">
@@ -200,6 +201,8 @@ export const Dishes: React.FC = () => {
                 {/* Label Modal */}
                 <LabelModal modalOpen={hasLabelModal} setModalOpen={setHasLabelModal} />
 
+                {/* Allergens Modal */}
+                <AllergensModal modalOpen={hasAllergensModal} setModalOpen={setHasAllergensModal} />
 
                 {/* Delete Modal */}
                 <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
