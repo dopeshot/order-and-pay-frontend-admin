@@ -89,6 +89,7 @@ export const Dishes: React.FC = () => {
     }, [getDishById, isEditing, getAllAllergens, getAllCategories, getAllLabels, dishId])
 
     useEffect(() => {
+        console.log("update labels")
         const allergensResult = allergens.map(allergens => ({
             id: allergens._id,
             label: allergens.title
@@ -180,14 +181,14 @@ export const Dishes: React.FC = () => {
                             <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
                             <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
-                                {labelsOptions.length > 0 && <div className="mr-2 sm:mr-8 md:mr-32">
+                                <div className="mr-2 sm:mr-8 md:mr-32">
                                     <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
                                     <Button kind="tertiary" onClick={() => setHasLabelModal(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
-                                </div>}
-                                {labelsOptions.length > 0 && <div>
+                                </div>
+                                <div>
                                     <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
                                     <Button kind="tertiary" to="/menus/allergens" icon={faPlus} className="text-left">Allergene hinzufügen</Button>
-                                </div>}
+                                </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between mt-10">
                                 {isEditing && <Button dataCy="dishes-delete-button" kind="tertiary" icon={faTrash} className="mb-4 order-last md:order-none" onClick={() => setHasDeleteModal(true)}>Löschen</Button>}

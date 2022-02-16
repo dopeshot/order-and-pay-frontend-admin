@@ -7,7 +7,7 @@ describe('Api Error Handling', () => {
         })
 
         it('should handle create duplicate Dish Title', () => {
-
+            //TODO: needs to be implemented when feature ready
         })
 
         it('should handle dish title to short (min 2 letters)', () => {

@@ -21,7 +21,7 @@ export const createLabel = async ({ state, effects }: Context, label: LabelDto):
     try {
         const response = await effects.labels.createLabel(label)
         const newLabel = response.data
-        state.labels.labels.push(newLabel)
+        state.labels.labels = [...state.labels.labels, newLabel]
         return true
     } catch (error) {
         console.error(error)

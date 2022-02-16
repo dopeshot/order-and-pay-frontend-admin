@@ -62,10 +62,8 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
         setModalOpen(false)
 
         // Clear modal data if we are editing a label
-        if (modalEditData) {
-            if (setModalEditData)
-                setModalEditData(null)
-        }
+        if (modalEditData && setModalEditData)
+            setModalEditData(null)
     }
 
 
