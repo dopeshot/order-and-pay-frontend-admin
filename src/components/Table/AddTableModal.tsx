@@ -29,33 +29,33 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
     const { modalErrors, hasModalError } = useAppState().tables
     const { createTable } = useActions().tables
 
-    // Formik
-    const initialValues = {
+    const initialFormikValues = {
         tableNumber: "",
         capacity: ""
     }
 
-    // Formik validation
     const addTableSchema = yup.object().shape({
         tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
         capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein.")
     })
 
-    // Formik Submit
     const submitForm = async (values: any) => {
         setIsLoadingButton(true)
+
+        // If createTable table returns true => table created successful
         if (await createTable(values))
             setModalOpen(false)
+
         setIsLoadingButton(false)
     }
 
     return (
         <Modal dataCy="table-modal" modalHeading="Neuer Tisch" open={modalOpen} onDissmis={() => setModalOpen(false)}>
-            <Formik initialValues={initialValues} validationSchema={addTableSchema} onSubmit={submitForm}>
+            <Formik initialValues={initialFormikValues} validationSchema={addTableSchema} onSubmit={submitForm}>
                 {({ setFieldValue, values, dirty, isValid }) => (
                     <Form>
                         {/* Error Banner */}
-                        {hasModalError && <ErrorBanner headlineContent={`There ${modalErrors.length > 1 ? "were" : "is"} ${modalErrors.length} ${modalErrors.length > 1 ? "Errors" : "Error"}`} listContent={modalErrors} />}
+                        {hasModalError && <ErrorBanner headlineContent={`Es ${modalErrors.length === 1 ? 'ist' : 'sind'} ${modalErrors.length} Fehler aufgetreten.`} listContent={modalErrors} />}
 
                         {/* Tablenumber Input */}
                         <TextInput name="tableNumber" labelText="Tischnummer" placeholder="A1" />
@@ -73,9 +73,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
                         </div>
                         <div className="flex flex-col sm:flex sm:flex-row-reverse sm:justify-between">
                             {/* Save and Cancel Buttons */}
-                            <div>
-                                <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} disabled={!(dirty && isValid)}>Speichern</Button>
-                            </div>
+                            <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} disabled={!(dirty && isValid)}>Speichern</Button>
                             <Button dataCy="table-cancel" kind="tertiary" className="mt-2 sm:mt-0" onClick={() => setModalOpen(false)}>Abbrechen</Button>
                         </div>
                     </Form>
