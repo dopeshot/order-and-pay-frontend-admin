@@ -1,5 +1,3 @@
-const api = `${Cypress.env("apiUrl")}/dishes`
-
 describe('Api Error Handling', () => {
     // TODO: change contains when merge table refactore
     describe('Create Dish Errors', () => {

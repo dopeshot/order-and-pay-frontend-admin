@@ -11,26 +11,39 @@ import { TextInput } from "../Form/TextInput"
 import { Modal } from "../UI/Modal"
 
 type AllergensModalProps = {
+    /** State Data from allergen to edit */
     modalEditData?: Label | null
+    /** State Setter from modalEditData */
     setModalEditData?: React.Dispatch<React.SetStateAction<Label | null>> | null
+    /** State for modal open/close */
     modalOpen: boolean
+    /** State Setter for modalOpen */
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Modal for add and edit allergens, possible to use only add functionality
+ */
 export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ modalEditData, setModalEditData, modalOpen, setModalOpen }) => {
+    // Global State
     const { createAllergen, updateAllergen } = useActions().allergens
+
+    // Local State
     const [isModalLoading, setIsModalLoading] = useState(false)
 
+    // Formik
     const initialValues: AllergenDto = {
         title: modalEditData?.title ?? "",
         icon: modalEditData?.icon ?? "user"
     }
 
+    // Formik Validation
     const validationSchema = Yup.object().shape({
         title: Yup.string().min(2).max(20).required("Title is required"),
         icon: Yup.string()
     })
 
+    // Formik Submit Form
     const submitForm = async (values: LabelDto) => {
         setIsModalLoading(true)
 
@@ -54,6 +67,7 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
         setIsModalLoading(false)
     }
 
+    // Modal close handler
     const handleModelDismiss = () => {
         // Prevent closing modal when form is submitting
         if (isModalLoading)

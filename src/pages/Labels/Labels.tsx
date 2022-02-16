@@ -32,7 +32,7 @@ export const Labels: React.FC = () => {
         deleteLabel(id)
     }
 
-    return < div className="container md:max-w-full mt-12" >
+    return <div className="container md:max-w-full mt-12">
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Labels</h1>
@@ -52,5 +52,5 @@ export const Labels: React.FC = () => {
         </List>
 
         <LabelModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
-    </div >
+    </div>
 }

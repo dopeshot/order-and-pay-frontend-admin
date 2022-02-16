@@ -90,6 +90,7 @@ export const Dishes: React.FC = () => {
         return () => { isMounted = false }
     }, [getDishById, isEditing, getAllAllergens, getAllCategories, getAllLabels, dishId])
 
+    // Format Data from labels and allergens
     useEffect(() => {
         const allergensResult = allergens.map(allergens => ({
             id: allergens._id,

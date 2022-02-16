@@ -10,26 +10,39 @@ import { TextInput } from "../Form/TextInput"
 import { Modal } from "../UI/Modal"
 
 type LabelModalProps = {
+    /** State Data from label to edit */
     modalEditData?: Label | null
+    /** State Setter from modalEditData */
     setModalEditData?: React.Dispatch<React.SetStateAction<Label | null>> | null
+    /** State for modal open/close */
     modalOpen: boolean
+    /** State Setter for modalOpen */
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Modal for add and edit labels, possible to use only add functionality
+ */
 export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEditData, setModalEditData, modalOpen, setModalOpen }) => {
+    // Global State
     const { createLabel, updateLabel } = useActions().labels
+
+    // Local State
     const [isModalLoading, setIsModalLoading] = useState(false)
 
+    // Formik
     const initialValues: LabelDto = {
         title: modalEditData?.title ?? "",
         icon: modalEditData?.icon ?? "user"
     }
 
+    // Formik Validation
     const validationSchema = Yup.object().shape({
         title: Yup.string().min(2).max(20).required("Title is required"),
         icon: Yup.string()
     })
 
+    // Formik Submit Form
     const submitForm = async (values: LabelDto) => {
         setIsModalLoading(true)
 
@@ -53,6 +66,7 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
         setIsModalLoading(false)
     }
 
+    // Modal close handler
     const handleModelDismiss = () => {
         // Prevent closing modal when form is submitting
         if (isModalLoading)
@@ -65,7 +79,6 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
         if (modalEditData && setModalEditData)
             setModalEditData(null)
     }
-
 
     return (
         <Modal modalHeading={modalEditData ? `Label bearbeiten` : `Neues Label hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
