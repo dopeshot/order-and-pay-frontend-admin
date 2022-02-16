@@ -129,7 +129,7 @@ describe('Api Endpoints', () => {
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).should('be.checked')
         })
 
-        it.only('should update dish', () => {
+        it('should update dish', () => {
             cy.get('input[name="title"]').type('Hello')
             cy.updateDish()
 
