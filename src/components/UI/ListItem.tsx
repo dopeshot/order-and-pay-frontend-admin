@@ -24,27 +24,28 @@ type ListItemProps = {
  * List, should have List as parent
  */
 export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, header, children, to, onClick }) => {
-    return (
-        <>
-            {to ?
-                <Link to={to} className={`flex items-center py-4 pl-7 rounded-lg ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey "} ${indent ? "pl-16" : ""}`}>
-                    <FontAwesomeIcon icon={icon} className="text-lightgrey mr-4" />
-                    <h4 className="text-lg text-headline-black font-semibold">{title}</h4>
-                    {header}
-                    {children}
-                </Link>
-                :
-                <div className={`rounded-lg w-full flex cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"}`}>
-                    <div onClick={onClick} className={`flex items-center py-4 pl-7 ${indent ? "pl-16" : ""} flex-grow`}>
-                        <FontAwesomeIcon icon={icon} className="text-lightgrey mr-4" />
-                        <h4 className="text-lg text-headline-black font-semibold mr-4">{title}</h4>
-                        {header}
-                    </div>
-                    <div className="flex items-center mx-4">
-                        {children}
-                    </div>
-                </div>
-            }
-        </>
-    )
+
+    // Elements on the left side of the item
+    const headerContent = <>
+        <FontAwesomeIcon icon={icon} className="text-lightgrey mr-4" />
+        <h4 className="text-lg text-headline-black font-semibold mr-4">{title}</h4>
+        {header}
+    </>
+
+    const headerClasses = `flex items-center py-4 pl-7 ${indent ? "pl-16" : ""} flex-grow`
+
+    return <div className={`flex rounded-lg w-full cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"}`}>
+        {to ?
+            <Link to={to} className={headerClasses}>
+                {headerContent}
+            </Link>
+            :
+            <button onClick={onClick} className={headerClasses}>
+                {headerContent}
+            </button>
+        }
+        {children && <div className="flex items-center mx-4">
+            {children}
+        </div>}
+    </div>
 }
