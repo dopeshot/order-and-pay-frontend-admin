@@ -25,6 +25,8 @@ describe('Api Error Handling', () => {
             cy.addTable()
             cy.visit('/tables')
 
+            cy.wait('@getEmptyTables')
+
             cy.contains('Tisch hinzufügen').click()
 
             cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
