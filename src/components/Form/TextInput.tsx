@@ -21,16 +21,12 @@ type TextInputProps = {
     type?: HTMLInputTypeAttribute
     /** Enables autofocus */
     autoFocus?: boolean // MC: This is not tested yet!!!!!
-    /** For Testing */
-    dataCyInput?: string
-    /** For Testing */
-    dataCyValidate?: string
 }
 
 /**
  * Text Input, can only be used with Formik
  */
-export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelText, labelRequired = false, helperText, icon, type = "text", autoFocus = false, dataCyValidate, dataCyInput }) => {
+export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelText, labelRequired = false, helperText, icon, type = "text", autoFocus = false }) => {
     return (
         <div className="mb-4">
             <label className="text-darkgrey text-sm font-semibold" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
@@ -38,12 +34,12 @@ export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelTe
                 <>
                     <div className="relative flex flex-col justify-center my-1">
                         {icon && <FontAwesomeIcon icon={icon} className={`absolute right-6 ${props.meta.error && props.meta.touched ? "" : "text-darkgrey"}`} />}
-                        <input data-cy={dataCyInput} type={type} placeholder={placeholder} autoFocus={autoFocus} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${icon ? "pr-10" : ""} ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
+                        <input data-cy={`textinput-${name}-input`} type={type} placeholder={placeholder} autoFocus={autoFocus} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${icon ? "pr-10" : ""} ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
                     </div>
                     {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey text-sm font-semibold">{helperText}</p>}
                 </>
             )}</Field>
-            <FormError dataCy={dataCyValidate} field={name} />
+            <FormError dataCy={`textinput-${name}-form-error`} field={name} />
         </div>
     )
 }

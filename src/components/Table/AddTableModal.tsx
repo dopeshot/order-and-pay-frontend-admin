@@ -60,10 +60,10 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                         {hasModalError && <ErrorBanner headlineContent={`There ${modalErrors.length > 1 ? "were" : "is"} ${modalErrors.length} ${modalErrors.length > 1 ? "Errors" : "Error"}`} listContent={modalErrors} />}
 
                         {/* Tablenumber Input */}
-                        <TextInput name="tableNumber" labelText="Tischnummer" placeholder="A1" dataCyInput="table-modal-tablenumber-input" dataCyValidate="table-modal-tablenumber-input-error" />
+                        <TextInput name="tableNumber" labelText="Tischnummer" placeholder="A1" />
 
                         {/* Capacity Input */}
-                        <TextInput type="number" name="capacity" labelText="Personenanzahl" placeholder="2" dataCyInput="table-modal-capacity-input" dataCyValidate="table-modal-capacity-input-error" />
+                        <TextInput type="number" name="capacity" labelText="Personenanzahl" placeholder="2" />
 
                         {/* Capacity Quick */}
                         <div className="flex mb-4 sm:inline-flex sm:justify-between">
