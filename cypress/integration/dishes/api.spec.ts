@@ -83,6 +83,16 @@ describe('Api Endpoints', () => {
 
             cy.url().should('include', '/admin/menus')
         })
+
+        it('should open labels modal when click add label', () => {
+            cy.contains('Label hinzufügen').click()
+            cy.contains('Neues Label hinzufügen').should('be.visible')
+        })
+
+        it('should open allergens modal when click add allergen', () => {
+            cy.contains('Allergene hinzufügen').click()
+            cy.contains('Neues Allergen hinzufügen').should('be.visible')
+        })
     })
 
     describe('Update dish', () => {
@@ -117,6 +127,14 @@ describe('Api Endpoints', () => {
             cy.get(`[data-cy="isActive-labeltext"]`).should('contain', 'Verfügbar')
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).should('be.checked')
+        })
+
+        it.only('should update dish', () => {
+            cy.get('input[name="title"]').type('Hello')
+            cy.updateDish()
+
+            cy.get('[data-cy="dishes-save-button"]').click()
+            cy.wait('@updateDish')
         })
     })
 
