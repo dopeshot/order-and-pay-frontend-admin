@@ -85,25 +85,38 @@ describe('Api Endpoints', () => {
         })
     })
 
-    describe('Update dish', () => {
-        it('should have "Gericht bearbeiten" as headline', () => {
+    describe.only('Update dish', () => {
+        beforeEach(() => {
+            cy.getDishById()
+            cy.getAllAllergens()
+            cy.getAllLabels()
+            cy.getAllCategories()
+            cy.visit(`/menus/1/categories/1/dish/${dish._id}`)
 
+            cy.wait('@getDishById')
+            cy.wait('@getAllAllergens')
+            cy.wait('@getAllLabels')
+            cy.wait('@getAllCategories')
+        })
+
+        it('should have "Gericht bearbeiten" as headline', () => {
+            cy.contains('Gericht bearbeiten').should('be.visible')
         })
 
         it('should have delete button', () => {
-
+            cy.get('[data-cy="dishes-delete-button"]').should('be.visible')
         })
 
-        it('should edit dish', () => {
+        it('should have filled all fields', () => {
+            cy.get('input[name="image"]').should('have.value', dish.image)
+            cy.get('input[name="title"]').should('have.value', dish.title)
+            cy.get('input[name="price"]').should('have.value', `${dish.price}`)
+            cy.get('textarea[name="description"]').should('have.value', dish.description)
 
-        })
-
-        it('should have disabled state when inputs are wrong', () => {
-
-        })
-
-        it('should have loading icon when sending', () => {
-
+            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', 'Burger')
+            cy.get(`[data-cy="isActive-labeltext"]`).should('contain', 'Verfügbar')
+            cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).should('be.checked')
+            cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).should('be.checked')
         })
     })
 
