@@ -46,8 +46,6 @@
       "src/**/*"
     ],
     "exclude": [
-      "src/overmind/example",
-      "src/pages/Example",
       "src/reportWebVitals.ts"
     ],
     "excludeAfterRemap": true
