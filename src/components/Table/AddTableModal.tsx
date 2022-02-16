@@ -18,7 +18,7 @@ type TableModalProps = {
 /**
  * Modal for adding new Tables, with Table Add Logic
  */
-export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) => {
+export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalOpen, setModalOpen }) => {
     // Local Variables
     const capacityTemplates = [2, 4, 6]
 
@@ -37,22 +37,20 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
 
     // Formik validation
     const addTableSchema = yup.object().shape({
-        tableNumber: yup.string().required("Table number must be defined").min(1, "Table number must be at least 1 letter long").max(8, "Table number cannot be greater than 8 letters"),
-        capacity: yup.number().required("Capacity must be defined").min(1, "Capacity must be greater than 1").max(100, "Capacity cannot be greater than 100")
+        tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
+        capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein.")
     })
 
     // Formik Submit
-    const submitForm = (values: any) => {
+    const submitForm = async (values: any) => {
         setIsLoadingButton(true)
-        createTable({
-            ...values,
-            setDisplayModal: props.setModalOpen,
-            setIsLoadingButton
-        })
+        if (await createTable(values))
+            setModalOpen(false)
+        setIsLoadingButton(false)
     }
 
     return (
-        <Modal dataCy="table-modal" modalHeading="Neuer Tisch" open={props.modalOpen} onDissmis={() => props.setModalOpen(false)}>
+        <Modal dataCy="table-modal" modalHeading="Neuer Tisch" open={modalOpen} onDissmis={() => setModalOpen(false)}>
             <Formik initialValues={initialValues} validationSchema={addTableSchema} onSubmit={submitForm}>
                 {({ setFieldValue, values, dirty, isValid }) => (
                     <Form>
@@ -78,7 +76,7 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = (props) =
                             <div>
                                 <Button dataCy="table-save" type="submit" icon={faCheck} loading={isLoadingButton} disabled={!(dirty && isValid)}>Speichern</Button>
                             </div>
-                            <Button dataCy="table-cancel" kind="tertiary" className="mt-2 sm:mt-0" onClick={() => props.setModalOpen(false)}>Abbrechen</Button>
+                            <Button dataCy="table-cancel" kind="tertiary" className="mt-2 sm:mt-0" onClick={() => setModalOpen(false)}>Abbrechen</Button>
                         </div>
                     </Form>
                 )}

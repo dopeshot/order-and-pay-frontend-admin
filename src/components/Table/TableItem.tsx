@@ -41,8 +41,8 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
     }
 
     const editTableSchema = yup.object().shape({
-        tableNumber: yup.string().required("Table number must be defined").min(1, "Table number must be at least 1 letter long").max(8, "Table number cannot be greater than 8 letters"),
-        capacity: yup.number().required("Capacity must be defined").min(1, "Capacity must be greater than 1").max(100, "Capacity cannot be greater than 100"),
+        tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
+        capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein."),
         _id: yup.string()
     })
 

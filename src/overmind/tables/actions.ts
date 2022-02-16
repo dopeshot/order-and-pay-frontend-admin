@@ -15,17 +15,17 @@ export const loadTables = async ({ state, effects }: Context) => {
     state.tables.isLoadingTables = false
 }
 
-export const createTable = async ({ state, effects }: Context, { tableNumber, capacity, setDisplayModal, setIsLoadingButton }: { tableNumber: string, capacity: number, setDisplayModal: (value: boolean) => void, setIsLoadingButton: (value: boolean) => void }) => {
+export const createTable = async ({ state, effects }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
         const response = await effects.tables.createTable({ tableNumber, capacity })
         const newTable = { ...response.data, updatedAt: new Date(response.data.updatedAt), ...InitialTableHelper }
         state.tables.tables = [...state.tables.tables, newTable]
         state.tables.modalErrors = []
-        setDisplayModal(false)
+        return true
     } catch (error) {
         generateErrorMessage(state, error, "modalErrors")
     }
-    setIsLoadingButton(false)
+    return false
 }
 
 export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity, setIsEdit, setIsLoadingButton }: { id: string, tableNumber: string, capacity: number, setIsEdit: (action: boolean) => void, setIsLoadingButton: (value: boolean) => void }) => {
