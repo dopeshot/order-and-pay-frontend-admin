@@ -2,6 +2,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { Link } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
+import { IconButton } from "../../components/Buttons/IconButton"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
@@ -24,9 +25,15 @@ export const Home: React.FunctionComponent = () => {
             <Link to="/tables">Gehe zu Tabellen</Link>
             <List>
                 <ListItem onClick={() => console.log("Hello")} title="Hello" background></ListItem>
-                <ListItem to="/" title="Hello" icon={faTrash} indent></ListItem>
-                <ListItem title="Hello" indent></ListItem>
-                <ListItem title="Hello" indent></ListItem>
+                <ListItem to="/" title="Link" icon={faTrash} indent>
+                    <IconButton className="mr-4" icon={faTrash} onClick={() => console.log("child")} />
+                </ListItem>
+                <ListItem title="Testing" indent onClick={() => console.log("parent")}>
+                    <IconButton icon={faTrash} onClick={() => console.log("child")} />
+                </ListItem>
+                <ListItem title="Hello" indent header={<p>Header</p>} onClick={() => console.log("parent")}>
+                    <p>Children</p>
+                </ListItem>
             </List>
 
             <List lines>
