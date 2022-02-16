@@ -66,10 +66,6 @@ input:focus-visible {
     outline: var(--primary-color) auto 1px;
 }
 
-input::placeholder {
-    font-size: 15px;
-}
-
 input::-webkit-search-cancel-button {
     position: relative;
     right: 1rem;
