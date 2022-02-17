@@ -14,8 +14,8 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands.ts'
 import '@cypress/code-coverage/support'
+import './commands.ts'
 
 /// <reference types="cypress" />
 
@@ -81,6 +81,12 @@ declare global {
              * @example cy.changeToDuplicateTable()
              */
             changeToDuplicateTable(): void
+
+            /**
+             * Custom command to intercept all getMenuOverviewEditor requests
+             * @example cy.getMenuOverviewEditor()
+             */
+            getMenuOverviewEditor(): void
         }
     }
 }

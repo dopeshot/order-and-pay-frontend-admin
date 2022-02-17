@@ -68,4 +68,12 @@ Cypress.Commands.add('changeToDuplicateTable', () => {
     }).as('changeToDuplicateTable')
 })
 
+/********** Menu ***********/
+Cypress.Commands.add('getMenuOverviewEditor', () => {
+    cy.intercept('GET', `${api}/menus/**/editor`, {
+        fixture: 'menu-overview.json'
+    }).as('getMenuOverviewEditor')
+})
+
 export { }
+

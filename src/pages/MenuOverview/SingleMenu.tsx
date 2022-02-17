@@ -30,7 +30,7 @@ export const SingleMenu: React.FC = () => {
     return (
         <div className="container md:max-w-full mt-12">
             {/* Back Button */}
-            <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück zu allen Menüs</Button>
+            <Button dataCy="singlemenu-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück zu allen Menüs</Button>
 
             {/* Header */}
             <div className="flex items-baseline">

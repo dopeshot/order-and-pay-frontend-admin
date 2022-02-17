@@ -1,27 +1,57 @@
+import menu from '../../fixtures/menu-overview.json';
+import { interceptIndefinitely } from '../../support/utils';
+
+const api = `${Cypress.env("apiUrl")}/menus/**`
+
 describe('Menu Overview', () => {
     describe('Ui Header', () => {
-        it('should display correct headline', () => {
+        beforeEach(() => {
+            cy.getMenuOverviewEditor()
+            cy.visit(`/menus/${menu._id}/edit`)
 
+            cy.wait('@getMenuOverviewEditor')
+        })
+
+        it('should display correct headline', () => {
+            cy.contains(menu.title).should('be.visible')
         })
 
         it('should display correct description', () => {
-
+            cy.contains(menu.description).should('be.visible')
         })
 
         it('should display active tag when menu is active', () => {
-
-        })
-
-        it('should not display active tag when menu is inactive', () => {
-
+            cy.get('[data-cy=tag-box].bg-green-500').should('be.visible')
         })
 
         it('should go to "admin/menus" when click on back button', () => {
+            cy.get('[data-cy="singlemenu-back-button"]').click()
 
+            cy.url().should('include', '/admin/menus')
+        })
+    })
+
+    describe('Loading', () => {
+        it.only('should display loading when menu not loaded', () => {
+            const interception = interceptIndefinitely('GET', `${api}/editor`, "getMenuOverviewEditorIndefinitely", { fixture: 'menu-overview.json' })
+
+            cy.visit('/menus/${menu._id}/edit').then(() => {
+                // TODO:Change when loading component implemented
+                cy.contains('Loading...').should('be.visible')
+                interception.sendResponse()
+                cy.wait('@getMenuOverviewEditorIndefinitely')
+            })
         })
     })
 
     describe('Ui Content', () => {
+        beforeEach(() => {
+            cy.getMenuOverviewEditor()
+            cy.visit(`/menus/${menu._id}/edit`)
+
+            cy.wait('@getMenuOverviewEditor')
+        })
+
         it('should display correct count of categories', () => {
 
         })
@@ -64,6 +94,13 @@ describe('Menu Overview', () => {
     })
 
     describe('Create', () => {
+        beforeEach(() => {
+            cy.getMenuOverviewEditor()
+            cy.visit(`/menus/${menu._id}/edit`)
+
+            cy.wait('@getMenuOverviewEditor')
+        })
+
         it('should go to page add category when click "Kategorie hinzufügen" button', () => {
 
         })
@@ -82,6 +119,13 @@ describe('Menu Overview', () => {
     })
 
     describe('Delete', () => {
+        beforeEach(() => {
+            cy.getMenuOverviewEditor()
+            cy.visit(`/menus/${menu._id}/edit`)
+
+            cy.wait('@getMenuOverviewEditor')
+        })
+
         it('should delete category when open delete modal and click delete', () => {
 
         })
@@ -92,5 +136,5 @@ describe('Menu Overview', () => {
     })
 })
 
-export { }
+export { };
 
