@@ -57,6 +57,10 @@ describe('Menu Overview', () => {
         it('should display correct price of dish', () => {
 
         })
+
+        it('should display not available tag when dish isAvailable set to false', () => {
+
+        })
     })
 
     describe('Create', () => {

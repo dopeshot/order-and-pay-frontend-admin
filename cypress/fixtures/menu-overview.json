@@ -1,0 +1,230 @@
+{
+    "_id": "620b9b0a1126e91d99b45559",
+    "title": "Mittagskarte",
+    "description": "Die Mittagskarte wird Mittags zwischen 12 Uhr und 16 Uhr Angeboten.",
+    "status": "active",
+    "isActive": true,
+    "categories": [
+        {
+            "_id": "620e4e7d4583c2935980af39",
+            "title": "Burger",
+            "description": "Loaf with stuff on it",
+            "icon": "hamburger",
+            "choices": [
+                {
+                    "id": 0,
+                    "title": "size",
+                    "default": 1,
+                    "type": "radio",
+                    "options": [
+                        {
+                            "id": 0,
+                            "name": "small",
+                            "price": -200
+                        },
+                        {
+                            "id": 1,
+                            "name": "normal",
+                            "price": 0
+                        },
+                        {
+                            "id": 2,
+                            "name": "large",
+                            "price": 200
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "title": "toppings",
+                    "type": "checkbox",
+                    "options": [
+                        {
+                            "id": 0,
+                            "name": "salami",
+                            "price": 100
+                        },
+                        {
+                            "id": 1,
+                            "name": "prosciutto",
+                            "price": 100
+                        },
+                        {
+                            "id": 2,
+                            "name": "olives",
+                            "price": 200
+                        }
+                    ]
+                }
+            ],
+            "image": "burger",
+            "status": "active",
+            "menu": "620b9b0a1126e91d99b45559",
+            "dishes": [
+                {
+                    "_id": "620e4f204583c2935980af41",
+                    "title": "Cheeseburger",
+                    "description": "Mit Salat, Tomaten und sauren Gurken",
+                    "price": 600,
+                    "status": "active",
+                    "image": "hamburger.png",
+                    "isAvailable": false,
+                    "category": "620e4e7d4583c2935980af39",
+                    "allergens": [],
+                    "labels": []
+                },
+                {
+                    "_id": "620e59934583c2935980b030",
+                    "title": "Hamburger",
+                    "description": "Mit Salat, Tomaten und sauren Gurken",
+                    "price": 600,
+                    "status": "active",
+                    "image": "hamburger.png",
+                    "isAvailable": true,
+                    "category": "620e4e7d4583c2935980af39",
+                    "allergens": [],
+                    "labels": []
+                },
+                {
+                    "_id": "620e599b4583c2935980b032",
+                    "title": "Bacon Beef Burger",
+                    "description": "Mit Salat, Tomaten und sauren Gurken",
+                    "price": 600,
+                    "status": "active",
+                    "image": "hamburger.png",
+                    "isAvailable": true,
+                    "category": "620e4e7d4583c2935980af39",
+                    "allergens": [],
+                    "labels": []
+                }
+            ]
+        },
+        {
+            "_id": "620e596e4583c2935980b022",
+            "title": "Pizza",
+            "description": "Loaf with stuff on it",
+            "icon": "pizza-slice",
+            "choices": [
+                {
+                    "id": 0,
+                    "title": "size",
+                    "default": 1,
+                    "type": "radio",
+                    "options": [
+                        {
+                            "id": 0,
+                            "name": "small",
+                            "price": -200
+                        },
+                        {
+                            "id": 1,
+                            "name": "normal",
+                            "price": 0
+                        },
+                        {
+                            "id": 2,
+                            "name": "large",
+                            "price": 200
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "title": "toppings",
+                    "type": "checkbox",
+                    "options": [
+                        {
+                            "id": 0,
+                            "name": "salami",
+                            "price": 100
+                        },
+                        {
+                            "id": 1,
+                            "name": "prosciutto",
+                            "price": 100
+                        },
+                        {
+                            "id": 2,
+                            "name": "olives",
+                            "price": 200
+                        }
+                    ]
+                }
+            ],
+            "image": "pizza",
+            "status": "active",
+            "menu": "620b9b0a1126e91d99b45559",
+            "dishes": [
+                {
+                    "_id": "620e5ec74583c2935980b09c",
+                    "title": "Margherita",
+                    "description": "Mit Tomatenauce und Käse",
+                    "price": 600,
+                    "status": "active",
+                    "image": "hamburger.png",
+                    "isAvailable": true,
+                    "category": "620e596e4583c2935980b022",
+                    "allergens": [],
+                    "labels": []
+                }
+            ]
+        },
+        {
+            "_id": "620e5fb34583c2935980b0a8",
+            "title": "Hehe",
+            "description": "Loaf with stuff on it",
+            "icon": "pizza",
+            "choices": [
+                {
+                    "id": 0,
+                    "title": "size",
+                    "default": 1,
+                    "type": "radio",
+                    "options": [
+                        {
+                            "id": 0,
+                            "name": "small",
+                            "price": -200
+                        },
+                        {
+                            "id": 1,
+                            "name": "normal",
+                            "price": 0
+                        },
+                        {
+                            "id": 2,
+                            "name": "large",
+                            "price": 200
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "title": "toppings",
+                    "type": "checkbox",
+                    "options": [
+                        {
+                            "id": 0,
+                            "name": "salami",
+                            "price": 100
+                        },
+                        {
+                            "id": 1,
+                            "name": "prosciutto",
+                            "price": 100
+                        },
+                        {
+                            "id": 2,
+                            "name": "olives",
+                            "price": 200
+                        }
+                    ]
+                }
+            ],
+            "image": "pizza",
+            "status": "active",
+            "menu": "620b9b0a1126e91d99b45559",
+            "dishes": []
+        }
+    ]
+}
