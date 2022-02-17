@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
 import { Allergens } from '../../pages/Allergens/Allergens';
+import { Dishes } from '../../pages/Dishes/Dishes';
 import { Home } from '../../pages/Home/Home';
 import { Labels } from '../../pages/Labels/Labels';
 import { MenuEditor } from '../../pages/Menus/MenuEditor';
@@ -29,6 +30,8 @@ export const App: React.FunctionComponent = () => {
               <Route path="/menus/allergens" component={Allergens} />
               <Route path="/menus/:id/editor" component={() => <p>editor</p>} />
               <Route path="/menus/:id" component={MenuEditor} />
+              <Route path="/menus/:menusId/categories/:categoriesId/dish/:dishId" component={Dishes} />
+              <Route path="/menus/:menusId/categories/:categoriesId/dish" component={Dishes} />
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
