@@ -32,17 +32,21 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
         capacity: table.capacity
     }
 
-    const submitChanges = ({ _id, tableNumber, capacity }: typeof initialValues) => {
+    const submitChanges = async ({ _id, tableNumber, capacity }: typeof initialValues) => {
         if (isLoadingButton)
             return
 
         setIsLoadingButton(true)
-        updateTable({ id: _id, tableNumber, capacity, setIsEdit, setIsLoadingButton })
+
+        if (await updateTable({ id: _id, tableNumber, capacity }))
+            setIsEdit(false)
+
+        setIsLoadingButton(false)
     }
 
     const editTableSchema = yup.object().shape({
-        tableNumber: yup.string().required("Table number must be defined").min(1, "Table number must be at least 1 letter long").max(8, "Table number cannot be greater than 8 letters"),
-        capacity: yup.number().required("Capacity must be defined").min(1, "Capacity must be greater than 1").max(100, "Capacity cannot be greater than 100"),
+        tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
+        capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein."),
         _id: yup.string()
     })
 
@@ -85,7 +89,6 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
 
                 {/* Created by */}
                 <td className="pr-4">
-                    {console.log(table)}
                     <h5 className="font-semibold text-sm h-3">{table.author}</h5>
                     <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
                 </td>
@@ -110,7 +113,7 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                         {/* Dropdown */}
                         {isMoreOptionsOpen && <div data-cy={`table-table-delete-dropdown-${index}`} className="absolute origin-top-right right-5 z-20 bg-white rounded-lg shadow mt-2 w-30" tabIndex={-1}>
                             <div className="py-1">
-                                <button data-cy={`table-table-delete-button-${index}`} onClick={() => { deleteTable(table._id) }} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
+                                <button data-cy={`table-table-delete-button-${index}`} onClick={() => deleteTable(table._id)} className="block text-darkgrey hover:text-gray-500 focus:hover:text-gray-500 text-sm px-4 py-2" tabIndex={-1}>
                                     <FontAwesomeIcon icon={faTrash} className="text-danger-red mr-3" />
                                     Löschen
                                 </button>

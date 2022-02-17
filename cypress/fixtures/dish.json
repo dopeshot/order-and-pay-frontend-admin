@@ -1,0 +1,16 @@
+{
+    "_id": "620c1974200c4d26fffbc940",
+    "title": "Hamburger",
+    "description": "Mit Salat, Tomaten und sauren Gurken",
+    "price": 600,
+    "status": "active",
+    "image": "hamburger.png",
+    "isAvailable": true,
+    "category": "620bf2298e70d965e0b46da3",
+    "allergens": [
+        "620c196a200c4d26fffbc93e"
+    ],
+    "labels": [
+        "620c1945200c4d26fffbc93c"
+    ]
+}

@@ -1,5 +1,6 @@
 const api = `${Cypress.env("apiUrl")}`
 
+/********* Tables *********/
 Cypress.Commands.add('getTables', () => {
     cy.intercept('GET', `${api}/tables`, {
         fixture: 'tables.json'
@@ -68,4 +69,61 @@ Cypress.Commands.add('changeToDuplicateTable', () => {
     }).as('changeToDuplicateTable')
 })
 
+/********* Dishes *********/
+Cypress.Commands.add('createDish', () => {
+    cy.intercept('POST', `${api}/dishes`, {
+        fixture: 'dish.json'
+    }).as('createDish')
+})
+
+Cypress.Commands.add('createDishDuplicate', () => {
+    cy.intercept('POST', `${api}/dishes`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This category title already exists",
+            "error": "Conflict"
+        }
+    }).as('createDishDuplicate')
+})
+
+Cypress.Commands.add('getDishById', () => {
+    cy.intercept('GET', `${api}/dishes/**`, {
+        fixture: 'dish.json'
+    }).as('getDishById')
+})
+
+Cypress.Commands.add('updateDish', () => {
+    cy.intercept('PATCH', `${api}/dishes/**`, {
+        fixture: 'dish.json'
+    }).as('updateDish')
+})
+
+Cypress.Commands.add('deleteDish', () => {
+    cy.intercept('DELETE', `${api}/dishes/**`, {
+        statusCode: 204
+    }).as('deleteDish')
+})
+
+Cypress.Commands.add('getAllCategories', () => {
+    cy.intercept('GET', `${api}/categories`, {
+        fixture: 'categories.json'
+    }).as('getAllCategories')
+})
+
+Cypress.Commands.add('getAllLabels', () => {
+    cy.intercept('GET', `${api}/labels`, {
+        fixture: 'labels.json'
+    }).as('getAllLabels')
+})
+
+Cypress.Commands.add('getAllAllergens', () => {
+    cy.intercept('GET', `${api}/allergens`, {
+        fixture: 'allergens.json'
+    }).as('getAllAllergens')
+})
+
+
+
 export { }
+

@@ -36,7 +36,7 @@
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:ct --run": "npx cypress run-ct",
+    "cypress:ct-run": "npx cypress run-ct",
     "cypress:ct": "npx cypress open-ct",
     "cc:instrument": "nyc instrument --compact=false src instrumented",
     "cc:report": "nyc report --reporter=text-summary"
@@ -46,8 +46,6 @@
       "src/**/*"
     ],
     "exclude": [
-      "src/overmind/example",
-      "src/pages/Example",
       "src/reportWebVitals.ts"
     ],
     "excludeAfterRemap": true
