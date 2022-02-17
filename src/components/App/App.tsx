@@ -25,9 +25,9 @@ export const App: React.FunctionComponent = () => {
               <Route exact path="/home" component={Home} />
               <Route exact path="/menus" component={Menus} />
               <Route path="/menus/add" component={MenuEditor} />
-              <Route path="/menus/:id" component={MenuEditor} />
               <Route path="/menus/labels" component={Labels} />
               <Route path="/menus/allergens" component={Allergens} />
+              <Route path="/menus/:id" component={MenuEditor} />
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
