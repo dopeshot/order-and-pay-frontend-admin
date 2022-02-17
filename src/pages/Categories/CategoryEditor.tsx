@@ -12,13 +12,18 @@ import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
 import { CategoryDto, Choice, ChoiceType, Option } from "../../overmind/categories/effects"
 
+type CategoryParams = {
+    categoryid: string,
+    menuid: string
+}
+
 export const CategoryEditor: React.FunctionComponent = () => {
-    const { categoryid, menuid } = useParams<{ categoryid: string, menuid: string }>()
+    const { categoryid, menuid } = useParams<CategoryParams>()
 
     const [modalOpenChoice, setModalOpenChoice] = useState(false)
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
-    const [editOptionData, setEditOptionData] = useState<Option | null>(null)
+    // const [editOptionData, setEditOptionData] = useState<Option | null>(null)
 
     const initialValuesGeneral: CategoryDto = {
         title: "",
