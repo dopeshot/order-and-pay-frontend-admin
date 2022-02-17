@@ -48,11 +48,7 @@ export const Menus: React.FC = () => {
         getAllMenus()
     }
 
-    const openDeleteModal = (event: any, menu: Menu) => {
-        // This prevents the event from bubbling up the DOM to the parent node where you open edit
-        event.stopPropagation()
-        event.preventDefault()
-
+    const openDeleteModal = (menu: Menu) => {
         setSelectedMenu(menu)
         setHasDeleteModal(true)
     }
@@ -61,15 +57,6 @@ export const Menus: React.FC = () => {
         setHasDeleteModal(false)
         setSelectedMenu(null)
     }
-
-    const editMenu = (event: any, menu: Menu) => {
-        // This prevents the event from bubbling up the DOM to the parent node where you open edit
-        event.stopPropagation()
-        event.preventDefault()
-
-        history.push(`/menus/${menu._id}`)
-    }
-
     return <div className="container md:max-w-full mt-12" >
         <div className="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
@@ -81,10 +68,9 @@ export const Menus: React.FC = () => {
             </div>
         </div>
         <List lines>
-            {menus.map((menu) => <ListItem key={menu._id} title={menu.title} icon={faFolder} to={`/menus/${menu._id}/editor`}>
-                {menu.isActive && <Tag title="Aktiv" type={TagTypesEnum.green} />}
-                <IconButton className="ml-auto mr-4" icon={faEdit} onClick={(event) => editMenu(event, menu)} />
-                <IconButton className="mr-4" icon={faTrash} onClick={(event) => openDeleteModal(event, menu)} />
+            {menus.map((menu) => <ListItem key={menu._id} title={menu.title} icon={faFolder} to={`/menus/${menu._id}/editor`} header={menu.isActive ? <Tag title="Aktiv" type={TagTypesEnum.green} /> : undefined}>
+                <IconButton className="ml-auto mr-4" icon={faEdit} to={`/menus/${menu._id}`} />
+                <IconButton className="mr-4" icon={faTrash} onClick={() => openDeleteModal(menu)} />
             </ListItem>)}
         </List>
         <Modal modalHeading={`${selectedMenu?.title} löschen?`} open={hasDeleteModal} onDissmis={closeDeleteModal}>
