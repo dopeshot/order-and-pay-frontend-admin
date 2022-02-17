@@ -4,6 +4,7 @@ import {
 import { Allergens } from '../../pages/Allergens/Allergens';
 import { Home } from '../../pages/Home/Home';
 import { Labels } from '../../pages/Labels/Labels';
+import { SingleMenu } from '../../pages/MenuOverview/SingleMenu';
 import { Tables } from '../../pages/Tables/Tables';
 import { Sidebar } from '../Navigation/Sidebar';
 import { Topbar } from '../Navigation/Topbar';
@@ -23,6 +24,7 @@ export const App: React.FunctionComponent = () => {
               <Route exact path="/home" component={Home} />
               <Route exact path="/menus/labels" component={Labels} />
               <Route exact path="/menus/allergens" component={Allergens} />
+              <Route path="/menus/:menuId/edit" component={SingleMenu} />
               <Route exact path="/">
                 <Redirect to="/home" />
               </Route>
