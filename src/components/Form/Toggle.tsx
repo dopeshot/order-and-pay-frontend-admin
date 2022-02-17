@@ -20,7 +20,7 @@ type ToggleProps = {
  */
 export const Toggle: React.FC<ToggleProps> = ({ name, labelText, labelOn, labelOff, helperText, labelRequired = false }) => {
     return (
-        <>
+        <div className="mb-4">
             <label className="block text-darkgrey text-sm font-semibold mb-1" htmlFor={name}>{labelText}{labelRequired && <span className="text-primary-blue ml-1">*</span>}</label>
             <Field name={name}>{(props: FieldProps<any>) => (
                 <div data-cy={`${name}-clickdiv`} onClick={() => props.form.setFieldValue(name, !props.field.value)} className="inline-flex items-center cursor-pointer">
@@ -31,6 +31,6 @@ export const Toggle: React.FC<ToggleProps> = ({ name, labelText, labelOn, labelO
                 </div>
             )}</Field>
             <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm font-semibold">{helperText}</p>
-        </>
+        </div>
     )
 }

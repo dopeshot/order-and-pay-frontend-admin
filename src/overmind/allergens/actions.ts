@@ -21,7 +21,7 @@ export const createAllergen = async ({ state, effects }: Context, allergen: Alle
     try {
         const response = await effects.allergens.createAllergen(allergen)
         const newAllergen = response.data
-        state.allergens.allergens.push(newAllergen)
+        state.allergens.allergens = [...state.allergens.allergens, newAllergen]
         return true
     } catch (error) {
         console.error(error)

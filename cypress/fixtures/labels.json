@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "61f1939acc615c1d6e8dd0ea",
+        "title": "dd",
+        "icon": "user"
+    },
+    {
+        "_id": "61f1939ecc615c1d6e8dd0ec",
+        "title": "Hak",
+        "icon": "user"
+    },
+    {
+        "_id": "620b9af11126e91d99b45555",
+        "title": "Gesund",
+        "icon": "user"
+    },
+    {
+        "_id": "620c1945200c4d26fffbc93c",
+        "title": "Burger",
+        "icon": "burger"
+    }
+]
