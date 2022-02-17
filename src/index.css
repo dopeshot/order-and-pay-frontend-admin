@@ -88,12 +88,17 @@ input::-webkit-search-cancel-button {
 }
 
 /*** Writing it like this to have better browser support. https://caniuse.com/?search=%3Anot() ***/
-.lines-list a,
-.lines-list div {
+.lines-list > a,
+.lines-list > div {
     border-bottom: solid #e4e7eb 1px;
 }
 
-.lines-list a:last-child,
-.lines-list div:last-child {
+.lines-list > a.bg-white-lightgrey,
+.lines-list > div.bg-white-lightgrey {
+    border-bottom: none;
+}
+
+.lines-list > a:last-child,
+.lines-list > div:last-child {
     border-bottom: 0;
 }
