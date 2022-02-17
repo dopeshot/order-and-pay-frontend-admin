@@ -45,16 +45,18 @@ export const Allergens: React.FC = () => {
 
         // Check if we are editing or creating a new allergen
         if (modalEditData) {
-            await updateAllergen({
+            if (!await updateAllergen({
                 id: modalEditData._id,
                 allergen: values
-            })
+            }))
+                return
             // Clear modal data
             setModalEditData(null)
             setModalOpen(false)
         }
         else {
-            await createAllergen(values)
+            if (!await createAllergen(values))
+                return
             setModalOpen(false)
         }
         setIsModalLoading(false)

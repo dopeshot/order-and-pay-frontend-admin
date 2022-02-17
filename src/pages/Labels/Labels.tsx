@@ -45,16 +45,18 @@ export const Labels: React.FC = () => {
 
         // Check if we are editing or creating a new label
         if (modalEditData) {
-            await updateLabel({
+            if (!await updateLabel({
                 id: modalEditData._id,
                 label: values
-            })
+            }))
+                return
             // Clear modal data
             setModalEditData(null)
             setModalOpen(false)
         }
         else {
-            await createLabel(values)
+            if (!await createLabel(values))
+                return
             setModalOpen(false)
         }
         setIsModalLoading(false)

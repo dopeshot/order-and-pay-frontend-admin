@@ -17,7 +17,7 @@ export const Tables: React.FunctionComponent = () => {
 
     const { loadTables, bulkTableSelection, sortTable, bulkDelete } = useActions().tables
 
-    const [displayModal, setDisplayModal] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
     const [bulkDropdown, setBulkDropdown] = useState(false)
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export const Tables: React.FunctionComponent = () => {
         <div className="container md:max-w-full mt-12">
             <div className="text-darkgrey">
                 {/* Add Table Modal */}
-                {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
+                <AddTableModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
                 {/* Headline */}
                 <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
@@ -62,7 +62,7 @@ export const Tables: React.FunctionComponent = () => {
                         </div>}
                     </div>
                     <div>
-                        <Button dataCy="table-add" type="button" icon={faPlus} onClick={() => setDisplayModal(true)}>Tisch hinzufügen</Button>
+                        <Button dataCy="table-add" type="button" icon={faPlus} onClick={() => setModalOpen(true)}>Tisch hinzufügen</Button>
                     </div>
                 </div>
 

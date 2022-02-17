@@ -59,8 +59,8 @@ describe('Api Endpoints', () => {
     it('should create one table using only input', () => {
       cy.get('[data-cy="table-table-row"]').should('have.length', 4)
 
-      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
-      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
+      cy.get('[data-cy="textinput-tableNumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="textinput-capacity-input"]').type(table.capacity.toString())
 
       cy.get('[data-cy="table-save"]').click()
       cy.wait('@addTable')
@@ -70,7 +70,7 @@ describe('Api Endpoints', () => {
     it('should create one table using input and quick people count', () => {
       cy.get('[data-cy="table-table-row"]').should('have.length', 4)
 
-      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="textinput-tableNumber-input"]').type(table.tableNumber)
       cy.get('[data-cy="capacity-quick-2"]').click()
 
       cy.get('[data-cy="table-save"]').click()
@@ -79,7 +79,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should close add table modal because of clicking outside the element', () => {
-      cy.get('[data-cy="table-modal-background"]').click({ force: true })
+      cy.get('body').click('left')
       cy.get('[data-cy="table-modal"]').should('not.exist')
     })
 
@@ -89,7 +89,7 @@ describe('Api Endpoints', () => {
     })
 
     it('should have disabled state when inputs are wrong', () => {
-      cy.get('[data-cy="table-modal-capacity-input"]').type("0")
+      cy.get('[data-cy="textinput-capacity-input"]').type("0")
       cy.get('[data-cy="table-modal"]').click()
 
       cy.get('[data-cy="table-save"]').should('have.class', 'opacity-80')
@@ -98,8 +98,8 @@ describe('Api Endpoints', () => {
     it('should have disabled state when inputs are empty', () => {
       cy.get('[data-cy="table-save"]').should('have.class', 'opacity-80')
 
-      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
-      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
+      cy.get('[data-cy="textinput-tableNumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="textinput-capacity-input"]').type(table.capacity.toString())
 
       cy.get('[data-cy="table-save"]').should('not.have.class', 'opacity-80')
     })
@@ -107,8 +107,8 @@ describe('Api Endpoints', () => {
     it('should have loading icon when sending', () => {
       const interception = interceptIndefinitely('POST', api, "createTableIndefinitely", { fixture: 'table.json' })
 
-      cy.get('[data-cy="table-modal-tablenumber-input"]').type(table.tableNumber)
-      cy.get('[data-cy="table-modal-capacity-input"]').type(table.capacity.toString())
+      cy.get('[data-cy="textinput-tableNumber-input"]').type(table.tableNumber)
+      cy.get('[data-cy="textinput-capacity-input"]').type(table.capacity.toString())
 
       cy.get('[data-cy="table-save"] svg').click().then(() => {
         cy.get('[data-cy="table-save"] svg').should('have.class', 'fa-spinner')
