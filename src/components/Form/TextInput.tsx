@@ -34,12 +34,12 @@ export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelTe
                 <>
                     <div className="relative flex flex-col justify-center my-1">
                         {icon && <FontAwesomeIcon icon={icon} className={`absolute right-6 ${props.meta.error && props.meta.touched ? "" : "text-darkgrey"}`} />}
-                        <input type={type} placeholder={placeholder} autoFocus={autoFocus} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${icon ? "pr-10" : ""} ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
+                        <input data-cy={`textinput-${name}-input`} type={type} placeholder={placeholder} autoFocus={autoFocus} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${icon ? "pr-10" : ""} ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
                     </div>
                     {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey text-sm font-semibold">{helperText}</p>}
                 </>
             )}</Field>
-            <FormError field={name} />
+            <FormError dataCy={`textinput-${name}-form-error`} field={name} />
         </div>
     )
 }
