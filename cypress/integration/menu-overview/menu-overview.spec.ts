@@ -32,7 +32,7 @@ describe('Menu Overview', () => {
     })
 
     describe('Loading', () => {
-        it.only('should display loading when menu not loaded', () => {
+        it('should display loading when menu not loaded', () => {
             const interception = interceptIndefinitely('GET', `${api}/editor`, "getMenuOverviewEditorIndefinitely", { fixture: 'menu-overview.json' })
 
             cy.visit('/menus/${menu._id}/edit').then(() => {
