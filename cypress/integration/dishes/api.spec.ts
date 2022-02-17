@@ -78,7 +78,7 @@ describe('Api Endpoints', () => {
             })
         })
 
-        it.only('should go to "/admin/menus/1/editor" when click back button', () => {
+        it('should go to "/admin/menus/1/editor" when click back button', () => {
             cy.get('[data-cy="dishes-back-button"]').click()
 
             cy.url().should('include', '/admin/menus/1/editor')
