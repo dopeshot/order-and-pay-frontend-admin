@@ -49,6 +49,7 @@ export const SingleMenu: React.FC = () => {
 
             {/* Categories and Dishes */}
             <div>
+                {console.log(menu)}
                 <List>
                     {isLoadingMenu ? <p>Loading...</p> : <>
                         {/* Category */}
@@ -59,7 +60,7 @@ export const SingleMenu: React.FC = () => {
                             </ListItem>
                             {/* Dishes */}
                             {category.dishes.map(dish => (
-                                <ListItem key={dish._id} icon={faUtensils} title={dish.title} indent>
+                                <ListItem key={dish._id} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                     <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
                                     <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                 </ListItem>
