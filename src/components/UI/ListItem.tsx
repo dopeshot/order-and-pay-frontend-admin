@@ -18,12 +18,14 @@ type ListItemProps = {
     to?: string
     /** Function what happens when you click element */
     onClick?: (values: any) => void
+    /** For Testing */
+    dataCy?: string
 }
 
 /**
  * List, should have List as parent
  */
-export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, header, children, to, onClick }) => {
+export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, header, children, to, onClick, dataCy }) => {
 
     // Elements on the left side of the item
     const headerContent = <>
@@ -34,7 +36,7 @@ export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, inde
 
     const headerClasses = `flex items-center py-4 pl-7 ${indent ? "pl-8 md:pl-16" : ""} flex-grow`
 
-    return <div className={`flex rounded-lg w-full cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"}`}>
+    return <div data-cy={dataCy} className={`flex rounded-lg w-full cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"}`}>
         {to ?
             <Link to={to} className={headerClasses}>
                 {headerContent}

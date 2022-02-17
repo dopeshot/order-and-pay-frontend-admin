@@ -7,7 +7,7 @@ describe('Menu Overview', () => {
     describe('Ui Header', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/edit`)
+            cy.visit(`/menus/${menu._id}/editor`)
 
             cy.wait('@getMenuOverviewEditor')
         })
@@ -35,7 +35,7 @@ describe('Menu Overview', () => {
         it('should display loading when menu not loaded', () => {
             const interception = interceptIndefinitely('GET', `${api}/editor`, "getMenuOverviewEditorIndefinitely", { fixture: 'menu-overview.json' })
 
-            cy.visit('/menus/${menu._id}/edit').then(() => {
+            cy.visit('/menus/${menu._id}/editor').then(() => {
                 // TODO:Change when loading component implemented
                 cy.contains('Loading...').should('be.visible')
                 interception.sendResponse()
@@ -47,56 +47,53 @@ describe('Menu Overview', () => {
     describe('Ui Content', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/edit`)
+            cy.visit(`/menus/${menu._id}/editor`)
 
             cy.wait('@getMenuOverviewEditor')
         })
 
         it('should display correct count of categories', () => {
-
+            cy.get('[data-cy="singlemenu-category-listitem"]').should('have.length', menu.categories.length)
         })
 
         it('should display correct title of category', () => {
-
+            cy.get('[data-cy="singlemenu-category-listitem"] h4').should('contain', menu.categories[0].title)
         })
 
         it('should display correct icon of category', () => {
-
+            cy.get('[data-cy="singlemenu-category-listitem"] svg').should('have.class', `fa-${menu.categories[0].icon}`)
         })
 
         it('should display correct count of dishes ("Gerichte") in category box', () => {
-
+            cy.get('[data-cy="singlemenu-category-listitem"]').should('contain', `${menu.categories[0].dishes.length} Gerichte`)
         })
 
         it('should display "1 Gericht" when only one dish is added', () => {
-
+            cy.get('[data-cy="singlemenu-category-listitem"]').should('contain', `1 Gericht`)
         })
 
         it('should display correct count of dishes', () => {
-
+            cy.get(`[data-cy="singlemenu-${menu.categories[0].title}-dish-listitem"]`).should('have.length', menu.categories[0].dishes.length)
         })
 
         it('should display correct title of dish', () => {
-
-        })
-
-        it('should display correct icon of dish', () => {
-
+            cy.get(`[data-cy="singlemenu-${menu.categories[0].title}-dish-listitem"]`).should('contain', menu.categories[0].dishes[0].title)
         })
 
         it('should display correct price of dish', () => {
-
+            cy.get(`[data-cy="singlemenu-${menu.categories[0].title}-dish-listitem"] h6`).should('contain', '6,00')
         })
 
         it('should display not available tag when dish isAvailable set to false', () => {
-
+            cy.get('[data-cy=tag-box].bg-red-600').should('be.visible')
         })
     })
 
-    describe('Create', () => {
+    // TODO: Implement when dish and categories are merged
+    describe.skip('Create', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/edit`)
+            cy.visit(`/menus/${menu._id}/editor`)
 
             cy.wait('@getMenuOverviewEditor')
         })
@@ -118,10 +115,11 @@ describe('Menu Overview', () => {
         })
     })
 
-    describe('Delete', () => {
+    // TODO: Implement when dish and categories are merged
+    describe.skip('Delete', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/edit`)
+            cy.visit(`/menus/${menu._id}/editor`)
 
             cy.wait('@getMenuOverviewEditor')
         })

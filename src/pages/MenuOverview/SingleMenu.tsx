@@ -54,13 +54,13 @@ export const SingleMenu: React.FC = () => {
                     {isLoadingMenu ? <p>Loading...</p> : <>
                         {/* Category */}
                         {menu?.categories.map(category => (<div key={category._id}>
-                            <ListItem title={category.title} icon={category.icon as IconProp} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
+                            <ListItem dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon as IconProp} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
                                 {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" icon={faPlus} className="text-darkgrey mr-3">Gericht hinzufügen</Button>}
                                 <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                             </ListItem>
                             {/* Dishes */}
                             {category.dishes.map(dish => (
-                                <ListItem key={dish._id} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
+                                <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} key={dish._id} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                     <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
                                     <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                 </ListItem>
