@@ -17,6 +17,8 @@ export type ButtonProps = {
 }
 
 export const Button: React.FC<ButtonProps> = ({ kind = "primary", icon, disabled, loading, dataCy, className, children, to, onClick, type = "button" }) => {
+    disabled = loading ? true : disabled
+
     return (<>
         {kind === "tertiary" ?
             to ?
