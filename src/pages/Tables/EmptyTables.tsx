@@ -12,12 +12,13 @@ export const EmptyTables: React.FunctionComponent = () => {
         }
     } = useAppState()
 
-    const [displayModal, setDisplayModal] = useState(false)
+    const [modalOpen, setModalOpen] = useState(false)
+
 
     return (
         <>
             {/* Add Table Modal */}
-            {displayModal && <AddTableModal setDisplayModal={setDisplayModal} />}
+            <AddTableModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
             <div data-cy="empty-tables-background" className={`bg-no-repeat ${!isMobile ? 'bg-table-empty' : ""} flex flex-col justify-center`} style={{ height: "calc(100vh - 64px)" }}>
                 <div className="container flex flex-col items-center md:block mb-44 md:mb-20">
                     {isMobile &&
@@ -27,7 +28,7 @@ export const EmptyTables: React.FunctionComponent = () => {
                     <h1 className="text-4xl text-primary-blue font-semibold mb-3">Erstelle Tische</h1>
                     <p className="text-lg text-darkgrey text-center md:text-left mb-4">Um QR-Codes und Bestellungen zu bearbeiten, <br className="hidden sm:block" /> musst du wissen wo deine Kundschaft sitzt. </p>
                     <div className="w-full sm:w-max">
-                        <Button icon={faPlus} type="button" className="w-full" onClick={() => setDisplayModal(true)}> Tisch hinzufügen</Button>
+                        <Button icon={faPlus} type="button" className="w-full" onClick={() => setModalOpen(true)}> Tisch hinzufügen</Button>
                     </div>
                 </div>
             </div >
