@@ -25,6 +25,8 @@ export const SingleMenu: React.FC = () => {
         getMenuEditor(menuId)
     }, [getMenuEditor, menuId])
 
+    const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
+
     return (
         <div className="container md:max-w-full mt-12">
             {/* Back Button */}
@@ -58,7 +60,7 @@ export const SingleMenu: React.FC = () => {
                             {/* Dishes */}
                             {category.dishes.map(dish => (
                                 <ListItem key={dish._id} icon={faUtensils} title={dish.title} indent>
-                                    <h6 className="text-headline-black text-lg font-semibold mr-3">{dish.price}</h6>
+                                    <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
                                     <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                 </ListItem>
                             ))}
