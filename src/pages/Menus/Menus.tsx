@@ -67,7 +67,7 @@ export const Menus: React.FC = () => {
         event.stopPropagation()
         event.preventDefault()
 
-        history.push(`/menus/${menu._id}/edit`)
+        history.push(`/menus/${menu._id}`)
     }
 
     return <div className="container md:max-w-full mt-12" >
