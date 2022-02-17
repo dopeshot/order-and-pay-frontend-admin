@@ -25,13 +25,6 @@ export const Labels: React.FC = () => {
         getAllLabels()
     }, [getAllLabels])
 
-    const handleDelete = async (event: any, id: string) => {
-        // This prevents the event from bubbling up the DOM to the parent node where you open edit
-        event.stopPropagation()
-
-        deleteLabel(id)
-    }
-
     return <div className="container md:max-w-full mt-12">
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
@@ -47,7 +40,7 @@ export const Labels: React.FC = () => {
                 setModalEditData(label)
                 setModalOpen(true)
             }}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={(event) => handleDelete(event, label._id)} />
+                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => deleteLabel(label._id)} />
             </ListItem>)}
         </List>
 
