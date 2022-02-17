@@ -8,7 +8,7 @@ import * as Yup from "yup"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
-import { ComponentOptions, Dropdown } from "../../components/Form/Dropdown"
+import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
@@ -16,6 +16,7 @@ import { LabelModal } from "../../components/Labels/LabelModal"
 import { Modal } from "../../components/UI/Modal"
 import { useActions, useAppState } from "../../overmind"
 import { DishDto } from "../../overmind/dishes/effects"
+import { ComponentOptions } from "../../shared/types/ComponentOptions"
 
 type Params = {
     menusId: string,

@@ -1,15 +1,9 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field, FieldProps } from "formik";
 import { useState } from "react";
+import { ComponentOptions } from "../../shared/types/ComponentOptions";
 import { FormError } from "../Errors/FormError";
-
-export type ComponentOptions = {
-    id: number | string
-    label: string
-    icon?: IconProp
-}
 
 type DropdownProps = {
     /** Gives the dropdown a unique name */
