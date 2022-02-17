@@ -24,7 +24,7 @@ export const Home: React.FunctionComponent = () => {
             </Formik>
 
             <Link to="/tables">Gehe zu Tabellen</Link>
-            <List>
+            <List lines>
                 <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
                 <ListItem title="Football" indent onClick={() => console.log("parent")} header={<Tag title="Favorite" />}>
                     <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
@@ -41,7 +41,6 @@ export const Home: React.FunctionComponent = () => {
                     <IconButton icon={faLink} className="mr-2" to="/home" />
                     <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
                 </ListItem>
-
             </List>
         </div>
     )
