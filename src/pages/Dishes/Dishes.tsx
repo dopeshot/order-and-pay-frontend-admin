@@ -8,7 +8,7 @@ import * as Yup from "yup"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
-import { ComponentOptions, Dropdown } from "../../components/Form/Dropdown"
+import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
@@ -16,11 +16,12 @@ import { LabelModal } from "../../components/Labels/LabelModal"
 import { Modal } from "../../components/UI/Modal"
 import { useActions, useAppState } from "../../overmind"
 import { DishDto } from "../../overmind/dishes/effects"
+import { ComponentOptions } from "../../shared/types/ComponentOptions"
 
 type Params = {
     menusId: string,
     categoriesId: string,
-    dishId: string
+    dishId?: string
 }
 
 export const Dishes: React.FC = () => {
@@ -54,7 +55,7 @@ export const Dishes: React.FC = () => {
         async function loadDish() {
             try {
                 // Fetch dish and set editing
-                const dish = await getDishById(dishId)
+                const dish = await getDishById(dishId!) // ! because we only call when isEditing
 
                 if (!isMounted)
                     return
@@ -72,6 +73,10 @@ export const Dishes: React.FC = () => {
         // Prepare Categories, Labels and Allergens for Dropdown and Checkbox
         async function prepDataOptions() {
             const categories = await getAllCategories()
+
+            if (!isMounted)
+                return
+
             const categoriesResult = categories.map(categorie => ({
                 id: categorie._id,
                 label: categorie.title
@@ -135,7 +140,7 @@ export const Dishes: React.FC = () => {
 
         try {
             // Check if we are editing or creating a new dish
-            if (isEditing)
+            if (isEditing && dishId)
                 await updateDish({
                     dishId,
                     dish
@@ -157,7 +162,7 @@ export const Dishes: React.FC = () => {
     // Dish delete 
     const handleDishDelete = async () => {
         // Check if we are editing a dish
-        if (!isEditing)
+        if (!isEditing || !dishId)
             return
 
         setIsLoadingDelete(true)
@@ -201,21 +206,22 @@ export const Dishes: React.FC = () => {
                         </Form>
                     )}
                 </Formik>
-                {/* Label Modal */}
-                <LabelModal modalOpen={hasLabelModal} setModalOpen={setHasLabelModal} />
+            </div>
+            }
+            {/* Label Modal */}
+            <LabelModal modalOpen={hasLabelModal} setModalOpen={setHasLabelModal} />
 
-                {/* Allergens Modal */}
-                <AllergensModal modalOpen={hasAllergensModal} setModalOpen={setHasAllergensModal} />
+            {/* Allergens Modal */}
+            <AllergensModal modalOpen={hasAllergensModal} setModalOpen={setHasAllergensModal} />
 
-                {/* Delete Modal */}
-                <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
-                    <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
-                    <div className="flex md:justify-between flex-col md:flex-row">
-                        <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
-                        <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
-                    </div>
-                </Modal>
-            </div>}
+            {/* Delete Modal */}
+            <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
+                <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
+                <div className="flex md:justify-between flex-col md:flex-row">
+                    <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
+                    <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
+                </div>
+            </Modal>
         </div>
     )
 }
