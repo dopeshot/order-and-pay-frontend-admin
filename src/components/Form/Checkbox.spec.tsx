@@ -49,7 +49,7 @@ describe('Checkbox', () => {
     beforeEach(() => {
         mount(<Wrapper>
             <Checkbox name={data.name} options={data.options} labelText={data.labelText} helperText={data.helperText} />
-            <Button buttonType="primary" type="submit" className="mt-2">Hello</Button>
+            <Button kind="primary" type="submit" className="mt-2">Hello</Button>
         </Wrapper>)
     })
 

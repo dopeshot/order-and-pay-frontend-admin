@@ -42,13 +42,13 @@ declare global {
 
             /**
             * Custom command to intercept all patchTable request 
-            * @example cy.getTables()
+            * @example cy.patchTable()
             */
             patchTable(): void
 
             /**
              * Custom command to intercept all deleteTable request
-             * @example cy.getTables()
+             * @example cy.deleteTable()
              */
             deleteTable(): void
 
@@ -87,6 +87,54 @@ declare global {
              * @example cy.getMenuOverviewEditor()
              */
             getMenuOverviewEditor(): void
+
+            /**
+             * Custom command to intercept all create dish requests
+             * @example cy.createDish()
+             */
+            createDish(): void
+
+            /**
+             * Custom command to intercept all create dish requests give duplicate error back
+             * @example cy.createDishDuplicate()
+             */
+            createDishDuplicate(): void
+
+            /**
+             * Custom command to intercept all get dish by id requests
+             * @example cy.getDishById()
+             */
+            getDishById(): void
+
+            /**
+             * Custom command to intercept all update dish by id requests
+             * @example cy.updateDish()
+             */
+            updateDish(): void
+
+            /**
+             * Custom command to intercept all delete dish requests
+             * @example cy.deleteDish()
+             */
+            deleteDish(): void
+
+            /**
+             * Custom command to intercept all get all categories request
+             * @example cy.getAllCategories()
+             */
+            getAllCategories(): void
+
+            /**
+             * Custom command to intercept all get all allergens request
+             * @example cy.getAllAllergens()
+             */
+            getAllAllergens(): void
+
+            /**
+            * Custom command to intercept all get all labels request
+            * @example cy.getAllLabels()
+            */
+            getAllLabels(): void
         }
     }
 }
