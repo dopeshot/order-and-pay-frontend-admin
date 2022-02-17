@@ -1,6 +1,5 @@
 import { faEdit, faFolder, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/UI/List"
@@ -11,8 +10,6 @@ import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/state"
 
 export const Menus: React.FC = () => {
-    const history = useHistory()
-
     // Get hooks to manipulate global state
     const { getAllMenus } = useActions().menus
 
