@@ -25,7 +25,7 @@ type Params = {
 }
 
 export const Dishes: React.FC = () => {
-    const { dishId } = useParams<Params>()
+    const { dishId, menusId } = useParams<Params>()
     const isEditing = Boolean(dishId)
     const history = useHistory()
 
@@ -175,7 +175,7 @@ export const Dishes: React.FC = () => {
 
     return (
         <div className="container mt-12">
-            <Button dataCy="dishes-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+            <Button dataCy="dishes-back-button" kind="tertiary" to={`/menus/${menusId}/editor`} icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
             {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>

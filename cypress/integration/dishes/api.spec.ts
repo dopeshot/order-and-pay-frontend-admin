@@ -78,10 +78,10 @@ describe('Api Endpoints', () => {
             })
         })
 
-        it('should go to "/admin/menus" when click back button', () => {
+        it.only('should go to "/admin/menus/1/editor" when click back button', () => {
             cy.get('[data-cy="dishes-back-button"]').click()
 
-            cy.url().should('include', '/admin/menus')
+            cy.url().should('include', '/admin/menus/1/editor')
         })
 
         it('should open labels modal when click add label', () => {
