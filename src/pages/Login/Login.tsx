@@ -17,7 +17,7 @@ export const Login: React.FC = () => {
 
     // Formik Validation
     const validationSchema = Yup.object().shape({
-        email: Yup.string().required("Dies ist ein Pflichtfeld"),
+        email: Yup.string().email().required("Dies ist ein Pflichtfeld"),
         password: Yup.string().required("Dies ist ein Pflichtfeld")
     })
 
