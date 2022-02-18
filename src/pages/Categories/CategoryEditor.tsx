@@ -109,6 +109,14 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     const submitChoice = (values: ChoiceDto) => {
         console.log("submitChoice:", values)
+
+        // Create Choice from ChoiceDto. Add empty options + next id
+        const newChoice: Choice = {
+            ...values,
+            options: [],
+            id: Math.max(...choices.map(choice => choice.id), 0) + 1
+        }
+        setChoices([...choices, newChoice])
     }
 
     const dropdownOptionsChoice = [
