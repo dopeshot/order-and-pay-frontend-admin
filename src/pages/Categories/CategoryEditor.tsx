@@ -39,7 +39,7 @@ export type Option = {
 export type OptionDto = {
     name: string
     price: number
-    default: boolean
+    isDefault: boolean
 }
 
 export type Choice = {
@@ -186,13 +186,13 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const initialOptionValues: OptionDto = {
         name: editOptionData?.name ?? "",
         price: editOptionData?.price ?? 100,
-        default: (parentChoiceId !== null && choices[parentChoiceId].default === editOptionData?.id) ?? false
+        isDefault: (parentChoiceId !== null && choices[parentChoiceId].default === editOptionData?.id) ?? false
     }
 
     const validationOptionSchema = Yup.object().shape({
         name: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
         price: Yup.number().min(0, "Der Preis darf nicht kleiner als 0 sein.").max(10000000, "Der Preis darf nicht größer als 10000000 sein.").required("Dies ist ein Pflichtfeld."),
-        default: Yup.boolean().required()
+        isDefault: Yup.boolean().required()
     })
 
     const submitOption = (values: OptionDto) => {
@@ -203,16 +203,23 @@ export const CategoryEditor: React.FunctionComponent = () => {
             return
         }
 
+        // Remove isDefault from values
+        const { isDefault, ...optionData } = values
+
         if (isEditingOptions && editOptionData) {
             setChoices(choices => {
+                // Update default
+                if (isDefault && choices[parentChoiceId].default !== editOptionData.id)
+                    choices[parentChoiceId].default = editOptionData.id
+
                 const option = choices[parentChoiceId].options.find(option => option.id === editOptionData.id)
-                Object.assign(option, values)
+                Object.assign(option, optionData)
                 return choices
             })
         } else {
             // Create new option from OptionDto. + next id
             const newOption: Option = {
-                ...values,
+                ...optionData,
                 id: Math.max(...choices[parentChoiceId].options.map(option => option.id), 0) + 1
             }
 
@@ -320,7 +327,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 <Form>
                     <TextInput name="name" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
                     <TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="200" icon={faEuroSign} />
-                    <Toggle name="default" labelText="Vorausgewählte Option?" labelRequired labelOff="Nicht ausgewählt" labelOn="Ausgewählt" />
+                    <Toggle name="isDefault" labelText="Vorausgewählte Option?" labelRequired labelOff="Nicht ausgewählt" labelOn="Ausgewählt" />
                     <Button type="submit" icon={faCheck}>{isEditingOptions ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
