@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { LabelModal } from "../../components/Labels/LabelModal"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { useActions, useAppState } from "../../overmind"
@@ -19,13 +20,45 @@ export const Labels: React.FC = () => {
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<Label | null>(null)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [selectedLabel, setSelectedLabel] = useState<Label | null>(null)
 
     // Load labels when page is loaded
     useEffect((): void => {
         getAllLabels()
     }, [getAllLabels])
 
+    const handleDelete = async (event: any) => {
+        if (!selectedLabel) {
+            console.warn("There is no label selected.")
+            return
+        }
+
+        setIsLoadingDelete(true)
+
+        // Delete the allergen
+        await deleteLabel(selectedLabel._id)
+
+        closeDeleteModal()
+        setIsLoadingDelete(false)
+
+        // When allergen is delete update List
+        getAllLabels()
+    }
+
+    const openDeleteModal = (label: Label) => {
+        setSelectedLabel(label)
+        setDeleteModalOpen(true)
+    }
+
+    const closeDeleteModal = () => {
+        setDeleteModalOpen(false)
+        setSelectedLabel(null)
+    }
+
     return <div className="container md:max-w-full mt-12">
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Labels</h1>
@@ -35,15 +68,30 @@ export const Labels: React.FC = () => {
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Label hinzufügen</Button>
             </div>
         </div>
+        {/* Header end */}
+
+        {/* Content */}
         <List lines>
             {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
                 setModalEditData(label)
                 setModalOpen(true)
             }}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => deleteLabel(label._id)} />
+                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(label)} />
             </ListItem>)}
         </List>
+        {/* Content End */}
 
+        {/* Add/Edit Label Modal */}
         <LabelModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
+
+        {/* Delete Modal */}
+        <DeleteModal
+            title={`${selectedLabel?.title}`}
+            description={`Das Löschen kann nicht rückgängig gemacht werden. ${selectedLabel?.title} wird auch aus allen Kategorien entfernt.`}
+            open={isDeleteModalOpen}
+            onDissmis={closeDeleteModal}
+            handleDelete={handleDelete}
+            isLoadingDelete={isLoadingDelete}
+        />
     </div>
 }

@@ -83,6 +83,12 @@ declare global {
             changeToDuplicateTable(): void
 
             /**
+             * Custom command to intercept all getMenuOverviewEditor requests
+             * @example cy.getMenuOverviewEditor()
+             */
+            getMenuOverviewEditor(): void
+
+            /**
              * Custom command to intercept all create dish requests
              * @example cy.createDish()
              */

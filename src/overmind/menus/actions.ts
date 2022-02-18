@@ -44,10 +44,10 @@ export const getMenuById = async ({ state, effects }: Context, id: string): Prom
 }
 
 // Update menu by id action
-export const updateMenu = async ({ effects }: Context, { id, menu }: { id: string, menu: MenuDto }): Promise<boolean> => {
+export const updateMenu = async ({ effects }: Context, { menuId, menu }: { menuId: string, menu: MenuDto }): Promise<boolean> => {
     try {
         // We just await the update no need to update menu object
-        await effects.menus.updateMenu(id, menu)
+        await effects.menus.updateMenu(menuId, menu)
         return true
     } catch (error) {
         console.error(error)
