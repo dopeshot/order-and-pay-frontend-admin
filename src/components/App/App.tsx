@@ -27,11 +27,11 @@ export const App: React.FunctionComponent = () => {
               <Route exact path="/home" component={Home} />
               <Route exact path="/menus/labels" component={Labels} />
               <Route exact path="/menus/allergens" component={Allergens} />
-              <Route exact path="/menus/:menusId/categories/:categoriesId/dish/:dishId" component={Dishes} />
-              <Route exact path="/menus/:menusId/categories/:categoriesId/dish" component={Dishes} />
-              <Route exact path="/menus/:id/editor" component={SingleMenu} />
+              <Route exact path="/menus/:menuId/categories/:categoriesId/dish/:dishId" component={Dishes} />
+              <Route exact path="/menus/:menuId/categories/:categoriesId/dish" component={Dishes} />
+              <Route exact path="/menus/:menuId/editor" component={SingleMenu} />
               <Route exact path="/menus/add" component={MenuEditor} />
-              <Route exact path="/menus/:id" component={MenuEditor} />
+              <Route exact path="/menus/:menuId" component={MenuEditor} />
               <Route exact path="/menus" component={Menus} />
               <Route exact path="/">
                 <Redirect to="/home" />

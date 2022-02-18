@@ -19,7 +19,7 @@ import { DishDto } from "../../overmind/dishes/effects"
 import { ComponentOptions } from "../../shared/types/ComponentOptions"
 
 type Params = {
-    menusId: string,
+    menuId: string,
     categoriesId: string,
     dishId?: string
 }
