@@ -201,7 +201,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
         }
 
         if (isEditingOptions && editOptionData) {
-
+            setChoices(choices => {
+                const option = choices[parentChoiceId].options.find(option => option.id === editOptionData.id)
+                Object.assign(option, values)
+                return choices
+            })
         } else {
             // Create new option from OptionDto. + next id
             const newOption: Option = {
