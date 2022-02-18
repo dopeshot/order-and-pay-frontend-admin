@@ -13,7 +13,7 @@ import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
 import { Tag } from "../../components/UI/Tag"
-import { useAppState } from "../../overmind"
+import { useActions, useAppState } from "../../overmind"
 import { ChoiceType } from "../../overmind/categories/effects"
 import { numberToPrice } from "../../services/numberToPrice"
 
@@ -27,7 +27,7 @@ type CategoryWithoutChoices = {
     description: string
     icon: string
     image: string
-    menu: string
+    menuId: string
 }
 
 export type Option = {
@@ -61,6 +61,9 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     // Global States
     const { isMobile } = useAppState().app
+
+    // Global actions
+    const { createCategory } = useActions().categories
 
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
@@ -105,7 +108,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         description: "",
         icon: "",
         image: "",
-        menu: menuId
+        menuId
     }
 
     const validationCategorySchema = Yup.object().shape({
@@ -117,13 +120,15 @@ export const CategoryEditor: React.FunctionComponent = () => {
     })
 
 
-    const submitCategory = (values: CategoryWithoutChoices) => {
+    const submitCategory = async (values: CategoryWithoutChoices) => {
         console.log("submitCategory:", values)
         console.log("choices:", choices)
-        console.log("finalObject:", {
+        const newCategory = {
             ...values,
             choices
-        })
+        }
+        console.log("finalObject:", newCategory)
+        await createCategory(newCategory)
     }
 
 
