@@ -36,7 +36,7 @@ describe('Menu Overview', () => {
             const interception = interceptIndefinitely('GET', `${api}/editor`, "getMenuOverviewEditorIndefinitely", { fixture: 'menu-overview.json' })
 
             cy.visit('/menus/${menu._id}/editor').then(() => {
-                // TODO:Change when loading component implemented
+                // TODO: Change when loading component implemented
                 cy.contains('Loading...').should('be.visible')
                 interception.sendResponse()
                 cy.wait('@getMenuOverviewEditorIndefinitely')
@@ -89,7 +89,6 @@ describe('Menu Overview', () => {
         })
     })
 
-    // TODO: Implement when dish and categories are merged
     describe('Create', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
@@ -98,12 +97,12 @@ describe('Menu Overview', () => {
             cy.wait('@getMenuOverviewEditor')
         })
 
-        it('should go to page add category when click "Kategorie hinzufügen" button', () => {
-
+        it.skip('should go to page add category when click "Kategorie hinzufügen" button', () => {
+            // TODO: Implement when categories are merged
         })
 
-        it('should go to page edit category when click category box', () => {
-
+        it.skip('should go to page edit category when click category box', () => {
+            // TODO: Implement when categories are merged
         })
 
         it('should go to page add dish when click "Gericht hinzufügen" button', () => {
@@ -137,8 +136,7 @@ describe('Menu Overview', () => {
         })
     })
 
-    // TODO: Implement when dish and categories are merged
-    describe.skip('Delete', () => {
+    describe('Delete', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
             cy.visit(`/menus/${menu._id}/editor`)
@@ -146,12 +144,13 @@ describe('Menu Overview', () => {
             cy.wait('@getMenuOverviewEditor')
         })
 
-        it('should delete category when open delete modal and click delete', () => {
-
+        it.skip('should delete category when open delete modal and click delete', () => {
+            // TODO: Implement when categories are merged  
         })
 
-        it('should delete dish when open delete modal and click delete', () => {
-
+        it('should open delete dish modal when click trash icon', () => {
+            cy.get('[data-cy="dishes-delete-button"]').first().click()
+            cy.contains(`${menu.categories[0].dishes[0].title} löschen?`).should('be.visible')
         })
     })
 })

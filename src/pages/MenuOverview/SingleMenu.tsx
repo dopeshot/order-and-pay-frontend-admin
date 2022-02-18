@@ -98,7 +98,7 @@ export const SingleMenu: React.FC = () => {
                                 {category.dishes.map(dish => (<div key={dish._id}>
                                     <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                         <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
-                                        <IconButton icon={faTrash} onClick={() => openDishDeleteModal(dish)} />
+                                        <IconButton dataCy="dishes-delete-button" icon={faTrash} onClick={() => openDishDeleteModal(dish)} />
                                     </ListItem>
                                 </div>))}
                                 {/* Dishes end */}
