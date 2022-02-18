@@ -6,7 +6,7 @@ export type DishDto = {
     title: string
     description: string
     image?: string
-    isActive: boolean
+    isAvailable: boolean
     price: number
     category: Category | string // id ref: 'Category'
     allergens: Allergen[] // id ref: 'Allergy
@@ -51,6 +51,6 @@ export const getDishById = (id: string) => request.get<Dish>(`/dishes/${id}`)
 // Update a dish
 export const updateDish = (id: string, dish: DishDto) => request.patch<Dish>(`/dishes/${id}`, dish)
 // Delete a dish
-export const deleteDish = (id: string) => request.delete(`/dishes/${id}`)
+export const deleteDish = (id: string) => request.delete(`/dishes/${id}?type=hard`)
 // Get all Categories
 export const getAllCategories = () => request.get<Category[]>('/categories')

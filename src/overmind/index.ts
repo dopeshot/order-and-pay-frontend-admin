@@ -5,6 +5,7 @@ import * as allergens from './allergens'
 import * as app from './app'
 import * as dishes from './dishes'
 import * as labels from './labels'
+import * as menuoverview from './menuoverview'
 import * as menus from './menus'
 import * as tables from './tables'
 
@@ -13,6 +14,7 @@ export const config = namespaced({
     app,
     labels,
     allergens,
+    menuoverview,
     menus,
     dishes
 })
