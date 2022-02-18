@@ -7,6 +7,7 @@ import { IconButton } from "../../components/Buttons/IconButton"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Dish } from "../../overmind/dishes/effects"
@@ -68,7 +69,7 @@ export const SingleMenu: React.FC = () => {
             {/* Back Button */}
             <Button dataCy="singlemenu-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück zu allen Menüs</Button>
 
-            {isLoadingMenu ? <p>Loading...</p> : <>
+            {isLoadingMenu ? <Loading /> : <>
                 {/* Header */}
                 <div className="flex items-baseline">
                     <h1 className="text-2xl text-headline-black font-semibold mr-3 mb-1">{menu?.title}</h1>
