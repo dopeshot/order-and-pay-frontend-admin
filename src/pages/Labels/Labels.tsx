@@ -20,7 +20,7 @@ export const Labels: React.FC = () => {
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<Label | null>(null)
-    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedLabel, setSelectedLabel] = useState<Label | null>(null)
 
@@ -40,7 +40,7 @@ export const Labels: React.FC = () => {
         // Delete the allergen
         await deleteLabel(selectedLabel._id)
 
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
@@ -49,11 +49,11 @@ export const Labels: React.FC = () => {
 
     const openDeleteModal = (label: Label) => {
         setSelectedLabel(label)
-        setHasDeleteModal(true)
+        setDeleteModalOpen(true)
     }
 
     const closeDeleteModal = () => {
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setSelectedLabel(null)
     }
 
@@ -88,7 +88,7 @@ export const Labels: React.FC = () => {
         <DeleteModal
             title={`${selectedLabel?.title}`}
             description={`Das Löschen kann nicht rückgängig gemacht werden. ${selectedLabel?.title} wird auch aus allen Kategorien entfernt.`}
-            open={hasDeleteModal}
+            open={isDeleteModalOpen}
             onDissmis={closeDeleteModal}
             handleDelete={handleDelete}
             isLoadingDelete={isLoadingDelete}
