@@ -1,10 +1,13 @@
+import { request } from "../../services/axios"
+import { Category } from "../dishes/effects"
+
 export type CategoryDto = {
     title: string
     description: string
     icon: string
     image: string
     choices: Choice[]
-    menu: string // id ref: 'Menu'
+    menuId: string // id ref: 'Menu'
 }
 
 export type Option = {
@@ -25,3 +28,6 @@ export enum ChoiceType {
     RADIO = "radio",
     CHECKBOX = "checkbox"
 }
+
+// Create a category
+export const createCategory = (categoryDto: CategoryDto) => request.post<Category>('/categories', categoryDto)
