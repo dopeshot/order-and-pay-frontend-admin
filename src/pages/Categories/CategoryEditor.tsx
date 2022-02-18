@@ -73,17 +73,13 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [category, setCategory] = useState<Category>()
-
     const [modalOpenChoice, setModalOpenChoice] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
     const isEditingChoice = Boolean(editChoiceData)
-
     const [choices, setChoices] = useState<Choice[]>([])
-
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editOptionData, setEditOptionData] = useState<Option | null>(null)
     const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
-
     const isEditingOptions = Boolean(editOptionData)
 
     useEffect(() => {
