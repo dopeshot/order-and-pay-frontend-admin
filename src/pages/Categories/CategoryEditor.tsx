@@ -102,6 +102,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
         type: ChoiceType.RADIO
     }
 
+    const validationChoiceSchema = Yup.object().shape({
+        title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
+        type: Yup.string().oneOf(Object.values(ChoiceType)).required()
+    })
+
     const submitChoice = (values: ChoiceDto) => {
         console.log("submitChoice:", values)
     }
@@ -169,7 +174,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
             setModalOpenChoice(false)
         }}>
-            <Formik initialValues={initialChoiceValues} onSubmit={submitChoice}>
+            <Formik initialValues={initialChoiceValues} onSubmit={submitChoice} validationSchema={validationChoiceSchema}>
                 <Form>
                     <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." />
                     <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
