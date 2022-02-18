@@ -1,11 +1,12 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faArrowLeft, faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Modal } from "../../components/UI/Modal"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 
@@ -16,16 +17,26 @@ type SingleMenuParams = {
 export const SingleMenu: React.FC = () => {
     const { menuId } = useParams<SingleMenuParams>()
 
-    const { isMobile } = useAppState().app
+    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
 
+    const { isMobile } = useAppState().app
     const { isLoadingMenu, menu } = useAppState().menuoverview
     const { getMenuEditor } = useActions().menuoverview
+    const { deleteDish } = useActions().dishes
 
     useEffect((): void => {
         getMenuEditor(menuId)
     }, [getMenuEditor, menuId])
 
     const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
+
+    const handleDishDelete = async (id: string) => {
+        console.log(id)
+        setIsLoadingDelete(true)
+        await deleteDish(id)
+        setIsLoadingDelete(false)
+    }
 
     return (
         <div className="container md:max-w-full mt-12">
@@ -59,12 +70,20 @@ export const SingleMenu: React.FC = () => {
                                     <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                 </ListItem>
                                 {/* Dishes */}
-                                {category.dishes.map(dish => (
-                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} key={dish._id} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
+                                {category.dishes.map(dish => (<div key={dish._id}>
+                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                         <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
-                                        <IconButton icon={faTrash} onClick={() => console.log("remove")} />
+                                        <IconButton icon={faTrash} onClick={() => setHasDeleteModal(true)} />
                                     </ListItem>
-                                ))}
+                                    {/* Delete Dish Modal */}
+                                    <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
+                                        <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
+                                        <div className="flex md:justify-between flex-col md:flex-row">
+                                            <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
+                                            <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete(dish._id)} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
+                                        </div>
+                                    </Modal>
+                                </div>))}
                                 {/* Dishes end */}
                             </div>))}
                             {/* Category End */}
