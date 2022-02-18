@@ -28,7 +28,7 @@ describe('Api Endpoints', () => {
 
             cy.get(`[data-cy="category-dropdown-button"]`).click()
             cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
-            cy.get(`[data-cy="isActive-clickdiv"]`).click()
+            cy.get(`[data-cy="isAvailable-clickdiv"]`).click()
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).check().should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
 
@@ -68,7 +68,7 @@ describe('Api Endpoints', () => {
 
             cy.get(`[data-cy="category-dropdown-button"]`).click()
             cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
-            cy.get(`[data-cy="isActive-clickdiv"]`).click()
+            cy.get(`[data-cy="isAvailable-clickdiv"]`).click()
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).check().should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
 
@@ -131,7 +131,7 @@ describe('Api Endpoints', () => {
             cy.get('textarea[name="description"]').should('have.value', dish.description)
 
             cy.get(`[data-cy="category-dropdown-button"]`).should('contain', 'Burger')
-            cy.get(`[data-cy="isActive-labeltext"]`).should('contain', 'Verfügbar')
+            cy.get(`[data-cy="isAvailable-labeltext"]`).should('contain', 'Verfügbar')
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).should('be.checked')
         })
@@ -147,7 +147,7 @@ describe('Api Endpoints', () => {
         })
     })
 
-    describe('Delete Dish', () => {
+    describe.only('Delete Dish', () => {
         beforeEach(() => {
             cy.getDishById()
             cy.getAllAllergens()
@@ -163,14 +163,14 @@ describe('Api Endpoints', () => {
 
         it('should open delete modal when click on delete', () => {
             cy.get('[data-cy="dishes-delete-button"]').click()
-            cy.contains('Dish für immer löschen?')
+            cy.contains(`${dish.title} löschen?`)
         })
 
         it.skip('should delete dish when click delete on modal', () => {
             cy.deleteDish()
             cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-delete-button"]').click()
-            cy.get('[data-cy="dishes-modal-delete-button"]').click()
+            cy.get(`[data-cy="deletemodal-${dish.title}-delete-button"]`).click()
 
             cy.wait('@deleteDish')
             cy.wait('@getMenuOverviewEditor')
@@ -182,8 +182,8 @@ describe('Api Endpoints', () => {
             cy.getMenuOverviewEditor()
 
             cy.get('[data-cy="dishes-delete-button"]').click()
-            cy.get('[data-cy="dishes-modal-delete-button"]').click().then(() => {
-                cy.get('[data-cy="dishes-modal-delete-button"] svg').should('have.class', 'fa-spinner')
+            cy.get(`[data-cy="deletemodal-${dish.title}-delete-button"]`).click().then(() => {
+                cy.get(`[data-cy="deletemodal-${dish.title}-delete-button"] svg`).should('have.class', 'fa-spinner')
                 interception.sendResponse()
                 cy.wait('@deleteDishIndefinitely')
                 cy.wait('@getMenuOverviewEditor')

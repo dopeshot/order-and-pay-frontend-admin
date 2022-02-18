@@ -1,5 +1,4 @@
-import { Allergen } from "../allergens/state"
-import { Label } from "../labels/state"
+import { Dish } from "../dishes/effects"
 
 export enum Status {
     ACTIVE = "active",
@@ -34,18 +33,6 @@ export type Choice = {
 export enum ChoiceType {
     RADIO = "radio",
     CHECKBOX = "checkbox"
-}
-
-export type Dish = {
-    _id: string
-    title: string
-    description: string
-    image?: string
-    isAvailable: boolean
-    price: number
-    category: Category | string // id ref: 'Category'
-    allergens: Allergen[] // id ref: 'Allergy
-    labels: Label[] // id ref: 'Label'
 }
 
 export type Menu = {

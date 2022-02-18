@@ -6,7 +6,7 @@ export type DishDto = {
     title: string
     description: string
     image?: string
-    isActive: boolean
+    isAvailable: boolean
     price: number
     category: Category | string // id ref: 'Category'
     allergens: Allergen[] // id ref: 'Allergy
