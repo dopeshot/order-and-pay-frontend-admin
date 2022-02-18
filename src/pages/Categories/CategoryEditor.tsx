@@ -46,7 +46,7 @@ export type Choice = {
     id: number
     title: string
     type: ChoiceType
-    default?: number // id of option
+    isDefault?: number // id of option
     options: Option[]
 }
 
@@ -87,7 +87,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
             name: "Groß",
             price: 800
         }],
-        default: 1
+        isDefault: 1
     }, {
         id: 1,
         title: "Extras",
@@ -191,7 +191,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const initialOptionValues: OptionDto = {
         name: editOptionData?.name ?? "",
         price: editOptionData?.price ?? 100,
-        isDefault: (parentChoiceId !== null && choices[parentChoiceId].default === editOptionData?.id) ?? false
+        isDefault: (parentChoiceId !== null && choices[parentChoiceId].isDefault === editOptionData?.id) ?? false
     }
 
     const validationOptionSchema = Yup.object().shape({
@@ -214,8 +214,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
         if (isEditingOptions && editOptionData) {
             setChoices(choices => {
                 // Update default
-                if (isDefault && choices[parentChoiceId].default !== editOptionData.id)
-                    choices[parentChoiceId].default = editOptionData.id
+                if (isDefault && choices[parentChoiceId].isDefault !== editOptionData.id)
+                    choices[parentChoiceId].isDefault = editOptionData.id
 
                 const option = choices[parentChoiceId].options.find(option => option.id === editOptionData.id)
                 Object.assign(option, optionData)
@@ -236,13 +236,27 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
             // Set to default
             if (isDefault)
-                choices[parentChoiceId].default = newOption.id
+                choices[parentChoiceId].isDefault = newOption.id
 
             setChoices(newChoices)
         }
 
         // Close modal
         closeOptionModal()
+    }
+
+    const deleteOption = (choiceId: number, optionId: number) => {
+        setChoices(choices => {
+            const newChoices = [...choices]
+            let choice = newChoices.find(choice => choice.id === choiceId)!
+
+            choice.options = choice.options.filter(option => option.id !== optionId)
+
+            if (choice.isDefault === optionId)
+                delete choice.isDefault
+
+            return newChoices
+        })
     }
 
     const closeOptionModal = () => {
@@ -299,11 +313,9 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                     setParentChoiceId(choice.id)
                                     setEditOptionData(option)
                                     setModalOpenOption(true)
-                                }} title={option.name} icon={faCog} indent header={option.id === choice.default ? <Tag title="Standard" /> : ''}>
+                                }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
                                     <p className="mr-4">{numberToPrice(option.price)}</p>
-                                    <IconButton icon={faTrash} onClick={() => {
-                                        console.log("Delete Option")
-                                    }} />
+                                    <IconButton icon={faTrash} onClick={() => deleteOption(choice.id, option.id)} />
                                 </ListItem>)
                             }
                         </Fragment>
