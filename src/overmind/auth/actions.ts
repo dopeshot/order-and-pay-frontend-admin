@@ -28,3 +28,8 @@ export const login = async ({ state, effects }: Context, credentials: Credential
     }
     state.auth.authenticating = false
 }
+
+export const logout = ({ state, effects }: Context) => {
+    state.auth.currentUser = null;
+    effects.auth.setToken()
+}

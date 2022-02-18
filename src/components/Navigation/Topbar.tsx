@@ -11,6 +11,7 @@ export const Topbar: React.FunctionComponent = () => {
     const { toggleSidebar } = useActions().app
     const { isMobile } = useAppState().app
 
+    const { logout } = useActions().auth
     const { currentUser } = useAppState().auth
 
     const [dropdownOpen, setDropdownOpen] = useState(false)
@@ -43,7 +44,7 @@ export const Topbar: React.FunctionComponent = () => {
 
                         {/* Dropdown */}
                         {dropdownOpen && <div className="absolute z-20 bg-white rounded-lg shadow mt-2" tabIndex={-1}>
-                            <button onClick={() => ""} className="flex items-center text-darkgrey px-4 py-2" tabIndex={-1}>
+                            <button onClick={() => logout()} className="flex items-center text-darkgrey px-4 py-2" tabIndex={-1}>
                                 <FontAwesomeIcon icon={faSignOutAlt} className="mr-3" />
                                 Ausloggen
                             </button>
