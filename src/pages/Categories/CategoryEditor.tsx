@@ -117,6 +117,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
             id: Math.max(...choices.map(choice => choice.id), 0) + 1
         }
         setChoices([...choices, newChoice])
+
+        setModalOpenChoice(false)
     }
 
     const dropdownOptionsChoice = [
