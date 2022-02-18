@@ -6,22 +6,22 @@ import { Button } from "../../components/Buttons/Button"
 import { PasswordInput } from "../../components/Form/PasswortInput"
 import { TextInput } from "../../components/Form/TextInput"
 
+
 export const Login: React.FC = () => {
     const [isLoginLoading] = useState(false)
 
-    // Formik
-    const initialValues: any = {
+    const initialLoginValues: any = {
         email: "",
         password: ""
     }
 
-    // Formik Validation
-    const validationSchema = Yup.object().shape({
-        email: Yup.string().email().required("Dies ist ein Pflichtfeld"),
+    const validationLoginSchema = Yup.object().shape({
+        email: Yup.string().email("Diese E-Mail-Adresse ist ungültig. Versuche es mit einer anderen.").required("Dies ist ein Pflichtfeld"),
         password: Yup.string().required("Dies ist ein Pflichtfeld")
     })
 
-    const submitForm = (values: typeof initialValues) => {
+    // MC TODO: Add types here
+    const submitLoginForm = (values: typeof initialLoginValues) => {
         console.log(values)
     }
 
@@ -29,7 +29,7 @@ export const Login: React.FC = () => {
         <div style={{ maxWidth: "500px" }}>
             <h1 className="text-4xl text-center text-headline-black font-semibold mb-2">Einloggen</h1>
             <p className="text-center mb-3">Logge dich ein um dein Restaurant zu bearbeiten, Bestellungen einzusehen und neue Mitarbeiter hinzuzufügen.</p>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
+            <Formik initialValues={initialLoginValues} validationSchema={validationLoginSchema} onSubmit={submitLoginForm}>
                 <Form>
                     <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" />
                     <PasswordInput />
