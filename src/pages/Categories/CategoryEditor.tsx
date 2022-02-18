@@ -1,4 +1,4 @@
-import { faArrowLeft, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
@@ -83,13 +83,27 @@ export const CategoryEditor: React.FunctionComponent = () => {
                         <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
                         <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" labelRequired />
                     </div>
+
+                    {/* Choices and Options */}
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                        <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
+                            <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
+                            <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                        </div>
+                        <div className="w-full md:w-auto">
+                            <Button icon={faPlus} onClick={() => {
+                                setModalOpenChoice(true)
+                            }}>Neue Auswahlmöglichkeit</Button>
+                        </div>
+                    </div>
+
                     <div className="flex flex-col md:flex-row justify-between mt-4">
                         {isEditing && <Button kind="tertiary" onClick={() => console.log("delete")} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                         <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
                     </div>
                 </Form>
             </Formik>
-        </div >
+        </div>
     )
 }
 
@@ -154,19 +168,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
             //         </>
             //     ))}
             // </List>
-
-            // {/* Choices and Options */}
-            // <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-            //     <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
-            //         <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
-            //         <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
-            //     </div>
-            //     <div className="w-full md:w-auto">
-            //         <Button icon={faPlus} onClick={() => {
-            //             setModalOpenChoice(true)
-            //         }}>Neue Auswahlmöglichkeit</Button>
-            //     </div>
-            // </div>
 
             // {/* Option Modal */}
             // <Modal modalHeading={true ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={() => {
