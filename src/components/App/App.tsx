@@ -29,8 +29,8 @@ export const App: React.FunctionComponent = () => {
               <Route exact path="/menus/allergens" component={Allergens} />
               <Route exact path="/menus/:menusId/categories/:categoriesId/dish/:dishId" component={Dishes} />
               <Route exact path="/menus/:menusId/categories/:categoriesId/dish" component={Dishes} />
-              <Route exact path="/menus/:menuid/categories" component={CategoryEditor} />
-              <Route exact path="/menus/:menuid/categories/:categoryid" component={CategoryEditor} />
+              <Route exact path="/menus/:menuId/categories" component={CategoryEditor} />
+              <Route exact path="/menus/:menuId/categories/:categoryId" component={CategoryEditor} />
               <Route exact path="/menus/:id/editor" component={() => <p>editor</p>} />
               <Route exact path="/menus/add" component={MenuEditor} />
               <Route exact path="/menus/:id" component={MenuEditor} />
