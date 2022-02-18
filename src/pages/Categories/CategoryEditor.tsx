@@ -56,9 +56,12 @@ export const CategoryEditor: React.FunctionComponent = () => {
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
+
     const [modalOpenChoice, setModalOpenChoice] = useState(false)
-    const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
+    const isEditingChoice = Boolean(editChoiceData)
+
+    const [modalOpenOption, setModalOpenOption] = useState(false)
 
     const [choices, setChoices] = useState<Choice[]>([{
         id: 0,
@@ -98,8 +101,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
     // choices
 
     const initialChoiceValues: ChoiceDto = {
-        title: "",
-        type: ChoiceType.RADIO
+        title: editChoiceData?.title ?? "",
+        type: editChoiceData?.type ?? ChoiceType.RADIO
     }
 
     const validationChoiceSchema = Yup.object().shape({
@@ -110,14 +113,26 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const submitChoice = (values: ChoiceDto) => {
         console.log("submitChoice:", values)
 
-        // Create Choice from ChoiceDto. Add empty options + next id
-        const newChoice: Choice = {
-            ...values,
-            options: [],
-            id: Math.max(...choices.map(choice => choice.id), 0) + 1
-        }
-        setChoices([...choices, newChoice])
+        if (isEditingChoice && editChoiceData) {
+            // Find object and merge new values
+            setChoices(choices => {
+                const choice = choices.find(choice => choice.id === editChoiceData.id)
+                Object.assign(choice, values)
+                return choices
+            })
 
+            // Clear edit data
+            setEditChoiceData(null)
+        } else {
+            // Create Choice from ChoiceDto. Add empty options + next id
+            const newChoice: Choice = {
+                ...values,
+                options: [],
+                id: Math.max(...choices.map(choice => choice.id), 0) + 1
+            }
+            setChoices([...choices, newChoice])
+
+        }
         setModalOpenChoice(false)
     }
 
@@ -164,7 +179,10 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
                     <List>
                         {choices.map(choice =>
-                            <ListItem key={`c${choice.id}`} onClick={() => console.log("listitem")} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
+                            <ListItem key={`c${choice.id}`} onClick={() => {
+                                setEditChoiceData(choice)
+                                setModalOpenChoice(true)
+                            }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
                                 {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => console.log("add option")} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
                                 <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                             </ListItem>
@@ -181,14 +199,14 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
 
         {/* Choices Modal */}
-        <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
+        <Modal modalHeading={isEditingChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
             setModalOpenChoice(false)
         }}>
             <Formik initialValues={initialChoiceValues} onSubmit={submitChoice} validationSchema={validationChoiceSchema}>
                 <Form>
                     <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." />
                     <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
-                    <Button type="submit" icon={faCheck}>{editChoiceData ? `Speichern` : `Hinzufügen`}</Button>
+                    <Button type="submit" icon={faCheck}>{isEditingChoice ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
         </Modal>
