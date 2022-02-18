@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import {
   BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
+import { useActions } from '../../overmind';
 import { Allergens } from '../../pages/Allergens/Allergens';
 import { Dishes } from '../../pages/Dishes/Dishes';
 import { Home } from '../../pages/Home/Home';
@@ -13,6 +15,11 @@ import { Sidebar } from '../Navigation/Sidebar';
 import { Topbar } from '../Navigation/Topbar';
 
 export const App: React.FunctionComponent = () => {
+  const { initializeUser } = useActions().auth
+
+  useEffect(() => {
+    initializeUser()
+  }, [initializeUser])
 
   return (
     <Router basename="/admin">

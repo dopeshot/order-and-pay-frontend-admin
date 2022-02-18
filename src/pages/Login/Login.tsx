@@ -5,9 +5,15 @@ import * as Yup from 'yup'
 import { Button } from "../../components/Buttons/Button"
 import { PasswordInput } from "../../components/Form/PasswortInput"
 import { TextInput } from "../../components/Form/TextInput"
+import { useActions, useAppState } from "../../overmind"
+import { Credentials } from "../../overmind/auth/effects"
 
 export const Login: React.FC = () => {
     const [isLoginLoading] = useState(false)
+
+    const { isLoggedIn } = useAppState().auth
+
+    const { login } = useActions().auth
 
     // Formik
     const initialValues: any = {
@@ -21,11 +27,12 @@ export const Login: React.FC = () => {
         password: Yup.string().required("Dies ist ein Pflichtfeld")
     })
 
-    const submitForm = (values: typeof initialValues) => {
-        console.log(values)
+    const submitForm = (credentials: Credentials) => {
+        login(credentials)
     }
 
     return <div className="h-screen flex flex-col items-center justify-center mx-4">
+        {console.log(isLoggedIn)}
         <div style={{ maxWidth: "500px" }}>
             <h1 className="text-4xl text-center text-headline-black font-semibold mb-2">Einloggen</h1>
             <p className="text-center mb-3">Logge dich ein um dein Restaurant zu bearbeiten, Bestellungen einzusehen und neue Mitarbeiter hinzuzufügen.</p>
