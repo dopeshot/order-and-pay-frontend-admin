@@ -1,11 +1,12 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faArrowLeft, faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
+import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
 import { Dropdown } from "../../components/Form/Dropdown"
@@ -179,7 +180,7 @@ export const Dishes: React.FC = () => {
 
     return (
         <div className="container mt-12">
-            <Button dataCy="dishes-back-button" kind="tertiary" to={`/menus/${menuId}/editor`} icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+            <BackButton dataCy="dishes-back-button" to={`/menus/${menuId}/editor`} />
             {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>

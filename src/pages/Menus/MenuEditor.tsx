@@ -1,9 +1,10 @@
-import { faArrowLeft, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
+import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
@@ -111,7 +112,7 @@ export const MenuEditor: React.FC = () => {
     }
 
     return <div className="container mt-12">
-        <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+        <BackButton dataCy="dishes-back-button" to="/menus" />
         {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
             <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
             <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
