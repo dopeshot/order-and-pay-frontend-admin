@@ -3,6 +3,7 @@ import { Form, Formik } from "formik"
 import { useState } from "react"
 import * as Yup from 'yup'
 import { Button } from "../../components/Buttons/Button"
+import { PasswordInput } from "../../components/Form/PasswortInput"
 import { TextInput } from "../../components/Form/TextInput"
 
 export const Login: React.FC = () => {
@@ -31,7 +32,7 @@ export const Login: React.FC = () => {
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 <Form>
                     <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" />
-                    <TextInput name="password" placeholder="Passwort eingeben" labelText="Passwort" />
+                    <PasswordInput />
                     <Button type="submit" loading={isLoginLoading} icon={faSignInAlt} className="min-w-full">Login</Button>
                 </Form>
             </Formik>
