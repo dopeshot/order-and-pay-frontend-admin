@@ -90,6 +90,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editOptionData, setEditOptionData] = useState<Option | null>(null)
+    const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
     const isEditingOptions = Boolean(editOptionData)
 
     const initialCategoryValues: CategoryWithoutChoices = {
@@ -179,6 +180,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         if (isEditingOptions && editOptionData)
             setEditOptionData(null)
 
+        setParentChoiceId(null)
         setModalOpenOption(false)
     }
 
@@ -216,12 +218,16 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                 setEditChoiceData(choice)
                                 setModalOpenChoice(true)
                             }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-                                {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => setModalOpenOption(true)} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
+                                {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => {
+                                    setParentChoiceId(choice.id)
+                                    setModalOpenOption(true)
+                                }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
                                 <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                             </ListItem>
 
                             {choice.options.map(option =>
                                 <ListItem onClick={() => {
+                                    setParentChoiceId(choice.id)
                                     setModalOpenOption(true)
                                 }} title={option.name} icon={faCog} indent header={option.id === choice.default ? <Tag title="Standard" /> : ''}>
                                     <p className="mr-4">{numberToPrice(option.price)}</p>
@@ -257,6 +263,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         {/* Options Modal */}
         <Modal modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
             <p>Heyo!</p>
+            <p>{parentChoiceId}</p>
         </Modal>
     </>
 }
