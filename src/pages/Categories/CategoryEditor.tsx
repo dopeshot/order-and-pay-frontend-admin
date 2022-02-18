@@ -1,4 +1,4 @@
-import { faArrowLeft, faCheck, faCheckDouble, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faCheckDouble, faCog, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
@@ -11,8 +11,10 @@ import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
+import { Tag } from "../../components/UI/Tag"
 import { useAppState } from "../../overmind"
 import { ChoiceType } from "../../overmind/categories/effects"
+import { numberToPrice } from "../../services/numberToPrice"
 
 type CategoryParams = {
     categoryId: string,
@@ -79,7 +81,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
             id: 3,
             name: "Groß",
             price: 800
-        }]
+        }],
+        default: 1
     }, {
         id: 1,
         title: "Extras",
@@ -197,7 +200,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                     </div>
 
                     <List>
-                        {choices.map(choice =>
+                        {choices.map(choice => <>
                             <ListItem key={`c${choice.id}`} onClick={() => {
                                 setEditChoiceData(choice)
                                 setModalOpenChoice(true)
@@ -205,6 +208,18 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                 {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => console.log("add option")} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
                                 <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                             </ListItem>
+
+                            {choice.options.map(option =>
+                                <ListItem onClick={() => {
+                                    setModalOpenOption(true)
+                                }} title={option.name} icon={faCog} indent header={option.id === choice.default ? <Tag title="Standard" /> : ''}>
+                                    <p className="mr-4">{numberToPrice(option.price)}</p>
+                                    <IconButton icon={faTrash} onClick={() => {
+                                        console.log("Delete Option")
+                                    }} />
+                                </ListItem>)
+                            }
+                        </>
                         )}
                     </List>
 
@@ -229,39 +244,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
         </Modal>
     </>
 }
-
-            // <List>
-            //     {formikGeneral.values.choices.map((choice) => (
-            //         <>
-            //             { /* Choices List */}
-            //             <ListItem onClick={() => {
-            //                 setEditChoiceData(choice)
-            //                 setModalOpenChoice(true)
-            //             }} title={choice.title} icon={true ? faCheck : faCheckDouble} background>
-            //                 <div className="flex items-center w-full">
-            //                     <p className="text-darkgrey ml-8">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>
-            //                     <Button onClick={(e) => {
-            //                         setModalOpenOption(true)
-            //                     }} kind="tertiary" icon={faPlus} className="text-darkgrey hover:text-headline-black ml-auto mr-4">Neue Option</Button>
-            //                     <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
-            //                         console.log("Delete Choice")
-            //                     }} />
-            //                 </div>
-            //             </ListItem>
-            //             { /* Option List */}
-            //             {choice.options.map((option: Option) => (
-            //                 <ListItem onClick={() => {
-            //                     setModalOpenOption(true)
-            //                 }} title={option.name} icon={faCog} indent>
-            //                     <p className="ml-auto mr-4">{(1000 / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}€</p>
-            //                     <IconButton icon={faTrash} className="mr-7" onClick={(e) => {
-            //                         console.log("Delete Option")
-            //                     }} />
-            //                 </ListItem>
-            //             ))}
-            //         </>
-            //     ))}
-            // </List>
 
             // {/* Option Modal */}
             // <Modal modalHeading={true ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={() => {
