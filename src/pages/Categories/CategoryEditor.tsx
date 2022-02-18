@@ -221,6 +221,9 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
             setChoices(newChoices)
         }
+
+        // Close modal
+        closeOptionModal()
     }
 
     const closeOptionModal = () => {
