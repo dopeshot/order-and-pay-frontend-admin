@@ -26,7 +26,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({ title, open, onDissmis
             <p>{description}</p>
             <div className="flex md:justify-between flex-col md:flex-row">
                 <Button kind="tertiary" onClick={onDissmis} className="my-4 md:my-0">Abbrechen</Button>
-                <Button kind="primary" dataCy={`deletemodal-${title}-delete-button`} onClick={(event) => handleDelete(event)} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
+                <Button kind="primary" dataCy={`deletemodal-${title}-delete-button`} onClick={handleDelete} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
             </div>
         </Modal>
     )
