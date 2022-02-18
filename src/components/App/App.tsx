@@ -18,30 +18,32 @@ export const App: React.FunctionComponent = () => {
   return (
     <Router basename="/admin">
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <div className="h-screen">
-          <Topbar />
-          <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
-            <Sidebar />
-            <div className="flex-1 overflow-y-auto">
-              {/* Content Start */}
-              <Route exact path="/tables" component={Tables} />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/menus/labels" component={Labels} />
-              <Route exact path="/menus/allergens" component={Allergens} />
-              <Route exact path="/menus/:menuId/categories/:categoryId/dish/:dishId" component={Dishes} />
-              <Route exact path="/menus/:menuId/categories/:categoryId/dish" component={Dishes} />
-              <Route exact path="/menus/:menuId/editor" component={SingleMenu} />
-              <Route exact path="/menus/add" component={MenuEditor} />
-              <Route exact path="/menus/:menuId" component={MenuEditor} />
-              <Route exact path="/menus" component={Menus} />
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-              {/* Content End */}
+        <>
+          <Route exact path="/login" component={Login} />
+          <div className="h-screen">
+            <Topbar />
+            <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
+              <Sidebar />
+              <div className="flex-1 overflow-y-auto">
+                {/* Content Start */}
+                <Route exact path="/tables" component={Tables} />
+                <Route exact path="/home" component={Home} />
+                <Route exact path="/menus" component={Menus} />
+                <Route exact path="/menus/allergens" component={Allergens} />
+                <Route exact path="/menus/labels" component={Labels} />
+                <Route exact path="/menus/add" component={MenuEditor} />
+                <Route exact path="/menus/:menuId/edit" component={MenuEditor} />
+                <Route exact path="/menus/:menuId/categories/:categoryId/dish/:dishId" component={Dishes} />
+                <Route exact path="/menus/:menuId/categories/:categoryId/dish" component={Dishes} />
+                <Route exact path="/menus/:menuId/editor" component={SingleMenu} />
+                <Route exact path="/">
+                  <Redirect to="/home" />
+                </Route>
+                {/* Content End */}
+              </div>
             </div>
           </div>
-        </div>
+        </>
       </Switch>
     </Router>
   )
