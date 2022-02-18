@@ -25,7 +25,7 @@ type Params = {
 }
 
 export const Dishes: React.FC = () => {
-    const { dishId } = useParams<Params>()
+    const { dishId, menuId } = useParams<Params>()
     const isEditing = Boolean(dishId)
     const history = useHistory()
 
@@ -148,7 +148,7 @@ export const Dishes: React.FC = () => {
             else
                 await createDish(dish)
 
-            history.push("/")
+            history.push(`/menus/${menuId}/editor`)
         } catch (error) {
             if (!axios.isAxiosError(error))
                 return
@@ -170,12 +170,12 @@ export const Dishes: React.FC = () => {
         await deleteDish(dishId)
 
         setIsLoadingDelete(false)
-        history.push("/menus")
+        history.push(`/menus/${menuId}/editor`)
     }
 
     return (
         <div className="container mt-12">
-            <Button dataCy="dishes-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+            <Button dataCy="dishes-back-button" kind="tertiary" to={`/menus/${menuId}/editor`} icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
             {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>

@@ -23,7 +23,6 @@ export const SingleMenu: React.FC = () => {
 
     useEffect((): void => {
         getMenuEditor(menuId)
-        console.log(menuId)
     }, [getMenuEditor, menuId])
 
     const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
@@ -51,6 +50,7 @@ export const SingleMenu: React.FC = () => {
 
                 {/* Categories and Dishes */}
                 <div>
+                    {console.log(menu)}
                     <List>
                         <>
                             {/* Category */}
@@ -61,7 +61,7 @@ export const SingleMenu: React.FC = () => {
                                 </ListItem>
                                 {/* Dishes */}
                                 {category.dishes.map(dish => (
-                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to="" key={dish._id} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
+                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} key={dish._id} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                         <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
                                         <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                     </ListItem>

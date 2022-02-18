@@ -33,10 +33,13 @@ describe('Api Endpoints', () => {
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
 
             cy.createDish()
+            cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-save-button"]').click()
-            cy.wait('@createDish')
 
-            cy.url().should('include', '/admin/home')
+            cy.wait('@createDish')
+            cy.wait('@getMenuOverviewEditor')
+
+            cy.url().should('include', '/admin/menus/1/editor')
         })
 
         it('should have disabled state when inputs are wrong', () => {
@@ -78,10 +81,12 @@ describe('Api Endpoints', () => {
             })
         })
 
-        it('should go to "/admin/menus" when click back button', () => {
+        it('should go to "/admin/menus/1/editor" when click back button', () => {
+            cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-back-button"]').click()
 
-            cy.url().should('include', '/admin/menus')
+            cy.wait('@getMenuOverviewEditor')
+            cy.url().should('include', '/admin/menus/1/editor')
         })
 
         it('should open labels modal when click add label', () => {
@@ -159,11 +164,13 @@ describe('Api Endpoints', () => {
 
         it('should delete dish when click delete on modal', () => {
             cy.deleteDish()
+            cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-delete-button"]').click()
             cy.get('[data-cy="dishes-modal-delete-button"]').click()
 
             cy.wait('@deleteDish')
-            cy.url().should('include', '/admin/menus')
+            cy.wait('@getMenuOverviewEditor')
+            cy.url().should('include', '/admin/menus/1/editor')
         })
 
         it('should have loading icon when deleting', () => {
