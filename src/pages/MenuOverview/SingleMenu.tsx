@@ -32,7 +32,6 @@ export const SingleMenu: React.FC = () => {
     const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
 
     const handleDishDelete = async (id: string) => {
-        console.log(id)
         setIsLoadingDelete(true)
         await deleteDish(id)
         setIsLoadingDelete(false)
