@@ -310,7 +310,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                         <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
                             <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired autoFocus />
                             <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" />
-                            <TextInput name="image" placeholder="Gebe die Url für ein passendes Bild ein..." labelText="Titelbild" />
+                            <TextInput name="image" placeholder="Geben Sie eine URL ein..." labelText="Titelbild-URL" />
                             <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
                         </div>
 
