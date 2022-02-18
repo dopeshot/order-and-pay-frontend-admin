@@ -216,7 +216,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                 setEditChoiceData(choice)
                                 setModalOpenChoice(true)
                             }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-                                {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => console.log("add option")} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
+                                {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => setModalOpenOption(true)} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
                                 <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                             </ListItem>
 
