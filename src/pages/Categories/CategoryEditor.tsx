@@ -295,7 +295,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             </ListItem>
 
                             {choice.options.map(option =>
-                                <ListItem onClick={() => {
+                                <ListItem key={`o${option.id}`} onClick={() => {
                                     setParentChoiceId(choice.id)
                                     setEditOptionData(option)
                                     setModalOpenOption(true)
