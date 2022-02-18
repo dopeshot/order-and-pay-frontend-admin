@@ -33,7 +33,7 @@ export const SingleMenu: React.FC = () => {
         getMenuEditor(menuId)
     }, [getMenuEditor, menuId])
 
-    const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
+    const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }) //MC TODO: Use from shared
 
     const handleDishDelete = async (event: any) => {
         if (!selectedDish) {
