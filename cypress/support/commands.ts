@@ -105,24 +105,39 @@ Cypress.Commands.add('deleteDish', () => {
     }).as('deleteDish')
 })
 
+/********* Categories *********/
 Cypress.Commands.add('getAllCategories', () => {
     cy.intercept('GET', `${api}/categories`, {
         fixture: 'categories.json'
     }).as('getAllCategories')
 })
 
+/********* Labels *********/
 Cypress.Commands.add('getAllLabels', () => {
     cy.intercept('GET', `${api}/labels`, {
         fixture: 'labels.json'
     }).as('getAllLabels')
 })
 
+/********* Allergens *********/
 Cypress.Commands.add('getAllAllergens', () => {
     cy.intercept('GET', `${api}/allergens`, {
         fixture: 'allergens.json'
     }).as('getAllAllergens')
 })
 
+/********* Login *********/
+Cypress.Commands.add('login', () => {
+    cy.intercept('POST', `${api}/auth/login`, {
+        fixture: 'access_token.json'
+    }).as('login')
+})
+
+Cypress.Commands.add('getCurrentUser', () => {
+    cy.intercept('GET', `${api}/users/profile`, {
+        fixture: 'current-user.json'
+    }).as('getCurrentUser')
+})
 
 
 export { }

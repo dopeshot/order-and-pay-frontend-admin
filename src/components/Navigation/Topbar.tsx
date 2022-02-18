@@ -36,7 +36,7 @@ export const Topbar: React.FunctionComponent = () => {
                         {/* When dropdown open click outside close it */}
                         {dropdownOpen && <div className="fixed inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setDropdownOpen(false)}></div>}
 
-                        <div className="flex items-center cursor-pointer mr-3" onClick={() => { setDropdownOpen(true) }} >
+                        <div data-cy="avatar-dropdown" className="flex items-center cursor-pointer mr-3" onClick={() => { setDropdownOpen(true) }} >
                             <img src={avatar} className="w-10 h-10 mr-3" alt="Avatar" />
                             <h6 className="text-darkgrey font-semibold leading-5">{currentUser?.username}</h6>
                             <FontAwesomeIcon icon={faChevronDown} className="text-darkgrey ml-3" />
@@ -44,7 +44,7 @@ export const Topbar: React.FunctionComponent = () => {
 
                         {/* Dropdown */}
                         {dropdownOpen && <div className="absolute z-20 bg-white rounded-lg shadow mt-2" tabIndex={-1}>
-                            <button onClick={() => logout()} className="flex items-center text-darkgrey px-4 py-2" tabIndex={-1}>
+                            <button data-cy="avatar-dropdown-delete" onClick={() => logout()} className="flex items-center text-darkgrey px-4 py-2" tabIndex={-1}>
                                 <FontAwesomeIcon icon={faSignOutAlt} className="mr-3" />
                                 Ausloggen
                             </button>

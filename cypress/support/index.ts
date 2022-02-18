@@ -129,6 +129,18 @@ declare global {
             * @example cy.getAllLabels()
             */
             getAllLabels(): void
+
+            /**
+            * Custom command to intercept all login request
+            * @example cy.login()
+            */
+            login(): void
+
+            /**
+            * Custom command to intercept all profile request
+            * @example cy.getCurrentUser()
+            */
+            getCurrentUser(): void
         }
     }
 }
