@@ -70,40 +70,18 @@ export const CategoryEditor: React.FunctionComponent = () => {
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
+    const [category, setCategory] = useState<Category>()
 
     const [modalOpenChoice, setModalOpenChoice] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
     const isEditingChoice = Boolean(editChoiceData)
 
-    const [choices, setChoices] = useState<Choice[]>([{
-        id: 0,
-        title: "Größe",
-        type: ChoiceType.RADIO,
-        options: [{
-            id: 0,
-            name: "Klein",
-            price: 200
-        }, {
-            id: 1,
-            name: "Mittel",
-            price: 500
-        }, {
-            id: 3,
-            name: "Groß",
-            price: 800
-        }],
-        isDefault: 1
-    }, {
-        id: 1,
-        title: "Extras",
-        type: ChoiceType.CHECKBOX,
-        options: []
-    }])
+    const [choices, setChoices] = useState<Choice[]>([])
 
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editOptionData, setEditOptionData] = useState<Option | null>(null)
     const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
-    const [category, setCategory] = useState<Category>()
+
     const isEditingOptions = Boolean(editOptionData)
 
     useEffect(() => {
@@ -116,6 +94,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 return
 
             setCategory(category)
+            setChoices(category.choices)
             setIsLoading(false)
         }
 
@@ -127,11 +106,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
     }, [])
 
     const initialCategoryValues: CategoryWithoutChoices = {
-        title: "",
-        description: "",
-        icon: "",
-        image: "",
-        menuId
+        title: category?.title ?? "",
+        description: category?.description ?? "",
+        icon: category?.icon ?? "",
+        image: category?.image ?? "",
+        menuId: category?.menuId ?? menuId
     }
 
     const validationCategorySchema = Yup.object().shape({
