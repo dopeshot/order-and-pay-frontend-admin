@@ -27,7 +27,7 @@ export const Menus: React.FC = () => {
         getAllMenus()
     }, [getAllMenus])
 
-    const handleDelete = async (event: any) => {
+    const handleDelete = async () => {
         if (!selectedMenu) {
             console.warn("There is no menu selected.")
             return

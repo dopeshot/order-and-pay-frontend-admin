@@ -1,7 +1,8 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faArrowLeft, faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { DeleteModal } from "../../components/UI/DeleteModal"
@@ -72,7 +73,7 @@ export const SingleMenu: React.FC = () => {
     return (
         <div className="container md:max-w-full mt-12">
             {/* Back Button */}
-            <Button dataCy="singlemenu-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück zu allen Menüs</Button>
+            <BackButton dataCy="singlemenu-back-button" to="/menus" />
 
             {isLoading ? <Loading /> : <>
                 {/* Header */}
