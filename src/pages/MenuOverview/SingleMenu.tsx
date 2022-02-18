@@ -33,7 +33,7 @@ export const SingleMenu: React.FC = () => {
         getMenuEditor(menuId)
     }, [getMenuEditor, menuId])
 
-    const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
+    const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }) //MC TODO: Use from shared
 
     const handleDishDelete = async (event: any) => {
         if (!selectedDish) {
@@ -43,13 +43,13 @@ export const SingleMenu: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the allergen
+        // Delete the dish
         await deleteDish(selectedDish._id)
 
         closeDishDeleteModal()
         setIsLoadingDelete(false)
 
-        // When allergen is delete update List
+        // When dish is delete update List
         getMenuEditor(menuId)
     }
 
