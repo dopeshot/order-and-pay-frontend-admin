@@ -37,8 +37,7 @@ describe('Menu Overview', () => {
             const interception = interceptIndefinitely('GET', `${api}/editor`, "getMenuOverviewEditorIndefinitely", { fixture: 'menu-overview.json' })
 
             cy.visit('/menus/${menu._id}/editor').then(() => {
-                // TODO: Change when loading component implemented
-                cy.contains('Loading...').should('be.visible')
+                cy.contains('Bereitet Burger zu...').should('be.visible')
                 interception.sendResponse()
                 cy.wait('@getMenuOverviewEditorIndefinitely')
             })
