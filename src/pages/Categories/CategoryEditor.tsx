@@ -1,7 +1,8 @@
 import { faArrowLeft, faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import axios from "axios"
 import { Form, Formik } from "formik"
 import { Fragment, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
@@ -59,6 +60,7 @@ export type ChoiceDto = {
 
 export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryId, menuId } = useParams<CategoryParams>()
+    const history = useHistory()
     const isEditing = Boolean(categoryId)
 
     // Global States
@@ -123,14 +125,32 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
 
     const submitCategory = async (values: CategoryWithoutChoices) => {
-        console.log("submitCategory:", values)
-        console.log("choices:", choices)
+        // Merge formik and choices state
         const newCategory = {
             ...values,
             choices
         }
         console.log("finalObject:", newCategory)
-        await createCategory(newCategory)
+
+        setIsLoadingSave(true)
+
+        try {
+            // Check if we are editing or creating a new menu
+            if (isEditing) {
+
+            } else {
+                await createCategory(newCategory)
+            }
+
+            history.push(`/menus/${newCategory.menuId}/editor`)
+        } catch (error) {
+            if (!axios.isAxiosError(error))
+                return
+
+            // MC: Put error display here (or we generalize it???)
+        } finally {
+            setIsLoadingSave(false)
+        }
     }
 
 
