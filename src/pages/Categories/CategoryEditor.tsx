@@ -7,6 +7,8 @@ import { Button } from "../../components/Buttons/Button"
 import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
+import { List } from "../../components/UI/List"
+import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
 import { ChoiceType } from "../../overmind/categories/effects"
 
@@ -129,6 +131,12 @@ export const CategoryEditor: React.FunctionComponent = () => {
                         </div>
                     </div>
 
+                    <List>
+                        <ListItem onClick={() => console.log("listitem")} title={"Titel"} icon={true ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{ChoiceType.RADIO === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
+
+                        </ListItem>
+                    </List>
+
                     <div className="flex flex-col md:flex-row justify-between mt-4">
                         {isEditing && <Button kind="tertiary" onClick={() => console.log("delete")} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                         <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
@@ -139,7 +147,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
 
         {/* Choices Modal */}
-
         <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
             setModalOpenChoice(false)
         }}>
