@@ -90,7 +90,7 @@ describe('Menu Overview', () => {
     })
 
     // TODO: Implement when dish and categories are merged
-    describe.only('Create', () => {
+    describe('Create', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
             cy.visit(`/menus/${menu._id}/editor`)
