@@ -46,7 +46,7 @@ export const SingleMenu: React.FC = () => {
         // Delete the allergen
         await deleteDish(selectedDish._id)
 
-        setDishDeleteModalOpen(false)
+        closeDishDeleteModal()
         setIsLoadingDelete(false)
 
         // When allergen is delete update List

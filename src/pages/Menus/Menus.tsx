@@ -38,7 +38,7 @@ export const Menus: React.FC = () => {
         // Delete the menu
         await deleteMenu(selectedMenu._id)
 
-        setDeleteModalOpen(false)
+        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When menu is delete update List
