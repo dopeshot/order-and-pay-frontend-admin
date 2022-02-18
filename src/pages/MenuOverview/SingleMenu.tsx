@@ -52,8 +52,8 @@ export const SingleMenu: React.FC = () => {
         // Delete the dish
         await deleteDish(selectedDish._id)
 
-        setDishDeleteModalOpen(false)
         closeDishDeleteModal()
+        setIsLoadingDelete(false)
 
         // When dish is delete update List
         getMenuEditor(menuId)

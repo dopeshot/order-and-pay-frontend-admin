@@ -40,7 +40,7 @@ export const Allergens: React.FC = () => {
         // Delete the allergen
         await deleteAllergen(selectedAllergen._id)
 
-        setDeleteModalOpen(false)
+        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
