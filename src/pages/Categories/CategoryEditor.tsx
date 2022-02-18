@@ -11,10 +11,12 @@ import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { Modal } from "../../components/UI/Modal"
 import { Tag } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { ChoiceType } from "../../overmind/categories/effects"
+import { Category } from "../../overmind/dishes/effects"
 import { numberToPrice } from "../../services/numberToPrice"
 
 type CategoryParams = {
@@ -63,7 +65,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const { isMobile } = useAppState().app
 
     // Global actions
-    const { createCategory } = useActions().categories
+    const { createCategory, getCategoryById } = useActions().categories
 
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
@@ -101,12 +103,20 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editOptionData, setEditOptionData] = useState<Option | null>(null)
     const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
+    const [category, setCategory] = useState<Category>()
     const isEditingOptions = Boolean(editOptionData)
 
     useEffect(() => {
         let isMounted = true
         async function loadCategory() {
-            console.log("We are editing!")
+            // Fetch category and set editing
+            const category = await getCategoryById(categoryId)
+
+            if (!isMounted)
+                return
+
+            setCategory(category)
+            setIsLoading(false)
         }
 
         // Check if we are editing an existing menu
@@ -292,67 +302,69 @@ export const CategoryEditor: React.FunctionComponent = () => {
     return <>
         <div className="container mt-12">
             <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
-            <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
+            {isLoading ? <Loading /> : <>
+                <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
 
-            <Formik initialValues={initialCategoryValues} enableReinitialize validationSchema={validationCategorySchema} onSubmit={submitCategory}>
-                <Form>
-                    <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
-                    <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
-                        <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired autoFocus />
-                        <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" />
-                        <TextInput name="image" placeholder="Gebe die Url für ein passendes Bild ein..." labelText="Titelbild" />
-                        <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
-                    </div>
-
-                    {/* Choices and Options */}
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
-                            <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
-                            <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                <Formik initialValues={initialCategoryValues} enableReinitialize validationSchema={validationCategorySchema} onSubmit={submitCategory}>
+                    <Form>
+                        <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
+                        <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
+                            <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired autoFocus />
+                            <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" />
+                            <TextInput name="image" placeholder="Gebe die Url für ein passendes Bild ein..." labelText="Titelbild" />
+                            <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
                         </div>
-                        <div className="w-full md:w-auto">
-                            <Button icon={faPlus} onClick={() => {
-                                setModalOpenChoice(true)
-                            }}>Neue Auswahlmöglichkeit</Button>
+
+                        {/* Choices and Options */}
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                            <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
+                                <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
+                                <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                            </div>
+                            <div className="w-full md:w-auto">
+                                <Button icon={faPlus} onClick={() => {
+                                    setModalOpenChoice(true)
+                                }}>Neue Auswahlmöglichkeit</Button>
+                            </div>
                         </div>
-                    </div>
 
-                    <List>
-                        {choices.map(choice => <Fragment key={`c${choice.id}`}>
-                            <ListItem onClick={() => {
-                                setEditChoiceData(choice)
-                                setModalOpenChoice(true)
-                            }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-                                {isMobile ? <IconButton icon={faPlus} onClick={() => {
-                                    setParentChoiceId(choice.id)
-                                    setModalOpenOption(true)
-                                }} /> : <Button kind="tertiary" onClick={() => {
-                                    setParentChoiceId(choice.id)
-                                    setModalOpenOption(true)
-                                }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
-                                <IconButton icon={faTrash} onClick={() => deleteChoice(choice.id)} />
-                            </ListItem>
+                        <List>
+                            {choices.map(choice => <Fragment key={`c${choice.id}`}>
+                                <ListItem onClick={() => {
+                                    setEditChoiceData(choice)
+                                    setModalOpenChoice(true)
+                                }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
+                                    {isMobile ? <IconButton icon={faPlus} onClick={() => {
+                                        setParentChoiceId(choice.id)
+                                        setModalOpenOption(true)
+                                    }} /> : <Button kind="tertiary" onClick={() => {
+                                        setParentChoiceId(choice.id)
+                                        setModalOpenOption(true)
+                                    }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
+                                    <IconButton icon={faTrash} onClick={() => deleteChoice(choice.id)} />
+                                </ListItem>
 
-                            {choice.options.map(option =>
-                                <ListItem key={`c${choice.id}_o${option.id}`} onClick={() => {
-                                    setParentChoiceId(choice.id)
-                                    setEditOptionData(option)
-                                    setModalOpenOption(true)
-                                }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
-                                    <p className="mr-4">{numberToPrice(option.price)}</p>
-                                    <IconButton icon={faTrash} onClick={() => deleteOption(choice.id, option.id)} />
-                                </ListItem>)
-                            }
-                        </Fragment>
-                        )}
-                    </List>
+                                {choice.options.map(option =>
+                                    <ListItem key={`c${choice.id}_o${option.id}`} onClick={() => {
+                                        setParentChoiceId(choice.id)
+                                        setEditOptionData(option)
+                                        setModalOpenOption(true)
+                                    }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
+                                        <p className="mr-4">{numberToPrice(option.price)}</p>
+                                        <IconButton icon={faTrash} onClick={() => deleteOption(choice.id, option.id)} />
+                                    </ListItem>)
+                                }
+                            </Fragment>
+                            )}
+                        </List>
 
-                    <div className="flex flex-col md:flex-row justify-between mt-4">
-                        {isEditing && <Button kind="tertiary" onClick={() => console.log("delete")} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                        <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
-                    </div>
-                </Form>
-            </Formik>
+                        <div className="flex flex-col md:flex-row justify-between mt-4">
+                            {isEditing && <Button kind="tertiary" onClick={() => console.log("delete")} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
+                        </div>
+                    </Form>
+                </Formik>
+            </>}
         </div>
 
 
