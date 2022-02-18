@@ -117,7 +117,7 @@ export const Dishes: React.FC = () => {
         title: dish?.title ?? "",
         description: dish?.description ?? "",
         image: dish?.image ?? "",
-        isActive: dish?.isActive ?? true,
+        isAvailable: dish?.isAvailable ?? true,
         price: dish?.price ?? 0,
         category: dish?.category ?? categoryId ?? "",
         allergens: dish?.allergens ?? [],
@@ -188,7 +188,7 @@ export const Dishes: React.FC = () => {
                             </div>
                             <Textarea name="description" labelText="Beschreibung" maxLength={200} labelRequired placeholder="Mit Salat, Tomaten und sauren Gurken" />
                             <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
-                            <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
+                            <Toggle name="isAvailable" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
                                 <div className="mr-2 sm:mr-8 md:mr-32">
                                     <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
