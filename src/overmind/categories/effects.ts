@@ -31,5 +31,7 @@ export enum ChoiceType {
 
 // Create a category
 export const createCategory = (categoryDto: CategoryDto) => request.post<Category>('/categories', categoryDto)
-// Get category by
+// Get category by id
 export const getCategoryById = (id: string) => request.get<Category>(`/categories/${id}`)
+// Update category by id
+export const updateCategory = (id: string, category: CategoryDto) => request.patch<Category>(`/categories/${id}`, category)

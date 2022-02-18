@@ -25,3 +25,15 @@ export const getCategoryById = async ({ state, effects }: Context, id: string): 
         throw (error)
     }
 }
+
+// Update menu by id action
+export const updateCategory = async ({ effects }: Context, { id, category }: { id: string, category: CategoryDto }): Promise<boolean> => {
+    try {
+        // We just await the update no need to update menu object
+        await effects.categories.updateCategory(id, category)
+        return true
+    } catch (error) {
+        console.error(error)
+        throw (error)
+    }
+}
