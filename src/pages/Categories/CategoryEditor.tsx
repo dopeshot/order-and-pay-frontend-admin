@@ -1,11 +1,13 @@
-import { faArrowLeft, faCheck, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faCheckDouble, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
+import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
+import { Modal } from "../../components/UI/Modal"
 import { ChoiceType } from "../../overmind/categories/effects"
 
 type CategoryParams = {
@@ -33,6 +35,11 @@ export type Choice = {
     type: ChoiceType
     default?: number // id of option
     options: Option[]
+}
+
+export type ChoiceDto = {
+    title: string,
+    type: ChoiceType
 }
 
 export const CategoryEditor: React.FunctionComponent = () => {
@@ -66,10 +73,35 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
 
     const submitCategory = (values: CategoryWithoutChoices) => {
-        console.log("Values from fomrik:", values)
+        console.log("submitCategory:", values)
     }
 
-    return (
+
+    // choices
+
+    const initialChoiceValues: ChoiceDto = {
+        title: "",
+        type: ChoiceType.RADIO
+    }
+
+    const submitChoice = (values: ChoiceDto) => {
+        console.log("submitChoice:", values)
+    }
+
+    const dropdownOptionsChoice = [
+        {
+            id: ChoiceType.RADIO,
+            label: "Einzeln",
+            icon: faCheck
+        },
+        {
+            id: ChoiceType.CHECKBOX,
+            label: "Mehrere",
+            icon: faCheckDouble
+        }
+    ]
+
+    return <>
         <div className="container mt-12">
             <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
             <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
@@ -104,37 +136,26 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 </Form>
             </Formik>
         </div>
-    )
+
+
+        {/* Choices Modal */}
+
+        <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
+            setModalOpenChoice(false)
+        }}>
+            <Formik initialValues={initialChoiceValues} onSubmit={submitChoice}>
+                <Form>
+                    <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." />
+                    <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
+                    <Button type="submit" icon={faCheck}>{editChoiceData ? `Speichern` : `Hinzufügen`}</Button>
+                </Form>
+            </Formik>
+        </Modal>
+
+
+
+    </>
 }
-
-
-// const dropdownOptionsChoice = [
-//     {
-//         id: ChoiceType.RADIO,
-//         label: "Einzeln",
-//         icon: faCheck
-//     },
-//     {
-//         id: ChoiceType.CHECKBOX,
-//         label: "Mehrere",
-//         icon: faCheckDouble
-//     }
-// ]
-
-            // {/* Choices Modal */}
-            // <Formik initialValues={initialValuesChoices} onSubmit={(formikChoicesValues) => submitFormChoices(formikChoicesValues, formikGeneral.setFieldValue, formikGeneral.values)}>
-            //     {(formikChoices) => (
-            //         <Modal modalHeading={editChoiceData ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
-            //             setModalOpenChoice(false)
-            //         }}>
-            //             <div>
-            //                 <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." />
-            //                 <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
-            //             </div>
-            //             <Button onClick={formikChoices.handleSubmit} type="submit">Speichern</Button>
-            //         </Modal>
-            //     )}
-            // </Formik>
 
             // <List>
             //     {formikGeneral.values.choices.map((choice) => (
