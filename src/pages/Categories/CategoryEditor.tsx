@@ -4,12 +4,14 @@ import { useState } from "react"
 import { useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
+import { IconButton } from "../../components/Buttons/IconButton"
 import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
+import { useAppState } from "../../overmind"
 import { ChoiceType } from "../../overmind/categories/effects"
 
 type CategoryParams = {
@@ -48,6 +50,9 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryId, menuId } = useParams<CategoryParams>()
     const isEditing = Boolean(categoryId)
 
+    // Global States
+    const { isMobile } = useAppState().app
+
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
@@ -55,6 +60,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
 
+    const [choices, setChoices] = useState<Choice[]>([])
     // const [editOptionData, setEditOptionData] = useState<Option | null>(null)
 
     const initialCategoryValues: CategoryWithoutChoices = {
@@ -133,7 +139,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
                     <List>
                         <ListItem onClick={() => console.log("listitem")} title={"Titel"} icon={true ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{ChoiceType.RADIO === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-
+                            {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => console.log("add option")} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
+                            <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                         </ListItem>
                     </List>
 
@@ -158,9 +165,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 </Form>
             </Formik>
         </Modal>
-
-
-
     </>
 }
 
