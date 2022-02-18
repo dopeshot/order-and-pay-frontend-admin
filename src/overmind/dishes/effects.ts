@@ -41,7 +41,7 @@ export type Category = {
     icon: string
     image: string
     choices: Choice[]
-    menu: string // id ref: 'Menu'
+    menuId: string // id ref: 'Menu'
 }
 
 // Create a Dish
