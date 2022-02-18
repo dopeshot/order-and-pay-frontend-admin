@@ -25,30 +25,32 @@ export const App: React.FunctionComponent = () => {
   return (
     <Router basename="/admin">
       <Switch>
-        <RouteHandler exact path="/login" component={Login} />
-        <div className="h-screen">
-          <Topbar />
-          <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
-            <Sidebar />
-            <div className="flex-1 overflow-y-auto">
-              {/* Content Start */}
-              <RouteHandler exact path="/tables" component={Tables} />
-              <RouteHandler exact path="/home" component={Home} />
-              <RouteHandler exact path="/menus/labels" component={Labels} />
-              <RouteHandler exact path="/menus/allergens" component={Allergens} />
-              <RouteHandler exact path="/menus/:menusId/categories/:categoriesId/dish/:dishId" component={Dishes} />
-              <RouteHandler exact path="/menus/:menusId/categories/:categoriesId/dish" component={Dishes} />
-              <RouteHandler exact path="/menus/:id/editor" component={() => <p>editor</p>} />
-              <RouteHandler exact path="/menus/add" component={MenuEditor} />
-              <RouteHandler exact path="/menus/:id" component={MenuEditor} />
-              <RouteHandler exact path="/menus" component={Menus} />
-              <Route exact path="/">
-                <Redirect to="/login" />
-              </Route>
-              {/* Content End */}
+        <>
+          <RouteHandler exact path="/login" component={Login} />
+          <div className="h-screen">
+            <Topbar />
+            <div className="flex" style={{ height: "calc(100vh - 64px)" }}>
+              <Sidebar />
+              <div className="flex-1 overflow-y-auto">
+                {/* Content Start */}
+                <RouteHandler exact path="/tables" component={Tables} />
+                <RouteHandler exact path="/home" component={Home} />
+                <RouteHandler exact path="/menus/labels" component={Labels} />
+                <RouteHandler exact path="/menus/allergens" component={Allergens} />
+                <RouteHandler exact path="/menus/:menusId/categories/:categoriesId/dish/:dishId" component={Dishes} />
+                <RouteHandler exact path="/menus/:menusId/categories/:categoriesId/dish" component={Dishes} />
+                <RouteHandler exact path="/menus/:id/editor" component={() => <p>editor</p>} />
+                <RouteHandler exact path="/menus/add" component={MenuEditor} />
+                <RouteHandler exact path="/menus/:id" component={MenuEditor} />
+                <RouteHandler exact path="/menus" component={Menus} />
+                <Route exact path="/">
+                  <Redirect to="/login" />
+                </Route>
+                {/* Content End */}
+              </div>
             </div>
           </div>
-        </div>
+        </>
       </Switch>
     </Router>
   )
