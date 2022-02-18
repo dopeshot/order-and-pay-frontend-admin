@@ -8,6 +8,7 @@ import { IconButton } from "../../components/Buttons/IconButton"
 import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
+import { Toggle } from "../../components/Form/Toggle"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Modal } from "../../components/UI/Modal"
@@ -319,6 +320,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 <Form>
                     <TextInput name="name" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
                     <TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="200" icon={faEuroSign} />
+                    <Toggle name="default" labelText="Vorausgewählte Option?" labelRequired labelOff="Nicht ausgewählt" labelOn="Ausgewählt" />
                     <Button type="submit" icon={faCheck}>{isEditingOptions ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
