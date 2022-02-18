@@ -139,6 +139,33 @@ Cypress.Commands.add('getCurrentUser', () => {
     }).as('getCurrentUser')
 })
 
+Cypress.Commands.add('easyLogin', () => {
+    cy.overmind().its('actions').invoke('auth.loginTest')
+})
+
+/********* Overmind *********/
+Cypress.Commands.add('overmind', () => {
+    let overmind: any
+
+    const cmd = Cypress.log({
+        name: 'overmind',
+        consoleProps() {
+            return {
+                Overmind: overmind
+            }
+        }
+    })
+
+    return (
+        cy.window().then((window: any) => {
+            overmind = window.overmind
+            cmd.end()
+            return overmind
+        })
+    )
+})
+
+
 
 export { }
 

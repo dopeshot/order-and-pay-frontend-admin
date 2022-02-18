@@ -141,6 +141,18 @@ declare global {
             * @example cy.getCurrentUser()
             */
             getCurrentUser(): void
+
+            /**
+             * Custom command to get overmind window object
+             * @overmind cy.overmind()
+             */
+            overmind(): Chainable
+
+            /**
+             * Custom command to login without username and password
+             * @overmind cy.easyLogin()
+             */
+            easyLogin(): void
         }
     }
 }

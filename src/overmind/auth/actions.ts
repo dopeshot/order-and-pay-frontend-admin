@@ -33,3 +33,13 @@ export const logout = ({ state, effects }: Context) => {
     state.auth.currentUser = null;
     effects.auth.setToken()
 }
+
+/** Only for testing */
+export const loginTest = ({ state, effects }: Context) => {
+    state.auth.currentUser = {
+        "_id": "620fbc5b991a915224910122",
+        "username": "test",
+        "email": "test@gmail.de"
+    }
+    effects.auth.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOiI2MjBmYmM1Yjk5MWE5MTUyMjQ5MTAxMjIiLCJpYXQiOjE2NDUyMDc4NTEsImV4cCI6MTY0NTI0Mzg1MX0.vBeV4UkpnU2xCZtmPP5ti1txGXvcUt8_TpeL9AJnYVI")
+}

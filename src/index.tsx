@@ -26,6 +26,15 @@ const overmind = createOvermind(config, {
   devtools: true
 })
 
+// istanbul ignore else
+if (window.Cypress) {
+  window.overmind = overmind
+}
+
+declare global {
+  interface Window { overmind: typeof overmind, Cypress: any }
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider value={overmind}>

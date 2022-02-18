@@ -44,9 +44,10 @@ describe('Login', () => {
         describe('Logged In', () => {
             beforeEach(() => {
                 cy.visit('/')
+                cy.easyLogin()
             })
 
-            it('should redirect to /home when logged in', () => {
+            it.only('should redirect to /home when logged in', () => {
 
             })
 
