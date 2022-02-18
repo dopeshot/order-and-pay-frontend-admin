@@ -13,9 +13,9 @@ import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
 import { LabelModal } from "../../components/Labels/LabelModal"
-import { Modal } from "../../components/UI/Modal"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { useActions, useAppState } from "../../overmind"
-import { DishDto } from "../../overmind/dishes/effects"
+import { Dish, DishDto } from "../../overmind/dishes/effects"
 import { ComponentOptions } from "../../shared/types/ComponentOptions"
 
 type Params = {
@@ -36,7 +36,7 @@ export const Dishes: React.FC = () => {
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
     const [hasLabelModal, setHasLabelModal] = useState(false)
     const [hasAllergensModal, setHasAllergensModal] = useState(false)
-    const [dish, setDish] = useState<DishDto>()
+    const [dish, setDish] = useState<Dish>()
     const [categoriesOptions, setCategoriesOptions] = useState<ComponentOptions[]>([])
     const [labelsOptions, setLabelsOptions] = useState<ComponentOptions[]>([])
     const [allergensOptions, setAllergensOptions] = useState<ComponentOptions[]>([])
@@ -215,13 +215,14 @@ export const Dishes: React.FC = () => {
             <AllergensModal modalOpen={hasAllergensModal} setModalOpen={setHasAllergensModal} />
 
             {/* Delete Modal */}
-            <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
-                <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
-                <div className="flex md:justify-between flex-col md:flex-row">
-                    <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
-                    <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
-                </div>
-            </Modal>
+            <DeleteModal
+                title={`${dish?.title}`}
+                description={`Das Löschen kann nicht rückgängig gemacht werden. ${dish?.title} wird auch aus allen Kategorien entfernt.`}
+                open={hasDeleteModal}
+                onDissmis={() => setHasDeleteModal(false)}
+                handleDelete={() => handleDishDelete()}
+                isLoadingDelete={isLoadingDelete}
+            />
         </div>
     )
 }
