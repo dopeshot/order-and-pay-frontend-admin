@@ -267,10 +267,3 @@ export const CategoryEditor: React.FunctionComponent = () => {
         </Modal>
     </>
 }
-
-            // {/* Option Modal */}
-            // <Modal modalHeading={true ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={() => {
-            //     setModalOpenOption(false)
-            // }}></Modal>
-
-
