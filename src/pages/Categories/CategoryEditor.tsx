@@ -313,7 +313,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
         {/* Options Modal */}
         <Modal modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
-            <p>{parentChoiceId}</p>
             <Formik initialValues={initialOptionValues} onSubmit={submitOption} validationSchema={validationOptionSchema}>
                 <Form>
                     <TextInput name="name" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
