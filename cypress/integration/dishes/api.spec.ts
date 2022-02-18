@@ -9,7 +9,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit('/menus/1/categories/1/dish')
+            cy.visit(`/menus/1/categories/${dish.category}/dish`)
 
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')
@@ -108,7 +108,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/1/dish/${dish._id}`)
+            cy.visit(`/menus/1/categories/${dish.category}/dish/${dish._id}`)
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')
@@ -153,7 +153,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/1/dish/${dish._id}`)
+            cy.visit(`/menus/1/categories/${dish.category}/dish/${dish._id}`)
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')

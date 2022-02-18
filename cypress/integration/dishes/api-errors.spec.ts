@@ -1,10 +1,12 @@
+import dish from '../../fixtures/dish.json';
+
 describe('Api Error Handling', () => {
     describe('Create Dish Errors', () => {
         beforeEach(() => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit('/menus/1/categories/1/dish')
+            cy.visit(`/menus/1/categories/${dish.category}/dish`)
 
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')
@@ -64,13 +66,8 @@ describe('Api Error Handling', () => {
             cy.get('input[name="image"]').type('a'.repeat(101)).blur()
             cy.get('[data-cy="textinput-image-form-error"]').should('contain', 'Die Titelbild-URL darf nicht länger als 100 Zeichen sein.')
         })
-
-        it('should handle category can not be empty', () => {
-            cy.get('[data-cy="dishes-save-button"]').click()
-            cy.get('[data-cy="dropdown-category-form-error"]').should('contain', 'Dies ist ein Pflichtfeld.')
-        })
     })
 })
 
-export { }
+export { };
 
