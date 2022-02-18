@@ -24,6 +24,7 @@ export const Home: React.FunctionComponent = () => {
             </Formik>
 
             <Link to="/tables">Gehe zu Tabellen</Link>
+            <Link to="/menus/1/edit">Gehe zu Menu Overview</Link>
             <List lines>
                 <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
                 <ListItem title="Football" indent onClick={() => console.log("parent")} header={<Tag title="Favorite" />}>

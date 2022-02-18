@@ -15,12 +15,12 @@ import { MenuDto } from "../../overmind/menus/effects"
 import { Menu } from "../../overmind/menus/state"
 
 type Params = {
-    id: string
+    menuId: string
 }
 
 export const MenuEditor: React.FC = () => {
-    const { id } = useParams<Params>()
-    const isEditing = Boolean(id)
+    const { menuId } = useParams<Params>()
+    const isEditing = Boolean(menuId)
     const history = useHistory()
 
     // Get hooks to manipulate global state
@@ -39,7 +39,7 @@ export const MenuEditor: React.FC = () => {
         async function loadMenu() {
             try {
                 // Fetch menu and set editing
-                const menu = await getMenuById(id)
+                const menu = await getMenuById(menuId)
 
                 if (!isMounted)
                     return
@@ -58,7 +58,7 @@ export const MenuEditor: React.FC = () => {
             loadMenu()
 
         return () => { isMounted = false }
-    }, [getMenuById, isEditing, id])
+    }, [getMenuById, isEditing, menuId])
 
     const initialValues: MenuDto = {
         title: menu?.title ?? "",
@@ -79,7 +79,7 @@ export const MenuEditor: React.FC = () => {
             // Check if we are editing or creating a new menu
             if (isEditing) {
                 await updateMenu({
-                    id,
+                    menuId,
                     menu: values
                 })
             } else {
@@ -104,7 +104,7 @@ export const MenuEditor: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        await deleteMenu(id)
+        await deleteMenu(menuId)
 
         setIsLoadingDelete(false)
         history.push("/menus")
