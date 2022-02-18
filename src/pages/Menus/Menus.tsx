@@ -2,9 +2,9 @@ import { faEdit, faFolder, faPlus, faTrash } from "@fortawesome/free-solid-svg-i
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
-import { Modal } from "../../components/UI/Modal"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/state"
@@ -18,7 +18,7 @@ export const Menus: React.FC = () => {
     const { deleteMenu } = useActions().menus
 
     // Component states
-    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null)
 
@@ -38,7 +38,7 @@ export const Menus: React.FC = () => {
         // Delete the menu
         await deleteMenu(selectedMenu._id)
 
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setIsLoadingDelete(false)
 
         // When menu is delete update List
@@ -47,11 +47,11 @@ export const Menus: React.FC = () => {
 
     const openDeleteModal = (menu: Menu) => {
         setSelectedMenu(menu)
-        setHasDeleteModal(true)
+        setDeleteModalOpen(true)
     }
 
     const closeDeleteModal = () => {
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setSelectedMenu(null)
     }
     return <div className="container md:max-w-full mt-12" >
@@ -70,12 +70,13 @@ export const Menus: React.FC = () => {
                 <IconButton className="mr-4" icon={faTrash} onClick={() => openDeleteModal(menu)} />
             </ListItem>)}
         </List>
-        <Modal modalHeading={`${selectedMenu?.title} löschen?`} open={hasDeleteModal} onDissmis={closeDeleteModal}>
-            <p>Das löschen kann nicht rückgängig gemacht werden.</p>
-            <div className="flex md:justify-between flex-col md:flex-row">
-                <Button kind="tertiary" onClick={closeDeleteModal} className="my-4 md:my-0">Abbrechen</Button>
-                <Button kind="primary" onClick={(event) => handleDelete(event)} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
-            </div>
-        </Modal>
+        <DeleteModal
+            title={`${selectedMenu?.title}`}
+            description="Das Löschen kann nicht rückgängig gemacht werden."
+            open={isDeleteModalOpen}
+            onDissmis={closeDeleteModal}
+            handleDelete={handleDelete}
+            isLoadingDelete={isLoadingDelete}
+        />
     </div>
 }

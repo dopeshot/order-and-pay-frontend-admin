@@ -1,5 +1,5 @@
 import { Context } from ".."
-import { Category, DishDto } from "./effects"
+import { Category, Dish, DishDto } from "./effects"
 
 /**
  * Create new Dish
@@ -17,7 +17,7 @@ export const createDish = async ({ effects }: Context, dish: DishDto): Promise<b
 /**
  * Get one Dish by id
  */
-export const getDishById = async ({ effects }: Context, id: string): Promise<DishDto> => {
+export const getDishById = async ({ effects }: Context, id: string): Promise<Dish> => {
     try {
         const response = await effects.dishes.getDishById(id)
         const dish = response.data

@@ -4,11 +4,12 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
-import { Modal } from "../../components/UI/Modal"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
+import { Dish } from "../../overmind/dishes/effects"
 
 type SingleMenuParams = {
     menuId: string
@@ -17,9 +18,12 @@ type SingleMenuParams = {
 export const SingleMenu: React.FC = () => {
     const { menuId } = useParams<SingleMenuParams>()
 
-    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    // Dish Local State
+    const [isDishDeleteModalOpen, setDishDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
 
+    // Global State
     const { isMobile } = useAppState().app
     const { isLoadingMenu, menu } = useAppState().menuoverview
     const { getMenuEditor } = useActions().menuoverview
@@ -31,10 +35,32 @@ export const SingleMenu: React.FC = () => {
 
     const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })
 
-    const handleDishDelete = async (id: string) => {
+    const handleDishDelete = async (event: any) => {
+        if (!selectedDish) {
+            console.warn("There is no dish selected.")
+            return
+        }
+
         setIsLoadingDelete(true)
-        await deleteDish(id)
+
+        // Delete the allergen
+        await deleteDish(selectedDish._id)
+
+        setDishDeleteModalOpen(false)
         setIsLoadingDelete(false)
+
+        // When allergen is delete update List
+        getMenuEditor(menuId)
+    }
+
+    const openDishDeleteModal = (dish: Dish) => {
+        setSelectedDish(dish)
+        setDishDeleteModalOpen(true)
+    }
+
+    const closeDishDeleteModal = () => {
+        setDishDeleteModalOpen(false)
+        setSelectedDish(null)
     }
 
     return (
@@ -72,16 +98,8 @@ export const SingleMenu: React.FC = () => {
                                 {category.dishes.map(dish => (<div key={dish._id}>
                                     <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                         <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
-                                        <IconButton icon={faTrash} onClick={() => setHasDeleteModal(true)} />
+                                        <IconButton dataCy="dishes-delete-button" icon={faTrash} onClick={() => openDishDeleteModal(dish)} />
                                     </ListItem>
-                                    {/* Delete Dish Modal */}
-                                    <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
-                                        <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
-                                        <div className="flex md:justify-between flex-col md:flex-row">
-                                            <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
-                                            <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete(dish._id)} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
-                                        </div>
-                                    </Modal>
                                 </div>))}
                                 {/* Dishes end */}
                             </div>))}
@@ -89,6 +107,16 @@ export const SingleMenu: React.FC = () => {
                         </>
                     </List>
                 </div>
+
+                {/* Delete Modal */}
+                <DeleteModal
+                    title={`${selectedDish?.title}`}
+                    description={`Das Löschen kann nicht rückgängig gemacht werden.`}
+                    open={isDishDeleteModalOpen}
+                    onDissmis={closeDishDeleteModal}
+                    handleDelete={handleDishDelete}
+                    isLoadingDelete={isLoadingDelete}
+                />
                 {/* Categories and Dishes end */}
             </>}
         </div>
