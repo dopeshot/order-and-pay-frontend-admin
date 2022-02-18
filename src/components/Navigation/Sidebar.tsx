@@ -33,11 +33,11 @@ export const Sidebar: React.FunctionComponent = () => {
             icon: faReceipt,
             path: '/menus/labels'
         }, {
-            title: 'Allergens',
+            title: 'Allergene',
             icon: faReceipt,
             path: '/menus/allergens'
         }, {
-            title: 'User',
+            title: 'Benutzer',
             icon: faUser,
             path: '/users'
         }],

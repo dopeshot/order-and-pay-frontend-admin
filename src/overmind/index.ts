@@ -8,6 +8,7 @@ import * as labels from './labels'
 import * as menuoverview from './menuoverview'
 import * as menus from './menus'
 import * as tables from './tables'
+import * as users from './users'
 
 export const config = namespaced({
     tables,
@@ -16,7 +17,8 @@ export const config = namespaced({
     allergens,
     menuoverview,
     menus,
-    dishes
+    dishes,
+    users
 })
 
 export type Context = IContext<{
