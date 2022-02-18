@@ -67,7 +67,19 @@ export const CategoryEditor: React.FunctionComponent = () => {
         id: 0,
         title: "Größe",
         type: ChoiceType.RADIO,
-        options: []
+        options: [{
+            id: 0,
+            name: "Klein",
+            price: 200
+        }, {
+            id: 1,
+            name: "Mittel",
+            price: 500
+        }, {
+            id: 3,
+            name: "Groß",
+            price: 800
+        }]
     }, {
         id: 1,
         title: "Extras",
