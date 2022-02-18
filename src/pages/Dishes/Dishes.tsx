@@ -14,6 +14,7 @@ import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
 import { LabelModal } from "../../components/Labels/LabelModal"
 import { DeleteModal } from "../../components/UI/DeleteModal"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Dish, DishDto } from "../../overmind/dishes/effects"
 import { ComponentOptions } from "../../shared/types/ComponentOptions"
@@ -30,7 +31,7 @@ export const Dishes: React.FC = () => {
     const history = useHistory()
 
     // Local State
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(isEditing)
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
@@ -53,6 +54,9 @@ export const Dishes: React.FC = () => {
 
         // Load dish when id is set in url
         async function loadDish() {
+            if (!isEditing)
+                return
+
             try {
                 // Fetch dish and set editing
                 const dish = await getDishById(dishId!) // ! because we only call when isEditing
@@ -61,7 +65,6 @@ export const Dishes: React.FC = () => {
                     return
 
                 setDish(dish)
-                setIsLoading(false)
             } catch (error) {
                 console.error("Dish not found")
                 // MC: Implement error here
@@ -72,26 +75,27 @@ export const Dishes: React.FC = () => {
 
         // Prepare Categories, Labels and Allergens for Dropdown and Checkbox
         async function prepDataOptions() {
-            const categories = await getAllCategories()
+            const responses = await Promise.all([getAllCategories(), getAllLabels(), getAllAllergens()])
 
             if (!isMounted)
                 return
 
-            const categoriesResult = categories.map(categorie => ({
-                id: categorie._id,
-                label: categorie.title
+            const categoriesResult = responses[0].map(category => ({
+                id: category._id,
+                label: category.title
             }))
             setCategoriesOptions(categoriesResult)
-
-            await getAllLabels()
-            await getAllAllergens()
         }
-        prepDataOptions()
 
-        // Check if we are editing an existing menu
-        if (isEditing)
-            loadDish()
+        async function main() {
+            await Promise.all([prepDataOptions(), loadDish()])
 
+            if (!isMounted)
+                return
+
+            setIsLoading(false)
+        }
+        main()
         return () => { isMounted = false }
     }, [getDishById, isEditing, getAllAllergens, getAllCategories, getAllLabels, dishId])
 
@@ -176,7 +180,7 @@ export const Dishes: React.FC = () => {
     return (
         <div className="container mt-12">
             <Button dataCy="dishes-back-button" kind="tertiary" to={`/menus/${menuId}/editor`} icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
-            {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
+            {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
                     {({ dirty, isValid }) => (
