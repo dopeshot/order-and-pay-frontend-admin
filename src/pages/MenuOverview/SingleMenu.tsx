@@ -23,15 +23,20 @@ export const SingleMenu: React.FC = () => {
     const [isDishDeleteModalOpen, setDishDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
+    const [isLoading, setLoading] = useState(true)
 
     // Global State
     const { isMobile } = useAppState().app
-    const { isLoadingMenu, menu } = useAppState().menuoverview
+    const { menu } = useAppState().menuoverview
     const { getMenuEditor } = useActions().menuoverview
     const { deleteDish } = useActions().dishes
 
     useEffect((): void => {
-        getMenuEditor(menuId)
+        async function loadMenu() {
+            if (await getMenuEditor(menuId))
+                setLoading(false)
+        }
+        loadMenu()
     }, [getMenuEditor, menuId])
 
     const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }) //MC TODO: Use from shared
@@ -69,7 +74,7 @@ export const SingleMenu: React.FC = () => {
             {/* Back Button */}
             <Button dataCy="singlemenu-back-button" kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück zu allen Menüs</Button>
 
-            {isLoadingMenu ? <Loading /> : <>
+            {isLoading ? <Loading /> : <>
                 {/* Header */}
                 <div className="flex items-baseline">
                     <h1 className="text-2xl text-headline-black font-semibold mr-3 mb-1">{menu?.title}</h1>

@@ -45,11 +45,9 @@ export type Menu = {
 }
 
 export type State = {
-    isLoadingMenu: boolean
     menu: Menu | null
 }
 
 export const state: State = {
-    isLoadingMenu: false,
     menu: null
 }
