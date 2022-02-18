@@ -1,6 +1,6 @@
 import { faArrowLeft, faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
@@ -282,8 +282,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
                     </div>
 
                     <List>
-                        {choices.map(choice => <>
-                            <ListItem key={`c${choice.id}`} onClick={() => {
+                        {choices.map(choice => <Fragment key={`c${choice.id}`}>
+                            <ListItem onClick={() => {
                                 setEditChoiceData(choice)
                                 setModalOpenChoice(true)
                             }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
@@ -295,7 +295,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             </ListItem>
 
                             {choice.options.map(option =>
-                                <ListItem key={`o${option.id}`} onClick={() => {
+                                <ListItem key={`c${choice.id}_o${option.id}`} onClick={() => {
                                     setParentChoiceId(choice.id)
                                     setEditOptionData(option)
                                     setModalOpenOption(true)
@@ -306,7 +306,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                     }} />
                                 </ListItem>)
                             }
-                        </>
+                        </Fragment>
                         )}
                     </List>
 
