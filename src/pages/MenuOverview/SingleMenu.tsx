@@ -19,7 +19,7 @@ export const SingleMenu: React.FC = () => {
     const { menuId } = useParams<SingleMenuParams>()
 
     // Dish Local State
-    const [hasDishDeleteModal, setHasDishDeleteModal] = useState(false)
+    const [isDishDeleteModalOpen, setDishDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
 
@@ -46,7 +46,7 @@ export const SingleMenu: React.FC = () => {
         // Delete the allergen
         await deleteDish(selectedDish._id)
 
-        setHasDishDeleteModal(false)
+        setDishDeleteModalOpen(false)
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
@@ -55,11 +55,11 @@ export const SingleMenu: React.FC = () => {
 
     const openDishDeleteModal = (dish: Dish) => {
         setSelectedDish(dish)
-        setHasDishDeleteModal(true)
+        setDishDeleteModalOpen(true)
     }
 
     const closeDishDeleteModal = () => {
-        setHasDishDeleteModal(false)
+        setDishDeleteModalOpen(false)
         setSelectedDish(null)
     }
 
@@ -112,7 +112,7 @@ export const SingleMenu: React.FC = () => {
                 <DeleteModal
                     title={`${selectedDish?.title}`}
                     description={`Das Löschen kann nicht rückgängig gemacht werden.`}
-                    open={hasDishDeleteModal}
+                    open={isDishDeleteModalOpen}
                     onDissmis={closeDishDeleteModal}
                     handleDelete={handleDishDelete}
                     isLoadingDelete={isLoadingDelete}
