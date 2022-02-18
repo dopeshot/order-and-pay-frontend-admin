@@ -67,42 +67,40 @@ describe('Api Error Handling', () => {
 
             cy.get('[data-cy="table-save"]').click()
 
-            cy.get('[data-cy="error-banner"]').should('be.visible').contains('This table number already exists')
+            cy.get('[data-cy="error-banner"]').should('contain', 'This table number already exists')
         })
 
         it('should handle tableNumber to long (over 8 letters)', () => {
-            cy.get('[data-cy="textinput-tableNumber-input"]').type("123456789").blur()
-            cy.get('[data-cy="textinput-tableNumber-form-error"]').should('be.visible').contains('Die Tischnummer darf nicht länger als 8 Zeichen sein.')
+            cy.get('[data-cy="textinput-tableNumber-input"]').type('a'.repeat(9)).blur()
+            cy.get('[data-cy="textinput-tableNumber-form-error"]').should('contain', 'Die Tischnummer darf nicht länger als 8 Zeichen sein.')
         })
 
         it('should handle tableNumber can not be empty', () => {
             cy.get('[data-cy="textinput-tableNumber-input"]').click().blur()
-            cy.get('[data-cy="textinput-tableNumber-form-error"]').should('be.visible').contains('Dies ist ein Pflichtfeld.')
+            cy.get('[data-cy="textinput-tableNumber-form-error"]').should('contain', 'Dies ist ein Pflichtfeld.')
         })
 
         it('should handle capacity to big (over 100)', () => {
             cy.get('[data-cy="textinput-capacity-input"]').clear().type("101").blur()
-            cy.get('[data-cy="textinput-capacity-form-error"]').should('be.visible').contains('Die Personenanzahl darf nicht größer als 100 sein.')
+            cy.get('[data-cy="textinput-capacity-form-error"]').should('contain', 'Die Personenanzahl darf nicht größer als 100 sein.')
         })
 
         it('should handle capacity can not be 0', () => {
             cy.get('[data-cy="textinput-capacity-input"]').clear().type("0").blur()
-            cy.get('[data-cy="textinput-capacity-form-error"]').should('be.visible').contains('Die Personenanzahl muss mindestens 1 sein.')
+            cy.get('[data-cy="textinput-capacity-form-error"]').should('contain', 'Die Personenanzahl muss mindestens 1 sein.')
         })
 
         it('should handle capacity can not be empty', () => {
             cy.get('[data-cy="textinput-capacity-input"]').clear().blur()
-            cy.get('[data-cy="textinput-capacity-form-error"]').should('be.visible').contains('Dies ist ein Pflichtfeld.')
+            cy.get('[data-cy="textinput-capacity-form-error"]').should('contain', 'Dies ist ein Pflichtfeld.')
         })
     })
 
-    describe('Table Edit Errors', () => {
-        beforeEach(() => {
+    describe('Table Edit Duplicate', () => {
+        it('should handle edit duplicate tableNumber', () => {
             cy.getTables()
             cy.visit('/tables')
-        })
 
-        it('should handle edit duplicate tableNumber', () => {
             cy.changeToDuplicateTable()
             cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
 
@@ -110,52 +108,40 @@ describe('Api Error Handling', () => {
 
             cy.get('[data-cy="table-table-save-button-0"]').click()
 
-            cy.get('[data-cy="error-banner"]').should('be.visible').contains('This table number already exists')
+            cy.get('[data-cy="error-banner"]').should('contain', 'This table number already exists')
+        })
+    })
+
+    describe('Table Edit Errors', () => {
+        beforeEach(() => {
+            cy.getTables()
+            cy.visit('/tables')
+            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
         })
 
         it('should handle tableNumber to long (over 8 letters)', () => {
-            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
-
-            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear().type("123456789")
-            cy.get('[data-cy="table-table-save-button-0"]').click()
-
-            cy.get('[data-cy="table-table-tablenumber-error"]').should('be.visible').contains('Die Tischnummer darf nicht länger als 8 Zeichen sein.')
+            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear().type("123456789").blur()
+            cy.get('[data-cy="table-table-tablenumber-error"]').should('contain', 'Die Tischnummer darf nicht länger als 8 Zeichen sein.')
         })
 
         it('should handle tableNumber can not be empty', () => {
-            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
-
-            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear()
-            cy.get('[data-cy="table-table-save-button-0"]').click()
-
-            cy.get('[data-cy="table-table-tablenumber-error"]').should('be.visible').contains('Dies ist ein Pflichtfeld.')
+            cy.get('[data-cy="table-table-tablenumber-input-0"]').clear().blur()
+            cy.get('[data-cy="table-table-tablenumber-error"]').should('contain', 'Dies ist ein Pflichtfeld.')
         })
 
         it('should handle capacity to big (over 100)', () => {
-            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
-
-            cy.get('[data-cy="table-table-capacity-input-0"]').clear().type("101")
-            cy.get('[data-cy="table-table-save-button-0"]').click()
-
-            cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Die Personenanzahl darf nicht größer als 100 sein.')
+            cy.get('[data-cy="table-table-capacity-input-0"]').clear().type("101").blur()
+            cy.get('[data-cy="table-table-capacity-error"]').should('contain', 'Die Personenanzahl darf nicht größer als 100 sein.')
         })
 
         it('should handle capacity can not be 0', () => {
-            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
-
-            cy.get('[data-cy="table-table-capacity-input-0"]').clear().type("0")
-            cy.get('[data-cy="table-table-save-button-0"]').click()
-
-            cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Die Personenanzahl muss mindestens 1 sein.')
+            cy.get('[data-cy="table-table-capacity-input-0"]').clear().type("0").blur()
+            cy.get('[data-cy="table-table-capacity-error"]').should('contain', 'Die Personenanzahl muss mindestens 1 sein.')
         })
 
         it('should handle capacity can not be empty', () => {
-            cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
-
-            cy.get('[data-cy="table-table-capacity-input-0"]').clear()
-            cy.get('[data-cy="table-table-save-button-0"]').click()
-
-            cy.get('[data-cy="table-table-capacity-error"]').should('be.visible').contains('Dies ist ein Pflichtfeld.')
+            cy.get('[data-cy="table-table-capacity-input-0"]').clear().blur()
+            cy.get('[data-cy="table-table-capacity-error"]').should('contain', 'Dies ist ein Pflichtfeld.')
         })
     })
 
