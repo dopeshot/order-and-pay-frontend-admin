@@ -182,8 +182,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
     // options 
 
     const initialOptionValues: OptionDto = {
-        name: "",
-        price: 100
+        name: editOptionData?.name ?? "",
+        price: editOptionData?.price ?? 100
     }
 
     const validationOptionSchema = Yup.object().shape({
@@ -271,6 +271,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                             {choice.options.map(option =>
                                 <ListItem onClick={() => {
                                     setParentChoiceId(choice.id)
+                                    setEditOptionData(option)
                                     setModalOpenOption(true)
                                 }} title={option.name} icon={faCog} indent header={option.id === choice.default ? <Tag title="Standard" /> : ''}>
                                     <p className="mr-4">{numberToPrice(option.price)}</p>
