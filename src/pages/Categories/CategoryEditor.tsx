@@ -229,6 +229,10 @@ export const CategoryEditor: React.FunctionComponent = () => {
             // Push new option into options array of currently editing choice
             newChoices[parentChoiceId].options = [...newChoices[parentChoiceId].options, newOption]
 
+            // Set to default
+            if (isDefault)
+                choices[parentChoiceId].default = newOption.id
+
             setChoices(newChoices)
         }
 
