@@ -1,7 +1,7 @@
 import access_token from '../../fixtures/access_token.json';
 import user from '../../fixtures/current-user.json';
 
-describe('Login', () => {
+describe.skip('Login', () => {
     describe('Login Functionality', () => {
         beforeEach(() => {
             cy.login()
