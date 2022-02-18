@@ -165,6 +165,10 @@ export const CategoryEditor: React.FunctionComponent = () => {
         closeChoiceModal()
     }
 
+    const deleteChoice = (choiceId: number) => {
+        setChoices(choices.filter(choice => choice.id !== choiceId))
+    }
+
     const closeChoiceModal = () => {
         if (isEditingChoice && editChoiceData)
             setEditChoiceData(null)
@@ -305,7 +309,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                     setParentChoiceId(choice.id)
                                     setModalOpenOption(true)
                                 }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
-                                <IconButton icon={faTrash} onClick={() => console.log("remove")} />
+                                <IconButton icon={faTrash} onClick={() => deleteChoice(choice.id)} />
                             </ListItem>
 
                             {choice.options.map(option =>
