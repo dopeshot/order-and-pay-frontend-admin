@@ -40,7 +40,7 @@ export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, inde
                 {headerContent}
             </Link>
             :
-            <button onClick={onClick} className={headerClasses}>
+            <button type="button" onClick={onClick} className={headerClasses}>
                 {headerContent}
             </button>
         }
