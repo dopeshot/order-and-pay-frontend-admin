@@ -1,4 +1,4 @@
-import { faArrowLeft, faCheck, faCheckDouble, faCog, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
@@ -282,8 +282,14 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
         {/* Options Modal */}
         <Modal modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
-            <p>Heyo!</p>
             <p>{parentChoiceId}</p>
+            <Formik initialValues={initialOptionValues} onSubmit={submitOption} validationSchema={validationOptionSchema}>
+                <Form>
+                    <TextInput name="name" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
+                    <TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="200" icon={faEuroSign} />
+                    <Button type="submit" icon={faCheck}>{isEditingOptions ? `Speichern` : `Hinzufügen`}</Button>
+                </Form>
+            </Formik>
         </Modal>
     </>
 }
