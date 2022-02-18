@@ -20,12 +20,12 @@ import { ComponentOptions } from "../../shared/types/ComponentOptions"
 
 type Params = {
     menuId: string,
-    categoriesId: string,
+    categoryId: string,
     dishId?: string
 }
 
 export const Dishes: React.FC = () => {
-    const { dishId, menuId } = useParams<Params>()
+    const { dishId, menuId, categoryId } = useParams<Params>()
     const isEditing = Boolean(dishId)
     const history = useHistory()
 
@@ -119,7 +119,7 @@ export const Dishes: React.FC = () => {
         image: dish?.image ?? "",
         isActive: dish?.isActive ?? true,
         price: dish?.price ?? 0,
-        category: dish?.category ?? "",
+        category: dish?.category ?? categoryId ?? "",
         allergens: dish?.allergens ?? [],
         labels: dish?.labels ?? []
     }

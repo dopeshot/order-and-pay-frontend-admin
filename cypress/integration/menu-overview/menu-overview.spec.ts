@@ -90,7 +90,7 @@ describe('Menu Overview', () => {
     })
 
     // TODO: Implement when dish and categories are merged
-    describe.skip('Create', () => {
+    describe.only('Create', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
             cy.visit(`/menus/${menu._id}/editor`)
@@ -107,11 +107,33 @@ describe('Menu Overview', () => {
         })
 
         it('should go to page add dish when click "Gericht hinzufügen" button', () => {
+            cy.getAllAllergens()
+            cy.getAllCategories()
+            cy.getAllLabels()
+            cy.get(`[data-cy="singlemenu-${menu.categories[0].title}-dish-add"]`).click()
 
+            cy.wait('@getAllAllergens')
+            cy.wait('@getAllCategories')
+            cy.wait('@getAllLabels')
+            cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
+
+            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', menu.categories[0].title)
+            cy.contains('Neues Gericht erstellen').should('be.visible')
         })
 
         it('should go to page edit dish when click dish box', () => {
+            cy.getAllAllergens()
+            cy.getAllCategories()
+            cy.getAllLabels()
+            cy.get(`[data-cy="singlemenu-${menu.categories[0].title}-dish-listitem"]`).first().click()
 
+            cy.wait('@getAllAllergens')
+            cy.wait('@getAllCategories')
+            cy.wait('@getAllLabels')
+            cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
+
+            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', menu.categories[0].title)
+            cy.contains('Gericht bearbeiten').should('be.visible')
         })
     })
 
