@@ -60,7 +60,17 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [modalOpenOption, setModalOpenOption] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
 
-    const [choices, setChoices] = useState<Choice[]>([])
+    const [choices, setChoices] = useState<Choice[]>([{
+        id: 0,
+        title: "Größe",
+        type: ChoiceType.RADIO,
+        options: []
+    }, {
+        id: 1,
+        title: "Extras",
+        type: ChoiceType.CHECKBOX,
+        options: []
+    }])
     // const [editOptionData, setEditOptionData] = useState<Option | null>(null)
 
     const initialCategoryValues: CategoryWithoutChoices = {
@@ -138,10 +148,12 @@ export const CategoryEditor: React.FunctionComponent = () => {
                     </div>
 
                     <List>
-                        <ListItem onClick={() => console.log("listitem")} title={"Titel"} icon={true ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{ChoiceType.RADIO === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-                            {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => console.log("add option")} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
-                            <IconButton icon={faTrash} onClick={() => console.log("remove")} />
-                        </ListItem>
+                        {choices.map(choice =>
+                            <ListItem key={`c${choice.id}`} onClick={() => console.log("listitem")} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
+                                {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => console.log("add option")} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
+                                <IconButton icon={faTrash} onClick={() => console.log("remove")} />
+                            </ListItem>
+                        )}
                     </List>
 
                     <div className="flex flex-col md:flex-row justify-between mt-4">
