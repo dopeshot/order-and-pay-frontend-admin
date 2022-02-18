@@ -119,6 +119,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     const submitCategory = (values: CategoryWithoutChoices) => {
         console.log("submitCategory:", values)
+        console.log("choices:", choices)
+        console.log("finalObject:", {
+            ...values,
+            choices
+        })
     }
 
 
