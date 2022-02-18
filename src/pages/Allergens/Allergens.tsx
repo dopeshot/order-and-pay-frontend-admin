@@ -20,7 +20,7 @@ export const Allergens: React.FC = () => {
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<Allergen | null>(null)
-    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedAllergen, setSelectedAllergen] = useState<Allergen | null>(null)
 
@@ -40,7 +40,7 @@ export const Allergens: React.FC = () => {
         // Delete the allergen
         await deleteAllergen(selectedAllergen._id)
 
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
@@ -49,11 +49,11 @@ export const Allergens: React.FC = () => {
 
     const openDeleteModal = (allergen: Allergen) => {
         setSelectedAllergen(allergen)
-        setHasDeleteModal(true)
+        setDeleteModalOpen(true)
     }
 
     const closeDeleteModal = () => {
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setSelectedAllergen(null)
     }
 
@@ -88,7 +88,7 @@ export const Allergens: React.FC = () => {
         <DeleteModal
             title={`${selectedAllergen?.title}`}
             description={`Das Löschen kann nicht rückgängig gemacht werden. ${selectedAllergen?.title} wird auch aus allen Kategorien entfernt.`}
-            open={hasDeleteModal}
+            open={isDeleteModalOpen}
             onDissmis={closeDeleteModal}
             handleDelete={handleDelete}
             isLoadingDelete={isLoadingDelete}
