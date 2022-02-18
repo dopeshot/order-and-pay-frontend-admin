@@ -1,6 +1,6 @@
 import { faArrowLeft, faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
@@ -102,6 +102,19 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [editOptionData, setEditOptionData] = useState<Option | null>(null)
     const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
     const isEditingOptions = Boolean(editOptionData)
+
+    useEffect(() => {
+        let isMounted = true
+        async function loadCategory() {
+            console.log("We are editing!")
+        }
+
+        // Check if we are editing an existing menu
+        if (isEditing)
+            loadCategory()
+
+        return () => { isMounted = false }
+    }, [])
 
     const initialCategoryValues: CategoryWithoutChoices = {
         title: "",
