@@ -194,6 +194,23 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     const submitOption = (values: OptionDto) => {
         console.log("submitOption:", values)
+
+        if (parentChoiceId === null) {
+            console.error("parentChoiceId is not defined.")
+            return
+        }
+
+        if (isEditingOptions && editOptionData) {
+
+        } else {
+            const newOption: Option = {
+                ...values,
+                id: Math.max(...choices[parentChoiceId].options.map(option => option.id), 0) + 1
+            }
+            const newChoices = [...choices]
+            newChoices[parentChoiceId].options = [...newChoices[parentChoiceId].options, newOption]
+            setChoices(newChoices)
+        }
     }
 
     const closeOptionModal = () => {
