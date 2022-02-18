@@ -18,7 +18,7 @@ export const Menus: React.FC = () => {
     const { deleteMenu } = useActions().menus
 
     // Component states
-    const [hasDeleteModal, setHasDeleteModal] = useState(false)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null)
 
@@ -38,7 +38,7 @@ export const Menus: React.FC = () => {
         // Delete the menu
         await deleteMenu(selectedMenu._id)
 
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setIsLoadingDelete(false)
 
         // When menu is delete update List
@@ -47,11 +47,11 @@ export const Menus: React.FC = () => {
 
     const openDeleteModal = (menu: Menu) => {
         setSelectedMenu(menu)
-        setHasDeleteModal(true)
+        setDeleteModalOpen(true)
     }
 
     const closeDeleteModal = () => {
-        setHasDeleteModal(false)
+        setDeleteModalOpen(false)
         setSelectedMenu(null)
     }
     return <div className="container md:max-w-full mt-12" >
@@ -73,7 +73,7 @@ export const Menus: React.FC = () => {
         <DeleteModal
             title={`${selectedMenu?.title}`}
             description="Das Löschen kann nicht rückgängig gemacht werden."
-            open={hasDeleteModal}
+            open={isDeleteModalOpen}
             onDissmis={closeDeleteModal}
             handleDelete={handleDelete}
             isLoadingDelete={isLoadingDelete}
