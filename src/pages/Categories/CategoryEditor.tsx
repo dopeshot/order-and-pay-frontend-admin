@@ -305,7 +305,10 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                 setEditChoiceData(choice)
                                 setModalOpenChoice(true)
                             }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-                                {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" onClick={() => {
+                                {isMobile ? <IconButton icon={faPlus} onClick={() => {
+                                    setParentChoiceId(choice.id)
+                                    setModalOpenOption(true)
+                                }} /> : <Button kind="tertiary" onClick={() => {
                                     setParentChoiceId(choice.id)
                                     setModalOpenOption(true)
                                 }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
