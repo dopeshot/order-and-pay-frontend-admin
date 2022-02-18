@@ -34,8 +34,8 @@ export const Dishes: React.FC = () => {
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
-    const [hasLabelModal, setHasLabelModal] = useState(false)
-    const [hasAllergensModal, setHasAllergensModal] = useState(false)
+    const [isLabelModalOpen, setLabelModalOpen] = useState(false)
+    const [isAllergensModalOpen, setAllergensModalOpen] = useState(false)
     const [dish, setDish] = useState<Dish>()
     const [categoriesOptions, setCategoriesOptions] = useState<ComponentOptions[]>([])
     const [labelsOptions, setLabelsOptions] = useState<ComponentOptions[]>([])
@@ -192,11 +192,11 @@ export const Dishes: React.FC = () => {
                             <div className="flex">
                                 <div className="mr-2 sm:mr-8 md:mr-32">
                                     <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
-                                    <Button kind="tertiary" onClick={() => setHasLabelModal(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
+                                    <Button kind="tertiary" onClick={() => setLabelModalOpen(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
                                 </div>
                                 <div>
                                     <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
-                                    <Button kind="tertiary" onClick={() => setHasAllergensModal(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
+                                    <Button kind="tertiary" onClick={() => setAllergensModalOpen(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between mt-10">
@@ -209,10 +209,10 @@ export const Dishes: React.FC = () => {
             </div>
             }
             {/* Label Modal */}
-            <LabelModal modalOpen={hasLabelModal} setModalOpen={setHasLabelModal} />
+            <LabelModal modalOpen={isLabelModalOpen} setModalOpen={setLabelModalOpen} />
 
             {/* Allergens Modal */}
-            <AllergensModal modalOpen={hasAllergensModal} setModalOpen={setHasAllergensModal} />
+            <AllergensModal modalOpen={isAllergensModalOpen} setModalOpen={setAllergensModalOpen} />
 
             {/* Delete Modal */}
             <DeleteModal
