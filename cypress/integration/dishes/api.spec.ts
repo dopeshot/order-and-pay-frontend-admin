@@ -73,11 +73,13 @@ describe('Api Endpoints', () => {
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
 
             const interception = interceptIndefinitely('POST', api, "createDishIndefinitely", { fixture: 'dish.json' })
+            cy.getMenuOverviewEditor()
 
             cy.get('[data-cy="dishes-save-button"]').click().then(() => {
                 cy.get('[data-cy="dishes-save-button"] svg').should('have.class', 'fa-spinner')
                 interception.sendResponse()
                 cy.wait('@createDishIndefinitely')
+                cy.wait('@getMenuOverviewEditor')
             })
         })
 
@@ -137,9 +139,11 @@ describe('Api Endpoints', () => {
         it('should update dish', () => {
             cy.get('input[name="title"]').type('Hello')
             cy.updateDish()
+            cy.getMenuOverviewEditor()
 
             cy.get('[data-cy="dishes-save-button"]').click()
             cy.wait('@updateDish')
+            cy.wait('@getMenuOverviewEditor')
         })
     })
 
@@ -175,12 +179,14 @@ describe('Api Endpoints', () => {
 
         it('should have loading icon when deleting', () => {
             const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { fixture: 'dish.json' })
-            cy.get('[data-cy="dishes-delete-button"]').click()
+            cy.getMenuOverviewEditor()
 
+            cy.get('[data-cy="dishes-delete-button"]').click()
             cy.get('[data-cy="dishes-modal-delete-button"]').click().then(() => {
                 cy.get('[data-cy="dishes-modal-delete-button"] svg').should('have.class', 'fa-spinner')
                 interception.sendResponse()
                 cy.wait('@deleteDishIndefinitely')
+                cy.wait('@getMenuOverviewEditor')
             })
         })
     })
