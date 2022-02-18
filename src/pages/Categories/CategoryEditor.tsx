@@ -121,8 +121,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 return choices
             })
 
-            // Clear edit data
-            setEditChoiceData(null)
         } else {
             // Create Choice from ChoiceDto. Add empty options + next id
             const newChoice: Choice = {
@@ -133,6 +131,15 @@ export const CategoryEditor: React.FunctionComponent = () => {
             setChoices([...choices, newChoice])
 
         }
+
+        // Close modal
+        closeChoiceModal()
+    }
+
+    const closeChoiceModal = () => {
+        if (isEditingChoice && editChoiceData)
+            setEditChoiceData(null)
+
         setModalOpenChoice(false)
     }
 
@@ -159,9 +166,9 @@ export const CategoryEditor: React.FunctionComponent = () => {
                     <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
                     <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
                         <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired />
+                        <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" />
                         <TextInput name="image" placeholder="Gebe die Url für ein passendes Bild ein..." labelText="Titelbild" />
                         <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
-                        <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" labelRequired />
                     </div>
 
                     {/* Choices and Options */}
@@ -199,13 +206,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
 
         {/* Choices Modal */}
-        <Modal modalHeading={isEditingChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={() => {
-            setModalOpenChoice(false)
-        }}>
+        <Modal modalHeading={isEditingChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={closeChoiceModal}>
             <Formik initialValues={initialChoiceValues} onSubmit={submitChoice} validationSchema={validationChoiceSchema}>
                 <Form>
-                    <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." />
-                    <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} />
+                    <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." labelRequired autoFocus />
+                    <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} labelRequired />
                     <Button type="submit" icon={faCheck}>{isEditingChoice ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
