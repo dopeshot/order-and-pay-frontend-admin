@@ -43,13 +43,13 @@ export const SingleMenu: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the allergen
+        // Delete the dish
         await deleteDish(selectedDish._id)
 
         setDishDeleteModalOpen(false)
-        setIsLoadingDelete(false)
+        closeDishDeleteModal()
 
-        // When allergen is delete update List
+        // When dish is delete update List
         getMenuEditor(menuId)
     }
 
