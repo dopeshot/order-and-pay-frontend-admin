@@ -203,12 +203,18 @@ export const CategoryEditor: React.FunctionComponent = () => {
         if (isEditingOptions && editOptionData) {
 
         } else {
+            // Create new option from OptionDto. + next id
             const newOption: Option = {
                 ...values,
                 id: Math.max(...choices[parentChoiceId].options.map(option => option.id), 0) + 1
             }
+
+            // Copy choices
             const newChoices = [...choices]
+
+            // Push new option into options array of currently editing choice
             newChoices[parentChoiceId].options = [...newChoices[parentChoiceId].options, newOption]
+
             setChoices(newChoices)
         }
     }
