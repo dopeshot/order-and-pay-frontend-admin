@@ -10,6 +10,7 @@ import { SingleMenu } from '../../pages/MenuOverview/SingleMenu';
 import { MenuEditor } from '../../pages/Menus/MenuEditor';
 import { Menus } from '../../pages/Menus/Menus';
 import { Tables } from '../../pages/Tables/Tables';
+import { Users } from '../../pages/Users/Users';
 import { Sidebar } from '../Navigation/Sidebar';
 import { Topbar } from '../Navigation/Topbar';
 
@@ -28,6 +29,7 @@ export const App: React.FunctionComponent = () => {
                 {/* Content Start */}
                 <Route exact path="/tables" component={Tables} />
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/users" component={Users} />
                 <Route exact path="/menus" component={Menus} />
                 <Route exact path="/menus/allergens" component={Allergens} />
                 <Route exact path="/menus/labels" component={Labels} />
