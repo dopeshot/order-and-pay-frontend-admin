@@ -4,8 +4,9 @@ import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { UsersModal } from "../../components/Users/UsersModal"
 import { useActions, useAppState } from "../../overmind"
-import { User } from "../../overmind/users/effects"
+import { UserDtoWithId } from "../../overmind/users/effects"
 
 export const Users: React.FC = () => {
     const { getAllUser } = useActions().users
@@ -13,7 +14,7 @@ export const Users: React.FC = () => {
 
     const [isLoading, setLoading] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
-    const [modalEditData, setModalEditData] = useState<User | null>(null)
+    const [modalEditData, setModalEditData] = useState<UserDtoWithId | null>(null)
 
     useEffect((): void => {
         async function loadUsers() {
@@ -48,6 +49,8 @@ export const Users: React.FC = () => {
             </List>
             {/* Content End */}
 
+            {/* Add/Edit User Modal */}
+            <UsersModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
         </div>
     )
 }

@@ -3,18 +3,17 @@ import { Form, Formik } from "formik"
 import { useState } from "react"
 import * as Yup from "yup"
 import { useActions } from "../../overmind"
-import { AllergenDto } from "../../overmind/allergens/effects"
-import { Allergen } from "../../overmind/allergens/state"
-import { LabelDto } from "../../overmind/labels/effects"
+import { UserDto, UserDtoWithId } from "../../overmind/users/effects"
 import { Button } from "../Buttons/Button"
+import { PasswordInput } from "../Form/PasswortInput"
 import { TextInput } from "../Form/TextInput"
 import { Modal } from "../UI/Modal"
 
-type AllergensModalProps = {
-    /** State Data from allergen to edit */
-    modalEditData?: Allergen | null
+type UsersModalProps = {
+    /** State Data from user to edit */
+    modalEditData?: UserDtoWithId | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<Allergen | null>> | null
+    setModalEditData?: React.Dispatch<React.SetStateAction<UserDtoWithId | null>> | null
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
@@ -22,36 +21,39 @@ type AllergensModalProps = {
 }
 
 /**
- * Modal for add and edit allergens, possible to use only add functionality
+ * Modal for add and edit users, possible to use only add functionality
  */
-export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ modalEditData, setModalEditData, modalOpen, setModalOpen }) => {
+export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEditData, setModalEditData, modalOpen, setModalOpen }) => {
     // Global State
-    const { createAllergen, updateAllergen } = useActions().allergens
+    const { createUser, updateUser } = useActions().users
 
     // Local State
     const [isModalLoading, setIsModalLoading] = useState(false)
 
     // Formik
-    const initialValues: AllergenDto = {
-        title: modalEditData?.title ?? "",
-        icon: modalEditData?.icon ?? "user"
+    const initialValues: UserDto = {
+        email: modalEditData?.email ?? "",
+        username: modalEditData?.username ?? "",
+        password: ""
     }
 
     // Formik Validation
+    // TODO: validation finishen
     const validationSchema = Yup.object().shape({
-        title: Yup.string().min(2).max(20).required("Title is required"),
-        icon: Yup.string()
+        email: Yup.string().email(),
+        username: Yup.string(),
+        password: Yup.string()
     })
 
     // Formik Submit Form
-    const submitForm = async (values: LabelDto) => {
+    const submitForm = async (user: UserDto) => {
         setIsModalLoading(true)
 
         // Check if we are editing or creating a new label
         if (modalEditData) {
-            if (!await updateAllergen({
-                id: modalEditData._id,
-                allergen: values
+            if (!await updateUser({
+                _id: modalEditData._id,
+                user: user
             }))
                 return
             // Clear modal data
@@ -60,7 +62,7 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
             setModalOpen(false)
         }
         else {
-            if (!await createAllergen(values))
+            if (!await createUser())
                 return
             setModalOpen(false)
         }
@@ -81,13 +83,13 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
             setModalEditData(null)
     }
 
-
     return (
-        <Modal modalHeading={modalEditData ? `Allergen bearbeiten` : `Neues Allergen hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
+        <Modal modalHeading={modalEditData ? `Benutzer bearbeiten` : `Neuen Benutzer hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 <Form>
-                    <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
-                    <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
+                    <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
+                    <TextInput name="username" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Username" />
+                    <PasswordInput />
                     <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
