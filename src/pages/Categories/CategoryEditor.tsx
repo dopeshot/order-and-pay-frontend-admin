@@ -63,8 +63,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
     const isEditingChoice = Boolean(editChoiceData)
 
-    const [modalOpenOption, setModalOpenOption] = useState(false)
-
     const [choices, setChoices] = useState<Choice[]>([{
         id: 0,
         title: "Größe",
@@ -89,7 +87,10 @@ export const CategoryEditor: React.FunctionComponent = () => {
         type: ChoiceType.CHECKBOX,
         options: []
     }])
-    // const [editOptionData, setEditOptionData] = useState<Option | null>(null)
+
+    const [modalOpenOption, setModalOpenOption] = useState(false)
+    const [editOptionData, setEditOptionData] = useState<Option | null>(null)
+    const isEditingOptions = Boolean(editOptionData)
 
     const initialCategoryValues: CategoryWithoutChoices = {
         title: "",
@@ -171,6 +172,16 @@ export const CategoryEditor: React.FunctionComponent = () => {
         }
     ]
 
+
+    // options 
+
+    const closeOptionModal = () => {
+        if (isEditingOptions && editOptionData)
+            setEditOptionData(null)
+
+        setModalOpenOption(false)
+    }
+
     return <>
         <div className="container mt-12">
             <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
@@ -241,6 +252,11 @@ export const CategoryEditor: React.FunctionComponent = () => {
                     <Button type="submit" icon={faCheck}>{isEditingChoice ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
+        </Modal>
+
+        {/* Options Modal */}
+        <Modal modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
+            <p>Heyo!</p>
         </Modal>
     </>
 }
