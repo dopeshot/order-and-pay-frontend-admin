@@ -7,6 +7,7 @@ import { IconButton } from "../../components/Buttons/IconButton"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Allergen } from "../../overmind/allergens/state"
 
@@ -72,7 +73,7 @@ export const Allergens: React.FC = () => {
         {/* Header end */}
 
         {/* Content */}
-        <List lines>
+        {(allergens.length === 0 && isLoadingAllergens) ? <Loading /> : <List lines>
             {allergens.map((allergen) => <ListItem dataCy="allergens-list-item" key={allergen._id} title={allergen.title} icon={allergen.icon as IconProp} onClick={() => {
                 setModalEditData(allergen)
                 setModalOpen(true)
@@ -80,6 +81,7 @@ export const Allergens: React.FC = () => {
                 <IconButton dataCy="allergens-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(allergen)} />
             </ListItem>)}
         </List>
+        }
         {/* Content End */}
 
         {/* Add/Edit Allergen Modal */}
