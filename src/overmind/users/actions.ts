@@ -1,3 +1,4 @@
+import axios from "axios"
 import { Context } from ".."
 import { UserDto } from "./effects"
 
@@ -30,6 +31,13 @@ export const createUser = async ({ state, effects, actions }: Context, user: Use
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Benutzers",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
