@@ -50,7 +50,7 @@ export type Choice = {
     id: number
     title: string
     type: ChoiceType
-    isDefault?: number // id of option
+    isDefault?: number | null // id of option
     options: Option[]
 }
 
@@ -257,6 +257,8 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 // Update default
                 if (isDefault && choices[parentChoiceIndex].isDefault !== editOptionData.id)
                     choices[parentChoiceIndex].isDefault = editOptionData.id
+                else if (!isDefault && choices[parentChoiceIndex].isDefault === editOptionData.id)
+                    choices[parentChoiceIndex].isDefault = null
 
                 const option = choices[parentChoiceIndex].options.find(option => option.id === editOptionData.id)
                 Object.assign(option, optionData)
@@ -294,7 +296,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
             choice.options = choice.options.filter(option => option.id !== optionId)
 
             if (choice.isDefault === optionId)
-                delete choice.isDefault
+                choice.isDefault = null
 
             return newChoices
         })
