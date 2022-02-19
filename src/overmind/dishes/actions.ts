@@ -67,12 +67,19 @@ export const updateDish = async ({ effects, actions }: Context, { dishId, dish }
 /**
  * Delete one Dish by id
  */
-export const deleteDish = async ({ effects }: Context, id: string): Promise<boolean> => {
+export const deleteDish = async ({ effects, actions }: Context, id: string): Promise<true> => {
     try {
         await effects.dishes.deleteDish(id)
         return true
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Gerichts",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
