@@ -102,7 +102,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
             loadCategory()
 
         return () => { isMounted = false }
-    }, [])
+    }, [categoryId, getCategoryById, isEditing])
 
     const initialCategoryValues: CategoryWithoutChoices = {
         title: category?.title ?? "",
