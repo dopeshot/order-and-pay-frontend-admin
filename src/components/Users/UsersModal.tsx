@@ -51,24 +51,30 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
     const submitForm = async (user: UserDto) => {
         setIsModalLoading(true)
 
-        // Check if we are editing or creating a new label
-        if (modalEditData) {
-            if (!await updateUser({
-                _id: modalEditData._id,
-                user: user
-            }))
-                return
-            // Clear modal data
-            setModalEditData(null)
-            setModalOpen(false)
+        try {
+            if (modalEditData) {
+                if (!await updateUser({
+                    _id: modalEditData._id,
+                    user: user
+                }))
+                    throw Error()
+
+                // Clear modal data
+                setModalEditData(null)
+                setModalOpen(false)
+            }
+            else {
+                if (!await createUser(user))
+                    throw Error()
+                setModalOpen(false)
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsModalLoading(false)
         }
-        else {
-            if (!await createUser(user))
-                return
-            setModalOpen(false)
-        }
-        setIsModalLoading(false)
     }
+
 
     // Modal close handler
     const handleModelDismiss = () => {
