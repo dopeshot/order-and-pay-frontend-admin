@@ -57,13 +57,20 @@ export const updateAllergen = async ({ state, actions, effects }: Context, { id,
     }
 }
 
-export const deleteAllergen = async ({ state, effects }: Context, id: string): Promise<boolean> => {
+export const deleteAllergen = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.allergens.deleteAllergen(id)
         state.allergens.allergens = state.allergens.allergens.filter(allergen => allergen._id !== id)
         return true
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Allergens",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
