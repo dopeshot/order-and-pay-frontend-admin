@@ -200,7 +200,7 @@ export const Dishes: React.FC = () => {
                                     <Button kind="tertiary" onClick={() => setLabelModalOpen(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
                                 </div>
                                 <div>
-                                    <Checkbox name="allergensId" labelText="Allergenen" options={allergensOptions} />
+                                    <Checkbox name="allergenIds" labelText="Allergenen" options={allergensOptions} />
                                     <Button kind="tertiary" onClick={() => setAllergensModalOpen(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
                                 </div>
                             </div>

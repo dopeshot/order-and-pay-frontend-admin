@@ -6,7 +6,7 @@ describe('Api Error Handling', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.category}/dish`)
+            cy.visit(`/menus/1/categories/${dish.categoryId}/dish`)
 
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')

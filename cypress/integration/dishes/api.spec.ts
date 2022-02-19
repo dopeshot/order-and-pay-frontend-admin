@@ -9,7 +9,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.category}/dish`)
+            cy.visit(`/menus/1/categories/${dish.categoryId}/dish`)
 
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')
@@ -26,11 +26,11 @@ describe('Api Endpoints', () => {
             cy.get('input[name="price"]').clear().type(`${dish.price}`)
             cy.get('textarea[name="description"]').type(dish.description)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).click()
-            cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).click()
+            cy.get(`[data-cy="categoryId-dropdown-option-${dish.categoryId}"]`).click()
             cy.get(`[data-cy="isAvailable-clickdiv"]`).click()
-            cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).check().should('be.checked')
-            cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
+            cy.get(`[data-cy="labelIds-option-${dish.labelIds[0]}"] input`).check().should('be.checked')
+            cy.get(`[data-cy="allergenIds-option-${dish.allergenIds[0]}"] input`).check().should('be.checked')
 
             cy.createDish()
             cy.getMenuOverviewEditor()
@@ -54,8 +54,8 @@ describe('Api Endpoints', () => {
             cy.get('input[name="title"]').type(dish.title)
             cy.get('input[name="price"]').clear().type(`${dish.price}`)
             cy.get('textarea[name="description"]').type(dish.description)
-            cy.get(`[data-cy="category-dropdown-button"]`).click()
-            cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).click()
+            cy.get(`[data-cy="categoryId-dropdown-option-${dish.categoryId}"]`).click()
 
             cy.get('[data-cy="dishes-save-button"]').should('not.have.class', 'opacity-80')
         })
@@ -66,11 +66,11 @@ describe('Api Endpoints', () => {
             cy.get('input[name="price"]').clear().type(`${dish.price}`)
             cy.get('textarea[name="description"]').type(dish.description)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).click()
-            cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).click()
+            cy.get(`[data-cy="categoryId-dropdown-option-${dish.categoryId}"]`).click()
             cy.get(`[data-cy="isAvailable-clickdiv"]`).click()
-            cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).check().should('be.checked')
-            cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
+            cy.get(`[data-cy="labelIds-option-${dish.labelIds[0]}"] input`).check().should('be.checked')
+            cy.get(`[data-cy="allergenIds-option-${dish.allergenIds[0]}"] input`).check().should('be.checked')
 
             const interception = interceptIndefinitely('POST', api, "createDishIndefinitely", { fixture: 'dish.json' })
             cy.getMenuOverviewEditor()
@@ -108,7 +108,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.category}/dish/${dish._id}`)
+            cy.visit(`/menus/1/categories/${dish.categoryId}/dish/${dish._id}`)
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')
@@ -130,10 +130,10 @@ describe('Api Endpoints', () => {
             cy.get('input[name="price"]').should('have.value', `${dish.price}`)
             cy.get('textarea[name="description"]').should('have.value', dish.description)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', 'Burger')
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).should('contain', 'Burger')
             cy.get(`[data-cy="isAvailable-labeltext"]`).should('contain', 'Verfügbar')
-            cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).should('be.checked')
-            cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).should('be.checked')
+            cy.get(`[data-cy="labelIds-option-${dish.labelIds[0]}"] input`).should('be.checked')
+            cy.get(`[data-cy="allergenIds-option-${dish.allergenIds[0]}"] input`).should('be.checked')
         })
 
         it('should update dish', () => {
@@ -147,13 +147,13 @@ describe('Api Endpoints', () => {
         })
     })
 
-    describe.only('Delete Dish', () => {
+    describe('Delete Dish', () => {
         beforeEach(() => {
             cy.getDishById()
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.category}/dish/${dish._id}`)
+            cy.visit(`/menus/1/categories/${dish.categoryId}/dish/${dish._id}`)
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')
