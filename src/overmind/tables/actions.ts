@@ -110,7 +110,7 @@ export const sortTable = async ({ state }: Context, sortedField: typeof config.s
     }
 }
 
-export const bulkDelete = async ({ state, effects }: Context) => {
+export const bulkDelete = async ({ state, effects, actions }: Context) => {
     try {
         const idArray: string[] = []
         await state.tables.tables.forEach(e => {
@@ -122,6 +122,10 @@ export const bulkDelete = async ({ state, effects }: Context) => {
 
         await effects.tables.bulkDelete(idArray)
     } catch (error) {
-
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen der Tische",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
 }
