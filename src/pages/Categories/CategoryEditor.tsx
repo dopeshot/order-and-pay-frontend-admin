@@ -119,9 +119,22 @@ export const CategoryEditor: React.FunctionComponent = () => {
         setDeleteData(null)
     }
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         if (!deleteData)
             return
+
+        switch (deleteData.type) {
+            case 'category':
+                deleteCategory()
+                // Do not close delete modal since we go back if we delete complete category
+                return
+            case 'choice':
+                deleteChoice(deleteData.choiceId)
+                break;
+            case 'option':
+                deleteOption(deleteData)
+                break;
+        }
 
         console.log(deleteData)
 
