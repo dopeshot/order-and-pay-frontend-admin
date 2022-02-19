@@ -118,12 +118,6 @@ Cypress.Commands.add('getAllCategories', () => {
     }).as('getAllCategories')
 })
 
-Cypress.Commands.add('getAllLabels', () => {
-    cy.intercept('GET', `${api}/labels`, {
-        fixture: 'labels.json'
-    }).as('getAllLabels')
-})
-
 /********* Allergen *********/
 Cypress.Commands.add('getAllAllergens', () => {
     cy.intercept('GET', `${api}/allergens`, {
@@ -169,6 +163,53 @@ Cypress.Commands.add('deleteAllergen', () => {
     cy.intercept('DELETE', `${api}/allergens/**`, {
         statusCode: 204
     }).as('deleteAllergen')
+})
+
+/********* Labels *********/
+Cypress.Commands.add('getAllLabels', () => {
+    cy.intercept('GET', `${api}/labels`, {
+        fixture: 'labels.json'
+    }).as('getAllLabels')
+})
+
+Cypress.Commands.add('createLabel', () => {
+    cy.intercept('POST', `${api}/labels`, {
+        fixture: 'label.json'
+    }).as('createLabel')
+})
+
+Cypress.Commands.add('createLabelDuplicateTitle', () => {
+    cy.intercept('POST', `${api}/labels`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('createLabelDuplicateTitle')
+})
+
+Cypress.Commands.add('updateLabel', () => {
+    cy.intercept('PATCH', `${api}/labels/**`, {
+        fixture: 'update-label.json'
+    }).as('updateLabel')
+})
+
+Cypress.Commands.add('updateLabelDuplicateTitle', () => {
+    cy.intercept('PATCH', `${api}/labels/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateLabelDuplicateTitle')
+})
+
+Cypress.Commands.add('deleteLabel', () => {
+    cy.intercept('DELETE', `${api}/labels/**`, {
+        statusCode: 204
+    }).as('deleteLabel')
 })
 
 
