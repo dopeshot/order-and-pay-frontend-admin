@@ -8,6 +8,7 @@ import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Allergen } from "../../overmind/allergens/state"
 
@@ -45,10 +46,10 @@ export const Allergens: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the allergen
-        await deleteAllergen(selectedAllergen._id)
+        // Delete the allergen and close modal when succesfull
+        if (await deleteAllergen(selectedAllergen._id))
+            closeDeleteModal()
 
-        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
@@ -75,7 +76,7 @@ export const Allergens: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Allergene</h1>
-                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{!isLoadingAllergens ? allergens.length : 0} Gesamt</p>
+                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{allergens.length ?? 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Allergen hinzufügen</Button>
@@ -84,7 +85,7 @@ export const Allergens: React.FC = () => {
         {/* Header end */}
 
         {/* Content */}
-        <List lines>
+        {(allergens.length === 0 && isLoadingAllergens) ? <Loading /> : <List lines>
             {allergens.map((allergen) => <ListItem dataCy="allergens-list-item" key={allergen._id} title={allergen.title} icon={allergen.icon as IconProp} onClick={() => {
                 setModalEditData(allergen)
                 setModalOpen(true)
@@ -92,6 +93,7 @@ export const Allergens: React.FC = () => {
                 <IconButton dataCy="allergens-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(allergen)} />
             </ListItem>)}
         </List>
+        }
         {/* Content End */}
 
         {/* Add/Edit Allergen Modal */}

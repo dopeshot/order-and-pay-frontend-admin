@@ -1,29 +1,35 @@
+import axios from "axios"
 import { config, Context } from ".."
-import { generateErrorMessage } from "../../services/error"
 import { InitialTableHelper, Table, TableDocument } from "./state"
 
-export const loadTables = async ({ state, effects }: Context) => {
+export const loadTables = async ({ state, effects, actions }: Context) => {
     state.tables.isLoadingTables = true
     try {
         const response = await effects.tables.getTables()
         const tables = response.data.map<TableDocument>((table: Table) => ({ ...table, updatedAt: new Date(table.updatedAt), ...InitialTableHelper }))
         state.tables.tables = tables.sort((a, b) => a.tableNumber.localeCompare(b.tableNumber))
-        state.tables.tableErrors = []
     } catch (error) {
-        generateErrorMessage(state, error, "tableErrors")
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Tische",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     state.tables.isLoadingTables = false
 }
 
-export const createTable = async ({ state, effects }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
+export const createTable = async ({ state, effects, actions }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
         const response = await effects.tables.createTable({ tableNumber, capacity })
         const newTable = { ...response.data, updatedAt: new Date(response.data.updatedAt), ...InitialTableHelper }
         state.tables.tables = [...state.tables.tables, newTable]
-        state.tables.modalErrors = []
         return true
     } catch (error) {
-        generateErrorMessage(state, error, "modalErrors")
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Tisches",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     return false
 }
@@ -35,22 +41,27 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
         const oldTable = state.tables.tables.find((table: Table) => table._id === id)!
         oldTable.capacity = updatedTable.capacity
         oldTable.tableNumber = updatedTable.tableNumber
-        state.tables.tableErrors = []
         return true
     } catch (error) {
-        generateErrorMessage(state, error, "tableErrors")
+        actions.notify.createNotification({
+            title: "Fehler beim Aktualisieren des Tisches",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     return false
 }
 
-export const deleteTable = async ({ state, effects }: Context, id: string) => {
+export const deleteTable = async ({ state, effects, actions }: Context, id: string) => {
     try {
         await effects.tables.deleteTable(id)
         state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
-        state.tables.tableErrors = []
     } catch (error) {
-        /* istanbul ignore next */ // should not happen
-        generateErrorMessage(state, error, "tableErrors")
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Tisches",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
 }
 
@@ -99,7 +110,7 @@ export const sortTable = async ({ state }: Context, sortedField: typeof config.s
     }
 }
 
-export const bulkDelete = async ({ state, effects }: Context) => {
+export const bulkDelete = async ({ state, effects, actions }: Context) => {
     try {
         const idArray: string[] = []
         await state.tables.tables.forEach(e => {
@@ -110,10 +121,11 @@ export const bulkDelete = async ({ state, effects }: Context) => {
         })
 
         await effects.tables.bulkDelete(idArray)
-
-        state.tables.tableErrors = []
     } catch (error) {
-        /* istanbul ignore next */ // should not happen
-        generateErrorMessage(state, error, "tableErrors")
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen der Tische",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
 }

@@ -2,9 +2,8 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import React, { useState } from "react"
 import * as yup from 'yup'
-import { useActions, useAppState } from "../../overmind"
+import { useActions } from "../../overmind"
 import { Button } from "../Buttons/Button"
-import { ErrorBanner } from "../Errors/ErrorBanner"
 import { TextInput } from "../Form/TextInput"
 import { Modal } from "../UI/Modal"
 
@@ -26,7 +25,6 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
     const [isLoadingButton, setIsLoadingButton] = useState(false)
 
     // Global State
-    const { modalErrors, hasModalError } = useAppState().tables
     const { createTable } = useActions().tables
 
     const initialFormikValues = {
@@ -54,9 +52,6 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
             <Formik initialValues={initialFormikValues} validationSchema={addTableSchema} onSubmit={submitForm}>
                 {({ setFieldValue, values, dirty, isValid }) => (
                     <Form>
-                        {/* Error Banner */}
-                        {hasModalError && <ErrorBanner headlineContent={`Es ${modalErrors.length === 1 ? 'ist' : 'sind'} ${modalErrors.length} Fehler aufgetreten.`} listContent={modalErrors} />}
-
                         {/* Tablenumber Input */}
                         <TextInput name="tableNumber" labelText="Tischnummer" placeholder="A1" />
 

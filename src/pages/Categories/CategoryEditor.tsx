@@ -1,5 +1,4 @@
 import { faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
-import axios from "axios"
 import { Form, Formik } from "formik"
 import { Fragment, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
@@ -200,10 +199,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
             history.push(`/admin/menus/${newCategory.menuId}/editor`)
         } catch (error) {
-            if (!axios.isAxiosError(error))
-                return
-
-            // MC: Put error display here (or we generalize it???)
+            // Create or update failed
         } finally {
             setIsLoadingSave(false)
         }
@@ -216,11 +212,15 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete category
-        await deleteCategoryById(categoryId)
-
-        setIsLoadingDelete(false)
-        history.push(`/admin/menus/${menuId}/editor`)
+        try {
+            // Delete category
+            await deleteCategoryById(categoryId)
+            history.push(`/admin/menus/${menuId}/editor`)
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     // choices

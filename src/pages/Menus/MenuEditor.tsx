@@ -1,5 +1,4 @@
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
-import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
@@ -90,10 +89,7 @@ export const MenuEditor: React.FC = () => {
 
             history.push("/admin/menus")
         } catch (error) {
-            if (!axios.isAxiosError(error))
-                return
-
-            // MC: Put error display here (or we generalize it???)
+            // Create or update failed
         } finally {
             setIsLoadingSave(false)
         }
@@ -106,10 +102,14 @@ export const MenuEditor: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        await deleteMenu(menuId)
-
-        setIsLoadingDelete(false)
-        history.push("/admin/menus")
+        try {
+            await deleteMenu(menuId)
+            history.push("/admin/menus")
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     return <div className="container mt-12">

@@ -1,7 +1,8 @@
+import axios from "axios"
 import { Context } from ".."
 import { LabelDto } from "./effects"
 
-export const getAllLabels = async ({ state, effects }: Context) => {
+export const getAllLabels = async ({ state, actions, effects }: Context) => {
     // istanbul ignore next //  Backoff when already loading
     if (state.labels.isLoadingLabels)
         return
@@ -13,11 +14,18 @@ export const getAllLabels = async ({ state, effects }: Context) => {
         state.labels.labels = labels
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Labels",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
     }
     state.labels.isLoadingLabels = false
 }
 
-export const createLabel = async ({ state, effects }: Context, label: LabelDto): Promise<boolean> => {
+export const createLabel = async ({ state, actions, effects }: Context, label: LabelDto): Promise<true> => {
     try {
         const response = await effects.labels.createLabel(label)
         const newLabel = response.data
@@ -25,11 +33,18 @@ export const createLabel = async ({ state, effects }: Context, label: LabelDto):
         return true
     } catch (error) {
         console.error(error)
-        return false
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Labels",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
+        throw (error)
     }
 }
 
-export const updateLabel = async ({ state, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<boolean> => {
+export const updateLabel = async ({ state, actions, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<true> => {
     try {
         const response = await effects.labels.updateLabel(id, label)
         const updatedLabel = response.data
@@ -38,17 +53,31 @@ export const updateLabel = async ({ state, effects }: Context, { id, label }: { 
         return true
     } catch (error) {
         console.error(error)
-        return false
+
+        actions.notify.createNotification({
+            title: "Fehler beim Aktualisieren des Labels",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
+        throw (error)
     }
 }
 
-export const deleteLabel = async ({ state, effects }: Context, id: string): Promise<boolean> => {
+export const deleteLabel = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.labels.deleteLabel(id)
         state.labels.labels = state.labels.labels.filter(label => label._id !== id)
         return true
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Labels",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }

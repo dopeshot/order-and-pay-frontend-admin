@@ -8,6 +8,7 @@ import { LabelModal } from "../../components/Labels/LabelModal"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Label } from "../../overmind/labels/state"
 
@@ -39,10 +40,10 @@ export const Labels: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the allergen
-        await deleteLabel(selectedLabel._id)
+        // Delete the label and close modal when succesfull
+        if (await deleteLabel(selectedLabel._id))
+            closeDeleteModal()
 
-        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
@@ -69,7 +70,7 @@ export const Labels: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Labels</h1>
-                <p data-cy="labels-count" className="text-lightgrey mr-3 mb-4">{!isLoadingLabels ? labels.length : 0} Gesamt</p>
+                <p data-cy="labels-count" className="text-lightgrey mr-3 mb-4">{labels.length ?? 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Label hinzufügen</Button>
@@ -78,7 +79,7 @@ export const Labels: React.FC = () => {
         {/* Header end */}
 
         {/* Content */}
-        <List lines>
+        {(labels.length === 0 && isLoadingLabels) ? <Loading /> : <List lines>
             {labels.map((label) => <ListItem dataCy="labels-list-item" key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
                 setModalEditData(label)
                 setModalOpen(true)
@@ -86,6 +87,7 @@ export const Labels: React.FC = () => {
                 <IconButton dataCy="labels-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(label)} />
             </ListItem>)}
         </List>
+        }
         {/* Content End */}
 
         {/* Add/Edit Label Modal */}

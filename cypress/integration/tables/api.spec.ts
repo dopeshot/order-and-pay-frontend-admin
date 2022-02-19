@@ -29,10 +29,10 @@ describe('Api Endpoints', () => {
 
       cy.quickLogin()
 
-      cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
+      cy.get('[data-cy="loading-component"]').should('be.visible').then(() => {
         interception.sendResponse()
         cy.wait('@getTableIndefinitely')
-        cy.get('[data-cy="table-spinner"]').should('not.exist')
+        cy.get('[data-cy="loading-component"]').should('not.exist')
         cy.get('[data-cy="table-table-row"]').should('be.visible')
       })
     })
@@ -47,10 +47,10 @@ describe('Api Endpoints', () => {
 
       cy.get('[data-cy="table-table-load-iconbutton"]').click()
 
-      cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
+      cy.get('[data-cy="loading-component"]').should('be.visible').then(() => {
         interception.sendResponse()
         cy.wait('@getTableIndefinitely')
-        cy.get('[data-cy="table-spinner"]').should('not.exist')
+        cy.get('[data-cy="loading-component"]').should('not.exist')
         cy.get('[data-cy="table-table-row"]').should('be.visible')
       })
     })

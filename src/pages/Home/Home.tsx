@@ -8,9 +8,18 @@ import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
+import { useActions } from "../../overmind"
 
 
 export const Home: React.FunctionComponent = () => {
+    const { createNotification } = useActions().notify
+    const debug = () => {
+        createNotification({
+            title: "Error occured",
+            message: "Error while fetching",
+            type: "danger"
+        })
+    }
     return (
         <div className="container mt-12">
             <h3 className="text-2xl font-bold">Welcome</h3>
@@ -26,6 +35,7 @@ export const Home: React.FunctionComponent = () => {
             <Link to="/admin/tables">Gehe zu Tabellen</Link>
             <Link to="/login">Gehe zu Login</Link>
             <Link to="/admin/menus/1/edit">Gehe zu Menu Overview</Link>
+            <Button onClick={() => debug()}>Debug</Button>
             <List lines>
                 <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
                 <ListItem title="Football" indent onClick={() => console.log("parent")} header={<Tag title="Favorite" />}>

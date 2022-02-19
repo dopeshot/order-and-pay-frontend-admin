@@ -6,6 +6,7 @@ import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/state"
@@ -37,14 +38,19 @@ export const Menus: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the menu
-        await deleteMenu(selectedMenu._id)
+        try {
+            // Delete the menu
+            await deleteMenu(selectedMenu._id)
 
-        closeDeleteModal()
-        setIsLoadingDelete(false)
+            closeDeleteModal()
 
-        // When menu is delete update List
-        getAllMenus()
+            // When menu is delete update List
+            getAllMenus()
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     const openDeleteModal = (menu: Menu) => {
@@ -65,7 +71,7 @@ export const Menus: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between mb-4">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Alle Menüs</h1>
-                <p data-cy="menus-count" className="text-lightgrey mb-4 md:mb-0">{!isLoadingMenus ? menus.length : 0} Gesamt</p>
+                <p data-cy="menus-count" className="text-lightgrey mb-4 md:mb-0">{menus.length ?? 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} to="/admin/menus/add">Menü hinzufügen</Button>
@@ -74,12 +80,13 @@ export const Menus: React.FC = () => {
         {/* Header end */}
 
         {/* Content */}
-        <List lines>
+        {(menus.length === 0 && isLoadingMenus) ? <Loading /> : <List lines>
             {menus.map((menu) => <ListItem dataCy="menus-list-item" key={menu._id} title={menu.title} icon={faFolder} to={`/admin/menus/${menu._id}/editor`} header={menu.isActive ? <Tag title="Aktiv" type={TagTypesEnum.green} /> : undefined}>
                 <IconButton dataCy="menus-edit-button" className="ml-auto mr-4" icon={faEdit} to={`/admin/menus/${menu._id}/edit`} />
                 <IconButton dataCy="menus-delete-button" className="mr-4" icon={faTrash} onClick={() => openDeleteModal(menu)} />
             </ListItem>)}
         </List>
+        }
         {/* Content End */}
 
         {/* Delete Modal */}
