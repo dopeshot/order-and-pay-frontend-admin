@@ -102,10 +102,14 @@ export const MenuEditor: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        await deleteMenu(menuId)
-
-        setIsLoadingDelete(false)
-        history.push("/admin/menus")
+        try {
+            await deleteMenu(menuId)
+            history.push("/admin/menus")
+        } catch (error) {
+            // Error deleting category
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     return <div className="container mt-12">

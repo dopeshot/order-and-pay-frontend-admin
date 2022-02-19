@@ -61,7 +61,7 @@ export const updateMenu = async ({ effects, actions }: Context, { menuId, menu }
         console.error(error)
 
         actions.notify.createNotification({
-            title: "Fehler beim Erstellen des Menus",
+            title: "Fehler beim Aktualisieren des Menus",
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
             type: "danger"
         })
@@ -71,13 +71,20 @@ export const updateMenu = async ({ effects, actions }: Context, { menuId, menu }
 }
 
 // Delete menu by id action
-export const deleteMenu = async ({ effects }: Context, id: string): Promise<boolean> => {
+export const deleteMenu = async ({ effects, actions }: Context, id: string): Promise<boolean> => {
     try {
         // We just await the deletion no need to update menu object
         await effects.menus.deleteMenu(id)
         return true
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Menus",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
