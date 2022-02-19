@@ -4,17 +4,17 @@ import { useState } from "react"
 import * as Yup from "yup"
 import { useActions } from "../../overmind"
 import { AllergenDto } from "../../overmind/allergens/effects"
+import { Allergen } from "../../overmind/allergens/state"
 import { LabelDto } from "../../overmind/labels/effects"
-import { Label } from "../../overmind/labels/state"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Form/TextInput"
 import { Modal } from "../UI/Modal"
 
 type AllergensModalProps = {
     /** State Data from allergen to edit */
-    modalEditData?: Label | null
+    modalEditData?: Allergen | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<Label | null>> | null
+    setModalEditData?: React.Dispatch<React.SetStateAction<Allergen | null>> | null
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
@@ -84,11 +84,15 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
     return (
         <Modal dataCy="allergens-modal-add-edit" modalHeading={modalEditData ? `Allergen bearbeiten` : `Neues Allergen hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
-                    <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <Button dataCy="allergens-modal-add-edit-button" type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
-                </Form>
+                {({ dirty, isValid }) => (
+                    <Form>
+                        <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
+                        <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
+                        <div className="flex justify-end">
+                            <Button dataCy="allergens-modal-add-edit-button" type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                        </div>
+                    </Form>
+                )}
             </Formik>
         </Modal>
     )

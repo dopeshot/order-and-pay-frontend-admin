@@ -31,11 +31,13 @@ export const Login: React.FC = () => {
             <h1 className="text-4xl text-center text-headline-black font-semibold mb-2">Einloggen</h1>
             <p className="text-center mb-3">Logge dich ein um dein Restaurant zu bearbeiten, Bestellungen einzusehen und neue Mitarbeiter hinzuzufügen.</p>
             <Formik initialValues={initialLoginValues} validationSchema={validationLoginSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="email" placeholder="E-Mail eingeben" labelText="E-Mail" />
-                    <PasswordInput />
-                    <Button type="submit" loading={authenticating} icon={faSignInAlt} className="min-w-full">Login</Button>
-                </Form>
+                {({ dirty, isValid }) => (
+                    <Form>
+                        <TextInput name="email" placeholder="E-Mail eingeben" labelText="E-Mail" />
+                        <PasswordInput />
+                        <Button type="submit" loading={authenticating} icon={faSignInAlt} disabled={!(dirty && isValid)} className="min-w-full">Login</Button>
+                    </Form>
+                )}
             </Formik>
         </div>
     </div>

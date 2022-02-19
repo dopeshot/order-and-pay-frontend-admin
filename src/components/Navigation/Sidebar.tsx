@@ -1,4 +1,4 @@
-import { faChair, faHome, faReceipt, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { faChair, faHome, faReceipt, faUser, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { NavLink, useRouteMatch } from "react-router-dom"
 import { useActions, useAppState } from "../../overmind"
@@ -35,10 +35,14 @@ export const Sidebar: React.FunctionComponent = () => {
             icon: faReceipt,
             path: `${url}/menus/labels`
         }, {
-            title: 'Allergens',
+            title: 'Allergene',
             icon: faReceipt,
             path: `${url}/menus/allergens`
-        }]
+        }, {
+            title: 'Benutzer',
+            icon: faUser,
+            path: `${url}/users`
+        }],
     }]
 
     return (
