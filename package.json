@@ -46,7 +46,10 @@
       "src/**/*"
     ],
     "exclude": [
-      "src/reportWebVitals.ts"
+      "src/pages/Home",
+      "src/reportWebVitals.ts",
+      "src/components/Buttons",
+      "src/components/Form"
     ],
     "excludeAfterRemap": true
   },

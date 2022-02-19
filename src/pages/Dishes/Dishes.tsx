@@ -1,11 +1,12 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faArrowLeft, faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
+import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { Checkbox } from "../../components/Form/Checkbox"
 import { Dropdown } from "../../components/Form/Dropdown"
@@ -13,30 +14,31 @@ import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
 import { LabelModal } from "../../components/Labels/LabelModal"
-import { Modal } from "../../components/UI/Modal"
+import { DeleteModal } from "../../components/UI/DeleteModal"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { DishDto } from "../../overmind/dishes/effects"
+import { Dish, DishDto } from "../../overmind/dishes/effects"
 import { ComponentOptions } from "../../shared/types/ComponentOptions"
 
 type Params = {
-    menusId: string,
-    categoriesId: string,
+    menuId: string,
+    categoryId: string,
     dishId?: string
 }
 
 export const Dishes: React.FC = () => {
-    const { dishId, menusId } = useParams<Params>()
+    const { dishId, menuId, categoryId } = useParams<Params>()
     const isEditing = Boolean(dishId)
     const history = useHistory()
 
     // Local State
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(isEditing)
     const [isLoadingSave, setIsLoadingSave] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [hasDeleteModal, setHasDeleteModal] = useState(false)
-    const [hasLabelModal, setHasLabelModal] = useState(false)
-    const [hasAllergensModal, setHasAllergensModal] = useState(false)
-    const [dish, setDish] = useState<DishDto>()
+    const [isLabelModalOpen, setLabelModalOpen] = useState(false)
+    const [isAllergensModalOpen, setAllergensModalOpen] = useState(false)
+    const [dish, setDish] = useState<Dish>()
     const [categoriesOptions, setCategoriesOptions] = useState<ComponentOptions[]>([])
     const [labelsOptions, setLabelsOptions] = useState<ComponentOptions[]>([])
     const [allergensOptions, setAllergensOptions] = useState<ComponentOptions[]>([])
@@ -53,15 +55,18 @@ export const Dishes: React.FC = () => {
 
         // Load dish when id is set in url
         async function loadDish() {
+            if (!isEditing)
+                return
+
             try {
                 // Fetch dish and set editing
                 const dish = await getDishById(dishId!) // ! because we only call when isEditing
 
+                // istanbul ignore next // is just for handling async correct
                 if (!isMounted)
                     return
 
                 setDish(dish)
-                setIsLoading(false)
             } catch (error) {
                 console.error("Dish not found")
                 // MC: Implement error here
@@ -72,26 +77,29 @@ export const Dishes: React.FC = () => {
 
         // Prepare Categories, Labels and Allergens for Dropdown and Checkbox
         async function prepDataOptions() {
-            const categories = await getAllCategories()
+            const responses = await Promise.all([getAllCategories(), getAllLabels(), getAllAllergens()])
 
+            // istanbul ignore next // is just for handling async correct
             if (!isMounted)
                 return
 
-            const categoriesResult = categories.map(categorie => ({
-                id: categorie._id,
-                label: categorie.title
+            const categoriesResult = responses[0].map(category => ({
+                id: category._id,
+                label: category.title
             }))
             setCategoriesOptions(categoriesResult)
-
-            await getAllLabels()
-            await getAllAllergens()
         }
-        prepDataOptions()
 
-        // Check if we are editing an existing menu
-        if (isEditing)
-            loadDish()
+        async function main() {
+            await Promise.all([prepDataOptions(), loadDish()])
 
+            // istanbul ignore next // is just for handling async correct
+            if (!isMounted)
+                return
+
+            setIsLoading(false)
+        }
+        main()
         return () => { isMounted = false }
     }, [getDishById, isEditing, getAllAllergens, getAllCategories, getAllLabels, dishId])
 
@@ -117,11 +125,11 @@ export const Dishes: React.FC = () => {
         title: dish?.title ?? "",
         description: dish?.description ?? "",
         image: dish?.image ?? "",
-        isActive: dish?.isActive ?? true,
+        isAvailable: dish?.isAvailable ?? true,
         price: dish?.price ?? 0,
-        category: dish?.category ?? "",
-        allergens: dish?.allergens ?? [],
-        labels: dish?.labels ?? []
+        categoryId: dish?.categoryId ?? categoryId ?? "",
+        allergenIds: dish?.allergenIds ?? [],
+        labelIds: dish?.labelIds ?? []
     }
 
     // Formik Validation
@@ -131,7 +139,7 @@ export const Dishes: React.FC = () => {
         image: Yup.string().min(2, "Die Titelbild-URL muss aus mindestens 2 Zeichen bestehen.").max(100, "Die Titelbild-URL darf nicht länger als 100 Zeichen sein."),
         isActive: Yup.boolean(),
         price: Yup.number().min(0, "Der Preis muss 0 oder größer sein").required("Dies ist ein Pflichtfeld."),
-        category: Yup.string().required("Dies ist ein Pflichtfeld.")
+        categoryId: Yup.string().required("Dies ist ein Pflichtfeld.")
     })
 
     // Formik Submit Form
@@ -148,7 +156,7 @@ export const Dishes: React.FC = () => {
             else
                 await createDish(dish)
 
-            history.push("/")
+            history.push(`/menus/${menuId}/editor`)
         } catch (error) {
             if (!axios.isAxiosError(error))
                 return
@@ -161,7 +169,7 @@ export const Dishes: React.FC = () => {
 
     // Dish delete 
     const handleDishDelete = async () => {
-        // Check if we are editing a dish
+        // istanbul ignore next // Should not happen
         if (!isEditing || !dishId)
             return
 
@@ -170,13 +178,13 @@ export const Dishes: React.FC = () => {
         await deleteDish(dishId)
 
         setIsLoadingDelete(false)
-        history.push("/menus")
+        history.push(`/menus/${menuId}/editor`)
     }
 
     return (
         <div className="container mt-12">
-            <Button dataCy="dishes-back-button" kind="tertiary" to={`/menus/${menusId}/editor`} icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
-            {isLoading ? <p>Is Loading...</p> : <div style={{ maxWidth: "500px" }}>
+            <BackButton dataCy="dishes-back-button" to={`/menus/${menuId}/editor`} />
+            {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
                     {({ dirty, isValid }) => (
@@ -187,16 +195,16 @@ export const Dishes: React.FC = () => {
                                 <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="2,00" icon={faEuroSign} /></span>
                             </div>
                             <Textarea name="description" labelText="Beschreibung" maxLength={200} labelRequired placeholder="Mit Salat, Tomaten und sauren Gurken" />
-                            <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
-                            <Toggle name="isActive" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
+                            <Dropdown name="categoryId" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
+                            <Toggle name="isAvailable" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
                                 <div className="mr-2 sm:mr-8 md:mr-32">
-                                    <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
-                                    <Button kind="tertiary" onClick={() => setHasLabelModal(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
+                                    <Checkbox name="labelIds" labelText="Labels" options={labelsOptions} />
+                                    <Button kind="tertiary" onClick={() => setLabelModalOpen(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
                                 </div>
                                 <div>
-                                    <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
-                                    <Button kind="tertiary" onClick={() => setHasAllergensModal(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
+                                    <Checkbox name="allergenIds" labelText="Allergenen" options={allergensOptions} />
+                                    <Button kind="tertiary" onClick={() => setAllergensModalOpen(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row justify-between mt-10">
@@ -209,19 +217,20 @@ export const Dishes: React.FC = () => {
             </div>
             }
             {/* Label Modal */}
-            <LabelModal modalOpen={hasLabelModal} setModalOpen={setHasLabelModal} />
+            <LabelModal modalOpen={isLabelModalOpen} setModalOpen={setLabelModalOpen} />
 
             {/* Allergens Modal */}
-            <AllergensModal modalOpen={hasAllergensModal} setModalOpen={setHasAllergensModal} />
+            <AllergensModal modalOpen={isAllergensModalOpen} setModalOpen={setAllergensModalOpen} />
 
             {/* Delete Modal */}
-            <Modal modalHeading="Dish für immer löschen?" open={hasDeleteModal} onDissmis={() => setHasDeleteModal(false)}>
-                <p>Das Löschen kann nicht rückgängig gemacht werden.</p>
-                <div className="flex md:justify-between flex-col md:flex-row">
-                    <Button kind="tertiary" onClick={() => setHasDeleteModal(false)} className="my-4 md:my-0">Abbrechen</Button>
-                    <Button dataCy="dishes-modal-delete-button" kind="primary" onClick={() => handleDishDelete()} loading={isLoadingDelete} icon={faTrash} >Löschen</Button>
-                </div>
-            </Modal>
+            <DeleteModal
+                title={`${dish?.title}`}
+                description={`Das Löschen kann nicht rückgängig gemacht werden. ${dish?.title} wird auch aus allen Kategorien entfernt.`}
+                open={hasDeleteModal}
+                onDissmis={() => setHasDeleteModal(false)}
+                handleDelete={() => handleDishDelete()}
+                isLoadingDelete={isLoadingDelete}
+            />
         </div>
     )
 }

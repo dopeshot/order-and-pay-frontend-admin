@@ -35,7 +35,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
                     {isOpen && <div className="fixed cursor-pointer inset-0 h-full w-full z-10" aria-hidden="true" onClick={() => setIsOpen(false)}></div>}
 
                     <button data-cy={`${name}-dropdown-button`} className={`relative flex items-center justify-between rounded-lg mr-5 sm:mb-0 py-2 px-5 w-full ${props.meta.error && props.meta.touched ? "text-danger-red bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red" : "border border-border-grey bg-white"} ${!props.field.value ? "text-lightgrey" : "text-darkgrey"}`} type="button" onClick={() => setIsOpen(!isOpen)}>
-                        {props.field.value !== "" ? <span className="truncate">{options.find(option => option.id === props.field.value)?.label}</span> : <span className={`${props.meta.error && props.meta.touched ? "text-lightgrey" : ""}`}>{placeholder}</span>}
+                        {props.field.value !== "" ? <span className="text-darkgrey truncate">{options.find(option => option.id === props.field.value)?.label}</span> : <span className={`${props.meta.error && props.meta.touched ? "text-lightgrey" : ""}`}>{placeholder}</span>}
                         <FontAwesomeIcon className={`ml-6 transform-gpu transition-transform duration-200 ease-linear ${isOpen ? "-rotate-180" : "rotate-0"}`} icon={faChevronDown} />
                     </button>
 
@@ -54,7 +54,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
                     {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm font-semibold mt-1">{helperText}</p>}
                 </div>
             )}</Field>
-            <FormError field={name} />
+            <FormError dataCy={`dropdown-${name}-form-error`} field={name} />
         </div>
     )
 }

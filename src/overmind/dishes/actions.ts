@@ -1,5 +1,5 @@
 import { Context } from ".."
-import { Category, DishDto } from "./effects"
+import { Category, Dish, DishDto } from "./effects"
 
 /**
  * Create new Dish
@@ -17,7 +17,7 @@ export const createDish = async ({ effects }: Context, dish: DishDto): Promise<b
 /**
  * Get one Dish by id
  */
-export const getDishById = async ({ effects }: Context, id: string): Promise<DishDto> => {
+export const getDishById = async ({ effects }: Context, id: string): Promise<Dish> => {
     try {
         const response = await effects.dishes.getDishById(id)
         const dish = response.data
@@ -49,21 +49,21 @@ export const deleteDish = async ({ effects }: Context, id: string): Promise<bool
     try {
         await effects.dishes.deleteDish(id)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         throw (error)
     }
 }
 
 /**
- * Get All Categories // TODO: needs to be moved when editor is done
+ * Get All Categories
  */
 export const getAllCategories = async ({ effects }: Context): Promise<Category[]> => {
     try {
         const response = await effects.dishes.getAllCategories()
         const categories = response.data
         return categories
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         throw (error)
     }
