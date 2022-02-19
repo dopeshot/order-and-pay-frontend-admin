@@ -69,7 +69,7 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
                 setModalOpen(false)
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         } finally {
             setIsModalLoading(false)
         }
