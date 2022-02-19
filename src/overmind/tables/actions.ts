@@ -1,14 +1,19 @@
+import axios from "axios"
 import { config, Context } from ".."
 import { InitialTableHelper, Table, TableDocument } from "./state"
 
-export const loadTables = async ({ state, effects }: Context) => {
+export const loadTables = async ({ state, effects, actions }: Context) => {
     state.tables.isLoadingTables = true
     try {
         const response = await effects.tables.getTables()
         const tables = response.data.map<TableDocument>((table: Table) => ({ ...table, updatedAt: new Date(table.updatedAt), ...InitialTableHelper }))
         state.tables.tables = tables.sort((a, b) => a.tableNumber.localeCompare(b.tableNumber))
     } catch (error) {
-
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Tische",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     state.tables.isLoadingTables = false
 }
