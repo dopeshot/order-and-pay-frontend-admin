@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
 import { Allergens } from '../../pages/Allergens/Allergens';
+import { CategoryEditor } from '../../pages/Categories/CategoryEditor';
 import { Dishes } from '../../pages/Dishes/Dishes';
 import { Home } from '../../pages/Home/Home';
 import { Labels } from '../../pages/Labels/Labels';
@@ -34,6 +35,8 @@ export const App: React.FunctionComponent = () => {
                 <Route exact path="/menus/allergens" component={Allergens} />
                 <Route exact path="/menus/labels" component={Labels} />
                 <Route exact path="/menus/add" component={MenuEditor} />
+                <Route exact path="/menus/:menuId/categories" component={CategoryEditor} />
+                <Route exact path="/menus/:menuId/categories/:categoryId" component={CategoryEditor} />
                 <Route exact path="/menus/:menuId/edit" component={MenuEditor} />
                 <Route exact path="/menus/:menuId/categories/:categoryId/dish/:dishId" component={Dishes} />
                 <Route exact path="/menus/:menuId/categories/:categoryId/dish" component={Dishes} />

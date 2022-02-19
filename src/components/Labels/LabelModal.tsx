@@ -68,7 +68,7 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
 
     // Modal close handler
     const handleModelDismiss = () => {
-        // Prevent closing modal when form is submitting
+        // istanbul ignore if // Prevent closing modal when form is submitting
         if (isModalLoading)
             return
 
@@ -81,18 +81,18 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
     }
 
     return (
-        <Modal modalHeading={modalEditData ? `Label bearbeiten` : `Neues Label hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
+        <Modal dataCy="labels-modal-add-edit" modalHeading={modalEditData ? `Label bearbeiten` : `Neues Label hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 {({ dirty, isValid }) => (
                     <Form>
                         <TextInput name="title" placeholder="Gesund, Empfohlen, Lecker..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
                         <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
                         <div className="flex justify-end">
-                            <Button type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                            <Button dataCy="labels-modal-add-edit-button" type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
                         </div>
                     </Form>
                 )}
-            </Formik>
-        </Modal>
+            </Formik >
+        </Modal >
     )
 }

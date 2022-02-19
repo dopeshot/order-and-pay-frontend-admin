@@ -3,7 +3,7 @@ import { MenuDto } from "./effects"
 import { Menu } from "./state"
 
 export const getAllMenus = async ({ state, effects }: Context): Promise<Menu[] | undefined> => {
-    // Backoff when already loading
+    // istanbul ignore next // Backoff when already loading
     if (state.menus.isLoadingMenus)
         return
 
@@ -12,7 +12,7 @@ export const getAllMenus = async ({ state, effects }: Context): Promise<Menu[] |
         const response = await effects.menus.getAllMenus()
         const menus = response.data
         state.menus.menus = menus
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         throw (error)
     }
@@ -37,7 +37,7 @@ export const getMenuById = async ({ state, effects }: Context, id: string): Prom
         const response = await effects.menus.getMenuById(id)
         const menu = response.data
         return menu
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         throw (error)
     }
@@ -61,7 +61,7 @@ export const deleteMenu = async ({ effects }: Context, id: string): Promise<bool
         // We just await the deletion no need to update menu object
         await effects.menus.deleteMenu(id)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         throw (error)
     }

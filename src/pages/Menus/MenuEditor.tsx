@@ -42,6 +42,7 @@ export const MenuEditor: React.FC = () => {
                 // Fetch menu and set editing
                 const menu = await getMenuById(menuId)
 
+                // istanbul ignore next // is just for handling async correct
                 if (!isMounted)
                     return
 
@@ -99,7 +100,7 @@ export const MenuEditor: React.FC = () => {
     }
 
     const handleDelete = async () => {
-        // Check if we are editing a menu
+        // istanbul ignore next // Should not happen
         if (!isEditing)
             return
 
@@ -112,7 +113,7 @@ export const MenuEditor: React.FC = () => {
     }
 
     return <div className="container mt-12">
-        <BackButton dataCy="dishes-back-button" to="/menus" />
+        <BackButton dataCy="menus-back-button" to="/menus" />
         {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
             <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
             <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
@@ -122,7 +123,7 @@ export const MenuEditor: React.FC = () => {
                         <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
                         <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
                         <div className="flex flex-col md:flex-row justify-between mt-4">
-                            {isEditing && <Button kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            {isEditing && <Button dataCy="menus-delete-button" kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                             <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} disabled={!(dirty && isValid)} className="ml-auto mb-4">Speichern</Button>
                         </div>
                     </Form>

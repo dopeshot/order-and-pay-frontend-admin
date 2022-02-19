@@ -116,7 +116,7 @@ describe('Menu Overview', () => {
             cy.wait('@getAllLabels')
             cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', menu.categories[0].title)
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).should('contain', menu.categories[0].title)
             cy.contains('Neues Gericht erstellen').should('be.visible')
         })
 
@@ -131,7 +131,7 @@ describe('Menu Overview', () => {
             cy.wait('@getAllLabels')
             cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', menu.categories[0].title)
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).should('contain', menu.categories[0].title)
             cy.contains('Gericht bearbeiten').should('be.visible')
         })
     })
@@ -144,13 +144,31 @@ describe('Menu Overview', () => {
             cy.wait('@getMenuOverviewEditor')
         })
 
-        it.skip('should delete category when open delete modal and click delete', () => {
-            // TODO: Implement when categories are merged  
+        describe.skip('Category', () => {
         })
 
-        it('should open delete dish modal when click trash icon', () => {
-            cy.get('[data-cy="dishes-delete-button"]').first().click()
-            cy.contains(`${menu.categories[0].dishes[0].title} löschen?`).should('be.visible')
+        describe('Dish', () => {
+            beforeEach(() => {
+                cy.deleteDish()
+                cy.getMenuOverviewEditor()
+                cy.get('[data-cy="dishes-delete-button"]').first().click()
+            })
+
+            it('should open delete modal when click on delete', () => {
+                cy.contains(`${menu.categories[0].dishes[0].title} löschen?`)
+            })
+
+            it('should close delete modal when click on x icon', () => {
+                cy.get('[data-cy="modal-close-iconbutton"]').click()
+                cy.get(`[data-cy="deletemodal-${menu.categories[0].dishes[0].title}]`).should('not.exist')
+            })
+
+            it('should delete dish when click delete on modal', () => {
+                cy.get(`[data-cy="deletemodal-${menu.categories[0].dishes[0].title}-delete-button"]`).click()
+
+                cy.wait('@deleteDish')
+                cy.wait('@getMenuOverviewEditor')
+            })
         })
     })
 })

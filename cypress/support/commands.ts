@@ -76,6 +76,47 @@ Cypress.Commands.add('getMenuOverviewEditor', () => {
     }).as('getMenuOverviewEditor')
 })
 
+Cypress.Commands.add('getAllMenus', () => {
+    cy.intercept('GET', `${api}/menus`, {
+        fixture: 'menus.json'
+    }).as('getAllMenus')
+})
+
+Cypress.Commands.add('createMenu', () => {
+    cy.intercept('POST', `${api}/menus`, {
+        fixture: 'menu.json'
+    }).as('createMenu')
+})
+
+Cypress.Commands.add('createMenuDuplicate', () => {
+    cy.intercept('POST', `${api}/menus`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This menu title already exists",
+            "error": "Conflict"
+        }
+    }).as('createMenuDuplicate')
+})
+
+Cypress.Commands.add('getMenuById', () => {
+    cy.intercept('GET', `${api}/menus/**`, {
+        fixture: 'menu.json'
+    }).as('getMenuById')
+})
+
+Cypress.Commands.add('updateMenu', () => {
+    cy.intercept('PATCH', `${api}/menus/**`, {
+        fixture: 'update-menu.json'
+    }).as('updateMenu')
+})
+
+Cypress.Commands.add('deleteMenu', () => {
+    cy.intercept('DELETE', `${api}/menus/**`, {
+        statusCode: 204
+    }).as('deleteMenu')
+})
+
 /********* Dishes *********/
 Cypress.Commands.add('createDish', () => {
     cy.intercept('POST', `${api}/dishes`, {
@@ -118,16 +159,98 @@ Cypress.Commands.add('getAllCategories', () => {
     }).as('getAllCategories')
 })
 
+/********* Allergen *********/
+Cypress.Commands.add('getAllAllergens', () => {
+    cy.intercept('GET', `${api}/allergens`, {
+        fixture: 'allergens.json'
+    }).as('getAllAllergens')
+})
+
+Cypress.Commands.add('createAllergen', () => {
+    cy.intercept('POST', `${api}/allergens`, {
+        fixture: 'allergen.json'
+    }).as('createAllergen')
+})
+
+Cypress.Commands.add('createAllergenDuplicateTitle', () => {
+    cy.intercept('POST', `${api}/allergens`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('createAllergenDuplicateTitle')
+})
+
+Cypress.Commands.add('updateAllergen', () => {
+    cy.intercept('PATCH', `${api}/allergens/**`, {
+        fixture: 'update-allergen.json'
+    }).as('updateAllergen')
+})
+
+Cypress.Commands.add('updateAllergenDuplicateTitle', () => {
+    cy.intercept('PATCH', `${api}/allergens/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateAllergenDuplicateTitle')
+})
+
+Cypress.Commands.add('deleteAllergen', () => {
+    cy.intercept('DELETE', `${api}/allergens/**`, {
+        statusCode: 204
+    }).as('deleteAllergen')
+})
+
+/********* Labels *********/
 Cypress.Commands.add('getAllLabels', () => {
     cy.intercept('GET', `${api}/labels`, {
         fixture: 'labels.json'
     }).as('getAllLabels')
 })
 
-Cypress.Commands.add('getAllAllergens', () => {
-    cy.intercept('GET', `${api}/allergens`, {
-        fixture: 'allergens.json'
-    }).as('getAllAllergens')
+Cypress.Commands.add('createLabel', () => {
+    cy.intercept('POST', `${api}/labels`, {
+        fixture: 'label.json'
+    }).as('createLabel')
+})
+
+Cypress.Commands.add('createLabelDuplicateTitle', () => {
+    cy.intercept('POST', `${api}/labels`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('createLabelDuplicateTitle')
+})
+
+Cypress.Commands.add('updateLabel', () => {
+    cy.intercept('PATCH', `${api}/labels/**`, {
+        fixture: 'update-label.json'
+    }).as('updateLabel')
+})
+
+Cypress.Commands.add('updateLabelDuplicateTitle', () => {
+    cy.intercept('PATCH', `${api}/labels/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateLabelDuplicateTitle')
+})
+
+Cypress.Commands.add('deleteLabel', () => {
+    cy.intercept('DELETE', `${api}/labels/**`, {
+        statusCode: 204
+    }).as('deleteLabel')
 })
 
 /********* Users *********/
