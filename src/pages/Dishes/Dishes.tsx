@@ -172,10 +172,14 @@ export const Dishes: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        await deleteDish(dishId)
-
-        setIsLoadingDelete(false)
-        history.push(`/admin/menus/${menuId}/editor`)
+        try {
+            await deleteDish(dishId)
+            history.push(`/admin/menus/${menuId}/editor`)
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     return (
