@@ -51,14 +51,18 @@ export const SingleMenu: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the dish
-        await deleteDish(selectedDish._id)
+        try {
+            // Delete the dish
+            await deleteDish(selectedDish._id)
+            closeDishDeleteModal()
 
-        closeDishDeleteModal()
-        setIsLoadingDelete(false)
-
-        // When dish is delete update List
-        getMenuEditor(menuId)
+            // When dish is delete update List
+            getMenuEditor(menuId)
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     const openDishDeleteModal = (dish: Dish) => {
