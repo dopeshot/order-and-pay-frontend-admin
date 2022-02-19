@@ -30,6 +30,7 @@ export const Allergens: React.FC = () => {
     }, [getAllAllergens])
 
     const handleDelete = async (event: any) => {
+        /* istanbul ignore next // should not happen just fallback */
         if (!selectedAllergen) {
             console.warn("There is no allergen selected.")
             return
