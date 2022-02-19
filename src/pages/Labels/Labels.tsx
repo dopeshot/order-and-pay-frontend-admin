@@ -7,6 +7,7 @@ import { LabelModal } from "../../components/Labels/LabelModal"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Label } from "../../overmind/labels/state"
 
@@ -72,7 +73,7 @@ export const Labels: React.FC = () => {
         {/* Header end */}
 
         {/* Content */}
-        <List lines>
+        {(labels.length === 0 && isLoadingLabels) ? <Loading /> : <List lines>
             {labels.map((label) => <ListItem dataCy="labels-list-item" key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
                 setModalEditData(label)
                 setModalOpen(true)
@@ -80,6 +81,7 @@ export const Labels: React.FC = () => {
                 <IconButton dataCy="labels-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(label)} />
             </ListItem>)}
         </List>
+        }
         {/* Content End */}
 
         {/* Add/Edit Label Modal */}
