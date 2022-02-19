@@ -85,13 +85,15 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
     return (
         <Modal modalHeading={modalEditData ? `Allergen bearbeiten` : `Neues Allergen hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
-                    <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <div className="flex justify-end">
-                        <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
-                    </div>
-                </Form>
+                {({ dirty, isValid }) => (
+                    <Form>
+                        <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
+                        <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
+                        <div className="flex justify-end">
+                            <Button type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                        </div>
+                    </Form>
+                )}
             </Formik>
         </Modal>
     )

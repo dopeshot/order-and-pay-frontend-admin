@@ -64,7 +64,7 @@ export const Users: React.FC = () => {
             <div className="flex flex-col md:flex-row md:justify-between">
                 <div>
                     <h1 className="text-2xl text-headline-black font-semibold">Benutzer</h1>
-                    <p className="text-lightgrey mr-3 mb-4">{!isLoading ? users.length : 0} Gesamt</p>
+                    <p data-cy="users-count" className="text-lightgrey mr-3 mb-4">{!isLoading ? users.length : 0} Gesamt</p>
                 </div>
                 <div>
                     <Button icon={faPlus} onClick={() => setModalOpen(true)}>Benutzer hinzufügen</Button>
@@ -74,7 +74,7 @@ export const Users: React.FC = () => {
 
             {/* Content */}
             <List lines>
-                {users.map((user) => <ListItem key={user._id} title={user.username} header={<p className="text-darkgrey">{user.email}</p>} icon={faUser} onClick={() => {
+                {users.map((user) => <ListItem dataCy="users-list-item" key={user._id} title={user.username} header={<p className="text-darkgrey">{user.email}</p>} icon={faUser} onClick={() => {
                     setModalEditData(user)
                     setModalOpen(true)
                 }}>

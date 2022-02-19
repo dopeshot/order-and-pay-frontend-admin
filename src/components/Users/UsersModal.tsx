@@ -83,16 +83,18 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
     }
 
     return (
-        <Modal modalHeading={modalEditData ? `Benutzer bearbeiten` : `Neuen Benutzer hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
+        <Modal dataCy="users-modal-add-edit" modalHeading={modalEditData ? `Benutzer bearbeiten` : `Neuen Benutzer hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="username" placeholder="user" labelText="Username" />
-                    <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
-                    <PasswordInput />
-                    <div className="flex justify-end">
-                        <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
-                    </div>
-                </Form>
+                {({ dirty, isValid }) => (
+                    <Form>
+                        <TextInput name="username" placeholder="user" labelText="Username" />
+                        <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
+                        <PasswordInput />
+                        <div className="flex justify-end">
+                            <Button type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                        </div>
+                    </Form>
+                )}
             </Formik>
         </Modal>
     )
