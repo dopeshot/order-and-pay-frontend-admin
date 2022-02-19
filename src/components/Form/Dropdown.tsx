@@ -1,8 +1,8 @@
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field, FieldProps } from "formik";
 import { useState } from "react";
+import { ComponentOptions } from "../../shared/types/ComponentOptions";
 import { FormError } from "../Errors/FormError";
 
 type DropdownProps = {
@@ -13,11 +13,7 @@ type DropdownProps = {
     /** Text that informs the user what to expect in the list of dropdown options. */
     placeholder: string
     /** A list of options to choose from. */
-    options: {
-        id: number
-        label: string
-        icon?: IconProp
-    }[]
+    options: ComponentOptions[]
     /** When set Required * will be seen */
     labelRequired?: boolean
     /** Provide text that is used for additional help. */
@@ -58,7 +54,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
                     {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm font-semibold mt-1">{helperText}</p>}
                 </div>
             )}</Field>
-            <FormError field={name} />
+            <FormError dataCy={`dropdown-${name}-form-error`} field={name} />
         </div>
     )
 }

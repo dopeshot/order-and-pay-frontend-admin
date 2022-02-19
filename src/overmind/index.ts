@@ -3,16 +3,20 @@ import { createActionsHook, createStateHook } from 'overmind-react'
 import { namespaced } from 'overmind/config'
 import * as allergens from './allergens'
 import * as app from './app'
-import * as example from './example'
+import * as dishes from './dishes'
 import * as labels from './labels'
+import * as menuoverview from './menuoverview'
+import * as menus from './menus'
 import * as tables from './tables'
 
 export const config = namespaced({
-    example,
     tables,
     app,
     labels,
-    allergens
+    allergens,
+    menuoverview,
+    menus,
+    dishes
 })
 
 export type Context = IContext<{

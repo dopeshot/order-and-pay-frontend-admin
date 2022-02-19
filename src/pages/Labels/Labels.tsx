@@ -1,21 +1,18 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faCheck, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { Form, Formik } from "formik"
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
-import * as Yup from "yup"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { TextInput } from "../../components/Form/TextInput"
+import { LabelModal } from "../../components/Labels/LabelModal"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
-import { Modal } from "../../components/UI/Modal"
 import { useActions, useAppState } from "../../overmind"
-import { LabelDto } from "../../overmind/labels/effects"
 import { Label } from "../../overmind/labels/state"
 
 export const Labels: React.FC = () => {
     // Get hooks to manipulate global state
-    const { getAllLabels, createLabel, updateLabel, deleteLabel } = useActions().labels
+    const { getAllLabels, deleteLabel } = useActions().labels
 
     // Get global state
     const { labels, isLoadingLabels } = useAppState().labels
@@ -23,66 +20,45 @@ export const Labels: React.FC = () => {
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<Label | null>(null)
-    const [isModalLoading, setIsModalLoading] = useState(false)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [selectedLabel, setSelectedLabel] = useState<Label | null>(null)
 
     // Load labels when page is loaded
     useEffect((): void => {
         getAllLabels()
     }, [getAllLabels])
 
-    const initialValues: LabelDto = {
-        title: modalEditData?.title ?? "",
-        icon: modalEditData?.icon ?? "user"
-    }
-
-    const validationSchema = Yup.object().shape({
-        title: Yup.string().min(2).max(20).required("Title is required"),
-        icon: Yup.string()
-    })
-
-    const submitForm = async (values: LabelDto) => {
-        setIsModalLoading(true)
-
-        // Check if we are editing or creating a new label
-        if (modalEditData) {
-            if (!await updateLabel({
-                id: modalEditData._id,
-                label: values
-            }))
-                return
-            // Clear modal data
-            setModalEditData(null)
-            setModalOpen(false)
-        }
-        else {
-            if (!await createLabel(values))
-                return
-            setModalOpen(false)
-        }
-        setIsModalLoading(false)
-    }
-
-    const handleModelDismiss = () => {
-        // Prevent closing modal when form is submitting
-        if (isModalLoading)
+    const handleDelete = async (event: any) => {
+        if (!selectedLabel) {
+            console.warn("There is no label selected.")
             return
+        }
 
-        // Close modal
-        setModalOpen(false)
+        setIsLoadingDelete(true)
 
-        // Clear modal data if we are editing a label
-        if (modalEditData)
-            setModalEditData(null)
+        // Delete the allergen
+        await deleteLabel(selectedLabel._id)
+
+        closeDeleteModal()
+        setIsLoadingDelete(false)
+
+        // When allergen is delete update List
+        getAllLabels()
     }
 
-    const handleDelete = async (event: any, id: string) => {
-        // This prevents the event from bubbling up the DOM to the parent node where you open edit
-        event.stopPropagation()
-
-        deleteLabel(id)
+    const openDeleteModal = (label: Label) => {
+        setSelectedLabel(label)
+        setDeleteModalOpen(true)
     }
 
-    return < div className="container md:max-w-full mt-12" >
+    const closeDeleteModal = () => {
+        setDeleteModalOpen(false)
+        setSelectedLabel(null)
+    }
+
+    return <div className="container md:max-w-full mt-12">
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Labels</h1>
@@ -92,23 +68,30 @@ export const Labels: React.FC = () => {
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Label hinzufügen</Button>
             </div>
         </div>
+        {/* Header end */}
+
+        {/* Content */}
         <List lines>
             {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
                 setModalEditData(label)
                 setModalOpen(true)
             }}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={(event) => handleDelete(event, label._id)} />
+                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(label)} />
             </ListItem>)}
         </List>
+        {/* Content End */}
 
-        <Modal modalHeading={modalEditData ? `Label bearbeiten` : `Neues Label hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="title" placeholder="Gesund, Empfohlen, Lecker..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
-                    <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
-                </Form>
-            </Formik>
-        </Modal>
-    </div >
+        {/* Add/Edit Label Modal */}
+        <LabelModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
+
+        {/* Delete Modal */}
+        <DeleteModal
+            title={`${selectedLabel?.title}`}
+            description={`Das Löschen kann nicht rückgängig gemacht werden. ${selectedLabel?.title} wird auch aus allen Kategorien entfernt.`}
+            open={isDeleteModalOpen}
+            onDissmis={closeDeleteModal}
+            handleDelete={handleDelete}
+            isLoadingDelete={isLoadingDelete}
+        />
+    </div>
 }

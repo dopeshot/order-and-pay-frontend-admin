@@ -33,13 +33,13 @@ export const Textarea: React.FC<TextareaProps> = ({ name, placeholder, labelText
                         {maxLength && (props.field.value !== null || props.field.value !== undefined) && <span className="text-lightgrey" data-cy={`${name}-character-count`}>{props.field.value.length}/{maxLength}</span>}
                     </div>
                     <div>
-                        <textarea placeholder={placeholder} autoFocus={autoFocus} {...props.field} rows={rows} className={`font-roboto rounded-lg p-2 w-full ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`}>
+                        <textarea data-cy={`textarea-${name}-input`} placeholder={placeholder} autoFocus={autoFocus} {...props.field} rows={rows} className={`font-roboto rounded-lg py-3 px-4 w-full placeholder-placeholder-grey ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`}>
                         </textarea>
                     </div>
                     {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey">{helperText}</p>}
                 </>
             )}</Field>
-            <FormError field={name} />
+            <FormError dataCy={`textarea-${name}-form-error`} field={name} />
         </div>
     )
 }
