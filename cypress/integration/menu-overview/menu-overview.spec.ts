@@ -116,7 +116,7 @@ describe('Menu Overview', () => {
             cy.wait('@getAllLabels')
             cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', menu.categories[0].title)
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).should('contain', menu.categories[0].title)
             cy.contains('Neues Gericht erstellen').should('be.visible')
         })
 
@@ -131,7 +131,7 @@ describe('Menu Overview', () => {
             cy.wait('@getAllLabels')
             cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
 
-            cy.get(`[data-cy="category-dropdown-button"]`).should('contain', menu.categories[0].title)
+            cy.get(`[data-cy="categoryId-dropdown-button"]`).should('contain', menu.categories[0].title)
             cy.contains('Gericht bearbeiten').should('be.visible')
         })
     })
