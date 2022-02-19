@@ -1,3 +1,4 @@
+import axios from "axios"
 import { Context } from ".."
 import { AllergenDto } from "./effects"
 
@@ -17,7 +18,7 @@ export const getAllAllergens = async ({ state, effects }: Context) => {
     state.allergens.isLoadingAllergens = false
 }
 
-export const createAllergen = async ({ state, effects }: Context, allergen: AllergenDto): Promise<boolean> => {
+export const createAllergen = async ({ state, actions, effects }: Context, allergen: AllergenDto): Promise<boolean> => {
     try {
         const response = await effects.allergens.createAllergen(allergen)
         const newAllergen = response.data
@@ -25,6 +26,13 @@ export const createAllergen = async ({ state, effects }: Context, allergen: Alle
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Allergens",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
