@@ -147,7 +147,7 @@ describe('Api Endpoints', () => {
         })
     })
 
-    describe.only('Delete Dish', () => {
+    describe('Delete Dish', () => {
         beforeEach(() => {
             cy.getDishById()
             cy.getAllAllergens()
@@ -166,7 +166,7 @@ describe('Api Endpoints', () => {
             cy.contains(`${dish.title} löschen?`)
         })
 
-        it.skip('should delete dish when click delete on modal', () => {
+        it('should delete dish when click delete on modal', () => {
             cy.deleteDish()
             cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-delete-button"]').click()
@@ -177,7 +177,7 @@ describe('Api Endpoints', () => {
             cy.url().should('include', '/admin/menus/1/editor')
         })
 
-        it.skip('should have loading icon when deleting', () => {
+        it('should have loading icon when deleting', () => {
             const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { fixture: 'dish.json' })
             cy.getMenuOverviewEditor()
 
