@@ -1,14 +1,22 @@
+import axios from "axios";
 import { Context } from "..";
 import { Credentials } from "./effects";
 
-export const initializeUser = async ({ state, effects }: Context) => {
+export const initializeUser = async ({ state, effects, actions }: Context) => {
     const token = localStorage.getItem('access_token')
     state.auth.authenticating = true
 
-    if (token) {
-        effects.auth.setToken(token)
-        const userResponse = await effects.auth.getCurrentUser()
-        state.auth.currentUser = userResponse.data
+    try {
+        if (token) {
+            effects.auth.setToken(token)
+            const userResponse = await effects.auth.getCurrentUser()
+            state.auth.currentUser = userResponse.data
+        }
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+            // Logout when the access token is not valid anymore
+            actions.auth.logout()
+        }
     }
     state.auth.couldBeLoggedIn = false
     state.auth.authenticating = false
