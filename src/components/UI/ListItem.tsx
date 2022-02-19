@@ -12,31 +12,42 @@ type ListItemProps = {
     title: string
     /** Icon at the beginning of the Element */
     icon?: IconProp
+    /** Content on the left side next to title */
+    header?: React.ReactChild
     /** Link to when click element */
     to?: string
     /** Function what happens when you click element */
     onClick?: (values: any) => void
+    /** For Testing */
+    dataCy?: string
 }
 
 /**
  * List, should have List as parent
  */
-export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, children, to, onClick }) => {
-    return (
-        <>
-            {to ?
-                <Link to={to} className={`flex items-center py-4 pl-7 rounded-lg ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey "} ${indent ? "pl-16" : ""}`}>
-                    <FontAwesomeIcon icon={icon} className="text-lightgrey mr-4" />
-                    <h4 className="text-lg text-headline-black font-semibold">{title}</h4>
-                    {children}
-                </Link>
-                :
-                <div onClick={onClick} className={`flex items-center py-4 pl-7 rounded-lg w-full cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"} ${indent ? "pl-16" : ""}`}>
-                    <FontAwesomeIcon icon={icon} className="text-lightgrey mr-4" />
-                    <h4 className="text-lg text-headline-black font-semibold">{title}</h4>
-                    {children}
-                </div>
-            }
-        </>
-    )
+export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, indent, background, header, children, to, onClick, dataCy }) => {
+
+    // Elements on the left side of the item
+    const headerContent = <>
+        <FontAwesomeIcon icon={icon} className="text-lightgrey mr-4" />
+        <h4 className="text-lg text-headline-black font-semibold mr-4">{title}</h4>
+        {header}
+    </>
+
+    const headerClasses = `flex items-center py-4 pl-7 ${indent ? "md:pl-16" : ""} flex-grow`
+
+    return <div data-cy={dataCy} className={`flex rounded-lg w-full cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"}`}>
+        {to ?
+            <Link to={to} className={headerClasses}>
+                {headerContent}
+            </Link>
+            :
+            <button type="button" onClick={onClick} className={headerClasses}>
+                {headerContent}
+            </button>
+        }
+        {children && <div className="flex items-center mx-4">
+            {children}
+        </div>}
+    </div>
 }

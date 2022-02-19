@@ -38,6 +38,7 @@ module.exports = {
         'white-lightgrey': '#F5F7FA',
         'border-grey': '#E4E7EB',
         'checkbox-grey': '#E0E6EE',
+        'placeholder-grey': '#9ca3af',
         'lightgrey': '#9AA5B1',
         'darkgrey': '#52606D',
         'active-grey': "#E8EEF5",

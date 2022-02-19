@@ -2,7 +2,7 @@ import { Context } from ".."
 import { AllergenDto } from "./effects"
 
 export const getAllAllergens = async ({ state, effects }: Context) => {
-    // Backoff when already loading
+    // istanbul ignore next // Backoff when already loading
     if (state.allergens.isLoadingAllergens)
         return
 
@@ -11,7 +11,7 @@ export const getAllAllergens = async ({ state, effects }: Context) => {
         const response = await effects.allergens.getAllergens()
         const allergens = response.data
         state.allergens.allergens = allergens
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
     }
     state.allergens.isLoadingAllergens = false
@@ -21,7 +21,7 @@ export const createAllergen = async ({ state, effects }: Context, allergen: Alle
     try {
         const response = await effects.allergens.createAllergen(allergen)
         const newAllergen = response.data
-        state.allergens.allergens.push(newAllergen)
+        state.allergens.allergens = [...state.allergens.allergens, newAllergen]
         return true
     } catch (error) {
         console.error(error)
@@ -47,7 +47,7 @@ export const deleteAllergen = async ({ state, effects }: Context, id: string): P
         await effects.allergens.deleteAllergen(id)
         state.allergens.allergens = state.allergens.allergens.filter(allergen => allergen._id !== id)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         return false
     }

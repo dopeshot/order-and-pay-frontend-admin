@@ -3,7 +3,9 @@ import capacityTables from '../../fixtures/capacity-tables.json'
 describe('Capacity Icons', () => {
     beforeEach(() => {
         cy.getCapacityTables()
-        cy.visit('/tables')
+        cy.visit('/admin/tables')
+
+        cy.quickLogin()
     })
 
     it('should show icons depending on the capacity', () => {
@@ -38,3 +40,4 @@ describe('Capacity Icons', () => {
 })
 
 export { }
+

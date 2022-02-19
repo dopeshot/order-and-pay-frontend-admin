@@ -1,47 +1,53 @@
-import { faChair, faHome, faReceipt, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { faChair, faHome, faReceipt, faUser, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { NavLink } from "react-router-dom"
+import { NavLink, useRouteMatch } from "react-router-dom"
 import { useActions, useAppState } from "../../overmind"
 
 export const Sidebar: React.FunctionComponent = () => {
     const { layoutIsSideBarOpen, isMobile, layoutIsSmallSidebar } = useAppState().app
     const { closeSidebar } = useActions().app
 
+    const { url } = useRouteMatch()
+
     const sidebarContent = [{
         title: 'Betrieb',
         items: [{
             title: 'Dashboard',
             icon: faHome,
-            path: '/home'
+            path: `${url}/home`
         }, {
             title: 'Bestellungen',
             icon: faReceipt,
-            path: '/orders'
+            path: `${url}/orders`
         }]
     }, {
         title: 'Konfiguration',
         items: [{
             title: 'Tische',
             icon: faChair,
-            path: '/tables'
+            path: `${url}/tables`
         }, {
             title: 'Menü',
             icon: faUtensils,
-            path: '/menus'
+            path: `${url}/menus`
         }, {
             title: 'Labels',
             icon: faReceipt,
-            path: '/menus/labels'
+            path: `${url}/menus/labels`
         }, {
-            title: 'Allergens',
+            title: 'Allergene',
             icon: faReceipt,
-            path: '/menus/allergens'
-        }]
+            path: `${url}/menus/allergens`
+        }, {
+            title: 'Benutzer',
+            icon: faUser,
+            path: `${url}/users`
+        }],
     }]
 
     return (
         <>
-            <nav data-cy="sidebar" style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 1, transform: !layoutIsSideBarOpen ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-y-auto overflow-x-hidden transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
+            <nav data-cy="sidebar" style={isMobile ? { height: `calc(100vh - 64px)`, width: `250px`, zIndex: 100, transform: !layoutIsSideBarOpen ? `translateX(-250px)` : `translateX(0px)` } : {}} className={`sidebar overflow-y-auto overflow-x-hidden transition duration-500 ease-in-out ${!layoutIsSideBarOpen && `sidebar-closed`} absolute md:static `}>
                 {sidebarContent.map((sidebarItem, i) => <div key={i} className="text-darkgrey mt-16">
                     <div className="mx-6">
                         {/* Headline */}

@@ -1,6 +1,7 @@
 describe('Navigation Ui', () => {
     beforeEach(() => {
         cy.visit('/')
+        cy.quickLogin()
     })
 
     describe('Desktop Sidebar', () => {
@@ -45,24 +46,7 @@ describe('Navigation Ui', () => {
             cy.get('[data-cy="sidebar"]').should('have.class', 'sidebar-closed')
         })
     })
-
-    describe('Mobile Topbar', () => {
-        beforeEach(() => {
-            cy.viewport('iphone-8')
-        })
-
-        it('should open full search (in the future)', () => {
-            cy.get('[data-cy="topbar-search-iconbutton"]').click()
-
-            // TODO: Implement when feature ready
-        })
-
-        it('should open notification dropdown (in the future)', () => {
-            cy.get('[data-cy="topbar-notification-iconbutton"]').click()
-
-            // TODO: Implement when feature ready
-        })
-    })
 })
 
 export { }
+

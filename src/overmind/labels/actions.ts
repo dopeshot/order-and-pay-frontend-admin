@@ -2,7 +2,7 @@ import { Context } from ".."
 import { LabelDto } from "./effects"
 
 export const getAllLabels = async ({ state, effects }: Context) => {
-    // Backoff when already loading
+    // istanbul ignore next //  Backoff when already loading
     if (state.labels.isLoadingLabels)
         return
 
@@ -11,7 +11,7 @@ export const getAllLabels = async ({ state, effects }: Context) => {
         const response = await effects.labels.getLabels()
         const labels = response.data
         state.labels.labels = labels
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
     }
     state.labels.isLoadingLabels = false
@@ -21,7 +21,7 @@ export const createLabel = async ({ state, effects }: Context, label: LabelDto):
     try {
         const response = await effects.labels.createLabel(label)
         const newLabel = response.data
-        state.labels.labels.push(newLabel)
+        state.labels.labels = [...state.labels.labels, newLabel]
         return true
     } catch (error) {
         console.error(error)
@@ -47,7 +47,7 @@ export const deleteLabel = async ({ state, effects }: Context, id: string): Prom
         await effects.labels.deleteLabel(id)
         state.labels.labels = state.labels.labels.filter(label => label._id !== id)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
         return false
     }
