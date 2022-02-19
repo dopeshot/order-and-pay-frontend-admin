@@ -1,14 +1,14 @@
-import { faArrowUp, faChevronDown, faCircleNotch, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp, faChair, faChevronDown, faCircleNotch, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { ErrorBanner } from "../../components/Errors/ErrorBanner"
 import { AddTableModal } from "../../components/Table/AddTableModal"
 import { TableItem } from "../../components/Table/TableItem"
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
-import { EmptyTables } from "./EmptyTables"
 
 export const Tables: React.FunctionComponent = () => {
     const {
@@ -25,7 +25,9 @@ export const Tables: React.FunctionComponent = () => {
     }, [loadTables])
 
     if (!isLoadingTables && tables.length === 0 && tableErrors.length === 0)
-        return <EmptyTables />
+        return <EmptyState dataCy="empty-tables-background" title="Erstelle Tische" setModalOpen={setModalOpen} description="Um QR-Codes und Bestellungen zu bearbeiten, musst du wissen wo deine Kundschaft sitzt. " icon={faChair} buttonText="Tisch hinzufügen">
+            <AddTableModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        </EmptyState>
 
     return (
         <div className="container md:max-w-full mt-12">

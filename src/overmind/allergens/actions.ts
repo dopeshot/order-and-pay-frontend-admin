@@ -2,11 +2,6 @@ import { Context } from ".."
 import { AllergenDto } from "./effects"
 
 export const getAllAllergens = async ({ state, effects }: Context) => {
-    // istanbul ignore next // Backoff when already loading
-    if (state.allergens.isLoadingAllergens)
-        return
-
-    state.allergens.isLoadingAllergens = true
     try {
         const response = await effects.allergens.getAllergens()
         const allergens = response.data
@@ -14,7 +9,6 @@ export const getAllAllergens = async ({ state, effects }: Context) => {
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
     }
-    state.allergens.isLoadingAllergens = false
 }
 
 export const createAllergen = async ({ state, effects }: Context, allergen: AllergenDto): Promise<boolean> => {

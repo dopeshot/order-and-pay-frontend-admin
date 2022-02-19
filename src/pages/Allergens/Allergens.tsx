@@ -1,9 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faGlassWhiskey, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -15,10 +16,11 @@ export const Allergens: React.FC = () => {
     const { getAllAllergens, deleteAllergen } = useActions().allergens
 
     // Get global state
-    const { allergens, isLoadingAllergens } = useAppState().allergens
+    const { allergens } = useAppState().allergens
 
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
+    const [isLoadingAllergens, setLoadingAllergens] = useState(true)
     const [modalEditData, setModalEditData] = useState<Allergen | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
@@ -26,7 +28,12 @@ export const Allergens: React.FC = () => {
 
     // Load allergens when page is loaded
     useEffect((): void => {
-        getAllAllergens()
+        async function loadAllergens() {
+            await getAllAllergens()
+            setLoadingAllergens(false)
+        }
+
+        loadAllergens()
     }, [getAllAllergens])
 
     const handleDelete = async (event: any) => {
@@ -57,6 +64,11 @@ export const Allergens: React.FC = () => {
         setDeleteModalOpen(false)
         setSelectedAllergen(null)
     }
+
+    if (!isLoadingAllergens && allergens.length === 0)
+        return <EmptyState icon={faGlassWhiskey} title="Erstelle Allergene" setModalOpen={setModalOpen} description="Es wurden noch keine Allergenen erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Allergen hinzufügen">
+            <AllergensModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
+        </EmptyState>
 
     return <div className="container md:max-w-full mt-12">
         {/* Header */}
