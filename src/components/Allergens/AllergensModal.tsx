@@ -69,7 +69,7 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
 
     // Modal close handler
     const handleModelDismiss = () => {
-        // Prevent closing modal when form is submitting
+        // istanbul ignore if // Prevent closing modal when form is submitting
         if (isModalLoading)
             return
 
@@ -81,14 +81,13 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
             setModalEditData(null)
     }
 
-
     return (
-        <Modal modalHeading={modalEditData ? `Allergen bearbeiten` : `Neues Allergen hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
+        <Modal dataCy="allergens-modal-add-edit" modalHeading={modalEditData ? `Allergen bearbeiten` : `Neues Allergen hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 <Form>
                     <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
                     <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                    <Button dataCy="allergens-modal-add-edit-button" type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
             </Formik>
         </Modal>

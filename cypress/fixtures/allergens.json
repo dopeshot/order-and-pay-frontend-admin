@@ -1,17 +1,17 @@
 [
     {
         "_id": "61f193b2cc615c1d6e8dd0f5",
-        "title": "Milk",
-        "icon": "cow"
+        "title": "Milch",
+        "icon": "folder"
     },
     {
         "_id": "61f193a8cc615c1d6e8dd0f1",
-        "title": "ddd",
-        "icon": "user"
+        "title": "Gluten",
+        "icon": "folder"
     },
     {
         "_id": "620c196a200c4d26fffbc93e",
-        "title": "Burger",
-        "icon": "burger"
+        "title": "Histamine",
+        "icon": "folder"
     }
 ]

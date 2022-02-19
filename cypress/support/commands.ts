@@ -151,7 +151,7 @@ Cypress.Commands.add('createAllergenDuplicateTitle', () => {
 Cypress.Commands.add('updateAllergen', () => {
     cy.intercept('PATCH', `${api}/allergens/**`, {
         fixture: 'update-allergen.json'
-    }).as('updateUser')
+    }).as('updateAllergen')
 })
 
 Cypress.Commands.add('updateAllergenDuplicateTitle', () => {
