@@ -106,7 +106,7 @@ export const MenuEditor: React.FC = () => {
             await deleteMenu(menuId)
             history.push("/admin/menus")
         } catch (error) {
-            // Error deleting category
+            // Delete failed
         } finally {
             setIsLoadingDelete(false)
         }

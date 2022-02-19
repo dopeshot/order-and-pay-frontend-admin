@@ -36,14 +36,19 @@ export const Menus: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the menu
-        await deleteMenu(selectedMenu._id)
+        try {
+            // Delete the menu
+            await deleteMenu(selectedMenu._id)
 
-        closeDeleteModal()
-        setIsLoadingDelete(false)
+            closeDeleteModal()
 
-        // When menu is delete update List
-        getAllMenus()
+            // When menu is delete update List
+            getAllMenus()
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     const openDeleteModal = (menu: Menu) => {
