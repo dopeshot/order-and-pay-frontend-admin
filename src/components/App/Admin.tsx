@@ -8,6 +8,7 @@ import { SingleMenu } from "../../pages/MenuOverview/SingleMenu"
 import { MenuEditor } from "../../pages/Menus/MenuEditor"
 import { Menus } from "../../pages/Menus/Menus"
 import { Tables } from "../../pages/Tables/Tables"
+import { Users } from "../../pages/Users/Users"
 import { Sidebar } from "../Navigation/Sidebar"
 import { Topbar } from "../Navigation/Topbar"
 
@@ -24,6 +25,7 @@ export const Admin: React.FC = () => {
                 <Switch>
                     <Route exact path={`${path}/tables`} component={Tables} />
                     <Route exact path={`${path}/home`} component={Home} />
+                    <Route exact path={`${path}/users`} component={Users} />
                     <Route exact path={`${path}/menus`} component={Menus} />
                     <Route exact path={`${path}/menus/allergens`} component={Allergens} />
                     <Route exact path={`${path}/menus/labels`} component={Labels} />
