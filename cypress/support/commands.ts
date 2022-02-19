@@ -153,6 +153,7 @@ Cypress.Commands.add('deleteDish', () => {
     }).as('deleteDish')
 })
 
+/********* Categories *********/
 Cypress.Commands.add('getAllCategories', () => {
     cy.intercept('GET', `${api}/categories`, {
         fixture: 'categories.json'
@@ -253,6 +254,45 @@ Cypress.Commands.add('deleteLabel', () => {
     }).as('deleteLabel')
 })
 
+/********* Login *********/
+Cypress.Commands.add('login', () => {
+    cy.intercept('POST', `${api}/auth/login`, {
+        fixture: 'access_token.json'
+    }).as('login')
+})
+
+Cypress.Commands.add('getCurrentUser', () => {
+    cy.intercept('GET', `${api}/users/profile`, {
+        fixture: 'current-user.json'
+    }).as('getCurrentUser')
+})
+
+Cypress.Commands.add('easyLogin', () => {
+    cy.overmind().its('actions').invoke('auth.loginTest')
+})
+
+/********* Overmind *********/
+Cypress.Commands.add('overmind', () => {
+    let overmind: any
+
+    const cmd = Cypress.log({
+        name: 'overmind',
+        consoleProps() {
+            return {
+                Overmind: overmind
+            }
+        }
+    })
+
+    return (
+        cy.window().then((window: any) => {
+            overmind = window.overmind
+            cmd.end()
+            return overmind
+        })
+    )
+})
+
 /********* Users *********/
 Cypress.Commands.add('getAllUser', () => {
     cy.intercept('GET', `${api}/users`, {
@@ -321,9 +361,6 @@ Cypress.Commands.add('deleteUser', () => {
         statusCode: 204
     }).as('deleteUser')
 })
-
-
-
 
 export { }
 

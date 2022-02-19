@@ -3,6 +3,7 @@ import { createActionsHook, createStateHook } from 'overmind-react'
 import { namespaced } from 'overmind/config'
 import * as allergens from './allergens'
 import * as app from './app'
+import * as auth from './auth'
 import * as categories from './categories'
 import * as dishes from './dishes'
 import * as labels from './labels'
@@ -19,6 +20,7 @@ export const config = namespaced({
     menuoverview,
     menus,
     dishes,
+    auth,
     users,
     categories
 })

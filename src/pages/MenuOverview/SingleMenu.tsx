@@ -74,7 +74,7 @@ export const SingleMenu: React.FC = () => {
     return (
         <div className="container md:max-w-full mt-12">
             {/* Back Button */}
-            <BackButton dataCy="singlemenu-back-button" to="/menus" />
+            <BackButton dataCy="singlemenu-back-button" to="/admin/menus" />
 
             {isLoading ? <Loading /> : <>
                 {/* Header */}
@@ -87,7 +87,7 @@ export const SingleMenu: React.FC = () => {
                         <p className="text-darkgrey">{menu?.description}</p>
                     </div>
                     <div>
-                        <Button icon={faPlus} to={`/menus/${menuId}/categories`}>Kategorie hinzufügen</Button>
+                        <Button icon={faPlus} to={`/admin/menus/${menuId}/categories`}>Kategorie hinzufügen</Button>
                     </div>
                 </div>
                 {/* Header end */}
@@ -98,13 +98,13 @@ export const SingleMenu: React.FC = () => {
                         <>
                             {/* Category */}
                             {menu?.categories.map(category => (<div key={category._id}>
-                                <ListItem to={`/menus/${menuId}/categories/${category._id}`} dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon as IconProp} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
+                                <ListItem to={`/admin/menus/${menuId}/categories/${category._id}`} dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon as IconProp} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
                                     {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" dataCy={`singlemenu-${category.title}-dish-add`} to={`/menus/${menuId}/categories/${category._id}/dish`} icon={faPlus} className="text-darkgrey mr-3">Gericht hinzufügen</Button>}
                                     <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                 </ListItem>
                                 {/* Dishes */}
                                 {category.dishes.map(dish => (<div key={dish._id}>
-                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
+                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/admin/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
                                         <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
                                         <IconButton dataCy="dishes-delete-button" icon={faTrash} onClick={() => openDishDeleteModal(dish)} />
                                     </ListItem>

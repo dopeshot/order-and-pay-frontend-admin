@@ -14,6 +14,13 @@ describe('Api Endpoints', () => {
     cy.visit('/tables')
   })
 
+  it('should open table page', () => {
+    cy.getTables()
+
+    cy.get('[data-cy="sidebar-Tische"]').click()
+    cy.contains('Tische')
+  })
+
   describe('Get Tables', () => {
     it('should show the loading spinner when load table data and hide afterwards', () => {
       const interception = interceptIndefinitely('GET', api, 'getTableIndefinitely', { fixture: 'tables.json' })
