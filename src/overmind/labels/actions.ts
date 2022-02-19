@@ -25,7 +25,7 @@ export const getAllLabels = async ({ state, actions, effects }: Context) => {
     state.labels.isLoadingLabels = false
 }
 
-export const createLabel = async ({ state, actions, effects }: Context, label: LabelDto): Promise<boolean> => {
+export const createLabel = async ({ state, actions, effects }: Context, label: LabelDto): Promise<true> => {
     try {
         const response = await effects.labels.createLabel(label)
         const newLabel = response.data
@@ -40,11 +40,11 @@ export const createLabel = async ({ state, actions, effects }: Context, label: L
             type: "danger"
         })
 
-        return false
+        throw (error)
     }
 }
 
-export const updateLabel = async ({ state, actions, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<boolean> => {
+export const updateLabel = async ({ state, actions, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<true> => {
     try {
         const response = await effects.labels.updateLabel(id, label)
         const updatedLabel = response.data
@@ -60,7 +60,7 @@ export const updateLabel = async ({ state, actions, effects }: Context, { id, la
             type: "danger"
         })
 
-        return false
+        throw (error)
     }
 }
 

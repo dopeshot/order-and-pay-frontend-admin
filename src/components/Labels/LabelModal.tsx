@@ -13,7 +13,7 @@ type LabelModalProps = {
     /** State Data from label to edit */
     modalEditData?: Label | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<Label | null>> | null
+    setModalEditData?: React.Dispatch<React.SetStateAction<Label | null>>
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
@@ -49,21 +49,20 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
         // Check if we are editing or creating a new label
         try {
             if (modalEditData) {
-                if (!await updateLabel({
+                await updateLabel({
                     id: modalEditData._id,
                     label: values
-                }))
-                    throw Error()
+                })
+
                 // Clear modal data
                 if (setModalEditData)
                     setModalEditData(null)
-                setModalOpen(false)
             }
             else {
-                if (!await createLabel(values))
-                    throw Error()
-                setModalOpen(false)
+                await createLabel(values)
             }
+            setModalOpen(false)
+
         } catch (error) {
             // Create or update failed
         } finally {
