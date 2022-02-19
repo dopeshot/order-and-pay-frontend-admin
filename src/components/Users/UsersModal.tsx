@@ -90,8 +90,8 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 {({ dirty, isValid }) => (
                     <Form>
-                        <TextInput name="username" placeholder="user" labelText="Username" />
-                        <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
+                        <TextInput name="username" placeholder="user" labelText="Username" autoFocus />
+                        <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired />
                         <PasswordInput />
                         <div className="flex justify-end">
                             <Button dataCy="users-modal-add-edit-button" type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
