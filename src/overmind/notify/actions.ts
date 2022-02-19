@@ -8,6 +8,8 @@ export type NotificationData = {
 }
 
 export const createNotification = ({ state }: Context, notification: NotificationData) => {
+
+    // We use this lib to create notifications (will replace with own code later).
     Store.addNotification({
         title: notification.title,
         message: notification.message,
