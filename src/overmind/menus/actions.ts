@@ -21,7 +21,7 @@ export const getAllMenus = async ({ state, effects }: Context): Promise<Menu[] |
 }
 
 // Create menu action
-export const createMenu = async ({ effects, actions }: Context, menu: MenuDto): Promise<boolean> => {
+export const createMenu = async ({ effects, actions }: Context, menu: MenuDto): Promise<true> => {
     try {
         // We just await the creation no need to update menu object
         await effects.menus.createMenu(menu)
@@ -52,13 +52,20 @@ export const getMenuById = async ({ state, effects }: Context, id: string): Prom
 }
 
 // Update menu by id action
-export const updateMenu = async ({ effects }: Context, { menuId, menu }: { menuId: string, menu: MenuDto }): Promise<boolean> => {
+export const updateMenu = async ({ effects, actions }: Context, { menuId, menu }: { menuId: string, menu: MenuDto }): Promise<true> => {
     try {
         // We just await the update no need to update menu object
         await effects.menus.updateMenu(menuId, menu)
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Menus",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
