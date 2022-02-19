@@ -238,35 +238,38 @@ export const CategoryEditor: React.FunctionComponent = () => {
             return
         }
 
+        const parentChoiceIndex = choices.findIndex(choice => choice.id === parentChoiceId)
+
         // Remove isDefault from values
         const { isDefault, ...optionData } = values
 
         if (isEditingOptions && editOptionData) {
             setChoices(choices => {
                 // Update default
-                if (isDefault && choices[parentChoiceId].isDefault !== editOptionData.id)
-                    choices[parentChoiceId].isDefault = editOptionData.id
+                if (isDefault && choices[parentChoiceIndex].isDefault !== editOptionData.id)
+                    choices[parentChoiceIndex].isDefault = editOptionData.id
 
-                const option = choices[parentChoiceId].options.find(option => option.id === editOptionData.id)
+                const option = choices[parentChoiceIndex].options.find(option => option.id === editOptionData.id)
                 Object.assign(option, optionData)
                 return choices
             })
         } else {
             // Create new option from OptionDto. + next id
+            console.log(parentChoiceIndex, choices[parentChoiceIndex])
             const newOption: Option = {
                 ...optionData,
-                id: Math.max(...choices[parentChoiceId].options.map(option => option.id), 0) + 1
+                id: Math.max(...choices[parentChoiceIndex].options.map(option => option.id), 0) + 1
             }
 
             // Copy choices
             const newChoices = [...choices]
 
             // Push new option into options array of currently editing choice
-            newChoices[parentChoiceId].options = [...newChoices[parentChoiceId].options, newOption]
+            newChoices[parentChoiceIndex].options = [...newChoices[parentChoiceIndex].options, newOption]
 
             // Set to default
             if (isDefault)
-                choices[parentChoiceId].isDefault = newOption.id
+                choices[parentChoiceIndex].isDefault = newOption.id
 
             setChoices(newChoices)
         }
