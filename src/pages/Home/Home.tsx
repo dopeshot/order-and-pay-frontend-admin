@@ -24,6 +24,7 @@ export const Home: React.FunctionComponent = () => {
             </Formik>
 
             <Link to="/admin/tables">Gehe zu Tabellen</Link>
+            <Link to="/login">Gehe zu Login</Link>
             <Link to="/admin/menus/1/edit">Gehe zu Menu Overview</Link>
             <List lines>
                 <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
