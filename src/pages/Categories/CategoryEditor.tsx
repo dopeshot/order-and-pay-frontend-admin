@@ -73,6 +73,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [category, setCategory] = useState<Category>()
     const [modalOpenChoice, setModalOpenChoice] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
@@ -151,6 +152,18 @@ export const CategoryEditor: React.FunctionComponent = () => {
         }
     }
 
+    const deleteCategory = async () => {
+        // Check if we are editing a category
+        if (!isEditing)
+            return
+
+        setIsLoadingDelete(true)
+
+        // Delete category
+
+        setIsLoadingDelete(false)
+        history.push(`/menus/${menuId}/editor`)
+    }
 
     // choices
 
@@ -354,7 +367,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                         </List>
 
                         <div className="flex flex-col md:flex-row justify-between mt-4">
-                            {isEditing && <Button kind="tertiary" onClick={() => console.log("delete")} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            {isEditing && <Button kind="tertiary" onClick={deleteCategory} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                             <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
                         </div>
                     </Form>
