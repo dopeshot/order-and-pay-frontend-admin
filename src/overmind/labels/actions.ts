@@ -16,7 +16,7 @@ export const getAllLabels = async ({ state, actions, effects }: Context) => {
         console.error(error)
 
         actions.notify.createNotification({
-            title: "Fehler beim Laden der Allergene",
+            title: "Fehler beim Laden der Labels",
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
             type: "danger"
         })
@@ -35,11 +35,10 @@ export const createLabel = async ({ state, actions, effects }: Context, label: L
         console.error(error)
 
         actions.notify.createNotification({
-            title: "Fehler beim Laden der Allergene",
+            title: "Fehler beim Erstellen des Labels",
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
             type: "danger"
         })
-
 
         return false
     }
