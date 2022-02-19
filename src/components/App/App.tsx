@@ -5,6 +5,7 @@ import {
 import { useActions } from '../../overmind';
 import { Login } from '../../pages/Login/Login';
 import { Admin } from './Admin';
+import { PrivateRoute } from './PrivateRoute';
 
 export const App: React.FunctionComponent = () => {
   const { initializeUser } = useActions().auth
@@ -17,7 +18,9 @@ export const App: React.FunctionComponent = () => {
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/admin" component={Admin} />
+        <PrivateRoute path="/admin">
+          <Admin />
+        </PrivateRoute>
         <Route path="*">
           <Redirect to="login" />
         </Route>
