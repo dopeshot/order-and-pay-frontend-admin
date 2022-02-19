@@ -61,7 +61,7 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
         </td>
 
         <Formik initialValues={initialValues} onSubmit={submitChanges} validationSchema={editTableSchema} >
-            {({ errors, touched, dirty, isValid, submitForm }) => (<>{/* MC: Do NOT put a form tag around!!! This is not working in tables! https://stackoverflow.com/questions/45815205/input-cannot-appear-as-a-child-of-tr*/}
+            {({ errors, touched, isValid, submitForm }) => (<>{/* MC: Do NOT put a form tag around!!! This is not working in tables! https://stackoverflow.com/questions/45815205/input-cannot-appear-as-a-child-of-tr*/}
                 {/* Tablenumber */}
                 <td data-cy={`table-table-tablenumber-${index}`} className="font-roboto font-semibold pr-4">
                     {isEdit ?
