@@ -212,11 +212,15 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete category
-        await deleteCategoryById(categoryId)
-
-        setIsLoadingDelete(false)
-        history.push(`/admin/menus/${menuId}/editor`)
+        try {
+            // Delete category
+            await deleteCategoryById(categoryId)
+            history.push(`/admin/menus/${menuId}/editor`)
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     // choices
