@@ -3,7 +3,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button } from "../Buttons/Button"
 
-export type EmptyItemsProps = {
+export type EmptyStateProps = {
     /** Headline */
     title: string
     /** Short little description */
@@ -23,7 +23,7 @@ export type EmptyItemsProps = {
 /**
  * Component that can be used when there are currently no items added
  */
-export const NoItems: React.FC<EmptyItemsProps> = ({ title, description, icon, buttonText, dataCy, children, setModalOpen, to }) => {
+export const EmptyState: React.FC<EmptyStateProps> = ({ title, description, icon, buttonText, dataCy, children, setModalOpen, to }) => {
     return (
         <>
             {children}

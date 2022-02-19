@@ -2,7 +2,7 @@ import { faEdit, faFolder, faPlus, faTrash, faUtensils } from "@fortawesome/free
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { NoItems } from "../../components/Errors/NoItems"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -58,7 +58,7 @@ export const Menus: React.FC = () => {
     }
 
     if (!isLoadingMenus && menus.length === 0)
-        return <NoItems icon={faUtensils} to="/admin/menus/add" title="Erstelle Menu" description="Es wurden noch kein Menu erstellt. Erstelle eines um Gerichte und Kategorien hinzufügen zu können." buttonText="Menu hinzufügen" />
+        return <EmptyState icon={faUtensils} to="/admin/menus/add" title="Erstelle Menu" description="Es wurden noch kein Menu erstellt. Erstelle eines um Gerichte und Kategorien hinzufügen zu können." buttonText="Menu hinzufügen" />
 
     return <div className="container md:max-w-full mt-12" >
         {/* Header */}

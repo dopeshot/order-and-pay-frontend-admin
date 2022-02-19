@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { NoItems } from "../../components/Errors/NoItems"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -73,7 +73,7 @@ export const SingleMenu: React.FC = () => {
     }
 
     if (!isLoading && menu?.categories.length === 0)
-        return <NoItems icon={faPizzaSlice} to={`/admin/menus/${menuId}/categories`} title="Erstelle Kategorie" description="Es wurden noch keine Kategorie erstellt. Erstelle neue um Gerichten hinzufügen zu können." buttonText="Kategorie hinzufügen" />
+        return <EmptyState icon={faPizzaSlice} to={`/admin/menus/${menuId}/categories`} title="Erstelle Kategorie" description="Es wurden noch keine Kategorie erstellt. Erstelle neue um Gerichten hinzufügen zu können." buttonText="Kategorie hinzufügen" />
 
     return (
         <div className="container md:max-w-full mt-12">

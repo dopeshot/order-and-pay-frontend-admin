@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { NoItems } from "../../components/Errors/NoItems"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -66,9 +66,9 @@ export const Allergens: React.FC = () => {
     }
 
     if (!isLoadingAllergens && allergens.length === 0)
-        return <NoItems icon={faGlassWhiskey} title="Erstelle Allergene" setModalOpen={setModalOpen} description="Es wurden noch keine Allergenen erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Allergen hinzufügen">
+        return <EmptyState icon={faGlassWhiskey} title="Erstelle Allergene" setModalOpen={setModalOpen} description="Es wurden noch keine Allergenen erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Allergen hinzufügen">
             <AllergensModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
-        </NoItems>
+        </EmptyState>
 
     return <div className="container md:max-w-full mt-12">
         {/* Header */}

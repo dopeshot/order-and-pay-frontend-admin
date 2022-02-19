@@ -3,7 +3,7 @@ import { faLeaf, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { NoItems } from "../../components/Errors/NoItems"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { LabelModal } from "../../components/Labels/LabelModal"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
@@ -60,9 +60,9 @@ export const Labels: React.FC = () => {
     }
 
     if (!isLoadingLabels && labels.length === 0)
-        return <NoItems icon={faLeaf} title="Erstelle Labels" setModalOpen={setModalOpen} description="Es wurden noch keine Labels erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Label hinzufügen">
+        return <EmptyState icon={faLeaf} title="Erstelle Labels" setModalOpen={setModalOpen} description="Es wurden noch keine Labels erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Label hinzufügen">
             <LabelModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
-        </NoItems>
+        </EmptyState>
 
     return <div className="container md:max-w-full mt-12">
         {/* Header */}
