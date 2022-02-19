@@ -78,3 +78,15 @@ export const deleteCategoryById = async ({ effects, actions }: Context, id: stri
         throw (error)
     }
 }
+
+// Get all categories action MC TODO: Error handling
+export const getAllCategories = async ({ effects }: Context): Promise<Category[]> => {
+    try {
+        const response = await effects.dishes.getAllCategories()
+        const categories = response.data
+        return categories
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
+        console.error(error)
+        throw (error)
+    }
+}

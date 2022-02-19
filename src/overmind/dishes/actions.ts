@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { Category, Dish, DishDto } from "./effects"
+import { Dish, DishDto } from "./effects"
 
 /**
  * Create new Dish
@@ -80,20 +80,6 @@ export const deleteDish = async ({ effects, actions }: Context, id: string): Pro
             type: "danger"
         })
 
-        throw (error)
-    }
-}
-
-/**
- * Get All Categories
- */
-export const getAllCategories = async ({ effects }: Context): Promise<Category[]> => {
-    try {
-        const response = await effects.dishes.getAllCategories()
-        const categories = response.data
-        return categories
-    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
-        console.error(error)
         throw (error)
     }
 }

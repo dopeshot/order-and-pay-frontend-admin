@@ -43,7 +43,8 @@ export const Dishes: React.FC = () => {
     const [allergensOptions, setAllergensOptions] = useState<ComponentOptions[]>([])
 
     // Global State
-    const { createDish, getDishById, getAllCategories, updateDish, deleteDish } = useActions().dishes
+    const { createDish, getDishById, updateDish, deleteDish } = useActions().dishes
+    const { getAllCategories } = useActions().categories
     const { getAllLabels } = useActions().labels
     const { getAllAllergens } = useActions().allergens
     const { labels } = useAppState().labels
