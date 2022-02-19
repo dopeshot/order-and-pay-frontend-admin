@@ -2,6 +2,7 @@ import { faPlus, faTrash, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { UsersModal } from "../../components/Users/UsersModal"
@@ -9,12 +10,17 @@ import { useActions, useAppState } from "../../overmind"
 import { User } from "../../overmind/users/effects"
 
 export const Users: React.FC = () => {
-    const { getAllUser } = useActions().users
+    // Global States
+    const { getAllUser, deleteUser } = useActions().users
     const { users } = useAppState().users
 
+    // Local States
     const [isLoading, setLoading] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<User | null>(null)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [selectedUser, setSelectedUser] = useState<User | null>(null)
 
     useEffect((): void => {
         async function loadUsers() {
@@ -23,6 +29,34 @@ export const Users: React.FC = () => {
         }
         loadUsers()
     }, [getAllUser])
+
+    const handleDelete = async (event: any) => {
+        if (!selectedUser) {
+            console.warn("There is no user selected.")
+            return
+        }
+
+        setIsLoadingDelete(true)
+
+        // Delete the user
+        await deleteUser(selectedUser._id)
+
+        closeDeleteModal()
+        setIsLoadingDelete(false)
+
+        // When user is delete update List
+        getAllUser()
+    }
+
+    const openDeleteModal = (user: User) => {
+        setSelectedUser(user)
+        setDeleteModalOpen(true)
+    }
+
+    const closeDeleteModal = () => {
+        setDeleteModalOpen(false)
+        setSelectedUser(null)
+    }
 
     return (
         <div className="container md:max-w-full mt-12">
@@ -44,14 +78,23 @@ export const Users: React.FC = () => {
                     setModalEditData(user)
                     setModalOpen(true)
                 }}>
-                    {console.log(users)}
-                    <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => ""} />
+                    <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(user)} />
                 </ListItem>)}
             </List>
             {/* Content End */}
 
             {/* Add/Edit User Modal */}
             <UsersModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
+
+            {/* Delete Modal */}
+            <DeleteModal
+                title={`${selectedUser?.username}`}
+                description="Das Löschen kann nicht rückgängig gemacht werden."
+                open={isDeleteModalOpen}
+                onDissmis={closeDeleteModal}
+                handleDelete={handleDelete}
+                isLoadingDelete={isLoadingDelete}
+            />
         </div>
     )
 }
