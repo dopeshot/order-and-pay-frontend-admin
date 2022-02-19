@@ -2,12 +2,7 @@ import axios from "axios"
 import { Context } from ".."
 import { AllergenDto } from "./effects"
 
-export const getAllAllergens = async ({ state, actions, effects }: Context) => {
-    // istanbul ignore next // Backoff when already loading
-    if (state.allergens.isLoadingAllergens)
-        return
-
-    state.allergens.isLoadingAllergens = true
+export const getAllAllergens = async ({ state, effects, actions }: Context) => {
     try {
         const response = await effects.allergens.getAllergens()
         const allergens = response.data
@@ -21,7 +16,6 @@ export const getAllAllergens = async ({ state, actions, effects }: Context) => {
             type: "danger"
         })
     }
-    state.allergens.isLoadingAllergens = false
 }
 
 export const createAllergen = async ({ state, actions, effects }: Context, allergen: AllergenDto): Promise<true> => {

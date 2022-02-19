@@ -10,6 +10,7 @@ import * as labels from './labels'
 import * as menuoverview from './menuoverview'
 import * as menus from './menus'
 import * as notify from './notify'
+import * as orders from './orders'
 import * as tables from './tables'
 import * as users from './users'
 
@@ -24,7 +25,8 @@ export const config = namespaced({
     auth,
     users,
     categories,
-    notify
+    notify,
+    orders
 })
 
 export type Context = IContext<{

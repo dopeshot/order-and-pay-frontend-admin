@@ -1,7 +1,8 @@
-import { faEdit, faFolder, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faFolder, faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -61,6 +62,9 @@ export const Menus: React.FC = () => {
         setDeleteModalOpen(false)
         setSelectedMenu(null)
     }
+
+    if (!isLoadingMenus && menus.length === 0)
+        return <EmptyState icon={faUtensils} to="/admin/menus/add" title="Erstelle Menu" description="Es wurden noch kein Menu erstellt. Erstelle eines um Gerichte und Kategorien hinzufügen zu können." buttonText="Menu hinzufügen" />
 
     return <div className="container md:max-w-full mt-12" >
         {/* Header */}
