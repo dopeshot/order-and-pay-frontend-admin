@@ -11,9 +11,9 @@ import { Modal } from "../UI/Modal"
 
 type UsersModalProps = {
     /** State Data from user to edit */
-    modalEditData?: User | null
+    modalEditData: User | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<User | null>> | null
+    setModalEditData: React.Dispatch<React.SetStateAction<User | null>>
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
@@ -59,8 +59,7 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
             }))
                 return
             // Clear modal data
-            if (setModalEditData)
-                setModalEditData(null)
+            setModalEditData(null)
             setModalOpen(false)
         }
         else {
