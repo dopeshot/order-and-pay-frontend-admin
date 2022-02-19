@@ -1,6 +1,5 @@
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
-import { useState } from "react"
 import * as Yup from 'yup'
 import { Button } from "../../components/Buttons/Button"
 import { PasswordInput } from "../../components/Form/PasswortInput"
@@ -10,9 +9,7 @@ import { Credentials } from "../../overmind/auth/effects"
 
 
 export const Login: React.FC = () => {
-    const [isLoginLoading] = useState(false)
-
-    const { isLoggedIn } = useAppState().auth
+    const { isLoggedIn, authenticating } = useAppState().auth
 
     const { login } = useActions().auth
 
@@ -40,7 +37,7 @@ export const Login: React.FC = () => {
                 <Form>
                     <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" />
                     <PasswordInput />
-                    <Button type="submit" loading={isLoginLoading} icon={faSignInAlt} className="min-w-full">Login</Button>
+                    <Button type="submit" loading={authenticating} icon={faSignInAlt} className="min-w-full">Login</Button>
                 </Form>
             </Formik>
         </div>
