@@ -2,7 +2,6 @@ import allergens from '../../fixtures/allergens.json';
 import updateAllergen from '../../fixtures/update-allergen.json';
 import { interceptIndefinitely } from '../../support/utils';
 
-
 const api = `${Cypress.env("apiUrl")}`
 
 describe('Api Endpoints Allergen', () => {
