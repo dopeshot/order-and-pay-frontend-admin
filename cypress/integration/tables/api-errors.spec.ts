@@ -30,19 +30,6 @@ describe('Api Error Handling', () => {
             cy.wait('@addTable')
             cy.get('[data-cy="table-table-row"]').should('have.length', 1)
         })
-
-        it('should have not have class bg-table-empty when switch to mobile', () => {
-            cy.getEmptyTables()
-            cy.viewport('iphone-8')
-            cy.visit('/admin/tables')
-
-            cy.quickLogin()
-
-            cy.get('[data-cy="empty-tables-background"]').should('not.have.class', 'bg-table-empty')
-
-            cy.viewport(1920, 1080)
-            cy.get('[data-cy="empty-tables-background"]').should('have.class', 'bg-table-empty')
-        })
     })
 
     describe('Table Add Errors', () => {
