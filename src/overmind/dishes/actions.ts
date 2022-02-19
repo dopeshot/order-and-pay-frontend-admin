@@ -34,7 +34,7 @@ export const getDishById = async ({ effects, actions }: Context, id: string): Pr
         console.error(error)
 
         actions.notify.createNotification({
-            title: "Fehler beim Erstellen des Gerichts",
+            title: "Fehler beim Laden des Gerichts",
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
             type: "danger"
         })
