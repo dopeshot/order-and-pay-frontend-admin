@@ -125,16 +125,46 @@ declare global {
             getAllCategories(): void
 
             /**
+             * Custom command to intercept all get all labels request
+             * @example cy.getAllLabels()
+             */
+            getAllLabels(): void
+
+            /**
              * Custom command to intercept all get all allergens request
              * @example cy.getAllAllergens()
              */
             getAllAllergens(): void
 
             /**
-            * Custom command to intercept all get all labels request
-            * @example cy.getAllLabels()
+            * Custom command to intercept all create allergen request
+            * @example cy.createAllergen()
             */
-            getAllLabels(): void
+            createAllergen(): void
+
+            /**
+            * Custom command to intercept all create allergen request with duplicate title
+            * @example cy.createAllergenDuplicateTitle()
+            */
+            createAllergenDuplicateTitle(): void
+
+            /**
+            * Custom command to intercept all update allergen request
+            * @example cy.updateAllergen()
+            */
+            updateAllergen(): void
+
+            /**
+            * Custom command to intercept all update allergen request with duplicate title
+            * @example cy.updateAllergenDuplicateTitle()
+            */
+            updateAllergenDuplicateTitle(): void
+
+            /**
+            * Custom command to intercept all delete allergen request
+            * @example cy.deleteAllergen()
+            */
+            deleteAllergen(): void
         }
     }
 }

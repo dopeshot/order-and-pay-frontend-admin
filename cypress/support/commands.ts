@@ -124,10 +124,51 @@ Cypress.Commands.add('getAllLabels', () => {
     }).as('getAllLabels')
 })
 
+/********* Allergen *********/
 Cypress.Commands.add('getAllAllergens', () => {
     cy.intercept('GET', `${api}/allergens`, {
         fixture: 'allergens.json'
     }).as('getAllAllergens')
+})
+
+Cypress.Commands.add('createAllergen', () => {
+    cy.intercept('POST', `${api}/allergens`, {
+        fixture: 'allergen.json'
+    }).as('createAllergen')
+})
+
+Cypress.Commands.add('createAllergenDuplicateTitle', () => {
+    cy.intercept('POST', `${api}/allergens`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('createAllergenDuplicateTitle')
+})
+
+Cypress.Commands.add('updateAllergen', () => {
+    cy.intercept('PATCH', `${api}/allergens/**`, {
+        fixture: 'update-user.json'
+    }).as('updateUser')
+})
+
+Cypress.Commands.add('updateAllergenDuplicateTitle', () => {
+    cy.intercept('PATCH', `${api}/allergens/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Title is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateAllergenDuplicateTitle')
+})
+
+Cypress.Commands.add('deleteAllergen', () => {
+    cy.intercept('DELETE', `${api}/allergens/**`, {
+        statusCode: 204
+    }).as('deleteAllergen')
 })
 
 
