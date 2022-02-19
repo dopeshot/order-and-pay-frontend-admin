@@ -4,7 +4,9 @@ import { Button } from "../../components/Buttons/Button"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Loading } from "../../components/UI/Loading"
+import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
+import { Order, OrderStatus, PaymentStatus } from "../../overmind/orders/effects"
 import { numberToPrice } from "../../services/numberToPrice"
 
 export const Orders: React.FC = () => {
@@ -18,6 +20,49 @@ export const Orders: React.FC = () => {
         getAllOrders()
     }, [getAllOrders])
 
+    const updateOrderHandler = (id: string, type: "edit" | "close" | "delete") => {
+        let order
+
+        switch (type) {
+            case "edit":
+                order = {
+                    Status: OrderStatus.IN_PROGRESS
+                }
+                updateOrder({ id, order })
+                break
+            case "close":
+                order = {
+                    Status: OrderStatus.FINISHED
+                }
+                updateOrder({ id, order })
+                // Refresh when order is completed
+                getAllOrders()
+                break
+            case "delete":
+                order = {
+                    Status: OrderStatus.CANCELLED,
+                    PaymentStatus: PaymentStatus.CANCELED
+                }
+                updateOrder({ id, order })
+                // Refresh when order is deleted
+                getAllOrders()
+                break
+        }
+
+
+    }
+
+    const beautifyStatus = (order: Order) => {
+        if (order.Status === OrderStatus.RECEIVED)
+            return <Tag title="Eingetroffen" type={TagTypesEnum.blue} />
+        else if (order.Status === OrderStatus.IN_PROGRESS)
+            return <Tag title="In Arbeit" type={TagTypesEnum.yellow} />
+        else if (order.Status === OrderStatus.FINISHED)
+            return <Tag title="Abgeschlossen" type={TagTypesEnum.green} />
+        else if (order.Status === OrderStatus.CANCELLED)
+            return <Tag title="Abgebrochen" type={TagTypesEnum.red} />
+    }
+
     return (
         <div className="container md:max-w-full mt-12">
             {/* Header */}
@@ -29,17 +74,17 @@ export const Orders: React.FC = () => {
             {/* Content */}
             {isLoadingOrders ? <Loading /> : <List>
                 {orders.map((order) => <Fragment key={order._id}>
-                    <ListItem title={`#${order._id}`} icon="shopping-basket" background header={<p>Tisch: {order.tableId}</p>}>
+                    <ListItem title={`#${order._id}`} icon="shopping-basket" background header={<><p className="pr-4">Tisch: {order.tableId}</p>{beautifyStatus(order)}</>}>
                         <h6 className="text-headline-black text-lg font-semibold mr-3">{numberToPrice(order.price)}</h6>
-                        <Button kind="tertiary" icon={faSync} className="text-darkgrey mr-4">Wird Bearbeitet</Button>
-                        <Button kind="tertiary" icon={faCheck} className="text-darkgrey mr-4">Abschließen</Button>
-                        <Button kind="tertiary" icon={faTrash} className="text-darkgrey mr-4">Löschen</Button>
+                        <Button kind="tertiary" icon={faSync} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "edit")}>Wird Bearbeitet</Button>
+                        <Button kind="tertiary" icon={faCheck} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "close")}>Abschließen</Button>
+                        <Button kind="tertiary" icon={faTrash} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "delete")}>Löschen</Button>
                     </ListItem>
                     {order.items.map(item => (
                         <ListItem key={item.dishId} title={`${item.count}x ${item.dishId}`} icon={faUtensils} indent header={<p>{item.note}</p>}>
                             <p>{item.pickedChoices.id}:</p>
-                            {item.pickedChoices.valueId.map(value => (
-                                <p className="pl-3">{value}</p>
+                            {item.pickedChoices.valueId.map((value, index) => (
+                                <p key={index} className="pl-3">{value}</p>
                             ))}
                         </ListItem>
                     ))}
