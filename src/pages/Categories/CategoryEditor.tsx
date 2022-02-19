@@ -221,7 +221,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const initialOptionValues: OptionDto = {
         name: editOptionData?.name ?? "",
         price: editOptionData?.price ?? 100,
-        isDefault: (parentChoiceId !== null && choices[parentChoiceId]?.isDefault === editOptionData?.id) ?? false
+        isDefault: (parentChoiceId !== null && choices[choices.findIndex(choice => choice.id === parentChoiceId)]?.isDefault === editOptionData?.id) ?? false
     }
 
     const validationOptionSchema = Yup.object().shape({
