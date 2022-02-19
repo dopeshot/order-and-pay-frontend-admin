@@ -45,7 +45,7 @@ export const Users: React.FC = () => {
         setIsLoadingDelete(false)
 
         // When user is delete update List
-        getAllUser()
+        await getAllUser()
     }
 
     const openDeleteModal = (user: User) => {
@@ -64,7 +64,7 @@ export const Users: React.FC = () => {
             <div className="flex flex-col md:flex-row md:justify-between">
                 <div>
                     <h1 className="text-2xl text-headline-black font-semibold">Benutzer</h1>
-                    <p data-cy="users-count" className="text-lightgrey mr-3 mb-4">{!isLoading ? users.length : 0} Gesamt</p>
+                    <p data-cy="users-count" className="text-lightgrey mr-3 mb-4">{users.length ?? 0} Gesamt</p>
                 </div>
                 <div>
                     <Button icon={faPlus} onClick={() => setModalOpen(true)}>Benutzer hinzufügen</Button>
