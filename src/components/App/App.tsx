@@ -18,7 +18,7 @@ export const App: React.FunctionComponent = () => {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} />
-        <Route path="/">
+        <Route path="*">
           <Redirect to="login" />
         </Route>
       </Switch>
