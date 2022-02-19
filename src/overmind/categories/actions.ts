@@ -54,13 +54,20 @@ export const updateCategoryById = async ({ effects, actions }: Context, { id, ca
 }
 
 // Delete category by id action 
-export const deleteCategoryById = async ({ effects }: Context, id: string): Promise<boolean> => {
+export const deleteCategoryById = async ({ effects, actions }: Context, id: string): Promise<true> => {
     try {
         // We just await the deletion no need to update menu object
         await effects.categories.deleteCategory(id)
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen der Kategorie",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
