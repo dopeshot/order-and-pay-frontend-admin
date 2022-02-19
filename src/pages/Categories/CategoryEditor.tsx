@@ -68,7 +68,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const { isMobile } = useAppState().app
 
     // Global actions
-    const { createCategory, getCategoryById, updateCategoryById } = useActions().categories
+    const { createCategory, getCategoryById, updateCategoryById, deleteCategoryById } = useActions().categories
 
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
@@ -160,6 +160,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         setIsLoadingDelete(true)
 
         // Delete category
+        await deleteCategoryById(categoryId)
 
         setIsLoadingDelete(false)
         history.push(`/menus/${menuId}/editor`)
