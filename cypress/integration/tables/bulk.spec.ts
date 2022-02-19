@@ -4,7 +4,9 @@ describe('Bulk Actions', () => {
     beforeEach(() => {
         cy.getTables()
         cy.deleteTable()
-        cy.visit('/tables')
+        cy.visit('/admin/tables')
+
+        cy.quickLogin()
     })
 
     describe('Check functionality', () => {

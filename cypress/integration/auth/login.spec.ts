@@ -1,7 +1,7 @@
 import access_token from '../../fixtures/access_token.json';
 import user from '../../fixtures/current-user.json';
 
-describe.skip('Login', () => {
+describe('Login', () => {
     describe('Login Functionality', () => {
         beforeEach(() => {
             cy.login()
@@ -29,7 +29,7 @@ describe.skip('Login', () => {
             cy.get('[data-cy="avatar-dropdown"]').click()
             cy.get('[data-cy="avatar-dropdown-delete"]').click()
 
-            cy.url().should('include', '/admin/login')
+            cy.url().should('include', '/login')
         })
 
         it('should remove access token in localstorage when logout', () => {
@@ -44,10 +44,10 @@ describe.skip('Login', () => {
         describe('Logged In', () => {
             beforeEach(() => {
                 cy.visit('/')
-                cy.easyLogin()
+                cy.quickLogin()
             })
 
-            it.only('should redirect to /home when logged in', () => {
+            it('should redirect to /home when logged in', () => {
 
             })
 

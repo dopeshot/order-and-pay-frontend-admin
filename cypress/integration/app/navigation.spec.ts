@@ -1,6 +1,7 @@
 describe('Navigation Ui', () => {
     beforeEach(() => {
         cy.visit('/')
+        cy.quickLogin()
     })
 
     describe('Desktop Sidebar', () => {

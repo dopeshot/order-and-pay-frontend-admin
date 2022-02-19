@@ -7,7 +7,9 @@ describe('Menu Overview', () => {
     describe('Ui Header', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/editor`)
+            cy.visit(`/admin/menus/${menu._id}/editor`)
+
+            cy.quickLogin()
 
             cy.wait('@getMenuOverviewEditor')
         })
@@ -24,9 +26,11 @@ describe('Menu Overview', () => {
             cy.get('[data-cy=tag-box].bg-green-500').should('be.visible')
         })
 
-        it.skip('should go to "admin/menus" when click on back button', () => {
+        it('should go to "admin/menus" when click on back button', () => {
+            cy.getAllMenus()
+
             cy.get('[data-cy="singlemenu-back-button"]').click()
-            // TODO: implement when menus stub is implemented
+            cy.wait('@getAllMenus')
 
             cy.url().should('include', '/admin/menus')
         })
@@ -36,7 +40,8 @@ describe('Menu Overview', () => {
         it('should display loading when menu not loaded', () => {
             const interception = interceptIndefinitely('GET', `${api}/editor`, "getMenuOverviewEditorIndefinitely", { fixture: 'menu-overview.json' })
 
-            cy.visit('/menus/${menu._id}/editor').then(() => {
+            cy.visit(`/admin/menus/${menu._id}/editor`).then(() => {
+                cy.quickLogin()
                 cy.contains('Bereitet Burger zu...').should('be.visible')
                 interception.sendResponse()
                 cy.wait('@getMenuOverviewEditorIndefinitely')
@@ -47,7 +52,9 @@ describe('Menu Overview', () => {
     describe('Ui Content', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/editor`)
+            cy.visit(`/admin/menus/${menu._id}/editor`)
+
+            cy.quickLogin()
 
             cy.wait('@getMenuOverviewEditor')
         })
@@ -92,7 +99,9 @@ describe('Menu Overview', () => {
     describe('Create', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/editor`)
+            cy.visit(`/admin/menus/${menu._id}/editor`)
+
+            cy.quickLogin()
 
             cy.wait('@getMenuOverviewEditor')
         })
@@ -114,7 +123,7 @@ describe('Menu Overview', () => {
             cy.wait('@getAllAllergens')
             cy.wait('@getAllCategories')
             cy.wait('@getAllLabels')
-            cy.url().should('include', `menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
+            cy.url().should('include', `/admin/menus/${menu._id}/categories/${menu.categories[0]._id}/dish`)
 
             cy.get(`[data-cy="categoryId-dropdown-button"]`).should('contain', menu.categories[0].title)
             cy.contains('Neues Gericht erstellen').should('be.visible')
@@ -139,7 +148,9 @@ describe('Menu Overview', () => {
     describe('Delete', () => {
         beforeEach(() => {
             cy.getMenuOverviewEditor()
-            cy.visit(`/menus/${menu._id}/editor`)
+            cy.visit(`/admin/menus/${menu._id}/editor`)
+
+            cy.quickLogin()
 
             cy.wait('@getMenuOverviewEditor')
         })

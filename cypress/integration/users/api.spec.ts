@@ -8,7 +8,9 @@ describe('Api Endpoints User', () => {
     describe('Get all User', () => {
         beforeEach(() => {
             cy.getAllUser()
-            cy.visit('/users')
+            cy.visit('/admin/users')
+
+            cy.quickLogin()
         })
 
         it('should list all user', () => {
@@ -23,7 +25,9 @@ describe('Api Endpoints User', () => {
     describe('Create User', () => {
         beforeEach(() => {
             cy.getAllUser()
-            cy.visit('/users')
+            cy.visit('/admin/users')
+
+            cy.quickLogin()
 
             cy.contains('Benutzer hinzufügen').click()
         })
@@ -72,7 +76,9 @@ describe('Api Endpoints User', () => {
     describe('Update User', () => {
         beforeEach(() => {
             cy.getAllUser()
-            cy.visit('/users')
+            cy.visit('/admin/users')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="users-list-item"]').first().click()
         })
@@ -80,6 +86,11 @@ describe('Api Endpoints User', () => {
         it('should open modal when click user list item', () => {
             cy.contains('Benutzer bearbeiten').should('be.visible')
             cy.get(`[data-cy="users-modal-add-edit"]`).should('be.visible')
+        })
+
+        it('should close modal when click x icon', () => {
+            cy.get(`[data-cy="modal-close-iconbutton"]`).click()
+            cy.get(`[data-cy="users-modal-add-edit"]`).should('not.exist')
         })
 
         it('should have filled all fields except password', () => {
@@ -101,13 +112,20 @@ describe('Api Endpoints User', () => {
     describe('Delete User', () => {
         beforeEach(() => {
             cy.getAllUser()
-            cy.visit('/users')
+            cy.visit('/admin/users')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="users-delete-button"]').first().click()
         })
 
         it('should open delete modal when click on delete', () => {
             cy.get('h2').should('contain', `${users[0].username} löschen?`)
+        })
+
+        it('should close modal when click x icon', () => {
+            cy.get(`[data-cy="modal-close-iconbutton"]`).click()
+            cy.get(`[data-cy="users-modal-add-edit"]`).should('not.exist')
         })
 
         it('should delete user when click delete on modal', () => {
