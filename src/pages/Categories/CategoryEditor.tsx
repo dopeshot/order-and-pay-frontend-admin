@@ -60,10 +60,25 @@ export type ChoiceDto = {
     type: ChoiceType
 }
 
-export type OptionDeleteData = {
+export type DeleteData = {
+    title: string
+    description?: string
+} & (OptionDeleteData | ChoiceDeleteData | CategoryDeleteData)
+
+type OptionDeleteData = {
+    type: "option"
     choiceId: number
     optionId: number
-    optionTitle: string
+}
+
+type ChoiceDeleteData = {
+    type: "choice"
+    choiceId: number
+}
+
+type CategoryDeleteData = {
+    type: "category"
+    categoryId: string
 }
 
 export const CategoryEditor: React.FunctionComponent = () => {
@@ -80,7 +95,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
     // Component States
     const [isLoading, setIsLoading] = useState(isEditing) // Why do we use isEditing here? When we edit we want to load the state from the backend so we set loading state to true till it's fetched.
     const [isLoadingSave, setIsLoadingSave] = useState(false)
-    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [category, setCategory] = useState<Category>()
     const [modalOpenChoice, setModalOpenChoice] = useState(false)
     const [editChoiceData, setEditChoiceData] = useState<Choice | null>(null)
@@ -91,25 +105,27 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
     const isEditingOptions = Boolean(editOptionData)
 
-    const [isOptionDeleteModalOpen, setOptionDeleteModalOpen] = useState(false)
-    const [optionDeleteData, setOptionDeleteData] = useState<OptionDeleteData | null>(null)
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [deleteData, setDeleteData] = useState<DeleteData | null>(null)
 
-    const openOptionDeleteModal = (optionDeleteData: OptionDeleteData) => {
-        setOptionDeleteData(optionDeleteData)
-        setOptionDeleteModalOpen(true)
+    const openDeleteModal = (optionDeleteData: DeleteData) => {
+        setDeleteData(optionDeleteData)
+        setDeleteModalOpen(true)
     }
 
-    const closeOptionDeleteModal = () => {
-        setOptionDeleteModalOpen(false)
-        setOptionDeleteData(null)
+    const closeDeleteModal = () => {
+        setDeleteModalOpen(false)
+        setDeleteData(null)
     }
 
-    const handleOptionDelete = () => {
-        if (!optionDeleteData)
+    const handleDelete = () => {
+        if (!deleteData)
             return
 
-        deleteOption(optionDeleteData)
-        closeOptionDeleteModal()
+        console.log(deleteData)
+
+        closeDeleteModal()
     }
 
     useEffect(() => {
@@ -380,7 +396,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                         setParentChoiceId(choice.id)
                                         setModalOpenOption(true)
                                     }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
-                                    <IconButton icon={faTrash} onClick={() => deleteChoice(choice.id)} />
+                                    <IconButton icon={faTrash} onClick={() => openDeleteModal({ type: 'choice', choiceId: choice.id, title: `Auswahl "${choice.title}"`, description: `${choice.options.length} Optionen werden mit gelöscht.` })} />
                                 </ListItem>
 
                                 {choice.options.map(option =>
@@ -390,7 +406,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                         setModalOpenOption(true)
                                     }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
                                         <p className="mr-4">{numberToPrice(option.price)}</p>
-                                        <IconButton icon={faTrash} onClick={() => openOptionDeleteModal({ choiceId: choice.id, optionId: option.id, optionTitle: option.name })} />
+                                        <IconButton icon={faTrash} onClick={() => openDeleteModal({ type: 'option', choiceId: choice.id, optionId: option.id, title: `Option "${option.name}"` })} />
                                     </ListItem>)
                                 }
                             </Fragment>
@@ -398,7 +414,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                         </List>
 
                         <div className="flex flex-col md:flex-row justify-between mt-4">
-                            {isEditing && <Button kind="tertiary" onClick={deleteCategory} loading={isLoadingDelete} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            {isEditing && category && <Button kind="tertiary" onClick={() => openDeleteModal({ type: 'category', categoryId: category._id, title: `Kategorie "${category?.title}"`, description: `Das Löschen kann nicht rückgängig gemacht werden.` })} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                             <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
                         </div>
                     </Form>
@@ -432,11 +448,12 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
         {/* Delete modal for options */}
         <DeleteModal
-            title={`Option "${optionDeleteData?.optionTitle}"` ?? "Unbekannt"}
-            description={`Das Löschen kann nicht rückgängig gemacht werden.`}
-            open={isOptionDeleteModalOpen}
-            onDissmis={closeOptionDeleteModal}
-            handleDelete={handleOptionDelete}
+            title={deleteData?.title ?? ""}
+            description={deleteData?.description ?? ""}
+            open={isDeleteModalOpen}
+            onDissmis={closeDeleteModal}
+            handleDelete={handleDelete}
+            isLoadingDelete={isLoadingDelete}
         />
     </>
 }
