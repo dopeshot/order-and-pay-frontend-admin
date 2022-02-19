@@ -86,7 +86,7 @@ export const SingleMenu: React.FC = () => {
                         <p className="text-darkgrey">{menu?.description}</p>
                     </div>
                     <div>
-                        <Button icon={faPlus} onClick={() => ""}>Kategorie hinzufügen</Button>
+                        <Button icon={faPlus} to={`/menus/${menuId}/categories`}>Kategorie hinzufügen</Button>
                     </div>
                 </div>
                 {/* Header end */}
