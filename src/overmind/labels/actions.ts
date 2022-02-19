@@ -64,13 +64,20 @@ export const updateLabel = async ({ state, actions, effects }: Context, { id, la
     }
 }
 
-export const deleteLabel = async ({ state, effects }: Context, id: string): Promise<boolean> => {
+export const deleteLabel = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.labels.deleteLabel(id)
         state.labels.labels = state.labels.labels.filter(label => label._id !== id)
         return true
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Labels",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
