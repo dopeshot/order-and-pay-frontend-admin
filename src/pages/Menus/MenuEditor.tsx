@@ -88,7 +88,7 @@ export const MenuEditor: React.FC = () => {
                 await createMenu(values)
             }
 
-            history.push("/menus")
+            history.push("/admin/menus")
         } catch (error) {
             if (!axios.isAxiosError(error))
                 return
@@ -109,11 +109,11 @@ export const MenuEditor: React.FC = () => {
         await deleteMenu(menuId)
 
         setIsLoadingDelete(false)
-        history.push("/menus")
+        history.push("/admin/menus")
     }
 
     return <div className="container mt-12">
-        <BackButton dataCy="menus-back-button" to="/menus" />
+        <BackButton dataCy="menus-back-button" to="/admin/menus" />
         {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
             <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
             <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>

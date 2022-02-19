@@ -1,6 +1,7 @@
 import { Context } from ".."
 
-export const onInitializeOvermind = ({ state, actions }: Context): void => {
+export const onInitializeOvermind = async ({ state, actions }: Context) => {
+    actions.auth.initializeUser()
     window.addEventListener("resize", actions.app.checkIsMobile)
 }
 

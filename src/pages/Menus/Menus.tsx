@@ -64,15 +64,15 @@ export const Menus: React.FC = () => {
                 <p data-cy="menus-count" className="text-lightgrey mb-4 md:mb-0">{!isLoadingMenus ? menus.length : 0} Gesamt</p>
             </div>
             <div>
-                <Button icon={faPlus} to="/menus/add">Menü hinzufügen</Button>
+                <Button icon={faPlus} to="/admin/menus/add">Menü hinzufügen</Button>
             </div>
         </div>
         {/* Header end */}
 
         {/* Content */}
         <List lines>
-            {menus.map((menu) => <ListItem dataCy="menus-list-item" key={menu._id} title={menu.title} icon={faFolder} to={`/menus/${menu._id}/editor`} header={menu.isActive ? <Tag title="Aktiv" type={TagTypesEnum.green} /> : undefined}>
-                <IconButton dataCy="menus-edit-button" className="ml-auto mr-4" icon={faEdit} to={`/menus/${menu._id}/edit`} />
+            {menus.map((menu) => <ListItem dataCy="menus-list-item" key={menu._id} title={menu.title} icon={faFolder} to={`/admin/menus/${menu._id}/editor`} header={menu.isActive ? <Tag title="Aktiv" type={TagTypesEnum.green} /> : undefined}>
+                <IconButton dataCy="menus-edit-button" className="ml-auto mr-4" icon={faEdit} to={`/admin/menus/${menu._id}/edit`} />
                 <IconButton dataCy="menus-delete-button" className="mr-4" icon={faTrash} onClick={() => openDeleteModal(menu)} />
             </ListItem>)}
         </List>

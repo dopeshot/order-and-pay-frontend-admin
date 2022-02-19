@@ -204,6 +204,30 @@ declare global {
             getAllLabels(): void
 
             /**
+            * Custom command to intercept all login request
+            * @example cy.login()
+            */
+            login(): void
+
+            /**
+            * Custom command to intercept all profile request
+            * @example cy.getCurrentUser()
+            */
+            getCurrentUser(): void
+
+            /**
+             * Custom command to get overmind window object
+             * @overmind cy.overmind()
+             */
+            overmind(): Chainable
+
+            /**
+             * Custom command to login without username and password
+             * @overmind cy.easyLogin()
+             */
+            easyLogin(): void
+
+            /**
             * Custom command to intercept all get all users requests
             * @example cy.getAllUser()
             */

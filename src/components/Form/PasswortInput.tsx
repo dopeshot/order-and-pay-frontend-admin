@@ -17,7 +17,7 @@ export const PasswordInput: React.FC = () => {
                         <button data-cy="password-eye-button" type="button" onMouseDown={event => event.preventDefault()} onClick={() => setShowPassword(!showPassword)} className="absolute right-4">
                             {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
                         </button>
-                        <input data-cy={`password-input`} type={showPassword ? "text" : "password"} placeholder="Password" autoComplete="password" {...props.field} className={`font-roboto rounded-xl pl-4 pr-10 py-2 ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
+                        <input data-cy={`password-input`} type={showPassword ? "text" : "password"} placeholder="Passwort eingeben" autoComplete="password" {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
                     </div>
                 </>
             )}</Field>
