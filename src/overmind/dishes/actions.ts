@@ -25,13 +25,20 @@ export const createDish = async ({ effects, actions }: Context, dish: DishDto): 
 /**
  * Get one Dish by id
  */
-export const getDishById = async ({ effects }: Context, id: string): Promise<Dish> => {
+export const getDishById = async ({ effects, actions }: Context, id: string): Promise<Dish> => {
     try {
         const response = await effects.dishes.getDishById(id)
         const dish = response.data
         return dish
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Gerichts",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
