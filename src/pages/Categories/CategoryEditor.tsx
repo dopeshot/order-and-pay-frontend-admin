@@ -294,7 +294,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     const validationOptionSchema = Yup.object().shape({
         name: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
-        price: Yup.number().min(0, "Der Preis darf nicht kleiner als 0 sein.").max(10000000, "Der Preis darf nicht größer als 10000000 sein.").required("Dies ist ein Pflichtfeld."),
+        price: Yup.number().min(-10000000, "Der Preis darf nicht kleiner als - 10 000 000 sein.").max(10000000, "Der Preis darf nicht größer als 10 000 000 sein.").required("Dies ist ein Pflichtfeld."),
         isDefault: Yup.boolean().required()
     })
 
