@@ -45,7 +45,7 @@ export const createUser = async ({ state, effects, actions }: Context, user: Use
 /**
  * Update User by id
  */
-export const updateUser = async ({ state, effects }: Context, { _id, user }: { _id: string, user: UserDto }): Promise<boolean> => {
+export const updateUser = async ({ state, actions, effects }: Context, { _id, user }: { _id: string, user: UserDto }): Promise<boolean> => {
     try {
         // Strip password when is not changed
         const newUser = { ...user }
@@ -59,6 +59,13 @@ export const updateUser = async ({ state, effects }: Context, { _id, user }: { _
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Aktualisieren des Benutzers",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
