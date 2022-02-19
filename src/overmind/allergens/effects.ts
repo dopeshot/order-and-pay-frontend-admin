@@ -8,8 +8,6 @@ export type AllergenDto = {
 
 // Get all allergens
 export const getAllergens = () => request.get<Allergen[]>('/allergens')
-// Get one allergen by id
-export const getAllergenById = (id: string) => request.get<Allergen>(`/allergens/${id}`)
 // Post a allergen
 export const createAllergen = (createAllergenDto: AllergenDto) => request.post<Allergen>('/allergens', createAllergenDto)
 // Update a allergen
