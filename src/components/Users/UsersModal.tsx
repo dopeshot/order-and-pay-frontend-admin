@@ -61,7 +61,7 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
             setModalOpen(false)
         }
         else {
-            if (!await createUser())
+            if (!await createUser(user))
                 return
             setModalOpen(false)
         }

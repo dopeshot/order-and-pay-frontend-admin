@@ -19,16 +19,19 @@ export const getAllUser = async ({ state, effects }: Context) => {
 /**
  * Create new User
  */
-export const createUser = async ({ state, effects }: Context): Promise<boolean> => {
+export const createUser = async ({ state, effects, actions }: Context, user: UserDto): Promise<boolean> => {
     try {
-        const response = await effects.users.createUser()
-        const newUser = response.data
-        state.users.users = [...state.users.users, newUser]
+        // Create User
+        await effects.users.createUser(user)
+
+        // Update user list
+        actions.users.getAllUser()
+
         return true
     } catch (error) {
         console.error(error)
-        return false
     }
+    return false
 }
 
 /**

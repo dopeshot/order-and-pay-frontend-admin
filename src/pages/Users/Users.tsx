@@ -44,6 +44,7 @@ export const Users: React.FC = () => {
                     setModalEditData(user)
                     setModalOpen(true)
                 }}>
+                    {console.log(users)}
                     <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => ""} />
                 </ListItem>)}
             </List>
