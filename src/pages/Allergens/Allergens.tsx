@@ -16,10 +16,11 @@ export const Allergens: React.FC = () => {
     const { getAllAllergens, deleteAllergen } = useActions().allergens
 
     // Get global state
-    const { allergens, isLoadingAllergens } = useAppState().allergens
+    const { allergens } = useAppState().allergens
 
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
+    const [isLoadingAllergens, setLoadingAllergens] = useState(true)
     const [modalEditData, setModalEditData] = useState<Allergen | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
@@ -27,7 +28,12 @@ export const Allergens: React.FC = () => {
 
     // Load allergens when page is loaded
     useEffect((): void => {
-        getAllAllergens()
+        async function loadAllergens() {
+            await getAllAllergens()
+            setLoadingAllergens(false)
+        }
+
+        loadAllergens()
     }, [getAllAllergens])
 
     const handleDelete = async (event: any) => {
