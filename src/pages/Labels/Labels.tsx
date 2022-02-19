@@ -38,10 +38,10 @@ export const Labels: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the allergen
-        await deleteLabel(selectedLabel._id)
+        // Delete the label and close modal when succesfull
+        if (await deleteLabel(selectedLabel._id))
+            closeDeleteModal()
 
-        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
