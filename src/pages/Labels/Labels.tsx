@@ -30,6 +30,7 @@ export const Labels: React.FC = () => {
     }, [getAllLabels])
 
     const handleDelete = async (event: any) => {
+        /* istanbul ignore next // should not happen just fallback */
         if (!selectedLabel) {
             console.warn("There is no label selected.")
             return
@@ -62,7 +63,7 @@ export const Labels: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Labels</h1>
-                <p className="text-lightgrey mr-3 mb-4">{!isLoadingLabels ? labels.length : 0} Gesamt</p>
+                <p data-cy="labels-count" className="text-lightgrey mr-3 mb-4">{!isLoadingLabels ? labels.length : 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Label hinzufügen</Button>
@@ -72,11 +73,11 @@ export const Labels: React.FC = () => {
 
         {/* Content */}
         <List lines>
-            {labels.map((label) => <ListItem key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
+            {labels.map((label) => <ListItem dataCy="labels-list-item" key={label._id} title={label.title} icon={label.icon as IconProp} onClick={() => {
                 setModalEditData(label)
                 setModalOpen(true)
             }}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(label)} />
+                <IconButton dataCy="labels-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(label)} />
             </ListItem>)}
         </List>
         {/* Content End */}

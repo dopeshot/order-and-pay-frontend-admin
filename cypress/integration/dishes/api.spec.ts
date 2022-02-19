@@ -166,7 +166,13 @@ describe('Api Endpoints', () => {
             cy.contains(`${dish.title} löschen?`)
         })
 
-        it.skip('should delete dish when click delete on modal', () => {
+        it('should close delete modal when click on x icon', () => {
+            cy.get('[data-cy="dishes-delete-button"]').click()
+            cy.get('[data-cy="modal-close-iconbutton"]').click()
+            cy.get(`[data-cy="deletemodal-${dish.title}]`).should('not.exist')
+        })
+
+        it('should delete dish when click delete on modal', () => {
             cy.deleteDish()
             cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-delete-button"]').click()
@@ -177,7 +183,7 @@ describe('Api Endpoints', () => {
             cy.url().should('include', '/admin/menus/1/editor')
         })
 
-        it.skip('should have loading icon when deleting', () => {
+        it('should have loading icon when deleting', () => {
             const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { fixture: 'dish.json' })
             cy.getMenuOverviewEditor()
 
