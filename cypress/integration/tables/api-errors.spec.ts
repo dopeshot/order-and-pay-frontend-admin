@@ -1,20 +1,8 @@
 import table from '../../fixtures/table.json'
 import tables from '../../fixtures/tables.json'
 
-const api = `${Cypress.env("apiUrl")}/tables`
-
 describe('Api Error Handling', () => {
     describe('General Errors', () => {
-        it('should handle it when database down', () => {
-            cy.getTableDatabaseDown()
-            cy.visit('/admin/tables')
-
-            cy.quickLogin()
-
-            cy.get('[data-cy="error-banner"]').should('be.visible')
-            cy.get('[data-cy="error-banner"]').contains(`Cannot connect to ${api}!`)
-        })
-
         it('should show empty table content when tables are empty', () => {
             cy.getEmptyTables()
             cy.visit('/admin/tables')
@@ -80,7 +68,7 @@ describe('Api Error Handling', () => {
 
             cy.get('[data-cy="table-save"]').click()
 
-            cy.get('[data-cy="error-banner"]').should('contain', 'This table number already exists')
+            cy.contains('This table number already exists').should('be.visible')
         })
 
         it('should handle tableNumber to long (over 8 letters)', () => {
@@ -123,7 +111,7 @@ describe('Api Error Handling', () => {
 
             cy.get('[data-cy="table-table-save-button-0"]').click()
 
-            cy.get('[data-cy="error-banner"]').should('contain', 'This table number already exists')
+            cy.contains('This table number already exists').should('be.visible')
         })
     })
 
