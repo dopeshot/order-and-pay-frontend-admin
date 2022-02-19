@@ -63,7 +63,7 @@ export const Labels: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Labels</h1>
-                <p data-cy="labels-count" className="text-lightgrey mr-3 mb-4">{!isLoadingLabels ? labels.length : 0} Gesamt</p>
+                <p data-cy="labels-count" className="text-lightgrey mr-3 mb-4">{labels.length ?? 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Label hinzufügen</Button>

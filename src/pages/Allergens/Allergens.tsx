@@ -63,7 +63,7 @@ export const Allergens: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Allergene</h1>
-                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{!isLoadingAllergens ? allergens.length : 0} Gesamt</p>
+                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{allergens.length ?? 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Allergen hinzufügen</Button>
