@@ -11,6 +11,7 @@ import { Dropdown } from "../../components/Form/Dropdown"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
 import { Toggle } from "../../components/Form/Toggle"
+import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { Loading } from "../../components/UI/Loading"
@@ -59,6 +60,12 @@ export type ChoiceDto = {
     type: ChoiceType
 }
 
+export type OptionDeleteData = {
+    choiceId: number
+    optionId: number
+    optionTitle: string
+}
+
 export const CategoryEditor: React.FunctionComponent = () => {
     const { categoryId, menuId } = useParams<CategoryParams>()
     const history = useHistory()
@@ -83,6 +90,27 @@ export const CategoryEditor: React.FunctionComponent = () => {
     const [editOptionData, setEditOptionData] = useState<Option | null>(null)
     const [parentChoiceId, setParentChoiceId] = useState<number | null>(null)
     const isEditingOptions = Boolean(editOptionData)
+
+    const [isOptionDeleteModalOpen, setOptionDeleteModalOpen] = useState(false)
+    const [optionDeleteData, setOptionDeleteData] = useState<OptionDeleteData | null>(null)
+
+    const openOptionDeleteModal = (optionDeleteData: OptionDeleteData) => {
+        setOptionDeleteData(optionDeleteData)
+        setOptionDeleteModalOpen(true)
+    }
+
+    const closeOptionDeleteModal = () => {
+        setOptionDeleteModalOpen(false)
+        setOptionDeleteData(null)
+    }
+
+    const handleOptionDelete = () => {
+        if (!optionDeleteData)
+            return
+
+        deleteOption(optionDeleteData)
+        closeOptionDeleteModal()
+    }
 
     useEffect(() => {
         let isMounted = true
@@ -288,7 +316,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         closeOptionModal()
     }
 
-    const deleteOption = (choiceId: number, optionId: number) => {
+    const deleteOption = ({ choiceId, optionId }: OptionDeleteData) => {
         setChoices(choices => {
             const newChoices = [...choices]
             let choice = newChoices.find(choice => choice.id === choiceId)!
@@ -362,7 +390,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                                         setModalOpenOption(true)
                                     }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
                                         <p className="mr-4">{numberToPrice(option.price)}</p>
-                                        <IconButton icon={faTrash} onClick={() => deleteOption(choice.id, option.id)} />
+                                        <IconButton icon={faTrash} onClick={() => openOptionDeleteModal({ choiceId: choice.id, optionId: option.id, optionTitle: option.name })} />
                                     </ListItem>)
                                 }
                             </Fragment>
@@ -401,6 +429,15 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 </Form>
             </Formik>
         </Modal>
+
+        {/* Delete modal for options */}
+        <DeleteModal
+            title={optionDeleteData?.optionTitle ?? "Unbekannt"}
+            description={`Das Löschen kann nicht rückgängig gemacht werden.`}
+            open={isOptionDeleteModalOpen}
+            onDissmis={closeOptionDeleteModal}
+            handleDelete={handleOptionDelete}
+        />
     </>
 }
 
