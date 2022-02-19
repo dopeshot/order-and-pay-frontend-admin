@@ -25,7 +25,7 @@ export const getAllLabels = async ({ state, actions, effects }: Context) => {
     state.labels.isLoadingLabels = false
 }
 
-export const createLabel = async ({ state, effects }: Context, label: LabelDto): Promise<boolean> => {
+export const createLabel = async ({ state, actions, effects }: Context, label: LabelDto): Promise<boolean> => {
     try {
         const response = await effects.labels.createLabel(label)
         const newLabel = response.data
@@ -33,6 +33,14 @@ export const createLabel = async ({ state, effects }: Context, label: LabelDto):
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Allergene",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
+
         return false
     }
 }
