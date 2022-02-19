@@ -6,7 +6,7 @@ import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 import { UsersModal } from "../../components/Users/UsersModal"
 import { useActions, useAppState } from "../../overmind"
-import { UserDtoWithId } from "../../overmind/users/effects"
+import { User } from "../../overmind/users/effects"
 
 export const Users: React.FC = () => {
     const { getAllUser } = useActions().users
@@ -14,7 +14,7 @@ export const Users: React.FC = () => {
 
     const [isLoading, setLoading] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
-    const [modalEditData, setModalEditData] = useState<UserDtoWithId | null>(null)
+    const [modalEditData, setModalEditData] = useState<User | null>(null)
 
     useEffect((): void => {
         async function loadUsers() {

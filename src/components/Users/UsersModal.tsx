@@ -3,7 +3,7 @@ import { Form, Formik } from "formik"
 import { useState } from "react"
 import * as Yup from "yup"
 import { useActions } from "../../overmind"
-import { UserDto, UserDtoWithId } from "../../overmind/users/effects"
+import { User, UserDto } from "../../overmind/users/effects"
 import { Button } from "../Buttons/Button"
 import { PasswordInput } from "../Form/PasswortInput"
 import { TextInput } from "../Form/TextInput"
@@ -11,9 +11,9 @@ import { Modal } from "../UI/Modal"
 
 type UsersModalProps = {
     /** State Data from user to edit */
-    modalEditData?: UserDtoWithId | null
+    modalEditData?: User | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<UserDtoWithId | null>> | null
+    setModalEditData?: React.Dispatch<React.SetStateAction<User | null>> | null
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
