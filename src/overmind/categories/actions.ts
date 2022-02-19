@@ -23,13 +23,20 @@ export const createCategory = async ({ effects, actions }: Context, categoryDto:
 }
 
 // Get category by id action
-export const getCategoryById = async ({ effects }: Context, id: string): Promise<Category> => {
+export const getCategoryById = async ({ effects, actions }: Context, id: string): Promise<Category> => {
     try {
         const response = await effects.categories.getCategoryById(id)
         const category = response.data
         return category
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Kategorie",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
