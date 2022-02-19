@@ -86,8 +86,8 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
         <Modal modalHeading={modalEditData ? `Benutzer bearbeiten` : `Neuen Benutzer hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
                 <Form>
+                    <TextInput name="username" placeholder="user" labelText="Username" />
                     <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
-                    <TextInput name="username" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Username" />
                     <PasswordInput />
                     <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
                 </Form>
