@@ -38,10 +38,10 @@ export const Users: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the user
-        await deleteUser(selectedUser._id)
+        // Delete the user and close modal when succesfull
+        if (await deleteUser(selectedUser._id))
+            closeDeleteModal()
 
-        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When user is delete update List

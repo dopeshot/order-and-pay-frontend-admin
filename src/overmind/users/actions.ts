@@ -73,13 +73,20 @@ export const updateUser = async ({ state, actions, effects }: Context, { _id, us
 /**
  * Delete User by id
  */
-export const deleteUser = async ({ state, effects }: Context, id: string): Promise<boolean> => {
+export const deleteUser = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.users.deleteUser(id)
         state.users.users = state.users.users.filter(users => users._id !== id)
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Benutzers",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
