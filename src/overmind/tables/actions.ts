@@ -52,12 +52,16 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
     return false
 }
 
-export const deleteTable = async ({ state, effects }: Context, id: string) => {
+export const deleteTable = async ({ state, effects, actions }: Context, id: string) => {
     try {
         await effects.tables.deleteTable(id)
         state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
     } catch (error) {
-
+        actions.notify.createNotification({
+            title: "Fehler beim Löschen des Tisches",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
 }
 
