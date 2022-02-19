@@ -1,5 +1,6 @@
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
+import { useHistory, useLocation } from "react-router-dom"
 import * as Yup from 'yup'
 import { Button } from "../../components/Buttons/Button"
 import { PasswordInput } from "../../components/Form/PasswortInput"
@@ -10,8 +11,11 @@ import { Credentials } from "../../overmind/auth/effects"
 
 export const Login: React.FC = () => {
     const { authenticating } = useAppState().auth
-
     const { login } = useActions().auth
+
+    const location = useLocation<any>()
+    const history = useHistory()
+    const { from } = location.state || { from: { pathname: "/admin" } };
 
     const initialLoginValues: any = {
         email: "",
@@ -25,6 +29,7 @@ export const Login: React.FC = () => {
 
     const submitForm = async (credentials: Credentials) => {
         await login(credentials)
+        history.replace(from)
     }
 
     return <div className="h-screen flex flex-col items-center justify-center mx-4">
