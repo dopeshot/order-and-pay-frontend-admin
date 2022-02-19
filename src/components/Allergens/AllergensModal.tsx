@@ -47,24 +47,30 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
     const submitForm = async (values: LabelDto) => {
         setIsModalLoading(true)
 
-        // Check if we are editing or creating a new label
-        if (modalEditData) {
-            if (!await updateAllergen({
-                id: modalEditData._id,
-                allergen: values
-            }))
-                return
-            // Clear modal data
-            if (setModalEditData)
-                setModalEditData(null)
-            setModalOpen(false)
+        try {
+            // Check if we are editing or creating a new label
+            if (modalEditData) {
+                if (!await updateAllergen({
+                    id: modalEditData._id,
+                    allergen: values
+                }))
+                    throw Error()
+                // Clear modal data
+                if (setModalEditData)
+                    setModalEditData(null)
+                setModalOpen(false)
+            }
+            else {
+                if (!await createAllergen(values))
+                    throw Error()
+                setModalOpen(false)
+            }
+
+        } catch (error) {
+            // Create or update failed
+        } finally {
+            setIsModalLoading(false)
         }
-        else {
-            if (!await createAllergen(values))
-                return
-            setModalOpen(false)
-        }
-        setIsModalLoading(false)
     }
 
     // Modal close handler
