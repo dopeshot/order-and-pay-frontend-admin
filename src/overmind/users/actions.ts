@@ -39,6 +39,10 @@ export const createUser = async ({ state, effects, actions }: Context, user: Use
  */
 export const updateUser = async ({ state, effects }: Context, { _id, user }: { _id: string, user: UserDto }): Promise<boolean> => {
     try {
+        // Strip password when is not changed
+        if (user.password === "")
+            delete user.password
+
         const response = await effects.users.updateUser(_id, user)
         const updatedUser = response.data
         const index = state.users.users.findIndex(users => users._id === _id)
