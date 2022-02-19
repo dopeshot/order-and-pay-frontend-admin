@@ -76,6 +76,12 @@ Cypress.Commands.add('getMenuOverviewEditor', () => {
     }).as('getMenuOverviewEditor')
 })
 
+Cypress.Commands.add('getAllMenus', () => {
+    cy.intercept('GET', `${api}/menus`, {
+        fixture: 'menus.json'
+    }).as('getAllMenus')
+})
+
 Cypress.Commands.add('createMenu', () => {
     cy.intercept('POST', `${api}/menus`, {
         fixture: 'menu.json'

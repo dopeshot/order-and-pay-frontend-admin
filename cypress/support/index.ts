@@ -89,6 +89,12 @@ declare global {
             getMenuOverviewEditor(): void
 
             /**
+             * Custom command to intercept all get all menus requests
+             * @example cy.getAllMenus()
+             */
+            getAllMenus(): void
+
+            /**
              * Custom command to intercept all create menu requests
              * @example cy.createMenu()
              */
