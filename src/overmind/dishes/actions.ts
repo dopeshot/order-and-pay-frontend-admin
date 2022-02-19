@@ -46,13 +46,20 @@ export const getDishById = async ({ effects, actions }: Context, id: string): Pr
 /**
  * Update one Dish by id
  */
-export const updateDish = async ({ effects }: Context, { dishId, dish }: { dishId: string, dish: DishDto }): Promise<boolean> => {
+export const updateDish = async ({ effects, actions }: Context, { dishId, dish }: { dishId: string, dish: DishDto }): Promise<true> => {
     try {
         // We just await the update no need to update menu object
         await effects.dishes.updateDish(dishId, dish)
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Gerichts",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
