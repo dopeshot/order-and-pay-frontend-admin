@@ -15,7 +15,6 @@ export const Users: React.FC = () => {
     const { users } = useAppState().users
 
     // Local States
-    const [isLoading, setLoading] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<User | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -24,8 +23,7 @@ export const Users: React.FC = () => {
 
     useEffect((): void => {
         async function loadUsers() {
-            if (await getAllUser())
-                setLoading(false)
+            await getAllUser()
         }
         loadUsers()
     }, [getAllUser])
