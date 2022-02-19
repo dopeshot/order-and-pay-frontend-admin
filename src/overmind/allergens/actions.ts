@@ -24,7 +24,7 @@ export const getAllAllergens = async ({ state, actions, effects }: Context) => {
     state.allergens.isLoadingAllergens = false
 }
 
-export const createAllergen = async ({ state, actions, effects }: Context, allergen: AllergenDto): Promise<boolean> => {
+export const createAllergen = async ({ state, actions, effects }: Context, allergen: AllergenDto): Promise<true> => {
     try {
         const response = await effects.allergens.createAllergen(allergen)
         const newAllergen = response.data
@@ -38,12 +38,11 @@ export const createAllergen = async ({ state, actions, effects }: Context, aller
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
             type: "danger"
         })
-
-        return false
+        throw (error)
     }
 }
 
-export const updateAllergen = async ({ state, actions, effects }: Context, { id, allergen }: { id: string, allergen: AllergenDto }): Promise<boolean> => {
+export const updateAllergen = async ({ state, actions, effects }: Context, { id, allergen }: { id: string, allergen: AllergenDto }): Promise<true> => {
     try {
         const response = await effects.allergens.updateAllergen(id, allergen)
         const updatedAllergen = response.data
@@ -59,7 +58,7 @@ export const updateAllergen = async ({ state, actions, effects }: Context, { id,
             type: "danger"
         })
 
-        return false
+        throw (error)
     }
 }
 

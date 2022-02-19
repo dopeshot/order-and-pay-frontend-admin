@@ -14,7 +14,7 @@ type AllergensModalProps = {
     /** State Data from allergen to edit */
     modalEditData?: Allergen | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<Allergen | null>> | null
+    setModalEditData?: React.Dispatch<React.SetStateAction<Allergen | null>>
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
@@ -50,21 +50,20 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
         try {
             // Check if we are editing or creating a new label
             if (modalEditData) {
-                if (!await updateAllergen({
+                await updateAllergen({
                     id: modalEditData._id,
                     allergen: values
-                }))
-                    throw Error()
+                })
+
                 // Clear modal data
                 if (setModalEditData)
                     setModalEditData(null)
                 setModalOpen(false)
             }
             else {
-                if (!await createAllergen(values))
-                    throw Error()
-                setModalOpen(false)
+                await createAllergen(values)
             }
+            setModalOpen(false)
 
         } catch (error) {
             // Create or update failed
