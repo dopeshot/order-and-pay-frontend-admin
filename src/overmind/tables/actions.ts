@@ -18,14 +18,18 @@ export const loadTables = async ({ state, effects, actions }: Context) => {
     state.tables.isLoadingTables = false
 }
 
-export const createTable = async ({ state, effects }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
+export const createTable = async ({ state, effects, actions }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
         const response = await effects.tables.createTable({ tableNumber, capacity })
         const newTable = { ...response.data, updatedAt: new Date(response.data.updatedAt), ...InitialTableHelper }
         state.tables.tables = [...state.tables.tables, newTable]
         return true
     } catch (error) {
-
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Tisches",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     return false
 }
