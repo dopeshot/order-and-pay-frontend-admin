@@ -1,9 +1,10 @@
-import { faArrowLeft, faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faCheckDouble, faCog, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { Fragment, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
+import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { Dropdown } from "../../components/Form/Dropdown"
@@ -303,7 +304,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     //MC TODO: BackButton einsetzen!
     return <>
         <div className="container mt-12">
-            <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+            <BackButton to={`/menus/${menuId}/editor`} />
             {isLoading ? <Loading /> : <>
                 <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
 
