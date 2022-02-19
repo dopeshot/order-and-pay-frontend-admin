@@ -43,7 +43,11 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
         oldTable.tableNumber = updatedTable.tableNumber
         return true
     } catch (error) {
-
+        actions.notify.createNotification({
+            title: "Fehler beim Aktualisieren des Tisches",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     return false
 }
