@@ -89,7 +89,9 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
                     <TextInput name="username" placeholder="user" labelText="Username" />
                     <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
                     <PasswordInput />
-                    <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                    <div className="flex justify-end">
+                        <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                    </div>
                 </Form>
             </Formik>
         </Modal>

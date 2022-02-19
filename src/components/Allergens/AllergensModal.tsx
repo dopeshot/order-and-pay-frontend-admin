@@ -88,7 +88,9 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
                 <Form>
                     <TextInput name="title" placeholder="Gluten, Erdnüsse, Sellerie..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
                     <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                    <div className="flex justify-end">
+                        <Button type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                    </div>
                 </Form>
             </Formik>
         </Modal>
