@@ -3,11 +3,7 @@ import { Context } from ".."
 import { MenuDto } from "./effects"
 import { Menu } from "./state"
 
-export const getAllMenus = async ({ state, actions, effects }: Context): Promise<Menu[] | undefined> => {
-    // istanbul ignore next // Backoff when already loading
-    if (state.menus.isLoadingMenus)
-        return
-
+export const getAllMenus = async ({ state, actions, effects }: Context): Promise<void> => {
     state.menus.isLoadingMenus = true
     try {
         const response = await effects.menus.getAllMenus()
@@ -78,7 +74,7 @@ export const updateMenu = async ({ effects, actions }: Context, { menuId, menu }
 }
 
 // Delete menu by id action
-export const deleteMenu = async ({ effects, actions }: Context, id: string): Promise<boolean> => {
+export const deleteMenu = async ({ effects, actions }: Context, id: string): Promise<true> => {
     try {
         // We just await the deletion no need to update menu object
         await effects.menus.deleteMenu(id)
