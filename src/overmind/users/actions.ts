@@ -30,8 +30,8 @@ export const createUser = async ({ state, effects, actions }: Context, user: Use
         return true
     } catch (error) {
         console.error(error)
+        return false
     }
-    return false
 }
 
 /**
