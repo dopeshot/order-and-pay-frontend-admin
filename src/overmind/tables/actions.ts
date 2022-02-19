@@ -1,5 +1,4 @@
 import { config, Context } from ".."
-import { generateErrorMessage } from "../../services/error"
 import { InitialTableHelper, Table, TableDocument } from "./state"
 
 export const loadTables = async ({ state, effects }: Context) => {
@@ -8,9 +7,8 @@ export const loadTables = async ({ state, effects }: Context) => {
         const response = await effects.tables.getTables()
         const tables = response.data.map<TableDocument>((table: Table) => ({ ...table, updatedAt: new Date(table.updatedAt), ...InitialTableHelper }))
         state.tables.tables = tables.sort((a, b) => a.tableNumber.localeCompare(b.tableNumber))
-        state.tables.tableErrors = []
     } catch (error) {
-        generateErrorMessage(state, error, "tableErrors")
+
     }
     state.tables.isLoadingTables = false
 }
@@ -20,10 +18,9 @@ export const createTable = async ({ state, effects }: Context, { tableNumber, ca
         const response = await effects.tables.createTable({ tableNumber, capacity })
         const newTable = { ...response.data, updatedAt: new Date(response.data.updatedAt), ...InitialTableHelper }
         state.tables.tables = [...state.tables.tables, newTable]
-        state.tables.modalErrors = []
         return true
     } catch (error) {
-        generateErrorMessage(state, error, "modalErrors")
+
     }
     return false
 }
@@ -35,10 +32,9 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
         const oldTable = state.tables.tables.find((table: Table) => table._id === id)!
         oldTable.capacity = updatedTable.capacity
         oldTable.tableNumber = updatedTable.tableNumber
-        state.tables.tableErrors = []
         return true
     } catch (error) {
-        generateErrorMessage(state, error, "tableErrors")
+
     }
     return false
 }
@@ -47,10 +43,8 @@ export const deleteTable = async ({ state, effects }: Context, id: string) => {
     try {
         await effects.tables.deleteTable(id)
         state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
-        state.tables.tableErrors = []
     } catch (error) {
-        /* istanbul ignore next */ // should not happen
-        generateErrorMessage(state, error, "tableErrors")
+
     }
 }
 
@@ -110,10 +104,7 @@ export const bulkDelete = async ({ state, effects }: Context) => {
         })
 
         await effects.tables.bulkDelete(idArray)
-
-        state.tables.tableErrors = []
     } catch (error) {
-        /* istanbul ignore next */ // should not happen
-        generateErrorMessage(state, error, "tableErrors")
+
     }
 }

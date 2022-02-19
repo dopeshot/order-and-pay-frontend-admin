@@ -1,18 +1,18 @@
-import { faArrowUp, faChevronDown, faCircleNotch, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUp, faChevronDown, faPlus, faSyncAlt, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { ErrorBanner } from "../../components/Errors/ErrorBanner"
 import { AddTableModal } from "../../components/Table/AddTableModal"
 import { TableItem } from "../../components/Table/TableItem"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
 import { EmptyTables } from "./EmptyTables"
 
 export const Tables: React.FunctionComponent = () => {
     const {
-        tables, isLoadingTables, tableErrors, hasTableError, isCheckedAll, checkedCount, sort
+        tables, isLoadingTables, isCheckedAll, checkedCount, sort
     } = useAppState().tables
 
     const { loadTables, bulkTableSelection, sortTable, bulkDelete } = useActions().tables
@@ -24,7 +24,7 @@ export const Tables: React.FunctionComponent = () => {
         loadTables()
     }, [loadTables])
 
-    if (!isLoadingTables && tables.length === 0 && tableErrors.length === 0)
+    if (!isLoadingTables && tables.length === 0)
         return <EmptyTables />
 
     return (
@@ -36,9 +36,6 @@ export const Tables: React.FunctionComponent = () => {
                 {/* Headline */}
                 <h1 className="text-2xl text-headline-black font-semibold">Tische</h1>
                 <p className="text-lightgrey mr-3 mb-4">{!isLoadingTables ? tables.length : 0} Gesamt</p>
-
-                {/* Error Banner */}
-                {hasTableError && <ErrorBanner headlineContent={`There ${tableErrors.length > 1 ? "were" : "is"} ${tableErrors.length} ${tableErrors.length > 1 ? "Errors" : "Error"}`} listContent={tableErrors} />}
 
                 {/* Add Table and Filters */}
                 <div className="sm:flex lg:justify-between mt-5 mb-5 lg:mt-0">
@@ -103,11 +100,7 @@ export const Tables: React.FunctionComponent = () => {
                             tables.map((table: TableDocument, index: number) => <TableItem key={table._id} index={index} id={table._id} />)}
                     </tbody>
                 </table>
-                {isLoadingTables &&
-                    <div data-cy="table-spinner">
-                        <FontAwesomeIcon icon={faCircleNotch} className="animate-spin mr-3" />
-                        <p className="text-semibold">Loading Tables</p>
-                    </div>}
+                {isLoadingTables && <Loading />}
             </div>
         </div>
     )
