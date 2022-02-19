@@ -59,7 +59,6 @@ describe('Api Endpoints User', () => {
             cy.get(`[data-cy="password-input"]`).type('123456789')
 
             const interception = interceptIndefinitely('POST', `${api}/auth/register`, "createUserIndefinitely", { fixture: 'user.json' })
-            cy.getAllUser()
 
             cy.get(`[data-cy="users-modal-add-edit-button"]`).click().then(() => {
                 cy.get(`[data-cy="users-modal-add-edit-button"] svg`).should('have.class', 'fa-spinner')
@@ -70,7 +69,7 @@ describe('Api Endpoints User', () => {
         })
     })
 
-    describe.only('Update User', () => {
+    describe('Update User', () => {
         beforeEach(() => {
             cy.getAllUser()
             cy.visit('/users')
@@ -100,11 +99,33 @@ describe('Api Endpoints User', () => {
     })
 
     describe('Delete User', () => {
-        it('should open delete modal when click on delete')
+        beforeEach(() => {
+            cy.getAllUser()
+            cy.visit('/users')
 
-        it('should delete user when click delete on modal')
+            cy.get('[data-cy="users-delete-button"]').first().click()
+        })
 
-        it('should have loading icon when deleting')
+        it('should open delete modal when click on delete', () => {
+            cy.get('h2').should('contain', `${users[0].username} löschen?`)
+        })
+
+        it('should delete user when click delete on modal', () => {
+            cy.deleteUser()
+            cy.get(`[data-cy="deletemodal-${users[0].username}-delete-button"]`).click()
+            cy.wait('@deleteUser')
+        })
+
+        it('should have loading icon when deleting', () => {
+            const interception = interceptIndefinitely('DELETE', `${api}/users/**`, "deleteUserIndefinitely", { statusCode: 204 })
+
+            cy.get(`[data-cy="deletemodal-${users[0].username}-delete-button"]`).click().then(() => {
+                cy.get(`[data-cy="deletemodal-${users[0].username}-delete-button"] svg`).should('have.class', 'fa-spinner')
+                interception.sendResponse()
+                cy.wait('@deleteUserIndefinitely')
+                cy.wait('@getAllUser')
+            })
+        })
     })
 })
 

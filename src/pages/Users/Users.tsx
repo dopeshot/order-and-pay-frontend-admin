@@ -78,7 +78,7 @@ export const Users: React.FC = () => {
                     setModalEditData(user)
                     setModalOpen(true)
                 }}>
-                    <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(user)} />
+                    <IconButton dataCy="users-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(user)} />
                 </ListItem>)}
             </List>
             {/* Content End */}
