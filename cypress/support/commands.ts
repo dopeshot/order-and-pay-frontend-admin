@@ -131,6 +131,12 @@ Cypress.Commands.add('getAllAllergens', () => {
 })
 
 /********* Users *********/
+Cypress.Commands.add('getAllUser', () => {
+    cy.intercept('GET', `${api}/users`, {
+        fixture: 'users.json'
+    }).as('getAllUser')
+})
+
 Cypress.Commands.add('createUser', () => {
     cy.intercept('POST', `${api}/auth/register`, {
         fixture: 'access_token.json'
