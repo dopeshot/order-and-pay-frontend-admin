@@ -89,6 +89,36 @@ declare global {
             getMenuOverviewEditor(): void
 
             /**
+             * Custom command to intercept all create menu requests
+             * @example cy.createMenu()
+             */
+            createMenu(): void
+
+            /**
+             * Custom command to intercept all create menu requests give duplicate error back
+             * @example cy.createMenuDuplicate()
+             */
+            createMenuDuplicate(): void
+
+            /**
+             * Custom command to intercept all get menu by id requests
+             * @example cy.getMenuById()
+             */
+            getMenuById(): void
+
+            /**
+             * Custom command to intercept all update menu by id requests
+             * @example cy.updateMenu()
+             */
+            updateMenu(): void
+
+            /**
+             * Custom command to intercept all delete menu requests
+             * @example cy.deleteDish()
+             */
+            deleteMenu(): void
+
+            /**
              * Custom command to intercept all create dish requests
              * @example cy.createDish()
              */

@@ -76,6 +76,41 @@ Cypress.Commands.add('getMenuOverviewEditor', () => {
     }).as('getMenuOverviewEditor')
 })
 
+Cypress.Commands.add('createMenu', () => {
+    cy.intercept('POST', `${api}/menus`, {
+        fixture: 'menu.json'
+    }).as('createMenu')
+})
+
+Cypress.Commands.add('createMenuDuplicate', () => {
+    cy.intercept('POST', `${api}/menus`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This menu title already exists",
+            "error": "Conflict"
+        }
+    }).as('createMenuDuplicate')
+})
+
+Cypress.Commands.add('getMenuById', () => {
+    cy.intercept('GET', `${api}/menus/**`, {
+        fixture: 'menu.json'
+    }).as('getMenuById')
+})
+
+Cypress.Commands.add('updateMenu', () => {
+    cy.intercept('PATCH', `${api}/menus/**`, {
+        fixture: 'update-menu.json'
+    }).as('updateMenu')
+})
+
+Cypress.Commands.add('deleteMenu', () => {
+    cy.intercept('DELETE', `${api}/menus/**`, {
+        statusCode: 204
+    }).as('deleteMenu')
+})
+
 /********* Dishes *********/
 Cypress.Commands.add('createDish', () => {
     cy.intercept('POST', `${api}/dishes`, {
