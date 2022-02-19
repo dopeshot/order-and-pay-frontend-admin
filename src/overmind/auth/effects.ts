@@ -15,7 +15,7 @@ export const setToken = (token?: string) => {
         localStorage.removeItem('access_token');
         delete request.defaults.headers.common['Authorization']
     } else {
-        localStorage.setItem('access_token', token);
         request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        localStorage.setItem('access_token', token);
     }
 }

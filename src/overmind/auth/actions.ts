@@ -10,7 +10,7 @@ export const initializeUser = async ({ state, effects }: Context) => {
         const userResponse = await effects.auth.getCurrentUser()
         state.auth.currentUser = userResponse.data
     }
-
+    state.auth.couldBeLoggedIn = false
     state.auth.authenticating = false
 }
 
