@@ -12,6 +12,7 @@ describe('Api Endpoints Menus', () => {
 
             cy.quickLogin()
 
+            cy.contains('Alle Menüs')
             cy.wait('@getAllMenus')
         })
 
