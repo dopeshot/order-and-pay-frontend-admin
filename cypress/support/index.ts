@@ -135,6 +135,36 @@ declare global {
             * @example cy.getAllLabels()
             */
             getAllLabels(): void
+
+            /**
+            * Custom command to intercept all create user request
+            * @example cy.getAllLabels()
+            */
+            createUser(): void
+
+            /**
+            * Custom command to intercept all create user request with duplicate email 
+            * @example cy.getAllLabels()
+            */
+            createUserDuplicateEmail(): void
+
+            /**
+            * Custom command to intercept all create user request with duplicate username 
+            * @example cy.getAllLabels()
+            */
+            createUserDuplicateUsername(): void
+
+            /**
+            * Custom command to intercept all update user request
+            * @example cy.getAllLabels()
+            */
+            updateUser(): void
+
+            /**
+            * Custom command to intercept all delete user request
+            * @example cy.getAllLabels()
+            */
+            deleteUser(): void
         }
     }
 }

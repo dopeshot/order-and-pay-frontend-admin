@@ -130,6 +130,48 @@ Cypress.Commands.add('getAllAllergens', () => {
     }).as('getAllAllergens')
 })
 
+/********* Users *********/
+Cypress.Commands.add('createUser', () => {
+    cy.intercept('POST', `${api}/auth/register`, {
+        fixture: 'access_token.json'
+    }).as('createUser')
+})
+
+Cypress.Commands.add('createUserDuplicateEmail', () => {
+    cy.intercept('POST', `${api}/auth/register`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Creating a user (username = test) failed due to a conflict.",
+            "error": "Conflict"
+        }
+    }).as('createUserDuplicateEmail')
+})
+
+Cypress.Commands.add('createUserDuplicateUsername', () => {
+    cy.intercept('POST', `${api}/auth/register`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Creating a user (email = test@gmail.de) failed due to a conflict.",
+            "error": "Conflict"
+        }
+    }).as('createUserDuplicateUsername')
+})
+
+Cypress.Commands.add('updateUser', () => {
+    cy.intercept('PATCH', `${api}/users/**`, {
+        fixture: 'user.json'
+    }).as('updateUser')
+})
+
+Cypress.Commands.add('deleteUser', () => {
+    cy.intercept('DELETE', `${api}/users/**`, {
+        statusCode: 204
+    }).as('deleteUser')
+})
+
+
 
 
 export { }
