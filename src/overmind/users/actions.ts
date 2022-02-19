@@ -5,7 +5,7 @@ import { UserDto } from "./effects"
 /**
  * Get all Users
  */
-export const getAllUser = async ({ state, effects }: Context) => {
+export const getAllUser = async ({ state, actions, effects }: Context) => {
     try {
         const response = await effects.users.getAllUser()
         const users = response.data
@@ -13,6 +13,13 @@ export const getAllUser = async ({ state, effects }: Context) => {
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Benutzer",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
