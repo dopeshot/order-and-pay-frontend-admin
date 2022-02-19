@@ -3,7 +3,7 @@ import { Context } from ".."
 import { MenuDto } from "./effects"
 import { Menu } from "./state"
 
-export const getAllMenus = async ({ state, effects }: Context): Promise<Menu[] | undefined> => {
+export const getAllMenus = async ({ state, actions, effects }: Context): Promise<Menu[] | undefined> => {
     // istanbul ignore next // Backoff when already loading
     if (state.menus.isLoadingMenus)
         return
@@ -15,6 +15,13 @@ export const getAllMenus = async ({ state, effects }: Context): Promise<Menu[] |
         state.menus.menus = menus
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Menüs",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
     state.menus.isLoadingMenus = false
