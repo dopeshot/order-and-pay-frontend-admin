@@ -88,6 +88,11 @@ describe('Api Endpoints User', () => {
             cy.get(`[data-cy="users-modal-add-edit"]`).should('be.visible')
         })
 
+        it('should close modal when click x icon', () => {
+            cy.get(`[data-cy="modal-close-iconbutton"]`).click()
+            cy.get(`[data-cy="users-modal-add-edit"]`).should('not.exist')
+        })
+
         it('should have filled all fields except password', () => {
             cy.get(`[data-cy="textinput-username-input"]`).should('have.value', users[0].username)
             cy.get(`[data-cy="textinput-email-input"]`).should('have.value', users[0].email)
@@ -116,6 +121,11 @@ describe('Api Endpoints User', () => {
 
         it('should open delete modal when click on delete', () => {
             cy.get('h2').should('contain', `${users[0].username} löschen?`)
+        })
+
+        it('should close modal when click x icon', () => {
+            cy.get(`[data-cy="modal-close-iconbutton"]`).click()
+            cy.get(`[data-cy="users-modal-add-edit"]`).should('not.exist')
         })
 
         it('should delete user when click delete on modal', () => {

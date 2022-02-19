@@ -73,7 +73,7 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
 
     // Modal close handler
     const handleModelDismiss = () => {
-        // Prevent closing modal when form is submitting
+        // istanbul ignore if // Prevent closing modal when form is submitting
         if (isModalLoading)
             return
 
