@@ -8,15 +8,20 @@ import { TextInput } from "../../components/Form/TextInput"
 import { useActions, useAppState } from "../../overmind"
 import { Credentials } from "../../overmind/auth/effects"
 
-
+export type LocationState = {
+    from: {
+        pathname: string
+    }
+}
 export const Login: React.FC = () => {
     const { authenticating } = useAppState().auth
     const { login } = useActions().auth
 
-    const location = useLocation<any>()
+    const location = useLocation<LocationState>()
     const history = useHistory()
     const { from } = location.state || { from: { pathname: "/admin" } };
 
+    // MC TODO: Add types here
     const initialLoginValues: any = {
         email: "",
         password: ""
