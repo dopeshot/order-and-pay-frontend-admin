@@ -117,15 +117,17 @@ export const MenuEditor: React.FC = () => {
         {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
             <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
             <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="title" labelText="Titel" placeholder="Mittagskarte, Abendmenu,..." labelRequired autoFocus />
-                    <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
-                    <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
-                    <div className="flex flex-col md:flex-row justify-between mt-4">
-                        {isEditing && <Button dataCy="menus-delete-button" kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                        <Button dataCy="menus-add-edit-save-button" type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
-                    </div>
-                </Form>
+                {({ dirty, isValid }) => (
+                    <Form>
+                        <TextInput name="title" labelText="Titel" placeholder="Mittagskarte, Abendmenu,..." labelRequired autoFocus />
+                        <Textarea rows={3} name="description" labelText="Beschreibung" placeholder="Beschreibung" maxLength={240} helperText="Diese Beschreibung wird in der Menü Übersicht angezeigt." />
+                        <Toggle name="isActive" labelText="Soll dieses Menu aktiv sein?" labelOn="Aktiv" labelOff="Inaktiv" helperText="Wenn du diese Option setzt werden alle anderen Menus deaktiviert" />
+                        <div className="flex flex-col md:flex-row justify-between mt-4">
+                            {isEditing && <Button dataCy="menus-delete-button" kind="tertiary" onClick={() => setHasDeleteModal(true)} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            <Button dataCy="menus-add-edit-save-button" type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} disabled={!(dirty && isValid)} className="ml-auto mb-4">Speichern</Button>
+                        </div>
+                    </Form>
+                )}
             </Formik>
 
             {/* Delete Modal */}

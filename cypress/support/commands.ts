@@ -253,6 +253,76 @@ Cypress.Commands.add('deleteLabel', () => {
     }).as('deleteLabel')
 })
 
+/********* Users *********/
+Cypress.Commands.add('getAllUser', () => {
+    cy.intercept('GET', `${api}/users`, {
+        fixture: 'users.json'
+    }).as('getAllUser')
+})
+
+Cypress.Commands.add('createUser', () => {
+    cy.intercept('POST', `${api}/auth/register`, {
+        fixture: 'access_token.json'
+    }).as('createUser')
+})
+
+Cypress.Commands.add('createUserDuplicateEmail', () => {
+    cy.intercept('POST', `${api}/auth/register`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Username is already taken.",
+            "error": "Conflict"
+        }
+    }).as('createUserDuplicateEmail')
+})
+
+Cypress.Commands.add('createUserDuplicateUsername', () => {
+    cy.intercept('POST', `${api}/auth/register`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Email is already taken.",
+            "error": "Conflict"
+        }
+    }).as('createUserDuplicateUsername')
+})
+
+Cypress.Commands.add('updateUser', () => {
+    cy.intercept('PATCH', `${api}/users/**`, {
+        fixture: 'update-user.json'
+    }).as('updateUser')
+})
+
+Cypress.Commands.add('updateUserDuplicateUsername', () => {
+    cy.intercept('PATCH', `${api}/users/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Username is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateUserDuplicateUsername')
+})
+
+Cypress.Commands.add('updateUserDuplicateEmail', () => {
+    cy.intercept('PATCH', `${api}/users/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Email is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateUserDuplicateEmail')
+})
+
+Cypress.Commands.add('deleteUser', () => {
+    cy.intercept('DELETE', `${api}/users/**`, {
+        statusCode: 204
+    }).as('deleteUser')
+})
+
+
 
 
 export { }

@@ -83,12 +83,16 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
     return (
         <Modal dataCy="labels-modal-add-edit" modalHeading={modalEditData ? `Label bearbeiten` : `Neues Label hinzufügen`} open={modalOpen} onDissmis={handleModelDismiss}>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={submitForm}>
-                <Form>
-                    <TextInput name="title" placeholder="Gesund, Empfohlen, Lecker..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
-                    <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
-                    <Button dataCy="labels-modal-add-edit-button" type="submit" loading={isModalLoading} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
-                </Form>
-            </Formik>
-        </Modal>
+                {({ dirty, isValid }) => (
+                    <Form>
+                        <TextInput name="title" placeholder="Gesund, Empfohlen, Lecker..." helperText="Wird am Gericht angezeigt" labelText="Name" labelRequired autoFocus />
+                        <TextInput name="icon" placeholder="user" helperText="Font Awesome Icon eingeben!" labelText="Icon" />
+                        <div className="flex justify-end">
+                            <Button dataCy="labels-modal-add-edit-button" type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                        </div>
+                    </Form>
+                )}
+            </Formik >
+        </Modal >
     )
 }
