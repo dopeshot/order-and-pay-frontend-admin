@@ -47,23 +47,28 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
         setIsModalLoading(true)
 
         // Check if we are editing or creating a new label
-        if (modalEditData) {
-            if (!await updateLabel({
-                id: modalEditData._id,
-                label: values
-            }))
-                return
-            // Clear modal data
-            if (setModalEditData)
-                setModalEditData(null)
-            setModalOpen(false)
+        try {
+            if (modalEditData) {
+                if (!await updateLabel({
+                    id: modalEditData._id,
+                    label: values
+                }))
+                    throw Error()
+                // Clear modal data
+                if (setModalEditData)
+                    setModalEditData(null)
+                setModalOpen(false)
+            }
+            else {
+                if (!await createLabel(values))
+                    throw Error()
+                setModalOpen(false)
+            }
+        } catch (error) {
+            // Create or update failed
+        } finally {
+            setIsModalLoading(false)
         }
-        else {
-            if (!await createLabel(values))
-                return
-            setModalOpen(false)
-        }
-        setIsModalLoading(false)
     }
 
     // Modal close handler
