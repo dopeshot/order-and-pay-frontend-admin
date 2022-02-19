@@ -46,4 +46,4 @@ export type OrderDto = {
 
 export const getAllOrders = () => request.get<Order[]>('/orders')
 
-export const updateOrder = (id: string, order: OrderDto) => request.patch<OrderDto>(`/orders/${id}`, order)
+export const updateOrder = (id: string, order: OrderDto) => request.patch<Order>(`/orders/${id}`, order)

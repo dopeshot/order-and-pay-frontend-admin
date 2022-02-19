@@ -2,20 +2,29 @@ import { Context } from ".."
 import { OrderDto } from "./effects"
 
 // Get all order action
-export const getAllOrders = async ({ effects }: Context) => {
+export const getAllOrders = async ({ state, effects }: Context) => {
+    // istanbul ignore next // Backoff when already loading
+    if (state.orders.isLoadingOrders)
+        return
+
+    state.orders.isLoadingOrders = true
     try {
-        await effects.orders.getAllOrders()
-        return true
-    } catch (error) {
+        const response = await effects.orders.getAllOrders()
+        const orders = response.data
+        state.orders.orders = orders
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
-        throw (error)
     }
+    state.orders.isLoadingOrders = false
 }
 
 // Update order status and payment action
-export const updateOrder = async ({ effects }: Context, { id, order }: { id: string, order: OrderDto }): Promise<boolean> => {
+export const updateOrder = async ({ state, effects }: Context, { id, order }: { id: string, order: OrderDto }): Promise<boolean> => {
     try {
-        await effects.orders.updateOrder(id, order)
+        const response = await effects.orders.updateOrder(id, order)
+        const updatedOrder = response.data
+        const index = state.orders.orders.findIndex(allergen => allergen._id === id)
+        state.orders.orders[index] = updatedOrder
         return true
     } catch (error) {
         console.error(error)
