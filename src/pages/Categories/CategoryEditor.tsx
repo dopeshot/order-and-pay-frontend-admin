@@ -127,8 +127,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
             ...values,
             choices
         }
-        console.log("finalObject:", newCategory)
-
         setIsLoadingSave(true)
 
         try {
@@ -167,8 +165,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
     })
 
     const submitChoice = (values: ChoiceDto) => {
-        console.log("submitChoice:", values)
-
         if (isEditingChoice && editChoiceData) {
             // Find object and merge new values
             setChoices(choices => {
@@ -232,8 +228,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
     })
 
     const submitOption = (values: OptionDto) => {
-        console.log("submitOption:", values)
-
         if (parentChoiceId === null) {
             console.error("parentChoiceId is not defined.")
             return
@@ -256,7 +250,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
             })
         } else {
             // Create new option from OptionDto. + next id
-            console.log(parentChoiceIndex, choices[parentChoiceIndex])
             const newOption: Option = {
                 ...optionData,
                 id: Math.max(...choices[parentChoiceIndex].options.map(option => option.id), 0) + 1
