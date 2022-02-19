@@ -30,7 +30,7 @@ const overmind = createOvermind(config, {
   devtools: true
 })
 
-// Add cypress to window while in testing mode istanbul ignore else
+// istanbul ignore else // Add cypress to window while in testing mode 
 if (window.Cypress) {
   window.overmind = overmind
 }
