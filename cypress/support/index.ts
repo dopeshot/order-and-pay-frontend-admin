@@ -227,7 +227,7 @@ declare global {
              */
             easyLogin(): void
 
-            /*
+            /**
             * Custom command to intercept all get all users requests
             * @example cy.getAllUser()
             */
