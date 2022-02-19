@@ -178,7 +178,7 @@ describe('Api Endpoints', () => {
         })
 
         it('should have loading icon when deleting', () => {
-            const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { fixture: 'dish.json' })
+            const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { statusCode: 204 })
             cy.getMenuOverviewEditor()
 
             cy.get('[data-cy="dishes-delete-button"]').click()
