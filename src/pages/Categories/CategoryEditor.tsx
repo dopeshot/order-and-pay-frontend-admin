@@ -367,7 +367,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                         </List>
 
                         <div className="flex flex-col md:flex-row justify-between mt-4">
-                            {isEditing && <Button kind="tertiary" onClick={deleteCategory} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                            {isEditing && <Button kind="tertiary" onClick={deleteCategory} loading={isLoadingDelete} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
                             <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
                         </div>
                     </Form>
