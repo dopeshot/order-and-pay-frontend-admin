@@ -38,7 +38,7 @@ export const TextInput: React.FC<TextInputProps> = ({ name, placeholder, labelTe
                         {icon && <FontAwesomeIcon icon={icon} className={`absolute right-6 ${props.meta.error && props.meta.touched ? "" : "text-darkgrey"}`} />}
                         <input data-cy={`textinput-${name}-input`} autoComplete={autoComplete} type={type} placeholder={placeholder} autoFocus={autoFocus} {...props.field} className={`font-roboto rounded-xl pl-4 py-2 ${icon ? "pr-10" : ""} ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`} />
                     </div>
-                    {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey text-sm font-semibold">{helperText}</p>}
+                    {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey text-sm">{helperText}</p>}
                 </>
             )}</Field>
             <FormError dataCy={`textinput-${name}-form-error`} field={name} />

@@ -51,7 +51,7 @@ export const Dropdown: React.FC<DropdownProps> = ({ name, labelText, helperText,
                             </button>
                         ))}
                     </div>}
-                    {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm font-semibold mt-1">{helperText}</p>}
+                    {!(props.meta.error && props.meta.touched) && <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm mt-1">{helperText}</p>}
                 </div>
             )}</Field>
             <FormError dataCy={`dropdown-${name}-form-error`} field={name} />

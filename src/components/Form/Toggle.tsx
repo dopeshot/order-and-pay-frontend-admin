@@ -30,7 +30,7 @@ export const Toggle: React.FC<ToggleProps> = ({ name, labelText, labelOn, labelO
                     <p data-cy={`${name}-labeltext`} className="text-darkgrey text-sm font-semibold pl-2">{props.field.value ? labelOn : labelOff}</p>
                 </div>
             )}</Field>
-            <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm font-semibold">{helperText}</p>
+            <p data-cy={`${name}-helpertext`} className="text-lightgrey text-sm">{helperText}</p>
         </div>
     )
 }

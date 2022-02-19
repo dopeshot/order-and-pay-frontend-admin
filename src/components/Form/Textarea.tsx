@@ -36,7 +36,7 @@ export const Textarea: React.FC<TextareaProps> = ({ name, placeholder, labelText
                         <textarea data-cy={`textarea-${name}-input`} placeholder={placeholder} autoFocus={autoFocus} {...props.field} rows={rows} className={`font-roboto rounded-lg py-3 px-4 w-full placeholder-placeholder-grey ${props.meta.error && props.meta.touched ? 'bg-danger-red bg-opacity-10 border-2 border-danger-red focus:outline-none focus:border-danger-red focus:ring-danger-red' : 'border border-border-grey'}`}>
                         </textarea>
                     </div>
-                    {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey">{helperText}</p>}
+                    {!(props.meta.error && props.meta.touched) && <p className="text-lightgrey text-sm">{helperText}</p>}
                 </>
             )}</Field>
             <FormError dataCy={`textarea-${name}-form-error`} field={name} />
