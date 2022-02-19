@@ -89,6 +89,42 @@ declare global {
             getMenuOverviewEditor(): void
 
             /**
+             * Custom command to intercept all get all menus requests
+             * @example cy.getAllMenus()
+             */
+            getAllMenus(): void
+
+            /**
+             * Custom command to intercept all create menu requests
+             * @example cy.createMenu()
+             */
+            createMenu(): void
+
+            /**
+             * Custom command to intercept all create menu requests give duplicate error back
+             * @example cy.createMenuDuplicate()
+             */
+            createMenuDuplicate(): void
+
+            /**
+             * Custom command to intercept all get menu by id requests
+             * @example cy.getMenuById()
+             */
+            getMenuById(): void
+
+            /**
+             * Custom command to intercept all update menu by id requests
+             * @example cy.updateMenu()
+             */
+            updateMenu(): void
+
+            /**
+             * Custom command to intercept all delete menu requests
+             * @example cy.deleteDish()
+             */
+            deleteMenu(): void
+
+            /**
              * Custom command to intercept all create dish requests
              * @example cy.createDish()
              */
@@ -131,10 +167,71 @@ declare global {
             getAllAllergens(): void
 
             /**
-            * Custom command to intercept all get all labels request
-            * @example cy.getAllLabels()
+            * Custom command to intercept all create allergen request
+            * @example cy.createAllergen()
             */
+            createAllergen(): void
+
+            /**
+            * Custom command to intercept all create allergen request with duplicate title
+            * @example cy.createAllergenDuplicateTitle()
+            */
+            createAllergenDuplicateTitle(): void
+
+            /**
+            * Custom command to intercept all update allergen request
+            * @example cy.updateAllergen()
+            */
+            updateAllergen(): void
+
+            /**
+            * Custom command to intercept all update allergen request with duplicate title
+            * @example cy.updateAllergenDuplicateTitle()
+            */
+            updateAllergenDuplicateTitle(): void
+
+            /**
+            * Custom command to intercept all delete allergen request
+            * @example cy.deleteAllergen()
+            */
+            deleteAllergen(): void
+
+
+            /**
+             * Custom command to intercept all get all labels request
+             * @example cy.getAllLabels()
+             */
             getAllLabels(): void
+
+            /**
+            * Custom command to intercept all create label request
+            * @example cy.createLabel()
+            */
+            createLabel(): void
+
+            /**
+            * Custom command to intercept all create label request with duplicate title
+            * @example cy.createLabelDuplicateTitle()
+            */
+            createLabelDuplicateTitle(): void
+
+            /**
+            * Custom command to intercept all update label request
+            * @example cy.updateLabel()
+            */
+            updateLabel(): void
+
+            /**
+            * Custom command to intercept all update label request with duplicate title
+            * @example cy.updateLabelDuplicateTitle()
+            */
+            updateLabelDuplicateTitle(): void
+
+            /**
+            * Custom command to intercept all delete label request
+            * @example cy.deleteLabel()
+            */
+            deleteLabel(): void
         }
     }
 }

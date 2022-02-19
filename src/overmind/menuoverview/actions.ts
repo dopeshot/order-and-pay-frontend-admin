@@ -6,8 +6,8 @@ export const getMenuEditor = async ({ state, effects }: Context, id: string): Pr
         const menu = response.data
         state.menuoverview.menu = menu
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+        return false
     }
-    return false
 }

@@ -22,7 +22,7 @@ type DeleteModalProps = {
  */
 export const DeleteModal: React.FC<DeleteModalProps> = ({ title, open, onDissmis, handleDelete, isLoadingDelete, description }) => {
     return (
-        <Modal modalHeading={`${title} löschen?`} open={open} onDissmis={onDissmis}>
+        <Modal dataCy={`deletemodal-${title}`} modalHeading={`${title} löschen?`} open={open} onDissmis={onDissmis}>
             <p>{description}</p>
             <div className="flex md:justify-between flex-col md:flex-row">
                 <Button kind="tertiary" onClick={onDissmis} className="my-4 md:my-0">Abbrechen</Button>

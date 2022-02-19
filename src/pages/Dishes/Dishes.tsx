@@ -62,6 +62,7 @@ export const Dishes: React.FC = () => {
                 // Fetch dish and set editing
                 const dish = await getDishById(dishId!) // ! because we only call when isEditing
 
+                // istanbul ignore next // is just for handling async correct
                 if (!isMounted)
                     return
 
@@ -78,6 +79,7 @@ export const Dishes: React.FC = () => {
         async function prepDataOptions() {
             const responses = await Promise.all([getAllCategories(), getAllLabels(), getAllAllergens()])
 
+            // istanbul ignore next // is just for handling async correct
             if (!isMounted)
                 return
 
@@ -91,6 +93,7 @@ export const Dishes: React.FC = () => {
         async function main() {
             await Promise.all([prepDataOptions(), loadDish()])
 
+            // istanbul ignore next // is just for handling async correct
             if (!isMounted)
                 return
 
@@ -166,7 +169,7 @@ export const Dishes: React.FC = () => {
 
     // Dish delete 
     const handleDishDelete = async () => {
-        // Check if we are editing a dish
+        // istanbul ignore next // Should not happen
         if (!isEditing || !dishId)
             return
 

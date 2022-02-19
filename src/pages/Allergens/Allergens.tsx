@@ -30,6 +30,7 @@ export const Allergens: React.FC = () => {
     }, [getAllAllergens])
 
     const handleDelete = async (event: any) => {
+        /* istanbul ignore next // should not happen just fallback */
         if (!selectedAllergen) {
             console.warn("There is no allergen selected.")
             return
@@ -62,7 +63,7 @@ export const Allergens: React.FC = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Allergene</h1>
-                <p className="text-lightgrey mr-3 mb-4">{!isLoadingAllergens ? allergens.length : 0} Gesamt</p>
+                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{!isLoadingAllergens ? allergens.length : 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Allergen hinzufügen</Button>
@@ -72,11 +73,11 @@ export const Allergens: React.FC = () => {
 
         {/* Content */}
         <List lines>
-            {allergens.map((allergen) => <ListItem key={allergen._id} title={allergen.title} icon={allergen.icon as IconProp} onClick={() => {
+            {allergens.map((allergen) => <ListItem dataCy="allergens-list-item" key={allergen._id} title={allergen.title} icon={allergen.icon as IconProp} onClick={() => {
                 setModalEditData(allergen)
                 setModalOpen(true)
             }}>
-                <IconButton className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(allergen)} />
+                <IconButton dataCy="allergens-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(allergen)} />
             </ListItem>)}
         </List>
         {/* Content End */}
