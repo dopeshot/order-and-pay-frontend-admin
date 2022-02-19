@@ -432,7 +432,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
         {/* Delete modal for options */}
         <DeleteModal
-            title={optionDeleteData?.optionTitle ?? "Unbekannt"}
+            title={`Option "${optionDeleteData?.optionTitle}"` ?? "Unbekannt"}
             description={`Das Löschen kann nicht rückgängig gemacht werden.`}
             open={isOptionDeleteModalOpen}
             onDissmis={closeOptionDeleteModal}
