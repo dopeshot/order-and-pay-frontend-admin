@@ -156,7 +156,7 @@ export const Dishes: React.FC = () => {
             else
                 await createDish(dish)
 
-            history.push(`/menus/${menuId}/editor`)
+            history.push(`/admin/menus/${menuId}/editor`)
         } catch (error) {
             if (!axios.isAxiosError(error))
                 return
@@ -178,12 +178,12 @@ export const Dishes: React.FC = () => {
         await deleteDish(dishId)
 
         setIsLoadingDelete(false)
-        history.push(`/menus/${menuId}/editor`)
+        history.push(`/admin/menus/${menuId}/editor`)
     }
 
     return (
         <div className="container mt-12">
-            <BackButton dataCy="dishes-back-button" to={`/menus/${menuId}/editor`} />
+            <BackButton dataCy="dishes-back-button" to={`/admin/menus/${menuId}/editor`} />
             {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
                 <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Gericht bearbeiten' : 'Neues Gericht erstellen'}</h1>
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>

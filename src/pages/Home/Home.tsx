@@ -23,8 +23,8 @@ export const Home: React.FunctionComponent = () => {
                 </Form>
             </Formik>
 
-            <Link to="/tables">Gehe zu Tabellen</Link>
-            <Link to="/menus/1/edit">Gehe zu Menu Overview</Link>
+            <Link to="/admin/tables">Gehe zu Tabellen</Link>
+            <Link to="/admin/menus/1/edit">Gehe zu Menu Overview</Link>
             <List lines>
                 <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
                 <ListItem title="Football" indent onClick={() => console.log("parent")} header={<Tag title="Favorite" />}>
@@ -35,10 +35,10 @@ export const Home: React.FunctionComponent = () => {
                 <ListItem title="Hello" indent header={<p>Header</p>} onClick={() => console.log("parent")}>
                     <p>Children</p>
                 </ListItem>
-                <ListItem to="/home" title="Links" background>
+                <ListItem to="/admin/home" title="Links" background>
                     <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
                 </ListItem>
-                <ListItem to="/home" title="Facebook" header={<Tag title="Trending" type={TagTypesEnum.green} />}>
+                <ListItem to="/admin/home" title="Facebook" header={<Tag title="Trending" type={TagTypesEnum.green} />}>
                     <IconButton icon={faLink} className="mr-2" to="/home" />
                     <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
                 </ListItem>

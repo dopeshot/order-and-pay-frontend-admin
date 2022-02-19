@@ -198,7 +198,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 await createCategory(newCategory)
             }
 
-            history.push(`/menus/${newCategory.menuId}/editor`)
+            history.push(`/admin/menus/${newCategory.menuId}/editor`)
         } catch (error) {
             if (!axios.isAxiosError(error))
                 return
@@ -220,7 +220,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         await deleteCategoryById(categoryId)
 
         setIsLoadingDelete(false)
-        history.push(`/menus/${menuId}/editor`)
+        history.push(`/admin/menus/${menuId}/editor`)
     }
 
     // choices
@@ -369,7 +369,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     return <>
         <div className="container mt-12">
-            <BackButton to={`/menus/${menuId}/editor`} />
+            <BackButton to={`/admin/menus/${menuId}/editor`} />
             {isLoading ? <Loading /> : <>
                 <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
 
