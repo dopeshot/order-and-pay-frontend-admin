@@ -37,7 +37,7 @@ export const createAllergen = async ({ state, actions, effects }: Context, aller
     }
 }
 
-export const updateAllergen = async ({ state, effects }: Context, { id, allergen }: { id: string, allergen: AllergenDto }): Promise<boolean> => {
+export const updateAllergen = async ({ state, actions, effects }: Context, { id, allergen }: { id: string, allergen: AllergenDto }): Promise<boolean> => {
     try {
         const response = await effects.allergens.updateAllergen(id, allergen)
         const updatedAllergen = response.data
@@ -46,6 +46,13 @@ export const updateAllergen = async ({ state, effects }: Context, { id, allergen
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Aktualisieren des Allergens",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
