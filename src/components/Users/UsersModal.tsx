@@ -91,7 +91,7 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
                         <TextInput name="email" placeholder="name@adresse.de" labelText="E-Mail" labelRequired autoFocus />
                         <PasswordInput />
                         <div className="flex justify-end">
-                            <Button dataCy="users-modal-add-button" type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
+                            <Button dataCy="users-modal-add-edit-button" type="submit" loading={isModalLoading} disabled={!(dirty && isValid)} icon={faCheck}>{modalEditData ? `Speichern` : `Hinzufügen`}</Button>
                         </div>
                     </Form>
                 )}

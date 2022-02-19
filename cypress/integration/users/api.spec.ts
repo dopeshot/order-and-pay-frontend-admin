@@ -1,3 +1,4 @@
+import updateuser from '../../fixtures/update-user.json';
 import users from '../../fixtures/users.json';
 import { interceptIndefinitely } from '../../support/utils';
 
@@ -40,7 +41,7 @@ describe('Api Endpoints User', () => {
             cy.createUser()
             cy.getAllUser()
 
-            cy.get(`[data-cy="users-modal-add-button"]`).click()
+            cy.get(`[data-cy="users-modal-add-edit-button"]`).click()
 
             cy.wait('@createUser')
             cy.wait('@getAllUser')
@@ -49,7 +50,7 @@ describe('Api Endpoints User', () => {
         it('should have disabled state when inputs are wrong', () => {
             cy.get(`[data-cy="textinput-username-input"]`).focus().blur()
 
-            cy.get(`[data-cy="users-modal-add-button"]`).should('have.class', 'opacity-80')
+            cy.get(`[data-cy="users-modal-add-edit-button"]`).should('have.class', 'opacity-80')
         })
 
         it('should have loading icon when sending', () => {
@@ -60,8 +61,8 @@ describe('Api Endpoints User', () => {
             const interception = interceptIndefinitely('POST', `${api}/auth/register`, "createUserIndefinitely", { fixture: 'user.json' })
             cy.getAllUser()
 
-            cy.get(`[data-cy="users-modal-add-button"]`).click().then(() => {
-                cy.get(`[data-cy="users-modal-add-button"] svg`).should('have.class', 'fa-spinner')
+            cy.get(`[data-cy="users-modal-add-edit-button"]`).click().then(() => {
+                cy.get(`[data-cy="users-modal-add-edit-button"] svg`).should('have.class', 'fa-spinner')
                 interception.sendResponse()
                 cy.wait('@createUserIndefinitely')
                 cy.wait('@getAllUser')
@@ -69,12 +70,33 @@ describe('Api Endpoints User', () => {
         })
     })
 
-    describe('Update User', () => {
-        it('should open modal when click user list item')
+    describe.only('Update User', () => {
+        beforeEach(() => {
+            cy.getAllUser()
+            cy.visit('/users')
 
-        it('should have filled all fields')
+            cy.get('[data-cy="users-list-item"]').first().click()
+        })
 
-        it('should update user')
+        it('should open modal when click user list item', () => {
+            cy.contains('Benutzer bearbeiten').should('be.visible')
+            cy.get(`[data-cy="users-modal-add-edit"]`).should('be.visible')
+        })
+
+        it('should have filled all fields except password', () => {
+            cy.get(`[data-cy="textinput-username-input"]`).should('have.value', users[0].username)
+            cy.get(`[data-cy="textinput-email-input"]`).should('have.value', users[0].email)
+            cy.get(`[data-cy="password-input"]`).should('have.value', "")
+        })
+
+        it('should update user', () => {
+            cy.get(`[data-cy="textinput-username-input"]`).clear().type(updateuser.username)
+            cy.get(`[data-cy="password-input"]`).type("123456789")
+
+            cy.updateUser()
+            cy.get(`[data-cy="users-modal-add-edit-button"]`).click()
+            cy.wait('@updateUser')
+        })
     })
 
     describe('Delete User', () => {

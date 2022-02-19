@@ -167,6 +167,18 @@ declare global {
             updateUser(): void
 
             /**
+            * Custom command to intercept all update user request with duplicate email 
+            * @example cy.createUserDuplicateEmail()
+            */
+            updateUserDuplicateEmail(): void
+
+            /**
+            * Custom command to intercept all update user request with duplicate username 
+            * @example cy.createUserDuplicateUsername()
+            */
+            updateUserDuplicateUsername(): void
+
+            /**
             * Custom command to intercept all delete user request
             * @example cy.deleteUser()
             */

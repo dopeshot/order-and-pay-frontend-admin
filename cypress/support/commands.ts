@@ -148,7 +148,7 @@ Cypress.Commands.add('createUserDuplicateEmail', () => {
         statusCode: 409,
         body: {
             "statusCode": 409,
-            "message": "Creating a user (username = test) failed due to a conflict.",
+            "message": "Username is already taken.",
             "error": "Conflict"
         }
     }).as('createUserDuplicateEmail')
@@ -159,7 +159,7 @@ Cypress.Commands.add('createUserDuplicateUsername', () => {
         statusCode: 409,
         body: {
             "statusCode": 409,
-            "message": "Creating a user (email = test@gmail.de) failed due to a conflict.",
+            "message": "Email is already taken.",
             "error": "Conflict"
         }
     }).as('createUserDuplicateUsername')
@@ -167,8 +167,30 @@ Cypress.Commands.add('createUserDuplicateUsername', () => {
 
 Cypress.Commands.add('updateUser', () => {
     cy.intercept('PATCH', `${api}/users/**`, {
-        fixture: 'user.json'
+        fixture: 'update-user.json'
     }).as('updateUser')
+})
+
+Cypress.Commands.add('updateUserDuplicateUsername', () => {
+    cy.intercept('PATCH', `${api}/users/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Username is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateUserDuplicateUsername')
+})
+
+Cypress.Commands.add('updateUserDuplicateEmail', () => {
+    cy.intercept('PATCH', `${api}/users/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "Email is already taken.",
+            "error": "Conflict"
+        }
+    }).as('updateUserDuplicateEmail')
 })
 
 Cypress.Commands.add('deleteUser', () => {
