@@ -1,5 +1,5 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faAddressBook, faCheck, faCheckDouble, faHamburger, faPizzaSlice, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faAddressBook, faCheck, faCheckDouble, faFolder, faHamburger, faPizzaSlice, faUser } from "@fortawesome/free-solid-svg-icons";
 import { createOvermind } from 'overmind';
 import { Provider } from 'overmind-react';
 import React from 'react';
@@ -13,7 +13,7 @@ import { config } from './overmind';
 import reportWebVitals from './reportWebVitals';
 
 // We have to predefine all icons we are using from api (they will get added to the bundle)
-library.add(faUser, faAddressBook, faCheck, faCheckDouble, faHamburger, faPizzaSlice)
+library.add(faUser, faAddressBook, faCheck, faCheckDouble, faHamburger, faPizzaSlice, faFolder)
 
 // Load custom font https://fonts.adobe.com/fonts/sofia
 const WebFontConfig = {

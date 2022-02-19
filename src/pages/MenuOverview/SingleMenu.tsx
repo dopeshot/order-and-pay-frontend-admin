@@ -98,7 +98,7 @@ export const SingleMenu: React.FC = () => {
                         <>
                             {/* Category */}
                             {menu?.categories.map(category => (<div key={category._id}>
-                                <ListItem to={`/admin/menus/${menuId}/categories/${category._id}`} dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon as IconProp} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
+                                <ListItem to={`/admin/menus/${menuId}/categories/${category._id}`} dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon !== '' ? category.icon as IconProp : 'folder'} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
                                     {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" dataCy={`singlemenu-${category.title}-dish-add`} to={`/menus/${menuId}/categories/${category._id}/dish`} icon={faPlus} className="text-darkgrey mr-3">Gericht hinzufügen</Button>}
                                     <IconButton icon={faTrash} onClick={() => console.log("remove")} />
                                 </ListItem>
