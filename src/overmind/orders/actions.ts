@@ -3,10 +3,6 @@ import { OrderDto } from "./effects"
 
 // Get all order action
 export const getAllOrders = async ({ state, effects }: Context) => {
-    // istanbul ignore next // Backoff when already loading
-    if (state.orders.isLoadingOrders)
-        return
-
     state.orders.isLoadingOrders = true
     try {
         const response = await effects.orders.getAllOrders()
