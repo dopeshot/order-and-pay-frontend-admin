@@ -1,4 +1,4 @@
-import { Redirect, Route, useRouteMatch } from "react-router-dom"
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom"
 import { Allergens } from "../../pages/Allergens/Allergens"
 import { CategoryEditor } from "../../pages/Categories/CategoryEditor"
 import { Dishes } from "../../pages/Dishes/Dishes"
@@ -13,7 +13,7 @@ import { Topbar } from "../Navigation/Topbar"
 
 export const Admin: React.FC = () => {
 
-    const { path, url } = useRouteMatch()
+    const { path } = useRouteMatch()
 
     return <div className="h-screen">
         <Topbar />
@@ -21,21 +21,23 @@ export const Admin: React.FC = () => {
             <Sidebar />
             <div className="flex-1 overflow-y-auto">
                 {/* Content Start */}
-                <Route exact path={`${path}/tables`} component={Tables} />
-                <Route exact path={`${path}/home`} component={Home} />
-                <Route exact path={`${path}/menus`} component={Menus} />
-                <Route exact path={`${path}/menus/allergens`} component={Allergens} />
-                <Route exact path={`${path}/menus/labels`} component={Labels} />
-                <Route exact path={`${path}/menus/add`} component={MenuEditor} />
-                <Route exact path={`${path}/menus/:menuId/categories`} component={CategoryEditor} />
-                <Route exact path={`${path}/menus/:menuId/categories/:categoryId`} component={CategoryEditor} />
-                <Route exact path={`${path}/menus/:menuId/edit`} component={MenuEditor} />
-                <Route exact path={`${path}/menus/:menuId/categories/:categoryId/dish/:dishId`} component={Dishes} />
-                <Route exact path={`${path}/menus/:menuId/categories/:categoryId/dish`} component={Dishes} />
-                <Route exact path={`${path}/menus/:menuId/editor`} component={SingleMenu} />
-                <Route path={`${path}`}>
-                    <Redirect to={`${path}/home`} />
-                </Route>
+                <Switch>
+                    <Route exact path={`${path}/tables`} component={Tables} />
+                    <Route exact path={`${path}/home`} component={Home} />
+                    <Route exact path={`${path}/menus`} component={Menus} />
+                    <Route exact path={`${path}/menus/allergens`} component={Allergens} />
+                    <Route exact path={`${path}/menus/labels`} component={Labels} />
+                    <Route exact path={`${path}/menus/add`} component={MenuEditor} />
+                    <Route exact path={`${path}/menus/:menuId/categories`} component={CategoryEditor} />
+                    <Route exact path={`${path}/menus/:menuId/categories/:categoryId`} component={CategoryEditor} />
+                    <Route exact path={`${path}/menus/:menuId/edit`} component={MenuEditor} />
+                    <Route exact path={`${path}/menus/:menuId/categories/:categoryId/dish/:dishId`} component={Dishes} />
+                    <Route exact path={`${path}/menus/:menuId/categories/:categoryId/dish`} component={Dishes} />
+                    <Route exact path={`${path}/menus/:menuId/editor`} component={SingleMenu} />
+                    <Route path={`${path}`}>
+                        <Redirect to={`${path}/home`} />
+                    </Route>
+                </Switch>
                 {/* Content End */}
             </div>
         </div>
