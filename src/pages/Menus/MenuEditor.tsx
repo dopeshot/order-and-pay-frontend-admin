@@ -1,9 +1,10 @@
-import { faArrowLeft, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import * as Yup from "yup"
+import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { Textarea } from "../../components/Form/Textarea"
 import { TextInput } from "../../components/Form/TextInput"
@@ -15,12 +16,12 @@ import { MenuDto } from "../../overmind/menus/effects"
 import { Menu } from "../../overmind/menus/state"
 
 type Params = {
-    id: string
+    menuId: string
 }
 
 export const MenuEditor: React.FC = () => {
-    const { id } = useParams<Params>()
-    const isEditing = Boolean(id)
+    const { menuId } = useParams<Params>()
+    const isEditing = Boolean(menuId)
     const history = useHistory()
 
     // Get hooks to manipulate global state
@@ -39,7 +40,7 @@ export const MenuEditor: React.FC = () => {
         async function loadMenu() {
             try {
                 // Fetch menu and set editing
-                const menu = await getMenuById(id)
+                const menu = await getMenuById(menuId)
 
                 if (!isMounted)
                     return
@@ -58,7 +59,7 @@ export const MenuEditor: React.FC = () => {
             loadMenu()
 
         return () => { isMounted = false }
-    }, [getMenuById, isEditing, id])
+    }, [getMenuById, isEditing, menuId])
 
     const initialValues: MenuDto = {
         title: menu?.title ?? "",
@@ -79,7 +80,7 @@ export const MenuEditor: React.FC = () => {
             // Check if we are editing or creating a new menu
             if (isEditing) {
                 await updateMenu({
-                    id,
+                    menuId,
                     menu: values
                 })
             } else {
@@ -104,14 +105,14 @@ export const MenuEditor: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        await deleteMenu(id)
+        await deleteMenu(menuId)
 
         setIsLoadingDelete(false)
         history.push("/menus")
     }
 
     return <div className="container mt-12">
-        <Button kind="tertiary" to="/menus" icon={faArrowLeft} className="mb-3 inline-block text-darkgrey">Zurück</Button>
+        <BackButton dataCy="dishes-back-button" to="/menus" />
         {isLoading ? <Loading /> : <div style={{ maxWidth: "500px" }}>
             <h1 className="text-2xl text-headline-black font-semibold mb-2">{isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen'}</h1>
             <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={submitForm}>

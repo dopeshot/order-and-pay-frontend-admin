@@ -9,7 +9,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit('/menus/1/categories/1/dish')
+            cy.visit(`/menus/1/categories/${dish.category}/dish`)
 
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')
@@ -28,15 +28,18 @@ describe('Api Endpoints', () => {
 
             cy.get(`[data-cy="category-dropdown-button"]`).click()
             cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
-            cy.get(`[data-cy="isActive-clickdiv"]`).click()
+            cy.get(`[data-cy="isAvailable-clickdiv"]`).click()
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).check().should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
 
             cy.createDish()
+            cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-save-button"]').click()
-            cy.wait('@createDish')
 
-            cy.url().should('include', '/admin/home')
+            cy.wait('@createDish')
+            cy.wait('@getMenuOverviewEditor')
+
+            cy.url().should('include', '/admin/menus/1/editor')
         })
 
         it('should have disabled state when inputs are wrong', () => {
@@ -65,22 +68,26 @@ describe('Api Endpoints', () => {
 
             cy.get(`[data-cy="category-dropdown-button"]`).click()
             cy.get(`[data-cy="category-dropdown-option-${dish.category}"]`).click()
-            cy.get(`[data-cy="isActive-clickdiv"]`).click()
+            cy.get(`[data-cy="isAvailable-clickdiv"]`).click()
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).check().should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).check().should('be.checked')
 
             const interception = interceptIndefinitely('POST', api, "createDishIndefinitely", { fixture: 'dish.json' })
+            cy.getMenuOverviewEditor()
 
             cy.get('[data-cy="dishes-save-button"]').click().then(() => {
                 cy.get('[data-cy="dishes-save-button"] svg').should('have.class', 'fa-spinner')
                 interception.sendResponse()
                 cy.wait('@createDishIndefinitely')
+                cy.wait('@getMenuOverviewEditor')
             })
         })
 
-        it.only('should go to "/admin/menus/1/editor" when click back button', () => {
+        it('should go to "/admin/menus/1/editor" when click back button', () => {
+            cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-back-button"]').click()
 
+            cy.wait('@getMenuOverviewEditor')
             cy.url().should('include', '/admin/menus/1/editor')
         })
 
@@ -101,7 +108,7 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/1/dish/${dish._id}`)
+            cy.visit(`/menus/1/categories/${dish.category}/dish/${dish._id}`)
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')
@@ -124,7 +131,7 @@ describe('Api Endpoints', () => {
             cy.get('textarea[name="description"]').should('have.value', dish.description)
 
             cy.get(`[data-cy="category-dropdown-button"]`).should('contain', 'Burger')
-            cy.get(`[data-cy="isActive-labeltext"]`).should('contain', 'Verfügbar')
+            cy.get(`[data-cy="isAvailable-labeltext"]`).should('contain', 'Verfügbar')
             cy.get(`[data-cy="labels-option-${dish.labels[0]}"] input`).should('be.checked')
             cy.get(`[data-cy="allergens-option-${dish.allergens[0]}"] input`).should('be.checked')
         })
@@ -132,19 +139,21 @@ describe('Api Endpoints', () => {
         it('should update dish', () => {
             cy.get('input[name="title"]').type('Hello')
             cy.updateDish()
+            cy.getMenuOverviewEditor()
 
             cy.get('[data-cy="dishes-save-button"]').click()
             cy.wait('@updateDish')
+            cy.wait('@getMenuOverviewEditor')
         })
     })
 
-    describe('Delete Dish', () => {
+    describe.only('Delete Dish', () => {
         beforeEach(() => {
             cy.getDishById()
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/1/dish/${dish._id}`)
+            cy.visit(`/menus/1/categories/${dish.category}/dish/${dish._id}`)
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')
@@ -154,26 +163,30 @@ describe('Api Endpoints', () => {
 
         it('should open delete modal when click on delete', () => {
             cy.get('[data-cy="dishes-delete-button"]').click()
-            cy.contains('Dish für immer löschen?')
+            cy.contains(`${dish.title} löschen?`)
         })
 
-        it('should delete dish when click delete on modal', () => {
+        it.skip('should delete dish when click delete on modal', () => {
             cy.deleteDish()
+            cy.getMenuOverviewEditor()
             cy.get('[data-cy="dishes-delete-button"]').click()
-            cy.get('[data-cy="dishes-modal-delete-button"]').click()
+            cy.get(`[data-cy="deletemodal-${dish.title}-delete-button"]`).click()
 
             cy.wait('@deleteDish')
-            cy.url().should('include', '/admin/menus')
+            cy.wait('@getMenuOverviewEditor')
+            cy.url().should('include', '/admin/menus/1/editor')
         })
 
-        it('should have loading icon when deleting', () => {
+        it.skip('should have loading icon when deleting', () => {
             const interception = interceptIndefinitely('DELETE', `${api}/**`, "deleteDishIndefinitely", { fixture: 'dish.json' })
-            cy.get('[data-cy="dishes-delete-button"]').click()
+            cy.getMenuOverviewEditor()
 
-            cy.get('[data-cy="dishes-modal-delete-button"]').click().then(() => {
-                cy.get('[data-cy="dishes-modal-delete-button"] svg').should('have.class', 'fa-spinner')
+            cy.get('[data-cy="dishes-delete-button"]').click()
+            cy.get(`[data-cy="deletemodal-${dish.title}-delete-button"]`).click().then(() => {
+                cy.get(`[data-cy="deletemodal-${dish.title}-delete-button"] svg`).should('have.class', 'fa-spinner')
                 interception.sendResponse()
                 cy.wait('@deleteDishIndefinitely')
+                cy.wait('@getMenuOverviewEditor')
             })
         })
     })
