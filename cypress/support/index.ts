@@ -223,9 +223,9 @@ declare global {
 
             /**
              * Custom command to login without username and password
-             * @overmind cy.easyLogin()
+             * @overmind cy.quickLogin()
              */
-            easyLogin(): void
+            quickLogin(): void
 
             /**
             * Custom command to intercept all get all users requests

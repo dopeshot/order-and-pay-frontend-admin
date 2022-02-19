@@ -9,7 +9,9 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.categoryId}/dish`)
+            cy.visit(`/admin/menus/1/categories/${dish.categoryId}/dish`)
+
+            cy.quickLogin()
 
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')
@@ -108,7 +110,9 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.categoryId}/dish/${dish._id}`)
+            cy.visit(`/admin/menus/1/categories/${dish.categoryId}/dish/${dish._id}`)
+
+            cy.quickLogin()
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')
@@ -153,7 +157,9 @@ describe('Api Endpoints', () => {
             cy.getAllAllergens()
             cy.getAllLabels()
             cy.getAllCategories()
-            cy.visit(`/menus/1/categories/${dish.categoryId}/dish/${dish._id}`)
+            cy.visit(`/admin/menus/1/categories/${dish.categoryId}/dish/${dish._id}`)
+
+            cy.quickLogin()
 
             cy.wait('@getDishById')
             cy.wait('@getAllAllergens')

@@ -11,12 +11,12 @@ describe('Api Endpoints', () => {
     cy.patchTable()
     cy.deleteTable()
 
-    cy.visit('/tables')
+    cy.visit('/admin/tables')
+
+    cy.quickLogin()
   })
 
   it('should open table page', () => {
-    cy.getTables()
-
     cy.get('[data-cy="sidebar-Tische"]').click()
     cy.contains('Tische')
   })
@@ -25,7 +25,9 @@ describe('Api Endpoints', () => {
     it('should show the loading spinner when load table data and hide afterwards', () => {
       const interception = interceptIndefinitely('GET', api, 'getTableIndefinitely', { fixture: 'tables.json' })
 
-      cy.visit('/tables')
+      cy.visit('/admin/tables')
+
+      cy.quickLogin()
 
       cy.get('[data-cy="table-spinner"]').should('be.visible').then(() => {
         interception.sendResponse()

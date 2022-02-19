@@ -8,7 +8,9 @@ describe('Api Endpoints Labels', () => {
     describe('Get All Labels', () => {
         beforeEach(() => {
             cy.getAllLabels()
-            cy.visit('/menus/labels')
+            cy.visit('/admin/menus/labels')
+
+            cy.quickLogin()
 
             cy.wait('@getAllLabels')
         })
@@ -25,7 +27,9 @@ describe('Api Endpoints Labels', () => {
     describe('Create Labels', () => {
         beforeEach(() => {
             cy.getAllLabels()
-            cy.visit('/menus/labels')
+            cy.visit('/admin/menus/labels')
+
+            cy.quickLogin()
 
             cy.wait('@getAllLabels')
             cy.contains('Label hinzufügen').click()
@@ -45,8 +49,7 @@ describe('Api Endpoints Labels', () => {
             cy.wait('@createLabel')
         })
 
-        // TODO: remove skip when user merged
-        it.skip('should have disabled state when inputs are wrong', () => {
+        it('should have disabled state when inputs are wrong', () => {
             cy.get(`[data-cy="textinput-title-input"]`).focus().blur()
 
             cy.get(`[data-cy="labels-modal-add-edit-button"]`).should('have.class', 'opacity-80')
@@ -69,7 +72,9 @@ describe('Api Endpoints Labels', () => {
     describe('Update Label', () => {
         beforeEach(() => {
             cy.getAllLabels()
-            cy.visit('/menus/labels')
+            cy.visit('/admin/menus/labels')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="labels-list-item"]').first().click()
         })
@@ -101,7 +106,9 @@ describe('Api Endpoints Labels', () => {
     describe('Delete Label', () => {
         beforeEach(() => {
             cy.getAllLabels()
-            cy.visit('/menus/labels')
+            cy.visit('/admin/menus/labels')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="labels-delete-button"]').first().click()
         })

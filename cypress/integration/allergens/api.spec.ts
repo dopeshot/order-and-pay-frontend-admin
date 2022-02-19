@@ -8,8 +8,9 @@ describe('Api Endpoints Allergen', () => {
     describe('Get All Allergens', () => {
         beforeEach(() => {
             cy.getAllAllergens()
-            cy.visit('/menus/allergens')
+            cy.visit('/admin/menus/allergens')
 
+            cy.quickLogin()
             cy.wait('@getAllAllergens')
         })
 
@@ -25,8 +26,9 @@ describe('Api Endpoints Allergen', () => {
     describe('Create Allergens', () => {
         beforeEach(() => {
             cy.getAllAllergens()
-            cy.visit('/menus/allergens')
+            cy.visit('/admin/menus/allergens')
 
+            cy.quickLogin()
             cy.wait('@getAllAllergens')
             cy.contains('Allergen hinzufügen').click()
         })
@@ -45,8 +47,7 @@ describe('Api Endpoints Allergen', () => {
             cy.wait('@createAllergen')
         })
 
-        // TODO: remove skip when user merged
-        it.skip('should have disabled state when inputs are wrong', () => {
+        it('should have disabled state when inputs are wrong', () => {
             cy.get(`[data-cy="textinput-title-input"]`).focus().blur()
 
             cy.get(`[data-cy="allergens-modal-add-edit-button"]`).should('have.class', 'opacity-80')
@@ -69,8 +70,9 @@ describe('Api Endpoints Allergen', () => {
     describe('Update Allergen', () => {
         beforeEach(() => {
             cy.getAllAllergens()
-            cy.visit('/menus/allergens')
+            cy.visit('/admin/menus/allergens')
 
+            cy.quickLogin()
             cy.get('[data-cy="allergens-list-item"]').first().click()
         })
 
@@ -101,8 +103,9 @@ describe('Api Endpoints Allergen', () => {
     describe('Delete Allergen', () => {
         beforeEach(() => {
             cy.getAllAllergens()
-            cy.visit('/menus/allergens')
+            cy.visit('/admin/menus/allergens')
 
+            cy.quickLogin()
             cy.get('[data-cy="allergens-delete-button"]').first().click()
         })
 

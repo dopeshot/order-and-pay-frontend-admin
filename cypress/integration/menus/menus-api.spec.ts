@@ -8,8 +8,11 @@ describe('Api Endpoints Menus', () => {
     describe('Get All Menus', () => {
         beforeEach(() => {
             cy.getAllMenus()
-            cy.visit('/menus')
+            cy.visit('/admin/menus')
 
+            cy.quickLogin()
+
+            cy.contains('Alle Menüs')
             cy.wait('@getAllMenus')
         })
 
@@ -25,19 +28,21 @@ describe('Api Endpoints Menus', () => {
             cy.get('[data-cy=tag-box].bg-green-500').should('be.visible')
         })
 
-        it(`should go to "/menus/${menus[0]._id}/editor when click on first item`, () => {
+        it(`should go to "/admin/menus/${menus[0]._id}/editor when click on first item`, () => {
             cy.getMenuOverviewEditor()
             cy.get('[data-cy="menus-list-item"]').first().click()
             cy.wait('@getMenuOverviewEditor')
 
-            cy.url().should('include', `/menus/${menus[0]._id}/editor`)
+            cy.url().should('include', `/admin/menus/${menus[0]._id}/editor`)
         })
     })
 
     describe('Create Menu', () => {
         beforeEach(() => {
             cy.getAllMenus()
-            cy.visit('/menus')
+            cy.visit('/admin/menus')
+
+            cy.quickLogin()
 
             cy.wait('@getAllMenus')
             cy.contains('Menü hinzufügen').click()
@@ -57,8 +62,7 @@ describe('Api Endpoints Menus', () => {
             cy.wait('@createMenu')
         })
 
-        // TODO: remove skip when user merged
-        it.skip('should have disabled state when inputs are wrong', () => {
+        it('should have disabled state when inputs are wrong', () => {
             cy.get(`[data-cy="textinput-title-input"]`).focus().blur()
 
             cy.get(`[data-cy="menus-add-edit-save-button"]`).should('have.class', 'opacity-80')
@@ -82,11 +86,12 @@ describe('Api Endpoints Menus', () => {
         beforeEach(() => {
             cy.getAllMenus()
             cy.getMenuById()
-            cy.visit('/menus')
+            cy.visit('/admin/menus')
+
+            cy.quickLogin()
+
             cy.wait('@getAllMenus')
-
             cy.get('[data-cy="menus-edit-button"]').first().click()
-
             cy.wait('@getMenuById')
         })
 
@@ -120,7 +125,9 @@ describe('Api Endpoints Menus', () => {
         describe('Menu List', () => {
             beforeEach(() => {
                 cy.getAllMenus()
-                cy.visit('/menus')
+                cy.visit('/admin/menus')
+
+                cy.quickLogin()
 
                 cy.wait('@getAllMenus')
                 cy.get('[data-cy="menus-delete-button"]').first().click()
@@ -157,12 +164,13 @@ describe('Api Endpoints Menus', () => {
             beforeEach(() => {
                 cy.getAllMenus()
                 cy.getMenuById()
-                cy.visit('/menus')
-                cy.wait('@getAllMenus')
+                cy.visit('/admin/menus')
 
+                cy.quickLogin()
+
+                cy.wait('@getAllMenus')
                 cy.get('[data-cy="menus-edit-button"]').first().click()
                 cy.wait('@getMenuById')
-
                 cy.get('[data-cy="menus-delete-button"]').click()
             })
 

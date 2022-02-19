@@ -22,7 +22,7 @@ export const Menus: React.FC = () => {
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null)
 
-    // Load labels when page is loaded
+    // Load menus when page is loaded
     useEffect((): void => {
         getAllMenus()
     }, [getAllMenus])

@@ -5,6 +5,7 @@ import { IconButton } from "../../components/Buttons/IconButton"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { UsersModal } from "../../components/Users/UsersModal"
 import { useActions, useAppState } from "../../overmind"
 import { User } from "../../overmind/users/effects"
@@ -73,14 +74,14 @@ export const Users: React.FC = () => {
             {/* Header end */}
 
             {/* Content */}
-            <List lines>
+            {isLoading ? <Loading /> : <List lines>
                 {users.map((user) => <ListItem dataCy="users-list-item" key={user._id} title={user.username} header={<p className="text-darkgrey">{user.email}</p>} icon={faUser} onClick={() => {
                     setModalEditData(user)
                     setModalOpen(true)
                 }}>
                     <IconButton dataCy="users-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(user)} />
                 </ListItem>)}
-            </List>
+            </List>}
             {/* Content End */}
 
             {/* Add/Edit User Modal */}

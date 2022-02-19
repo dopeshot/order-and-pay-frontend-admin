@@ -7,7 +7,9 @@ describe('Api Error Handling', () => {
     describe('General Errors', () => {
         it('should handle it when database down', () => {
             cy.getTableDatabaseDown()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="error-banner"]').should('be.visible')
             cy.get('[data-cy="error-banner"]').contains(`Cannot connect to ${api}!`)
@@ -15,7 +17,9 @@ describe('Api Error Handling', () => {
 
         it('should show empty table content when tables are empty', () => {
             cy.getEmptyTables()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
 
             cy.contains('Erstelle Tische').should('be.visible')
         })
@@ -23,7 +27,9 @@ describe('Api Error Handling', () => {
         it('should display table list when after creating a table on empty table content', () => {
             cy.getEmptyTables()
             cy.addTable()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
 
             cy.wait('@getEmptyTables')
 
@@ -40,7 +46,9 @@ describe('Api Error Handling', () => {
         it('should have not have class bg-table-empty when switch to mobile', () => {
             cy.getEmptyTables()
             cy.viewport('iphone-8')
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="empty-tables-background"]').should('not.have.class', 'bg-table-empty')
 
@@ -52,14 +60,19 @@ describe('Api Error Handling', () => {
     describe('Table Add Errors', () => {
         beforeEach(() => {
             cy.getTables()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
 
             cy.get('[data-cy="table-add"]').contains('Tisch hinzufügen').click()
         })
 
         it('should handle create duplicate tableNumber', () => {
             cy.addDuplicateTable()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
+
             cy.get('[data-cy="table-add"]').contains('Tisch hinzufügen').click()
 
             cy.get('[data-cy="textinput-tableNumber-input"]').type("a1")
@@ -99,7 +112,9 @@ describe('Api Error Handling', () => {
     describe('Table Edit Duplicate', () => {
         it('should handle edit duplicate tableNumber', () => {
             cy.getTables()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
 
             cy.changeToDuplicateTable()
             cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
@@ -115,7 +130,10 @@ describe('Api Error Handling', () => {
     describe('Table Edit Errors', () => {
         beforeEach(() => {
             cy.getTables()
-            cy.visit('/tables')
+            cy.visit('/admin/tables')
+
+            cy.quickLogin()
+
             cy.get('[data-cy="table-table-edit-button-0"]').contains('Bearbeiten').click()
         })
 

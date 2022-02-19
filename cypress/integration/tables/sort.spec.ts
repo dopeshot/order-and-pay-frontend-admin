@@ -1,10 +1,11 @@
-import tables from '../../fixtures/tables.json'
-import { getTableNumberAsArray, getCapacitiesAsArray } from '../../support/utils'
+import { getCapacitiesAsArray, getTableNumberAsArray } from '../../support/utils'
 
 describe('Sort', () => {
     beforeEach(() => {
         cy.getTables()
-        cy.visit('/tables')
+        cy.visit('/admin/tables')
+
+        cy.quickLogin()
     })
 
     describe('Tablenumber', () => {
