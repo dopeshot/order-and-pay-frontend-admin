@@ -6,12 +6,13 @@ import { UserDto } from "./effects"
  * Get all Users
  */
 export const getAllUser = async ({ state, actions, effects }: Context) => {
+
+    state.users.isLoadingUsers = true
     try {
         const response = await effects.users.getAllUser()
         const users = response.data
         state.users.users = users
-        return true
-    } catch (error) {
+    } catch (error)  /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
 
         actions.notify.createNotification({
@@ -19,9 +20,8 @@ export const getAllUser = async ({ state, actions, effects }: Context) => {
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
             type: "danger"
         })
-
-        return false
     }
+    state.users.isLoadingUsers = false
 }
 
 /**
