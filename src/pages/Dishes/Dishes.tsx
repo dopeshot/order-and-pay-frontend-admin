@@ -186,13 +186,13 @@ export const Dishes: React.FC = () => {
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
                     {({ dirty, isValid }) => (
                         <Form>
-                            <TextInput name="image" labelText="Titelbild-URL" placeholder="URL eingeben" />
                             <div className="flex justify-between">
                                 <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
                                 <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="2,00" icon={faEuroSign} /></span>
                             </div>
                             <Textarea name="description" labelText="Beschreibung" maxLength={200} labelRequired placeholder="Mit Salat, Tomaten und sauren Gurken" />
                             <Dropdown name="categoryId" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
+                            <TextInput name="image" labelText="Titelbild-URL" placeholder="URL eingeben" />
                             <Toggle name="isAvailable" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
                                 <div className="mr-2 sm:mr-8 md:mr-32">
