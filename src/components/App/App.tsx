@@ -3,6 +3,7 @@ import {
 } from 'react-router-dom';
 import { Login } from '../../pages/Login/Login';
 import { Admin } from './Admin';
+import { GuestRoute } from './GuestRoute';
 import { PrivateRoute } from './PrivateRoute';
 
 export const App: React.FunctionComponent = () => {
@@ -10,7 +11,9 @@ export const App: React.FunctionComponent = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
+        <GuestRoute path="/login" >
+          <Login />
+        </GuestRoute>
         <PrivateRoute path="/admin">
           <Admin />
         </PrivateRoute>
