@@ -44,7 +44,7 @@ export const createLabel = async ({ state, actions, effects }: Context, label: L
     }
 }
 
-export const updateLabel = async ({ state, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<boolean> => {
+export const updateLabel = async ({ state, actions, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<boolean> => {
     try {
         const response = await effects.labels.updateLabel(id, label)
         const updatedLabel = response.data
@@ -53,6 +53,13 @@ export const updateLabel = async ({ state, effects }: Context, { id, label }: { 
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Aktualisieren des Labels",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         return false
     }
 }
