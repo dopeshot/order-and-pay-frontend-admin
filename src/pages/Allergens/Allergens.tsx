@@ -1,9 +1,10 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faGlassWhiskey, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { NoItems } from "../../components/Errors/NoItems"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -57,6 +58,11 @@ export const Allergens: React.FC = () => {
         setDeleteModalOpen(false)
         setSelectedAllergen(null)
     }
+
+    if (!isLoadingAllergens && allergens.length === 0)
+        return <NoItems icon={faGlassWhiskey} title="Erstelle Allergene" setModalOpen={setModalOpen} description="Es wurden noch keine Allergenen erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Allergen hinzufügen">
+            <AllergensModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
+        </NoItems>
 
     return <div className="container md:max-w-full mt-12">
         {/* Header */}

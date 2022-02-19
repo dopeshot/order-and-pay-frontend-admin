@@ -25,7 +25,9 @@ export const Tables: React.FunctionComponent = () => {
     }, [loadTables])
 
     if (!isLoadingTables && tables.length === 0 && tableErrors.length === 0)
-        return <NoItems dataCy="empty-tables-background" icon={faChair} buttonText="Tisch hinzufügen" />
+        return <NoItems dataCy="empty-tables-background" title="Erstelle Tische" setModalOpen={setModalOpen} description="Um QR-Codes und Bestellungen zu bearbeiten, musst du wissen wo deine Kundschaft sitzt. " icon={faChair} buttonText="Tisch hinzufügen">
+            <AddTableModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        </NoItems>
 
     return (
         <div className="container md:max-w-full mt-12">

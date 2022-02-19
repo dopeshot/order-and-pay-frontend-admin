@@ -82,11 +82,6 @@ input::-webkit-search-cancel-button {
     -webkit-mask-image: linear-gradient(270deg, transparent 0.5px, red 7px);
 }
 
-.bg-table-empty {
-    background-position: right -150px center;
-    background-image: url(img/chair.svg);
-}
-
 /*** Writing it like this to have better browser support. https://caniuse.com/?search=%3Anot() ***/
 .lines-list > a,
 .lines-list > div {
