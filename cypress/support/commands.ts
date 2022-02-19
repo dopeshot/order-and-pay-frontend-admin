@@ -267,7 +267,7 @@ Cypress.Commands.add('getCurrentUser', () => {
     }).as('getCurrentUser')
 })
 
-Cypress.Commands.add('easyLogin', () => {
+Cypress.Commands.add('quickLogin', () => {
     cy.overmind().its('actions').invoke('auth.loginTest')
 })
 
