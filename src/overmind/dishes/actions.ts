@@ -1,15 +1,23 @@
+import axios from "axios"
 import { Context } from ".."
 import { Category, Dish, DishDto } from "./effects"
 
 /**
  * Create new Dish
  */
-export const createDish = async ({ effects }: Context, dish: DishDto): Promise<boolean> => {
+export const createDish = async ({ effects, actions }: Context, dish: DishDto): Promise<true> => {
     try {
         await effects.dishes.createDish(dish)
         return true
     } catch (error) {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Erstellen des Gerichts",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
