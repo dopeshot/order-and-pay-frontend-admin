@@ -53,21 +53,19 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
 
         try {
             if (modalEditData) {
-                if (!await updateUser({
+                await updateUser({
                     _id: modalEditData._id,
                     user: user
-                }))
-                    throw Error()
+                })
 
                 // Clear modal data
                 setModalEditData(null)
-                setModalOpen(false)
             }
             else {
-                if (!await createUser(user))
-                    throw Error()
-                setModalOpen(false)
+                await createUser(user)
             }
+
+            setModalOpen(false)
         } catch (error) {
             // Create or update failed
         } finally {

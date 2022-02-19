@@ -27,7 +27,7 @@ export const getAllUser = async ({ state, actions, effects }: Context) => {
 /**
  * Create new User
  */
-export const createUser = async ({ state, effects, actions }: Context, user: UserDto): Promise<boolean> => {
+export const createUser = async ({ state, effects, actions }: Context, user: UserDto): Promise<true> => {
     try {
         // Create User
         await effects.users.createUser(user)
@@ -45,14 +45,14 @@ export const createUser = async ({ state, effects, actions }: Context, user: Use
             type: "danger"
         })
 
-        return false
+        throw (error)
     }
 }
 
 /**
  * Update User by id
  */
-export const updateUser = async ({ state, actions, effects }: Context, { _id, user }: { _id: string, user: UserDto }): Promise<boolean> => {
+export const updateUser = async ({ state, actions, effects }: Context, { _id, user }: { _id: string, user: UserDto }): Promise<true> => {
     try {
         // Strip password when is not changed
         const newUser = { ...user }
@@ -73,7 +73,7 @@ export const updateUser = async ({ state, actions, effects }: Context, { _id, us
             type: "danger"
         })
 
-        return false
+        throw (error)
     }
 }
 
