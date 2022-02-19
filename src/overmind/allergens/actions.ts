@@ -2,7 +2,7 @@ import axios from "axios"
 import { Context } from ".."
 import { AllergenDto } from "./effects"
 
-export const getAllAllergens = async ({ state, effects }: Context) => {
+export const getAllAllergens = async ({ state, actions, effects }: Context) => {
     // istanbul ignore next // Backoff when already loading
     if (state.allergens.isLoadingAllergens)
         return
@@ -14,6 +14,12 @@ export const getAllAllergens = async ({ state, effects }: Context) => {
         state.allergens.allergens = allergens
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Allergene",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     state.allergens.isLoadingAllergens = false
 }
