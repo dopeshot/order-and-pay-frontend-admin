@@ -147,7 +147,7 @@ describe('Api Endpoints', () => {
         })
     })
 
-    describe.only('Delete Dish', () => {
+    describe('Delete Dish', () => {
         beforeEach(() => {
             cy.getDishById()
             cy.getAllAllergens()
