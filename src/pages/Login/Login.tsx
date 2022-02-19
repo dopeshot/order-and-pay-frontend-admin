@@ -9,7 +9,7 @@ import { Credentials } from "../../overmind/auth/effects"
 
 
 export const Login: React.FC = () => {
-    const { isLoggedIn, authenticating } = useAppState().auth
+    const { authenticating } = useAppState().auth
 
     const { login } = useActions().auth
 
