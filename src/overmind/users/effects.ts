@@ -6,12 +6,18 @@ export type UserDto = {
     password?: string
 }
 
-export type UserDtoWithId = UserDto & { _id: string }
-
 export type User = {
     _id: string
     email: string
     username: string
+    password?: string
 }
 
+// Get all users
 export const getAllUser = () => request.get<User[]>('/users')
+// Create new user
+export const createUser = () => request.post<User>('/users')
+// Update user by id
+export const updateUser = (id: string, user: UserDto) => request.patch<User>(`/users/${id}`, user)
+// Delete user by id
+export const deleteUser = (id: string) => request.delete<void>(`/users/${id}`)
