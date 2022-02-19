@@ -16,13 +16,15 @@ export type EmptyItemsProps = {
     /** For testing data cy of background because its hard to access */
     dataCy?: String
     /** State Setter for modalOpen */
-    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>
+    /** Optional: Link to add new item */
+    to?: string
 }
 
 /**
  * Component that can be used when there are currently no items added
  */
-export const NoItems: React.FC<EmptyItemsProps> = ({ title, description, icon, buttonText, dataCy, children, setModalOpen }) => {
+export const NoItems: React.FC<EmptyItemsProps> = ({ title, description, icon, buttonText, dataCy, children, setModalOpen, to }) => {
     const { isMobile } = useAppState().app
 
     return (
@@ -36,9 +38,12 @@ export const NoItems: React.FC<EmptyItemsProps> = ({ title, description, icon, b
                         </div>}
                     <h1 className="text-4xl text-primary-blue font-semibold mb-3">{title}</h1>
                     <p className="text-lg text-darkgrey text-center md:text-left mb-4" style={{ maxWidth: "500px" }}>{description}</p>
-                    <div className="w-full sm:w-max">
-                        <Button icon={faPlus} type="button" className="w-full" onClick={() => setModalOpen(true)}>{buttonText}</Button>
-                    </div>
+                    {!to && setModalOpen ?
+                        <Button icon={faPlus} type="button" onClick={() => setModalOpen(true)}>{buttonText}</Button>
+                        :
+                        <div className="w-max">
+                            <Button icon={faPlus} type="button" to={to}>{buttonText}</Button>
+                        </div>}
                 </div>
             </div >
         </>

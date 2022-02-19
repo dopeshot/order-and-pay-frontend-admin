@@ -1,10 +1,11 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { faPizzaSlice, faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { NoItems } from "../../components/Errors/NoItems"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -70,6 +71,9 @@ export const SingleMenu: React.FC = () => {
         setDishDeleteModalOpen(false)
         setSelectedDish(null)
     }
+
+    if (!isLoading && menu?.categories.length === 0)
+        return <NoItems icon={faPizzaSlice} to={`/admin/menus/${menuId}/categories`} title="Erstelle Kategorie" description="Es wurden noch keine Kategorie erstellt. Erstelle neue um Gerichten hinzufügen zu können." buttonText="Kategorie hinzufügen" />
 
     return (
         <div className="container md:max-w-full mt-12">
