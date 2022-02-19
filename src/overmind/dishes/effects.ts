@@ -8,9 +8,9 @@ export type DishDto = {
     image?: string
     isAvailable: boolean
     price: number
-    category: Category | string // id ref: 'Category'
-    allergens: Allergen[] // id ref: 'Allergy
-    labels: Label[] // id ref: 'Label'
+    categoryId: Category | string // id ref: 'Category'
+    allergenIds: Allergen[] // id ref: 'Allergy
+    labelIds: Label[] // id ref: 'Label'
 }
 
 export type Dish = DishDto & { _id: string }
@@ -41,7 +41,7 @@ export type Category = {
     icon: string
     image: string
     choices: Choice[]
-    menu: string // id ref: 'Menu'
+    menuId: string // id ref: 'Menu'
 }
 
 // Create a Dish

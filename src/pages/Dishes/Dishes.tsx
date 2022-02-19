@@ -127,9 +127,9 @@ export const Dishes: React.FC = () => {
         image: dish?.image ?? "",
         isAvailable: dish?.isAvailable ?? true,
         price: dish?.price ?? 0,
-        category: dish?.category ?? categoryId ?? "",
-        allergens: dish?.allergens ?? [],
-        labels: dish?.labels ?? []
+        categoryId: dish?.categoryId ?? categoryId ?? "",
+        allergenIds: dish?.allergenIds ?? [],
+        labelIds: dish?.labelIds ?? []
     }
 
     // Formik Validation
@@ -139,7 +139,7 @@ export const Dishes: React.FC = () => {
         image: Yup.string().min(2, "Die Titelbild-URL muss aus mindestens 2 Zeichen bestehen.").max(100, "Die Titelbild-URL darf nicht länger als 100 Zeichen sein."),
         isActive: Yup.boolean(),
         price: Yup.number().min(0, "Der Preis muss 0 oder größer sein").required("Dies ist ein Pflichtfeld."),
-        category: Yup.string().required("Dies ist ein Pflichtfeld.")
+        categoryId: Yup.string().required("Dies ist ein Pflichtfeld.")
     })
 
     // Formik Submit Form
@@ -195,15 +195,15 @@ export const Dishes: React.FC = () => {
                                 <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="2,00" icon={faEuroSign} /></span>
                             </div>
                             <Textarea name="description" labelText="Beschreibung" maxLength={200} labelRequired placeholder="Mit Salat, Tomaten und sauren Gurken" />
-                            <Dropdown name="category" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
+                            <Dropdown name="categoryId" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
                             <Toggle name="isAvailable" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
                                 <div className="mr-2 sm:mr-8 md:mr-32">
-                                    <Checkbox name="labels" labelText="Labels" options={labelsOptions} />
+                                    <Checkbox name="labelIds" labelText="Labels" options={labelsOptions} />
                                     <Button kind="tertiary" onClick={() => setLabelModalOpen(true)} icon={faPlus} className="text-left">Label hinzufügen</Button>
                                 </div>
                                 <div>
-                                    <Checkbox name="allergens" labelText="Allergenen" options={allergensOptions} />
+                                    <Checkbox name="allergenIds" labelText="Allergenen" options={allergensOptions} />
                                     <Button kind="tertiary" onClick={() => setAllergensModalOpen(true)} icon={faPlus} className="text-left">Allergene hinzufügen</Button>
                                 </div>
                             </div>

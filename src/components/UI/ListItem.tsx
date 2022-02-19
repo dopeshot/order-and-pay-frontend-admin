@@ -34,7 +34,7 @@ export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, inde
         {header}
     </>
 
-    const headerClasses = `flex items-center py-4 pl-7 ${indent ? "pl-8 md:pl-16" : ""} flex-grow`
+    const headerClasses = `flex items-center py-4 pl-7 ${indent ? "md:pl-16" : ""} flex-grow`
 
     return <div data-cy={dataCy} className={`flex rounded-lg w-full cursor-pointer ${background ? "bg-white-lightgrey hover:bg-gray-200" : "hover:bg-white-lightgrey"}`}>
         {to ?
@@ -42,7 +42,7 @@ export const ListItem: React.FC<ListItemProps> = ({ title, icon = faFolder, inde
                 {headerContent}
             </Link>
             :
-            <button onClick={onClick} className={headerClasses}>
+            <button type="button" onClick={onClick} className={headerClasses}>
                 {headerContent}
             </button>
         }

@@ -14,13 +14,13 @@ type DeleteModalProps = {
     /** What is called when click delete button */
     handleDelete: (event: Event | void) => void
     /** Loading State for Delete */
-    isLoadingDelete: boolean
+    isLoadingDelete?: boolean
 }
 
 /**
  * Delete Modal, before finally delete something use this
  */
-export const DeleteModal: React.FC<DeleteModalProps> = ({ title, open, onDissmis, handleDelete, isLoadingDelete, description }) => {
+export const DeleteModal: React.FC<DeleteModalProps> = ({ title, open, onDissmis, handleDelete, isLoadingDelete = false, description }) => {
     return (
         <Modal dataCy={`deletemodal-${title}`} modalHeading={`${title} löschen?`} open={open} onDissmis={onDissmis}>
             <p>{description}</p>
