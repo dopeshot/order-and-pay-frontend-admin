@@ -4,6 +4,8 @@ import { createOvermind } from 'overmind';
 import { Provider } from 'overmind-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ReactNotifications } from "react-notifications-component";
+import 'react-notifications-component/dist/theme.css';
 import WebFont from 'webfontloader';
 import { App } from './components/App/App';
 import './index.css';
@@ -38,6 +40,7 @@ declare global {
 ReactDOM.render(
   <React.StrictMode>
     <Provider value={overmind}>
+      <ReactNotifications />
       <App />
     </Provider>
   </React.StrictMode>,
