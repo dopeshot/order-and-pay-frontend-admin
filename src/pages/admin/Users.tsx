@@ -8,7 +8,7 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { UsersModal } from "../../components/Modals/UsersModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { User } from "../../overmind/users/effects"
+import { User } from "../../overmind/users/type"
 
 export const Users: React.FC = () => {
     // Global States
