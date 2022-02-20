@@ -2,7 +2,7 @@ import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Field, FieldProps } from "formik";
 import { useState } from "react";
-import { ComponentOptions } from "../../shared/types/ComponentOptions";
+import { ComponentOptions } from "../../types/ComponentOptions";
 import { FormError } from "../Errors/FormError";
 
 type DropdownProps = {

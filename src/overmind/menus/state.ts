@@ -1,4 +1,4 @@
-import { Status } from "../../services/shared"
+import { Status } from "../../types/Status"
 
 export type Menu = {
     _id: string

@@ -17,7 +17,7 @@ import { LabelModal } from "../../components/Modals/LabelModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Dish, DishDto } from "../../overmind/dishes/effects"
-import { ComponentOptions } from "../../shared/types/ComponentOptions"
+import { ComponentOptions } from "../../types/ComponentOptions"
 
 type Params = {
     menuId: string,
