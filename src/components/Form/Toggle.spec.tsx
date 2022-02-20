@@ -1,6 +1,6 @@
 import { mount } from '@cypress/react'
 import { Form, Formik } from "formik"
-import 'tailwindcss/dist/tailwind.min.css'
+import 'tailwindcss/tailwind.css'
 import { Toggle } from './Toggle'
 
 const initialValues = {
