@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Field } from "formik"
-import { ComponentOptions } from "../../types/ScomponentOptions"
+import { ComponentOptions } from "../../types/componentOptions"
 
 type CheckboxProps = {
     /** Gives the input a unique name */
