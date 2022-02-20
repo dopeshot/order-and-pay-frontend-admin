@@ -95,6 +95,12 @@ declare global {
             getAllMenus(): void
 
             /**
+             * Custom command to intercept all get all menus requests get empty array back
+             * @example cy.getAllMenusEmpty()
+             */
+            getAllMenusEmpty(): void
+
+            /**
              * Custom command to intercept all create menu requests
              * @example cy.createMenu()
              */
@@ -104,7 +110,7 @@ declare global {
              * Custom command to intercept all create menu requests give duplicate error back
              * @example cy.createMenuDuplicate()
              */
-            createMenuDuplicate(): void
+            createMenuDuplicateTitle(): void
 
             /**
              * Custom command to intercept all get menu by id requests
@@ -117,6 +123,12 @@ declare global {
              * @example cy.updateMenu()
              */
             updateMenu(): void
+
+            /**
+             * Custom command to intercept all update menu by id requests duplicate error back
+             * @example cy.updateMenu()
+             */
+            updateMenuDuplicateTitle(): void
 
             /**
              * Custom command to intercept all delete menu requests
@@ -161,10 +173,46 @@ declare global {
             getAllCategories(): void
 
             /**
+             * Custom command to intercept all get all categories request get empty array back
+             * @example cy.getMenuOverviewEditorEmptyCategories()
+             */
+            getMenuOverviewEditorEmptyCategories(): void
+
+            /**
+             * Custom command to intercept all create category request
+             * @example cy.createCategory()
+             */
+            createCategory(): void
+
+            /**
+             * Custom command to intercept all get one category by id request
+             * @example cy.getCategoryById()
+             */
+            getCategoryById(): void
+
+            /**
+            * Custom command to intercept all update category request
+            * @example cy.updateCategory()
+            */
+            updateCategory(): void
+
+            /**
+            * Custom command to intercept all delete category request
+            * @example cy.deleteCategory()
+            */
+            deleteCategory(): void
+
+            /**
              * Custom command to intercept all get all allergens request
              * @example cy.getAllAllergens()
              */
             getAllAllergens(): void
+
+            /**
+             * Custom command to intercept all get all allergens request get empty array back
+             * @example cy.getAllAllergensEmpty()
+             */
+            getAllAllergensEmpty(): void
 
             /**
             * Custom command to intercept all create allergen request
@@ -196,12 +244,17 @@ declare global {
             */
             deleteAllergen(): void
 
-
             /**
              * Custom command to intercept all get all labels request
              * @example cy.getAllLabels()
              */
             getAllLabels(): void
+
+            /**
+             * Custom command to intercept all get all labels request get empty array back
+             * @example cy.getAllLabelsEmpty()
+             */
+            getAllLabelsEmpty(): void
 
             /**
             * Custom command to intercept all login request

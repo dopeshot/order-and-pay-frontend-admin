@@ -25,7 +25,7 @@ describe('Api Endpoints Menus', () => {
         })
 
         it('should display active label when menu is active', () => {
-            cy.get('[data-cy=tag-box].bg-green-500').should('be.visible')
+            cy.get('[data-cy=tag-box].bg-emerald-500').should('be.visible')
         })
 
         it(`should go to "/admin/menus/${menus[0]._id}/editor when click on first item`, () => {

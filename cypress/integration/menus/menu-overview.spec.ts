@@ -23,7 +23,7 @@ describe('Menu Overview', () => {
         })
 
         it('should display active tag when menu is active', () => {
-            cy.get('[data-cy=tag-box].bg-green-500').should('be.visible')
+            cy.get('[data-cy=tag-box].bg-emerald-500').should('be.visible')
         })
 
         it('should go to "admin/menus" when click on back button', () => {

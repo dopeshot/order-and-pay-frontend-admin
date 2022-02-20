@@ -32,6 +32,13 @@ describe('Login', () => {
             cy.url().should('include', '/login')
         })
 
+        it('should close dropdown when click outside', () => {
+            cy.get('[data-cy="avatar-dropdown"]').click()
+            cy.get('body').click().then(() => {
+                cy.get('[data-cy="avatar-dropdown-delete"]').should('not.exist')
+            })
+        })
+
         it('should remove access token in localstorage when logout', () => {
             cy.get('[data-cy="avatar-dropdown"]').click()
             cy.get('[data-cy="avatar-dropdown-delete"]').click().should(ls => {
@@ -48,17 +55,14 @@ describe('Login', () => {
             })
 
             it('should redirect to /home when logged in', () => {
-
-            })
-
-            it('should redirect to /home when try to access /login when logged in', () => {
-
+                cy.url().should('include', '/admin/home')
             })
         })
 
         describe('Not Logged In/Guest', () => {
             it('should redirect to /login when try to access private route', () => {
-
+                cy.visit('/admin/menus')
+                cy.url().should('include', '/login')
             })
         })
     })

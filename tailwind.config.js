@@ -1,7 +1,9 @@
 module.exports = {
-  purge: [],
-  // MC: In production purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    // Example content paths...
+    './public/**/*.html',
+    './src/**/*.{ts,tsx}',
+  ],
   theme: {
     container: {
       padding: {
@@ -48,12 +50,6 @@ module.exports = {
         'darker-danger-red': '#AB091E'
       },
     },
-  },
-  variants: {
-    extend: {
-      backgroundColor: ['group-focus'],
-      borderColor: ['group-focus']
-    }
   },
   plugins: [],
 }
