@@ -2,7 +2,7 @@ import { faEdit, faFolder, faPlus, faTrash, faUtensils } from "@fortawesome/free
 import { useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { Chip, ChipTypesEnum } from "../../components/Chip/Chip"
+import { Chip, ChipTypesEnum } from "../../components/Chips/Chip"
 import { EmptyState } from "../../components/Errors/EmptyState"
 import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"

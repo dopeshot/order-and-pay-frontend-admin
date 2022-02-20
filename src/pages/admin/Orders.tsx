@@ -1,7 +1,7 @@
 import { faCheck, faSync, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { Fragment, useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
-import { Chip, ChipTypesEnum } from "../../components/Chip/Chip"
+import { Chip, ChipTypesEnum } from "../../components/Chips/Chip"
 import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { Loading } from "../../components/UI/Loading"
