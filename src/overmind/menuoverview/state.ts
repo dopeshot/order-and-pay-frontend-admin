@@ -13,7 +13,7 @@ export type Category = {
     image: string
     choices: Choice[]
     dishes: Dish[]
-    menu: string // id ref: 'Menu'
+    menuId: string // id ref: 'Menu'
 }
 
 export type Option = {
