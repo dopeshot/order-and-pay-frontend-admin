@@ -1,7 +1,7 @@
 import { mount } from '@cypress/react'
 import { faPizzaSlice, faYinYang } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
-import 'tailwindcss/dist/tailwind.min.css'
+import 'tailwindcss/tailwind.css'
 import * as yup from 'yup'
 import { Button } from '../Buttons/Button'
 import { Dropdown } from './Dropdown'
@@ -85,7 +85,7 @@ describe('Dropdown', () => {
         // open dropdown
         cy.get(`[data-cy="${data.name}-dropdown-button"]`).click()
 
-        data.options.map((option) => {
+        data.options.forEach((option) => {
             cy.get(`[data-cy="${data.name}-dropdown-option-${option.id}"]`).should('contain', option.label)
         })
     })
