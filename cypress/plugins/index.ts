@@ -26,6 +26,4 @@ module.exports = (on: Cypress.PluginEvents, config: Cypress.ConfigOptions) => {
   return config
 }
 export { }
-export { }
-export { }
 
