@@ -160,6 +160,30 @@ Cypress.Commands.add('getAllCategories', () => {
     }).as('getAllCategories')
 })
 
+Cypress.Commands.add('getCategoryById', () => {
+    cy.intercept('GET', `${api}/categories/**`, {
+        fixture: 'category.json'
+    }).as('getCategoryById')
+})
+
+Cypress.Commands.add('createCategory', () => {
+    cy.intercept('POST', `${api}/categories`, {
+        fixture: 'category.json'
+    }).as('createCategory')
+})
+
+Cypress.Commands.add('updateCategory', () => {
+    cy.intercept('PATCH', `${api}/categories/**`, {
+        fixture: 'update-category.json'
+    }).as('updateCategory')
+})
+
+Cypress.Commands.add('deleteCategory', () => {
+    cy.intercept('DELETE', `${api}/categories/**`, {
+        statusCode: 204
+    }).as('deleteCategory')
+})
+
 /********* Allergen *********/
 Cypress.Commands.add('getAllAllergens', () => {
     cy.intercept('GET', `${api}/allergens`, {

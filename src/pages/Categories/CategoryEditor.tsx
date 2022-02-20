@@ -119,6 +119,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     }
 
     const handleDelete = async () => {
+        /* istanbul ignore next // should not happen just fallback */
         if (!deleteData)
             return
 
@@ -135,8 +136,6 @@ export const CategoryEditor: React.FunctionComponent = () => {
                 break;
         }
 
-        console.log(deleteData)
-
         closeDeleteModal()
     }
 
@@ -146,6 +145,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
             // Fetch category and set editing
             const category = await getCategoryById(categoryId)
 
+            // istanbul ignore next // is just for handling async correct
             if (!isMounted)
                 return
 
@@ -206,7 +206,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     }
 
     const deleteCategory = async () => {
-        // Check if we are editing a category
+        /* istanbul ignore next // should not happen just fallback */
         if (!isEditing)
             return
 
@@ -299,6 +299,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
     })
 
     const submitOption = (values: OptionDto) => {
+        /* istanbul ignore next // should not happen just fallback */
         if (parentChoiceId === null) {
             console.error("parentChoiceId is not defined.")
             return
@@ -369,92 +370,98 @@ export const CategoryEditor: React.FunctionComponent = () => {
 
     return <>
         <div className="container mt-12">
-            <BackButton to={`/admin/menus/${menuId}/editor`} />
+            <BackButton dataCy="category-back-button" to={`/admin/menus/${menuId}/editor`} />
             {isLoading ? <Loading /> : <>
                 <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie erstellen"}</h1>
 
                 <Formik initialValues={initialCategoryValues} enableReinitialize validationSchema={validationCategorySchema} onSubmit={submitCategory}>
-                    <Form>
-                        <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
-                        <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
-                            <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired autoFocus />
-                            <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" />
-                            <TextInput name="image" placeholder="Geben Sie eine URL ein..." labelText="Titelbild-URL" />
-                            <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
-                        </div>
-
-                        {/* Choices and Options */}
-                        <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                            <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
-                                <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
-                                <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                    {({ dirty, isValid }) => (
+                        <Form>
+                            <h2 className="text-xl text-headline-black font-semibold mb-2">Allgemeines</h2>
+                            <div className="w-auto mb-10" style={{ maxWidth: "500px" }}>
+                                <TextInput name="title" placeholder="Pizza, Beilagen, Getränke,..." labelText="Titel" labelRequired autoFocus />
+                                <Textarea name="description" placeholder="Zu jedem Burger gibt es Pommes dazu,..." labelText="Beschreibung" />
+                                <TextInput name="image" placeholder="Geben Sie eine URL ein..." labelText="Titelbild-URL" />
+                                <TextInput name="icon" placeholder="Font Awesome Icon eingeben!" labelText="Icon" />
                             </div>
-                            <div className="w-full md:w-auto">
-                                <Button icon={faPlus} onClick={() => {
-                                    setModalOpenChoice(true)
-                                }}>Neue Auswahlmöglichkeit</Button>
+
+                            {/* Choices and Options */}
+                            <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <div className="mb-4 mr-0 md:mb-0 md:mr-4 lg:mr-0">
+                                    <h2 className="text-xl text-headline-black font-semibold">Auswahlmöglichkeiten</h2>
+                                    <p className="text-lightgrey">Auswahlmöglichkeiten für ein Gericht wie die Größe oder Beilagen.</p>
+                                </div>
+                                <div className="w-full md:w-auto">
+                                    <Button icon={faPlus} onClick={() => {
+                                        setModalOpenChoice(true)
+                                    }}>Neue Auswahlmöglichkeit</Button>
+                                </div>
                             </div>
-                        </div>
 
-                        <List>
-                            {choices.map(choice => <Fragment key={`c${choice.id}`}>
-                                <ListItem onClick={() => {
-                                    setEditChoiceData(choice)
-                                    setModalOpenChoice(true)
-                                }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
-                                    {isMobile ? <IconButton icon={faPlus} onClick={() => {
-                                        setParentChoiceId(choice.id)
-                                        setModalOpenOption(true)
-                                    }} /> : <Button kind="tertiary" onClick={() => {
-                                        setParentChoiceId(choice.id)
-                                        setModalOpenOption(true)
-                                    }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
-                                    <IconButton icon={faTrash} onClick={() => openDeleteModal({ type: 'choice', choiceId: choice.id, title: `Auswahl "${choice.title}"`, description: `${choice.options.length} Optionen werden mit gelöscht.` })} />
-                                </ListItem>
+                            <List>
+                                {choices.map(choice => <Fragment key={`c${choice.id}`}>
+                                    <ListItem dataCy="choices-list-item" onClick={() => {
+                                        setEditChoiceData(choice)
+                                        setModalOpenChoice(true)
+                                    }} title={choice.title} icon={choice.type === ChoiceType.RADIO ? faCheck : faCheckDouble} header={<p className="text-darkgrey">{choice.type === ChoiceType.RADIO ? "Eine Option" : "Mehrere Optionen"}</p>} background>
+                                        {isMobile ? <IconButton dataCy="category-mobile-add-choice" icon={faPlus} onClick={() => {
+                                            setParentChoiceId(choice.id)
+                                            setModalOpenOption(true)
+                                        }} /> : <Button kind="tertiary" onClick={() => {
+                                            setParentChoiceId(choice.id)
+                                            setModalOpenOption(true)
+                                        }} icon={faPlus} className="text-darkgrey mr-3">Neue Option</Button>}
+                                        <IconButton dataCy="choices-delete-button" icon={faTrash} onClick={() => openDeleteModal({ type: 'choice', choiceId: choice.id, title: `Auswahl-"${choice.title}"`, description: `${choice.options.length} Optionen werden mit gelöscht.` })} />
+                                    </ListItem>
 
-                                {choice.options.map(option =>
-                                    <ListItem key={`c${choice.id}_o${option.id}`} onClick={() => {
-                                        setParentChoiceId(choice.id)
-                                        setEditOptionData(option)
-                                        setModalOpenOption(true)
-                                    }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
-                                        <p className="mr-4">{numberToPrice(option.price)}</p>
-                                        <IconButton icon={faTrash} onClick={() => openDeleteModal({ type: 'option', choiceId: choice.id, optionId: option.id, title: `Option "${option.name}"` })} />
-                                    </ListItem>)
-                                }
-                            </Fragment>
-                            )}
-                        </List>
+                                    {choice.options.map(option =>
+                                        <ListItem dataCy="options-list-item" key={`c${choice.id}_o${option.id}`} onClick={() => {
+                                            setParentChoiceId(choice.id)
+                                            setEditOptionData(option)
+                                            setModalOpenOption(true)
+                                        }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
+                                            <p className="mr-4">{numberToPrice(option.price)}</p>
+                                            <IconButton dataCy="options-delete-button" icon={faTrash} onClick={() => openDeleteModal({ type: 'option', choiceId: choice.id, optionId: option.id, title: `Option-"${option.name}"` })} />
+                                        </ListItem>)
+                                    }
+                                </Fragment>
+                                )}
+                            </List>
 
-                        <div className="flex flex-col md:flex-row justify-between mt-4">
-                            {isEditing && category && <Button kind="tertiary" onClick={() => openDeleteModal({ type: 'category', categoryId: category._id, title: `Kategorie "${category?.title}"`, description: `Das Löschen kann nicht rückgängig gemacht werden.` })} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                            <Button type="submit" kind="primary" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
-                        </div>
-                    </Form>
+                            <div className="flex flex-col md:flex-row justify-between mt-4">
+                                {isEditing && category && <Button dataCy="category-delete-button" kind="tertiary" onClick={() => openDeleteModal({ type: 'category', categoryId: category._id, title: `Kategorie-"${category?.title}"`, description: `Das Löschen kann nicht rückgängig gemacht werden.` })} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
+                                <Button type="submit" kind="primary" dataCy="category-save-button" loading={isLoadingSave} disabled={!(dirty && isValid)} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
+                            </div>
+                        </Form>
+                    )}
                 </Formik>
             </>}
         </div>
 
 
         {/* Choices Modal */}
-        <Modal modalHeading={isEditingChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={closeChoiceModal}>
+        <Modal dataCy="choices-modal" modalHeading={isEditingChoice ? "Auswahlmöglichkeiten bearbeiten" : "Neue Auswahlmöglichkeiten"} open={modalOpenChoice} onDissmis={closeChoiceModal}>
             <Formik initialValues={initialChoiceValues} onSubmit={submitChoice} validationSchema={validationChoiceSchema}>
                 <Form>
                     <TextInput name="title" labelText="Titel" placeholder="Größe, Beilagen,..." labelRequired autoFocus />
                     <Dropdown name="type" labelText="Welchen Typ soll die Auswahlmöglichkeit haben?" helperText='Bei der Option "Einzeln" kann man nur ein Element auswählen. Bei "Mehreren" kann man mehrere Elemente auswählen.' placeholder="Wähle eine Option..." options={dropdownOptionsChoice} labelRequired />
-                    <Button type="submit" icon={faCheck}>{isEditingChoice ? `Speichern` : `Hinzufügen`}</Button>
+                    <div className="flex justify-end">
+                        <Button dataCy="category-choices-save-button" type="submit" icon={faCheck}>{isEditingChoice ? `Speichern` : `Hinzufügen`}</Button>
+                    </div>
                 </Form>
             </Formik>
         </Modal>
 
         {/* Options Modal */}
-        <Modal modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
+        <Modal dataCy="options-modal" modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
             <Formik initialValues={initialOptionValues} onSubmit={submitOption} validationSchema={validationOptionSchema}>
                 <Form>
                     <TextInput name="name" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
                     <TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="200" icon={faEuroSign} />
                     <Toggle name="isDefault" labelText="Vorausgewählte Option?" labelRequired labelOff="Nicht ausgewählt" labelOn="Ausgewählt" />
-                    <Button type="submit" icon={faCheck}>{isEditingOptions ? `Speichern` : `Hinzufügen`}</Button>
+                    <div className="flex justify-end">
+                        <Button dataCy="category-options-save-button" type="submit" icon={faCheck}>{isEditingOptions ? `Speichern` : `Hinzufügen`}</Button>
+                    </div>
                 </Form>
             </Formik>
         </Modal>

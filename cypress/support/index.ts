@@ -161,6 +161,30 @@ declare global {
             getAllCategories(): void
 
             /**
+             * Custom command to intercept all create category request
+             * @example cy.createCategory()
+             */
+            createCategory(): void
+
+            /**
+             * Custom command to intercept all get one category by id request
+             * @example cy.getCategoryById()
+             */
+            getCategoryById(): void
+
+            /**
+            * Custom command to intercept all update category request
+            * @example cy.updateCategory()
+            */
+            updateCategory(): void
+
+            /**
+            * Custom command to intercept all delete category request
+            * @example cy.deleteCategory()
+            */
+            deleteCategory(): void
+
+            /**
              * Custom command to intercept all get all allergens request
              * @example cy.getAllAllergens()
              */
