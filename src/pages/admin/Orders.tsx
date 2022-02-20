@@ -6,7 +6,7 @@ import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { OrderStatus, PaymentStatus } from "../../overmind/orders/effects"
+import { OrderStatus, PaymentStatus } from "../../overmind/orders/type"
 import { numberToPrice } from "../../services/numberToPrice"
 
 export const Orders: React.FC = () => {
@@ -101,18 +101,18 @@ export const Orders: React.FC = () => {
             {/* Content */}
             {(orders.length === 0 && isLoadingOrders) ? <Loading /> : <List>
                 {orders.map((order) => <Fragment key={order._id}>
-                    <ListItem title={`#${order._id.slice(order._id.length - 3)}`} icon="shopping-basket" background header={<><p className="pr-4">Tisch: {order.tableId}</p><Chip title={beautifyOrderStatus[order.Status].title} type={beautifyOrderStatus[order.Status].type} /></>}>
+                    <ListItem title={`#${order._id.slice(order._id.length - 3)}`} icon="shopping-basket" background header={<><p className="pr-4">Tisch: {order.table.tableNumber}</p><Chip title={beautifyOrderStatus[order.Status].title} type={beautifyOrderStatus[order.Status].type} /></>}>
                         <h6 className="text-headline-black text-lg font-semibold mr-3">{numberToPrice(order.price)}</h6>
                         <Button kind="tertiary" icon={faSync} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "edit")}>Wird Bearbeitet</Button>
                         <Button kind="tertiary" icon={faCheck} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "close")}>Abschließen</Button>
                         <Button kind="tertiary" icon={faTrash} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "delete")}>Löschen</Button>
                     </ListItem>
                     {order.items.map(item => (
-                        <ListItem key={order._id + item.dishId + item.count + item.note} title={`${item.count}x ${item.dishId}`} icon={faUtensils} indent header={<p>{item.note}</p>}>
-                            <p>{item.pickedChoices.id}:</p>
-                            {item.pickedChoices.valueId.map((value, index) => (
-                                <p key={index} className="pl-3">{value}</p>
-                            ))}
+                        <ListItem key={order._id + item.dishId + item.count + item.note} title={`${item.count}x ${item.dishName}`} icon={faUtensils} indent header={<p>{item.note}</p>}>
+                            {item.pickedChoices.map((pickedChoice, index) => <Fragment key={order._id + item.dishId + item.count + item.note + pickedChoice.id}>
+                                <p>{pickedChoice.title}</p>
+                                <p className="pl-3">{pickedChoice.optionNames.join(", ")}</p>
+                            </Fragment>)}
                         </ListItem>
                     ))}
                 </Fragment>)}

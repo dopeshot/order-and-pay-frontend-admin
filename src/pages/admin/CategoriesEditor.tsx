@@ -418,7 +418,7 @@ export const CategoriesEditor: React.FunctionComponent = () => {
         <Modal dataCy="options-modal" modalHeading={isEditingOptions ? "Option bearbeiten" : "Neue Option"} open={modalOpenOption} onDissmis={closeOptionModal}>
             <Formik initialValues={initialOptionValues} onSubmit={submitOption} validationSchema={validationOptionSchema}>
                 <Form>
-                    <TextInput name="name" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
+                    <TextInput name="title" labelText="Titel" placeholder="Klein, Mittel, Groß..." labelRequired autoFocus />
                     <TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="200" icon={faEuroSign} />
                     <Toggle name="isDefault" labelText="Vorausgewählte Option?" labelRequired labelOff="Nicht ausgewählt" labelOn="Ausgewählt" />
                     <div className="flex justify-end">

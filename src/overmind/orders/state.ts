@@ -1,4 +1,4 @@
-import { Order } from "./effects"
+import { Order } from "./type"
 
 export type State = {
     orders: Order[]
