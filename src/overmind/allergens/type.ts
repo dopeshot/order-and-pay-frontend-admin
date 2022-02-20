@@ -6,5 +6,5 @@ export type AllergenDto = {
 export type Allergen = {
     _id: string
     title: string
-    icon: string
+    icon?: string
 }
