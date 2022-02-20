@@ -5,7 +5,7 @@ import { Button } from "../components/Buttons/Button"
 import { PasswordInput } from "../components/Forms/PasswortInput"
 import { TextInput } from "../components/Forms/TextInput"
 import { useActions, useAppState } from "../overmind"
-import { Credentials } from "../overmind/auth/effects"
+import { Credentials } from "../overmind/auth/type"
 
 export const Login: React.FC = () => {
     const { authenticating } = useAppState().auth
