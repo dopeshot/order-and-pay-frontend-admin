@@ -43,3 +43,4 @@ oder
 ## Deploy
 
 Das gehostete Admin Frontend ist [hier](https://admin.dopeshot.coffee/login) erreichbar
+(die Live-Version kann natürlich von der Submission-Version abweichen)
