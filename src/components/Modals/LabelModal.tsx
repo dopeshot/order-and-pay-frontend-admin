@@ -36,7 +36,7 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
     }
 
     // Formik Validation
-    const validationSchema = Yup.object().shape({
+    const validationSchema: Yup.SchemaOf<LabelDto> = Yup.object().shape({
         title: Yup.string().min(2).max(20).required("Title is required"),
         icon: Yup.string()
     })

@@ -41,7 +41,7 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
     const validatePasswordAdd = Yup.string().min(8, 'Das Passwort muss aus mindestens 8 Zeichen bestehen.').max(124, 'Das Passwort darf nicht länger als 124 Zeichen sein.').required('Dies ist ein Pflichtfeld')
     const validatePasswordEdit = Yup.string().min(8, 'Das Passwort muss aus mindestens 8 Zeichen bestehen.').max(124, 'Das Passwort darf nicht länger als 124 Zeichen sein.')
 
-    const validationSchema = Yup.object().shape({
+    const validationSchema: Yup.SchemaOf<UserDto> = Yup.object().shape({
         email: Yup.string().email('Diese E-Mail-Adresse ist ungültig. Versuche es mit einer anderen.').required('Dies ist ein Pflichtfeld'),
         username: Yup.string().min(3, 'Der Username muss aus mindestens 3 Zeichen bestehen.').max(24, 'Der Username darf nicht länger als 24 Zeichen sein.').required('Dies ist ein Pflichtfeld'),
         password: modalEditData ? validatePasswordEdit : validatePasswordAdd
