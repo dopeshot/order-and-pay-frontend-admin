@@ -12,8 +12,8 @@ import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
+import { CategoryPopulated } from "../../overmind/categories/type"
 import { Dish } from "../../overmind/dishes/type"
-import { Category } from "../../overmind/menu/state"
 import { numberToPrice } from "../../services/numberToPrice"
 
 type MenuParams = {
@@ -33,7 +33,7 @@ export const Menu: React.FC = () => {
 
     // Categories Local State
     const [isCategoryDeleteModalOpen, setCategoryDeleteModalOpen] = useState(false)
-    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
+    const [selectedCategory, setSelectedCategory] = useState<CategoryPopulated | null>(null)
 
     // Global State
     const { isMobile } = useAppState().app
@@ -50,7 +50,7 @@ export const Menu: React.FC = () => {
         loadMenu()
     }, [getMenuEditor, menuId])
 
-    const handleDelete = async (selectedElement: Dish | Category | null, type: "dish" | "category") => {
+    const handleDelete = async (selectedElement: Dish | CategoryPopulated | null, type: "dish" | "category") => {
         /* istanbul ignore next // should not happen just fallback */
         if (!selectedElement) {
             console.warn("There is no element selected.")
@@ -87,7 +87,7 @@ export const Menu: React.FC = () => {
         setSelectedDish(null)
     }
 
-    const openCategoryDeleteModal = (category: Category) => {
+    const openCategoryDeleteModal = (category: CategoryPopulated) => {
         setSelectedCategory(category)
         setCategoryDeleteModalOpen(true)
     }

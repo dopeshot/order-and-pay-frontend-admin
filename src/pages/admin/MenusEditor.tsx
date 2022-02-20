@@ -11,8 +11,7 @@ import { Toggle } from "../../components/Forms/Toggle"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions } from "../../overmind"
-import { Menu } from "../../overmind/menu/state"
-import { MenuDto } from "../../overmind/menus/type"
+import { Menu, MenuDto } from "../../overmind/menus/type"
 
 type Params = {
     menuId: string

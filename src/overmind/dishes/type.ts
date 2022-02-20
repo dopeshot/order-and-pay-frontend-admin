@@ -9,11 +9,16 @@ export type DishDto = {
     image?: string
     isAvailable: boolean
     categoryId: string // id ref: 'Category'
-    allergenIds: Allergen[] // id ref: 'Allergy
-    labelIds: Label[] // id ref: 'Label'
+    allergenIds: string[] // id ref: 'Allergy
+    labelIds: string[] // id ref: 'Label'
 }
 
 export type Dish = DishDto & {
     _id: string,
     status: Status
+}
+
+export type DishPopulated = Dish & {
+    allergenIds: Allergen[]
+    labelIds: Label[]
 }

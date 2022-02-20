@@ -1,5 +1,5 @@
 import { request } from "../../services/axios";
-import { Menu } from "./state";
+import { MenuPopulated } from "../menus/type";
 
 /** Get Menu Single */
-export const getMenuEditorOverview = (id: string) => request.get<Menu>(`/menus/${id}/editor`)
+export const getMenuEditorOverview = (id: string) => request.get<MenuPopulated>(`/menus/${id}/editor`)

@@ -1,51 +1,7 @@
-import { Dish } from "../dishes/type"
-
-export enum Status {
-    ACTIVE = "active",
-    DELETED = "deleted"
-}
-
-export type Category = {
-    _id: string
-    title: string
-    description: string
-    icon: string
-    image: string
-    choices: Choice[]
-    dishes: Dish[]
-    menuId: string // id ref: 'Menu'
-}
-
-export type Option = {
-    id: number
-    name: string
-    price: number
-}
-
-export type Choice = {
-    id: number
-    title: string
-    type: ChoiceType
-    default?: number // id of option
-    options: Option[]
-}
-
-export enum ChoiceType {
-    RADIO = "radio",
-    CHECKBOX = "checkbox"
-}
-
-export type Menu = {
-    _id: string
-    title: string
-    description: string
-    status: Status
-    isActive: boolean
-    categories: Category[]
-}
+import { MenuPopulated } from "../menus/type"
 
 export type State = {
-    menu: Menu | null
+    menu: MenuPopulated | null
 }
 
 export const state: State = {

@@ -1,4 +1,4 @@
-import { Menu } from "../menu/state"
+import { Menu } from "./type"
 
 export type State = {
     menus: Menu[]

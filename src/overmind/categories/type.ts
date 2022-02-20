@@ -1,4 +1,5 @@
 import { Status } from "../../types/status"
+import { DishPopulated } from "../dishes/type"
 
 export type CategoryDto = {
     title: string
@@ -26,6 +27,10 @@ export type Category = {
     choices: Choice[]
     menuId: string // id ref: 'Menu'
     status: Status
+}
+
+export type CategoryPopulated = Category & {
+    dishes: DishPopulated[]
 }
 
 export type ChoiceDto = {

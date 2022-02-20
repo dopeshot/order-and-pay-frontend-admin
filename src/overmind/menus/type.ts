@@ -1,4 +1,5 @@
 import { Status } from "../../types/status";
+import { CategoryPopulated } from "../categories/type";
 
 export type MenuDto = {
     title: string
@@ -13,4 +14,13 @@ export type Menu = {
     description: string
     status: Status
     isActive: boolean
+}
+
+export type MenuPopulated = {
+    _id: string
+    title: string
+    description?: string
+    status?: Status
+    isActive?: boolean
+    categories: CategoryPopulated[]
 }

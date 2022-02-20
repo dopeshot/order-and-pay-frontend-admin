@@ -1,7 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { Menu } from "../menu/state"
-import { MenuDto } from "./type"
+import { Menu, MenuDto } from "./type"
 
 /**
  * Get all Menus request with error handling
