@@ -395,7 +395,7 @@ export const CategoriesEditor: React.FunctionComponent = () => {
 
                             <div className="flex flex-col md:flex-row justify-between mt-4">
                                 {isEditing && category && <Button dataCy="category-delete-button" kind="tertiary" onClick={() => openDeleteModal({ type: 'category', categoryId: category._id, title: `Kategorie-"${category?.title}"`, description: `Das Löschen kann nicht rückgängig gemacht werden.` })} icon={faTrash} className="mb-4 order-last md:order-none">Löschen</Button>}
-                                <Button type="submit" kind="primary" dataCy="category-save-button" loading={isLoadingSave} disabled={!(dirty && isValid)} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
+                                <Button type="submit" kind="primary" dataCy="category-save-button" loading={isLoadingSave} icon={faCheck} className="ml-auto mb-4">Speichern</Button>
                             </div>
                         </Form>
                     )}
