@@ -28,8 +28,13 @@ export const Menus: React.FC = () => {
     // Load menus when page is loaded
     useEffect((): void => {
         async function loadMenus() {
-            await getAllMenus()
-            setIsLoadingMenus(false)
+            try {
+                await getAllMenus()
+            } catch (error) {
+                // Loading menus failed
+            } finally {
+                setIsLoadingMenus(false)
+            }
         }
         loadMenus()
     }, [getAllMenus])

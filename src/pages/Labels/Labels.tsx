@@ -30,8 +30,13 @@ export const Labels: React.FC = () => {
     // Load labels when page is loaded
     useEffect((): void => {
         async function loadLabels() {
-            await getAllLabels()
-            setIsLoadingLabels(false)
+            try {
+                await getAllLabels()
+            } catch (error) {
+                // Loading labels failed
+            } finally {
+                setIsLoadingLabels(false)
+            }
         }
 
         loadLabels()

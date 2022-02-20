@@ -25,8 +25,13 @@ export const Users: React.FC = () => {
 
     useEffect((): void => {
         async function loadUsers() {
-            await getAllUser()
-            setIsLoadingUsers(false)
+            try {
+                await getAllUser()
+            } catch (error) {
+                // Loading users failed
+            } finally {
+                setIsLoadingUsers(false)
+            }
         }
         loadUsers()
     }, [getAllUser])
