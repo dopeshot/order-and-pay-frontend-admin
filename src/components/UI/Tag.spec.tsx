@@ -1,5 +1,5 @@
 import { mount } from '@cypress/react'
-import 'tailwindcss/dist/tailwind.min.css'
+import 'tailwindcss/tailwind.css'
 import { Tag, TagTypesEnum } from './Tag'
 
 describe('Tags', () => {

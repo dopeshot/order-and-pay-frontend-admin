@@ -1,7 +1,7 @@
 import { mount } from '@cypress/react'
 import { faCarrot, faPiggyBank } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
-import 'tailwindcss/dist/tailwind.min.css'
+import 'tailwindcss/tailwind.css'
 import { Button } from '../Buttons/Button'
 import { Checkbox } from './Checkbox'
 
@@ -62,7 +62,7 @@ describe('Checkbox', () => {
     })
 
     it('should display all options', () => {
-        data.options.map((option) => {
+        data.options.forEach((option) => {
             cy.get(`[data-cy="${data.name}-option-${option.id}"]`).should('contain', option.label)
         })
     })
