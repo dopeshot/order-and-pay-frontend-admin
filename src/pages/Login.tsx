@@ -16,7 +16,7 @@ export const Login: React.FC = () => {
         password: ""
     }
 
-    const validationLoginSchema = Yup.object().shape({
+    const validationLoginSchema: Yup.SchemaOf<Credentials> = Yup.object().shape({
         email: Yup.string().email("Diese E-Mail-Adresse ist ungültig. Versuche es mit einer anderen.").required("Dies ist ein Pflichtfeld"),
         password: Yup.string().required("Dies ist ein Pflichtfeld")
     })
