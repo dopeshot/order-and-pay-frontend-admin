@@ -30,6 +30,7 @@ export const Users: React.FC = () => {
     }, [getAllUser])
 
     const handleDelete = async (event: any) => {
+        /* istanbul ignore next // should not happen just fallback */
         if (!selectedUser) {
             console.warn("There is no user selected.")
             return

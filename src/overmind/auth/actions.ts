@@ -7,12 +7,13 @@ export const initializeUser = async ({ state, effects, actions }: Context) => {
     state.auth.authenticating = true
 
     try {
+        // istanbul ignore if // cant test because we cant test if we get reloggedin
         if (token) {
             effects.auth.setToken(token)
             const userResponse = await effects.auth.getCurrentUser()
             state.auth.currentUser = userResponse.data
         }
-    } catch (error) {
+    } catch (error) /* istanbul ignore next */ {
         if (axios.isAxiosError(error) && error.response) {
             // Logout when the access token is not valid anymore
             actions.auth.logout()
