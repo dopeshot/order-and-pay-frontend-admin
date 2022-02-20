@@ -1,12 +1,4 @@
-import { Status } from "../../types/status"
-
-export type Menu = {
-    _id: string
-    title: string
-    description: string
-    status: Status
-    isActive: boolean
-}
+import { Menu } from "../menu/state"
 
 export type State = {
     menus: Menu[]

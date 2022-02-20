@@ -11,8 +11,8 @@ import { Toggle } from "../../components/Forms/Toggle"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions } from "../../overmind"
-import { MenuDto } from "../../overmind/menus/effects"
-import { Menu } from "../../overmind/menus/state"
+import { Menu } from "../../overmind/menu/state"
+import { MenuDto } from "../../overmind/menus/type"
 
 type Params = {
     menuId: string
@@ -73,7 +73,7 @@ export const MenusEditor: React.FC = () => {
         isActive: Yup.boolean()
     })
 
-    const submitForm = async (values: MenuDto) => {
+    const submitForm = async (menu: MenuDto) => {
         setIsLoadingSave(true)
 
         try {
@@ -81,10 +81,10 @@ export const MenusEditor: React.FC = () => {
             if (isEditing) {
                 await updateMenu({
                     menuId,
-                    menu: values
+                    menu
                 })
             } else {
-                await createMenu(values)
+                await createMenu(menu)
             }
 
             history.push("/admin/menus")

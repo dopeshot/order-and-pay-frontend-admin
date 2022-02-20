@@ -4,7 +4,6 @@ import { useState } from "react"
 import * as Yup from "yup"
 import { useActions } from "../../overmind"
 import { Allergen, AllergenDto } from "../../overmind/allergens/type"
-import { LabelDto } from "../../overmind/labels/effects"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Forms/TextInput"
 import { Modal } from "./Modal"
@@ -43,7 +42,7 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
     })
 
     // Formik Submit Form
-    const submitForm = async (values: LabelDto) => {
+    const submitForm = async (values: AllergenDto) => {
         setIsModalLoading(true)
 
         try {

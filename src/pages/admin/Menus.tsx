@@ -9,7 +9,7 @@ import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { Menu } from "../../overmind/menus/state"
+import { Menu } from "../../overmind/menus/type"
 
 export const Menus: React.FC = () => {
     // Get hooks to manipulate global state
