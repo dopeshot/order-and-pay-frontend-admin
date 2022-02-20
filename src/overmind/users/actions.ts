@@ -6,8 +6,6 @@ import { UserDto } from "./effects"
  * Get all Users request with error handling
  */
 export const getAllUser = async ({ state, actions, effects }: Context) => {
-
-    state.users.isLoadingUsers = true
     try {
         const response = await effects.users.getAllUser()
         const users = response.data
@@ -21,7 +19,6 @@ export const getAllUser = async ({ state, actions, effects }: Context) => {
             type: "danger"
         })
     }
-    state.users.isLoadingUsers = false
 }
 
 /**

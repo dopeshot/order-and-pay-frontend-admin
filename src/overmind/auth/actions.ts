@@ -30,7 +30,7 @@ export const initializeUser = async ({ state, effects, actions }: Context) => {
 /**
  * Login request with error handling
  */
-export const login = async ({ state, effects }: Context, credentials: Credentials) => {
+export const login = async ({ state, effects, actions }: Context, credentials: Credentials) => {
     state.auth.authenticating = true
     try {
         const responseToken = await effects.auth.login(credentials)
@@ -40,8 +40,12 @@ export const login = async ({ state, effects }: Context, credentials: Credential
         const userResponse = await effects.auth.getCurrentUser()
         state.auth.currentUser = userResponse.data
     } catch (error) {
-        // TODO: Error handling
         console.error(error)
+        actions.notify.createNotification({
+            title: "Fehler beim Anmelden",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
     }
     state.auth.authenticating = false
 }

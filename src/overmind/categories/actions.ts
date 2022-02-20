@@ -6,13 +6,20 @@ import { CategoryDto } from "./effects";
 /**
  * Get all categories request with error handling MC TODO: Error handling
  */
-export const getAllCategories = async ({ effects }: Context): Promise<Category[]> => {
+export const getAllCategories = async ({ effects, actions }: Context): Promise<Category[]> => {
     try {
         const response = await effects.categories.getAllCategories()
         const categories = response.data
         return categories
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Kategorien",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }

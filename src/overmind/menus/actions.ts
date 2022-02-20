@@ -7,7 +7,6 @@ import { Menu } from "./state"
  * Get all Menus request with error handling
  */
 export const getAllMenus = async ({ state, actions, effects }: Context): Promise<void> => {
-    state.menus.isLoadingMenus = true
     try {
         const response = await effects.menus.getAllMenus()
         const menus = response.data
@@ -23,7 +22,6 @@ export const getAllMenus = async ({ state, actions, effects }: Context): Promise
 
         throw (error)
     }
-    state.menus.isLoadingMenus = false
 }
 
 /**

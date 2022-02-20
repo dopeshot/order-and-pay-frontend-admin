@@ -13,9 +13,10 @@ import { User } from "../../overmind/users/effects"
 export const Users: React.FC = () => {
     // Global States
     const { getAllUser, deleteUser } = useActions().users
-    const { users, isLoadingUsers } = useAppState().users
+    const { users } = useAppState().users
 
     // Local States
+    const [isLoadingUsers, setIsLoadingUsers] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<User | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -24,7 +25,13 @@ export const Users: React.FC = () => {
 
     useEffect((): void => {
         async function loadUsers() {
-            await getAllUser()
+            try {
+                await getAllUser()
+            } catch (error) {
+                // Loading users failed
+            } finally {
+                setIsLoadingUsers(false)
+            }
         }
         loadUsers()
     }, [getAllUser])

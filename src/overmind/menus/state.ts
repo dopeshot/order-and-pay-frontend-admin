@@ -9,11 +9,9 @@ export type Menu = {
 }
 
 export type State = {
-    isLoadingMenus: boolean
     menus: Menu[]
 }
 
 export const state: State = {
-    isLoadingMenus: false,
     menus: []
 }

@@ -6,11 +6,6 @@ import { LabelDto } from "./effects"
  * Get all Labels request with error handling
  */
 export const getAllLabels = async ({ state, actions, effects }: Context) => {
-    // istanbul ignore next //  Backoff when already loading
-    if (state.labels.isLoadingLabels)
-        return
-
-    state.labels.isLoadingLabels = true
     try {
         const response = await effects.labels.getLabels()
         const labels = response.data
@@ -25,7 +20,6 @@ export const getAllLabels = async ({ state, actions, effects }: Context) => {
         })
 
     }
-    state.labels.isLoadingLabels = false
 }
 
 /**
