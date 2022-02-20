@@ -7,7 +7,7 @@ import { User, UserDto } from "../../overmind/users/effects"
 import { Button } from "../Buttons/Button"
 import { PasswordInput } from "../Form/PasswortInput"
 import { TextInput } from "../Form/TextInput"
-import { Modal } from "../UI/Modal"
+import { Modal } from "./Modal"
 
 type UsersModalProps = {
     /** State Data from user to edit */

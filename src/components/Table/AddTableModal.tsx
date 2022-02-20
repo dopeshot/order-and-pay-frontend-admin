@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { useActions } from "../../overmind"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Form/TextInput"
-import { Modal } from "../UI/Modal"
+import { Modal } from "../Modals/Modal"
 
 type TableModalProps = {
     /** Modal State */

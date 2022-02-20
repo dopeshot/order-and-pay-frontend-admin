@@ -8,7 +8,7 @@ import { Allergen } from "../../overmind/allergens/state"
 import { LabelDto } from "../../overmind/labels/effects"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Form/TextInput"
-import { Modal } from "../UI/Modal"
+import { Modal } from "./Modal"
 
 type AllergensModalProps = {
     /** State Data from allergen to edit */

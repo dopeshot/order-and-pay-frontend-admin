@@ -7,7 +7,7 @@ import { LabelDto } from "../../overmind/labels/effects"
 import { Label } from "../../overmind/labels/state"
 import { Button } from "../Buttons/Button"
 import { TextInput } from "../Form/TextInput"
-import { Modal } from "../UI/Modal"
+import { Modal } from "./Modal"
 
 type LabelModalProps = {
     /** State Data from label to edit */
