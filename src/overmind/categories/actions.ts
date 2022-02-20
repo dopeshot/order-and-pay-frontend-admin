@@ -79,14 +79,21 @@ export const deleteCategoryById = async ({ effects, actions }: Context, id: stri
     }
 }
 
-// Get all categories action MC TODO: Error handling
-export const getAllCategories = async ({ effects }: Context): Promise<Category[]> => {
+// Get all categories action
+export const getAllCategories = async ({ effects, actions }: Context): Promise<Category[]> => {
     try {
         const response = await effects.dishes.getAllCategories()
         const categories = response.data
         return categories
     } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
+
+        actions.notify.createNotification({
+            title: "Fehler beim Laden der Kategorien",
+            message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
+            type: "danger"
+        })
+
         throw (error)
     }
 }
