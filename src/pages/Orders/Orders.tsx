@@ -1,5 +1,5 @@
 import { faCheck, faSync, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { Button } from "../../components/Buttons/Button"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -14,10 +14,21 @@ export const Orders: React.FC = () => {
     const { getAllOrders, updateOrder } = useActions().orders
 
     // Global State
-    const { orders, isLoadingOrders } = useAppState().orders
+    const { orders } = useAppState().orders
+
+    const [isLoadingOrders, setIsLoadingOrders] = useState(false)
 
     useEffect((): void => {
-        getAllOrders()
+        async function loadOrders() {
+            try {
+                await getAllOrders()
+            } catch (error) {
+                // Failed loading orders
+            } finally {
+                setIsLoadingOrders(false)
+            }
+        }
+        loadOrders()
     }, [getAllOrders])
 
     const updateOrderHandler = (id: string, type: "edit" | "close" | "delete") => {
@@ -88,7 +99,7 @@ export const Orders: React.FC = () => {
 
             {/* JS NOTE: The Design of this is not finished, just a debug version of it */}
             {/* Content */}
-            {isLoadingOrders ? <Loading /> : <List>
+            {(orders.length === 0 && isLoadingOrders) ? <Loading /> : <List>
                 {orders.map((order) => <Fragment key={order._id}>
                     <ListItem title={`#${order._id}`} icon="shopping-basket" background header={<><p className="pr-4">Tisch: {order.tableId}</p><Tag title={beautifyOrderStatus[order.Status].title} type={beautifyOrderStatus[order.Status].type} /></>}>
                         <h6 className="text-headline-black text-lg font-semibold mr-3">{numberToPrice(order.price)}</h6>
