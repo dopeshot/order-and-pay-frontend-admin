@@ -39,7 +39,7 @@ export const login = async ({ state, effects, actions }: Context, credentials: C
         effects.auth.setToken(access_token)
         const userResponse = await effects.auth.getCurrentUser()
         state.auth.currentUser = userResponse.data
-    } catch (error) {
+    } catch (error) /* istanbul ignore next */ {
         console.error(error)
         actions.notify.createNotification({
             title: "Fehler beim Anmelden",
