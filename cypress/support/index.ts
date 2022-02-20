@@ -95,6 +95,12 @@ declare global {
             getAllMenus(): void
 
             /**
+             * Custom command to intercept all get all menus requests get empty array back
+             * @example cy.getAllMenusEmpty()
+             */
+            getAllMenusEmpty(): void
+
+            /**
              * Custom command to intercept all create menu requests
              * @example cy.createMenu()
              */
@@ -104,7 +110,7 @@ declare global {
              * Custom command to intercept all create menu requests give duplicate error back
              * @example cy.createMenuDuplicate()
              */
-            createMenuDuplicate(): void
+            createMenuDuplicateTitle(): void
 
             /**
              * Custom command to intercept all get menu by id requests
@@ -117,6 +123,12 @@ declare global {
              * @example cy.updateMenu()
              */
             updateMenu(): void
+
+            /**
+             * Custom command to intercept all update menu by id requests duplicate error back
+             * @example cy.updateMenu()
+             */
+            updateMenuDuplicateTitle(): void
 
             /**
              * Custom command to intercept all delete menu requests

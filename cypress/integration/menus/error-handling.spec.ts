@@ -1,53 +1,55 @@
-import allergens from '../../fixtures/allergens.json';
-import updateAllergen from '../../fixtures/update-allergen.json';
+import menus from '../../fixtures/menus.json';
+import updateMenu from '../../fixtures/update-menu.json';
 
 describe('Error Handling Menus', () => {
     describe('Empty', () => {
         beforeEach(() => {
-            cy.getAllAllergensEmpty()
-            cy.visit('/admin/menus/allergens')
+            cy.getAllMenusEmpty()
+            cy.visit('/admin/menus')
 
             cy.quickLogin()
-            cy.wait('@getAllAllergensEmpty')
+            cy.wait('@getAllMenusEmpty')
         })
 
-        it('should show empty state when there are no allergens', () => {
-            cy.contains('Erstelle Allergene').should('be.visible')
+        it('should show empty state when there are no menus', () => {
+            cy.contains('Erstelle Menü').should('be.visible')
         })
     })
 
     describe('Duplicates', () => {
         beforeEach(() => {
-            cy.getAllAllergens()
-            cy.visit('/admin/menus/allergens')
+            cy.getAllMenus()
+            cy.visit('/admin/menus')
 
             cy.quickLogin()
-            cy.wait('@getAllAllergens')
+            cy.wait('@getAllMenus')
         })
 
-        it('should handle when create duplicate Allergen', () => {
-            cy.contains('Allergen hinzufügen').click()
+        it('should handle when create duplicate Menu', () => {
+            cy.contains('Menü hinzufügen').click()
 
-            cy.get(`[data-cy="textinput-title-input"]`).type(allergens[0].title)
-            cy.get(`[data-cy="textinput-icon-input"]`).type(allergens[0].icon)
+            cy.get(`[data-cy="textinput-title-input"]`).type(menus[0].title)
+            cy.get(`[data-cy="textarea-description-input"]`).type(menus[0].description)
 
-            cy.createAllergenDuplicateTitle()
-            cy.get(`[data-cy="allergens-modal-add-edit-button"]`).click()
-            cy.wait('@createAllergenDuplicateTitle')
+            cy.createMenuDuplicateTitle()
+            cy.get(`[data-cy="menus-add-edit-save-button"]`).click()
+            cy.wait('@createMenuDuplicateTitle')
 
-            cy.contains('Title is already taken.').should('be.visible')
+            cy.contains('This menu title already exists').should('be.visible')
         })
 
-        it('should handle when update duplicate Allergen', () => {
-            cy.get('[data-cy="allergens-list-item"]').first().click()
+        it('should handle when update duplicate Menu', () => {
+            cy.getMenuById()
+            cy.get('[data-cy="menus-edit-button"]').first().click()
+            cy.wait('@getMenuById')
 
-            cy.get(`[data-cy="textinput-title-input"]`).clear().type(updateAllergen.title)
+            cy.get(`[data-cy="textinput-title-input"]`).clear().type(updateMenu.title)
 
-            cy.updateAllergenDuplicateTitle()
-            cy.get(`[data-cy="allergens-modal-add-edit-button"]`).click()
-            cy.wait('@updateAllergenDuplicateTitle')
+            cy.updateMenuDuplicateTitle()
+            cy.get(`[data-cy="menus-add-edit-save-button"]`).click()
+            cy.wait('@updateMenuDuplicateTitle')
 
-            cy.contains('Title is already taken.').should('be.visible')
+            cy.contains('This menu title already exists').should('be.visible')
         })
     })
 })

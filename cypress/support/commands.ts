@@ -82,13 +82,17 @@ Cypress.Commands.add('getAllMenus', () => {
     }).as('getAllMenus')
 })
 
+Cypress.Commands.add('getAllMenusEmpty', () => {
+    cy.intercept('GET', `${api}/menus`, []).as('getAllMenusEmpty')
+})
+
 Cypress.Commands.add('createMenu', () => {
     cy.intercept('POST', `${api}/menus`, {
         fixture: 'menu.json'
     }).as('createMenu')
 })
 
-Cypress.Commands.add('createMenuDuplicate', () => {
+Cypress.Commands.add('createMenuDuplicateTitle', () => {
     cy.intercept('POST', `${api}/menus`, {
         statusCode: 409,
         body: {
@@ -96,7 +100,7 @@ Cypress.Commands.add('createMenuDuplicate', () => {
             "message": "This menu title already exists",
             "error": "Conflict"
         }
-    }).as('createMenuDuplicate')
+    }).as('createMenuDuplicateTitle')
 })
 
 Cypress.Commands.add('getMenuById', () => {
@@ -109,6 +113,17 @@ Cypress.Commands.add('updateMenu', () => {
     cy.intercept('PATCH', `${api}/menus/**`, {
         fixture: 'update-menu.json'
     }).as('updateMenu')
+})
+
+Cypress.Commands.add('updateMenuDuplicateTitle', () => {
+    cy.intercept('PATCH', `${api}/menus/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This menu title already exists",
+            "error": "Conflict"
+        }
+    }).as('updateMenuDuplicateTitle')
 })
 
 Cypress.Commands.add('deleteMenu', () => {
@@ -343,7 +358,7 @@ Cypress.Commands.add('createUserDuplicateEmail', () => {
         statusCode: 409,
         body: {
             "statusCode": 409,
-            "message": "Username is already taken.",
+            "message": "Email is already taken.",
             "error": "Conflict"
         }
     }).as('createUserDuplicateEmail')
@@ -354,7 +369,7 @@ Cypress.Commands.add('createUserDuplicateUsername', () => {
         statusCode: 409,
         body: {
             "statusCode": 409,
-            "message": "Email is already taken.",
+            "message": "Username is already taken.",
             "error": "Conflict"
         }
     }).as('createUserDuplicateUsername')
