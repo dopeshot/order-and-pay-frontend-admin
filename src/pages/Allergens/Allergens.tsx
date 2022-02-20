@@ -1,12 +1,14 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faGlassWhiskey, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { AllergensModal } from "../../components/Allergens/AllergensModal"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
+import { Loading } from "../../components/UI/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Allergen } from "../../overmind/allergens/state"
 
@@ -15,10 +17,11 @@ export const Allergens: React.FC = () => {
     const { getAllAllergens, deleteAllergen } = useActions().allergens
 
     // Get global state
-    const { allergens, isLoadingAllergens } = useAppState().allergens
+    const { allergens } = useAppState().allergens
 
     // Component States
     const [modalOpen, setModalOpen] = useState(false)
+    const [isLoadingAllergens, setLoadingAllergens] = useState(true)
     const [modalEditData, setModalEditData] = useState<Allergen | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
@@ -26,7 +29,17 @@ export const Allergens: React.FC = () => {
 
     // Load allergens when page is loaded
     useEffect((): void => {
-        getAllAllergens()
+        async function loadAllergens() {
+            try {
+                await getAllAllergens()
+            } catch (error) {
+                // Loading allergens failed
+            } finally {
+                setLoadingAllergens(false)
+            }
+        }
+
+        loadAllergens()
     }, [getAllAllergens])
 
     const handleDelete = async (event: any) => {
@@ -38,10 +51,10 @@ export const Allergens: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the allergen
-        await deleteAllergen(selectedAllergen._id)
+        // Delete the allergen and close modal when succesfull
+        if (await deleteAllergen(selectedAllergen._id))
+            closeDeleteModal()
 
-        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When allergen is delete update List
@@ -58,12 +71,17 @@ export const Allergens: React.FC = () => {
         setSelectedAllergen(null)
     }
 
+    if (!isLoadingAllergens && allergens.length === 0)
+        return <EmptyState icon={faGlassWhiskey} title="Erstelle Allergene" setModalOpen={setModalOpen} description="Es wurden noch keine Allergenen erstellt. Erstelle neue um sie den Gerichten hinzufügen zu können." buttonText="Allergen hinzufügen">
+            <AllergensModal modalOpen={modalOpen} setModalOpen={setModalOpen} modalEditData={modalEditData} setModalEditData={setModalEditData} />
+        </EmptyState>
+
     return <div className="container md:max-w-full mt-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between">
             <div>
                 <h1 className="text-2xl text-headline-black font-semibold">Allergene</h1>
-                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{!isLoadingAllergens ? allergens.length : 0} Gesamt</p>
+                <p data-cy="allergens-count" className="text-lightgrey mr-3 mb-4">{allergens.length ?? 0} Gesamt</p>
             </div>
             <div>
                 <Button icon={faPlus} onClick={() => setModalOpen(true)}>Allergen hinzufügen</Button>
@@ -72,7 +90,7 @@ export const Allergens: React.FC = () => {
         {/* Header end */}
 
         {/* Content */}
-        <List lines>
+        {(allergens.length === 0 && isLoadingAllergens) ? <Loading /> : <List lines>
             {allergens.map((allergen) => <ListItem dataCy="allergens-list-item" key={allergen._id} title={allergen.title} icon={allergen.icon as IconProp} onClick={() => {
                 setModalEditData(allergen)
                 setModalOpen(true)
@@ -80,6 +98,7 @@ export const Allergens: React.FC = () => {
                 <IconButton dataCy="allergens-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(allergen)} />
             </ListItem>)}
         </List>
+        }
         {/* Content End */}
 
         {/* Add/Edit Allergen Modal */}

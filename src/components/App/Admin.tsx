@@ -7,13 +7,16 @@ import { Labels } from "../../pages/Labels/Labels"
 import { SingleMenu } from "../../pages/MenuOverview/SingleMenu"
 import { MenuEditor } from "../../pages/Menus/MenuEditor"
 import { Menus } from "../../pages/Menus/Menus"
+import { Orders } from "../../pages/Orders/Orders"
 import { Tables } from "../../pages/Tables/Tables"
 import { Users } from "../../pages/Users/Users"
 import { Sidebar } from "../Navigation/Sidebar"
 import { Topbar } from "../Navigation/Topbar"
 
+/**
+ * Contains admin routes and styling 
+ */
 export const Admin: React.FC = () => {
-
     const { path } = useRouteMatch()
 
     return <div className="h-screen">
@@ -27,6 +30,7 @@ export const Admin: React.FC = () => {
                     <Route exact path={`${path}/home`} component={Home} />
                     <Route exact path={`${path}/users`} component={Users} />
                     <Route exact path={`${path}/menus`} component={Menus} />
+                    <Route exact path={`${path}/orders`} component={Orders} />
                     <Route exact path={`${path}/menus/allergens`} component={Allergens} />
                     <Route exact path={`${path}/menus/labels`} component={Labels} />
                     <Route exact path={`${path}/menus/add`} component={MenuEditor} />

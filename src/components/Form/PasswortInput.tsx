@@ -5,7 +5,6 @@ import { useState } from "react";
 import { FormError } from "../Errors/FormError";
 
 export const PasswordInput: React.FC = () => {
-
     const [showPassword, setShowPassword] = useState(false)
 
     return (

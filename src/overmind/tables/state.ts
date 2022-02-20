@@ -22,10 +22,6 @@ export type TableDocument = Table & TableHelper
 
 export type State = {
     isLoadingTables: boolean,
-    modalErrors: string[],
-    tableErrors: string[],
-    hasModalError: boolean,
-    hasTableError: boolean,
     isCheckedAll: boolean,
     checkedCount: number,
     tables: TableDocument[],
@@ -41,10 +37,6 @@ export type State = {
 export const state: State = {
     isLoadingTables: false,
     tables: [],
-    modalErrors: [],
-    tableErrors: [],
-    hasModalError: derived((state: State) => state.modalErrors.length !== 0),
-    hasTableError: derived((state: State) => state.tableErrors.length !== 0),
     isCheckedAll: derived((state: State) => state.tables.length !== 0 && !state.tables.some(table => !table.isChecked)),
     checkedCount: derived((state: State) => state.tables.filter(table => table.isChecked).length),
     sort: {

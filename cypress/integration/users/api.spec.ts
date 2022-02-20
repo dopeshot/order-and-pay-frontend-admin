@@ -101,7 +101,6 @@ describe('Api Endpoints User', () => {
 
         it('should update user', () => {
             cy.get(`[data-cy="textinput-username-input"]`).clear().type(updateuser.username)
-            cy.get(`[data-cy="password-input"]`).type("123456789")
 
             cy.updateUser()
             cy.get(`[data-cy="users-modal-add-edit-button"]`).click()

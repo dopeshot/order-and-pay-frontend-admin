@@ -11,9 +11,9 @@ import { Modal } from "../UI/Modal"
 
 type UsersModalProps = {
     /** State Data from user to edit */
-    modalEditData?: User | null
+    modalEditData: User | null
     /** State Setter from modalEditData */
-    setModalEditData?: React.Dispatch<React.SetStateAction<User | null>> | null
+    setModalEditData: React.Dispatch<React.SetStateAction<User | null>>
     /** State for modal open/close */
     modalOpen: boolean
     /** State Setter for modalOpen */
@@ -51,25 +51,28 @@ export const UsersModal: React.FunctionComponent<UsersModalProps> = ({ modalEdit
     const submitForm = async (user: UserDto) => {
         setIsModalLoading(true)
 
-        // Check if we are editing or creating a new label
-        if (modalEditData) {
-            if (!await updateUser({
-                _id: modalEditData._id,
-                user: user
-            }))
-                return
-            // Clear modal data
-            if (setModalEditData)
+        try {
+            if (modalEditData) {
+                await updateUser({
+                    _id: modalEditData._id,
+                    user: user
+                })
+
+                // Clear modal data
                 setModalEditData(null)
+            }
+            else {
+                await createUser(user)
+            }
+
             setModalOpen(false)
+        } catch (error) {
+            // Create or update failed
+        } finally {
+            setIsModalLoading(false)
         }
-        else {
-            if (!await createUser(user))
-                return
-            setModalOpen(false)
-        }
-        setIsModalLoading(false)
     }
+
 
     // Modal close handler
     const handleModelDismiss = () => {

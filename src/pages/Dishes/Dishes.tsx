@@ -1,6 +1,5 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faCheck, faEuroSign, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
-import axios from "axios"
 import { Form, Formik } from "formik"
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
@@ -44,7 +43,8 @@ export const Dishes: React.FC = () => {
     const [allergensOptions, setAllergensOptions] = useState<ComponentOptions[]>([])
 
     // Global State
-    const { createDish, getDishById, getAllCategories, updateDish, deleteDish } = useActions().dishes
+    const { createDish, getDishById, updateDish, deleteDish } = useActions().dishes
+    const { getAllCategories } = useActions().categories
     const { getAllLabels } = useActions().labels
     const { getAllAllergens } = useActions().allergens
     const { labels } = useAppState().labels
@@ -158,10 +158,7 @@ export const Dishes: React.FC = () => {
 
             history.push(`/admin/menus/${menuId}/editor`)
         } catch (error) {
-            if (!axios.isAxiosError(error))
-                return
-
-            // MC: Put error display here (or we generalize it???)
+            // Create or update failed
         } finally {
             setIsLoadingSave(false)
         }
@@ -175,10 +172,14 @@ export const Dishes: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        await deleteDish(dishId)
-
-        setIsLoadingDelete(false)
-        history.push(`/admin/menus/${menuId}/editor`)
+        try {
+            await deleteDish(dishId)
+            history.push(`/admin/menus/${menuId}/editor`)
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     return (
@@ -189,13 +190,13 @@ export const Dishes: React.FC = () => {
                 <Formik enableReinitialize initialValues={initialDishValues} validationSchema={dishValidationSchema} onSubmit={onDishSubmit}>
                     {({ dirty, isValid }) => (
                         <Form>
-                            <TextInput name="image" labelText="Titelbild-URL" placeholder="URL eingeben" />
                             <div className="flex justify-between">
                                 <span className="w-3/4 mr-2"><TextInput name="title" labelText="Titel" labelRequired placeholder="Hamburger, Cola,..." /></span>
                                 <span className="w-1/4"><TextInput type="number" name="price" labelText="Preis" labelRequired placeholder="2,00" icon={faEuroSign} /></span>
                             </div>
                             <Textarea name="description" labelText="Beschreibung" maxLength={200} labelRequired placeholder="Mit Salat, Tomaten und sauren Gurken" />
                             <Dropdown name="categoryId" placeholder="Wähle eine Kategorie..." labelText="Kategorie" labelRequired options={categoriesOptions} />
+                            <TextInput name="image" labelText="Titelbild-URL" placeholder="URL eingeben" />
                             <Toggle name="isAvailable" labelText="Ist das Gericht gerade verfügbar?" labelRequired labelOff="Nicht verfügbar" labelOn="Verfügbar" />
                             <div className="flex">
                                 <div className="mr-2 sm:mr-8 md:mr-32">

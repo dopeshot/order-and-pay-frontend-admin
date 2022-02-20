@@ -7,6 +7,9 @@ export type LocationState = {
     }
 }
 
+/**
+ * When Route should only be visible for not logged in user
+ */
 export const GuestRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
     // Get global state
     const { isLoggedIn } = useAppState().auth

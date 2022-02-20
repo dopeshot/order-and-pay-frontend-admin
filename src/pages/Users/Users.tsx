@@ -16,7 +16,7 @@ export const Users: React.FC = () => {
     const { users } = useAppState().users
 
     // Local States
-    const [isLoading, setLoading] = useState(true)
+    const [isLoadingUsers, setIsLoadingUsers] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<User | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -25,13 +25,19 @@ export const Users: React.FC = () => {
 
     useEffect((): void => {
         async function loadUsers() {
-            if (await getAllUser())
-                setLoading(false)
+            try {
+                await getAllUser()
+            } catch (error) {
+                // Loading users failed
+            } finally {
+                setIsLoadingUsers(false)
+            }
         }
         loadUsers()
     }, [getAllUser])
 
     const handleDelete = async (event: any) => {
+        /* istanbul ignore next // should not happen just fallback */
         if (!selectedUser) {
             console.warn("There is no user selected.")
             return
@@ -39,10 +45,10 @@ export const Users: React.FC = () => {
 
         setIsLoadingDelete(true)
 
-        // Delete the user
-        await deleteUser(selectedUser._id)
+        // Delete the user and close modal when succesfull
+        if (await deleteUser(selectedUser._id))
+            closeDeleteModal()
 
-        closeDeleteModal()
         setIsLoadingDelete(false)
 
         // When user is delete update List
@@ -74,14 +80,15 @@ export const Users: React.FC = () => {
             {/* Header end */}
 
             {/* Content */}
-            {isLoading ? <Loading /> : <List lines>
+            {(users.length === 0 && isLoadingUsers) ? <Loading /> : <List lines>
                 {users.map((user) => <ListItem dataCy="users-list-item" key={user._id} title={user.username} header={<p className="text-darkgrey">{user.email}</p>} icon={faUser} onClick={() => {
                     setModalEditData(user)
                     setModalOpen(true)
                 }}>
                     <IconButton dataCy="users-delete-button" className="ml-auto mr-4" icon={faTrash} onClick={() => openDeleteModal(user)} />
                 </ListItem>)}
-            </List>}
+            </List>
+            }
             {/* Content End */}
 
             {/* Add/Edit User Modal */}

@@ -6,8 +6,10 @@ import { Admin } from './Admin';
 import { GuestRoute } from './GuestRoute';
 import { PrivateRoute } from './PrivateRoute';
 
+/**
+ * Router
+ */
 export const App: React.FunctionComponent = () => {
-
   return (
     <Router>
       <Switch>
@@ -18,7 +20,7 @@ export const App: React.FunctionComponent = () => {
           <Admin />
         </PrivateRoute>
         <Route path="*">
-          <Redirect to="login" />
+          <Redirect to="/login" />
         </Route>
       </Switch>
     </Router >

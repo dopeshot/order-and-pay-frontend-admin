@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { NavLink, useRouteMatch } from "react-router-dom"
 import { useActions, useAppState } from "../../overmind"
 
+
 export const Sidebar: React.FunctionComponent = () => {
     const { layoutIsSideBarOpen, isMobile, layoutIsSmallSidebar } = useAppState().app
     const { closeSidebar } = useActions().app

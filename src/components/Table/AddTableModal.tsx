@@ -2,9 +2,8 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import React, { useState } from "react"
 import * as yup from 'yup'
-import { useActions, useAppState } from "../../overmind"
+import { useActions } from "../../overmind"
 import { Button } from "../Buttons/Button"
-import { ErrorBanner } from "../Errors/ErrorBanner"
 import { TextInput } from "../Form/TextInput"
 import { Modal } from "../UI/Modal"
 
@@ -26,19 +25,21 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
     const [isLoadingButton, setIsLoadingButton] = useState(false)
 
     // Global State
-    const { modalErrors, hasModalError } = useAppState().tables
     const { createTable } = useActions().tables
 
+    // Formik
     const initialFormikValues = {
         tableNumber: "",
         capacity: ""
     }
 
+    // Formik Validation
     const addTableSchema = yup.object().shape({
         tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
         capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein.")
     })
 
+    // Formik Submit Form
     const submitForm = async (values: any) => {
         setIsLoadingButton(true)
 
@@ -54,9 +55,6 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
             <Formik initialValues={initialFormikValues} validationSchema={addTableSchema} onSubmit={submitForm}>
                 {({ setFieldValue, values, dirty, isValid }) => (
                     <Form>
-                        {/* Error Banner */}
-                        {hasModalError && <ErrorBanner headlineContent={`Es ${modalErrors.length === 1 ? 'ist' : 'sind'} ${modalErrors.length} Fehler aufgetreten.`} listContent={modalErrors} />}
-
                         {/* Tablenumber Input */}
                         <TextInput name="tableNumber" labelText="Tischnummer" placeholder="A1" />
 

@@ -1,49 +1,55 @@
-import { faEdit, faHeart, faLink, faTrash } from "@fortawesome/free-solid-svg-icons"
-import { Form, Formik } from "formik"
-import { Link } from "react-router-dom"
-import { Button } from "../../components/Buttons/Button"
+import { faChair, faChevronRight, faReceipt, faUser, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { Fragment } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { Textarea } from "../../components/Form/Textarea"
-import { TextInput } from "../../components/Form/TextInput"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
-import { Tag, TagTypesEnum } from "../../components/UI/Tag"
-
 
 export const Home: React.FunctionComponent = () => {
+    const content = [{
+        title: 'Betrieb',
+        items: [{
+            title: 'Bestellungen',
+            icon: faReceipt,
+            path: `/admin/orders`
+        }]
+    }, {
+        title: 'Konfiguration',
+        items: [{
+            title: 'Tische',
+            icon: faChair,
+            path: `/admin/tables`
+        }, {
+            title: 'Menü',
+            icon: faUtensils,
+            path: `/admin/menus`
+        }, {
+            title: 'Labels',
+            icon: faReceipt,
+            path: `/admin/menus/labels`
+        }, {
+            title: 'Allergene',
+            icon: faReceipt,
+            path: `/admin/menus/allergens`
+        }, {
+            title: 'Benutzer',
+            icon: faUser,
+            path: `/admin/users`
+        }],
+    }]
+
     return (
         <div className="container mt-12">
-            <h3 className="text-2xl font-bold">Welcome</h3>
+            <h3 className="text-2xl font-bold text-headline-black">Willkommen bei Da Burger!</h3>
+            <p className="text-darkgrey mb-4 md:mb-9">Eine Übersicht über alle Seiten.</p>
 
-            <Formik initialValues={{ test: "test" }} onSubmit={(values: any) => console.log(values)}>
-                <Form>
-                    <TextInput name="hello" labelText="test" placeholder="test" />
-                    <Textarea name="test" labelText="test" placeholder="test" />
-                    <Button type="submit">test</Button>
-                </Form>
-            </Formik>
-
-            <Link to="/admin/tables">Gehe zu Tabellen</Link>
-            <Link to="/login">Gehe zu Login</Link>
-            <Link to="/admin/menus/1/edit">Gehe zu Menu Overview</Link>
-            <List lines>
-                <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
-                <ListItem title="Football" indent onClick={() => console.log("parent")} header={<Tag title="Favorite" />}>
-                    <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
-                    <IconButton icon={faEdit} className="mr-2" onClick={() => console.log("edit")} />
-                    <IconButton icon={faTrash} onClick={() => console.log("remove")} />
-                </ListItem>
-                <ListItem title="Hello" indent header={<p>Header</p>} onClick={() => console.log("parent")}>
-                    <p>Children</p>
-                </ListItem>
-                <ListItem to="/admin/home" title="Links" background>
-                    <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
-                </ListItem>
-                <ListItem to="/admin/home" title="Facebook" header={<Tag title="Trending" type={TagTypesEnum.green} />}>
-                    <IconButton icon={faLink} className="mr-2" to="/home" />
-                    <IconButton icon={faHeart} className="mr-2" onClick={() => console.log("like")} />
-                </ListItem>
-            </List>
+            {content.map((item, i) => <Fragment key={i}>
+                <h4 className="text-xl font-bold text-headline-black">{item.title}</h4>
+                <List lines>
+                    {item.items.map((item, i) => <ListItem key={i} title={item.title} to={item.path} icon={item.icon}>
+                        <IconButton icon={faChevronRight} />
+                    </ListItem>)}
+                </List>
+            </Fragment>)}
         </div>
     )
 }

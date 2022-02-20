@@ -1,0 +1,56 @@
+{
+    "_id": "620e4e7d4583c2935980af39",
+    "title": "Hehe",
+    "description": "Loaf with stuff on it",
+    "icon": "pizza",
+    "choices": [
+        {
+            "id": 0,
+            "title": "size",
+            "type": "radio",
+            "isDefault": 0,
+            "options": [
+                {
+                    "id": 0,
+                    "name": "small",
+                    "price": -200
+                },
+                {
+                    "id": 1,
+                    "name": "normal",
+                    "price": 0
+                },
+                {
+                    "id": 2,
+                    "name": "large",
+                    "price": 200
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "title": "toppings",
+            "type": "checkbox",
+            "options": [
+                {
+                    "id": 0,
+                    "name": "salami",
+                    "price": 100
+                },
+                {
+                    "id": 1,
+                    "name": "prosciutto",
+                    "price": 100
+                },
+                {
+                    "id": 2,
+                    "name": "olives",
+                    "price": 200
+                }
+            ]
+        }
+    ],
+    "image": "pizza",
+    "status": "active",
+    "menuId": "620b9b0a1126e91d99b45559"
+}

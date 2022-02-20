@@ -1,10 +1,11 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
+import { faPizzaSlice, faPlus, faTrash, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { BackButton } from "../../components/Buttons/BackButton"
 import { Button } from "../../components/Buttons/Button"
 import { IconButton } from "../../components/Buttons/IconButton"
+import { EmptyState } from "../../components/Errors/EmptyState"
 import { DeleteModal } from "../../components/UI/DeleteModal"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
@@ -12,6 +13,8 @@ import { Loading } from "../../components/UI/Loading"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Dish } from "../../overmind/dishes/effects"
+import { Category } from "../../overmind/menuoverview/state"
+import { numberToPrice } from "../../services/numberToPrice"
 
 type SingleMenuParams = {
     menuId: string
@@ -20,17 +23,24 @@ type SingleMenuParams = {
 export const SingleMenu: React.FC = () => {
     const { menuId } = useParams<SingleMenuParams>()
 
+    // Local State 
+    const [isLoading, setLoading] = useState(true)
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+
     // Dish Local State
     const [isDishDeleteModalOpen, setDishDeleteModalOpen] = useState(false)
-    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedDish, setSelectedDish] = useState<Dish | null>(null)
-    const [isLoading, setLoading] = useState(true)
+
+    // Categories Local State
+    const [isCategoryDeleteModalOpen, setCategoryDeleteModalOpen] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
 
     // Global State
     const { isMobile } = useAppState().app
     const { menu } = useAppState().menuoverview
     const { getMenuEditor } = useActions().menuoverview
     const { deleteDish } = useActions().dishes
+    const { deleteCategoryById } = useActions().categories
 
     useEffect((): void => {
         async function loadMenu() {
@@ -40,25 +50,31 @@ export const SingleMenu: React.FC = () => {
         loadMenu()
     }, [getMenuEditor, menuId])
 
-    const priceFormatter = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }) //MC TODO: Use from shared
-
-    const handleDishDelete = async (event: any) => {
+    const handleDelete = async (selectedElement: Dish | Category | null, type: "dish" | "category") => {
         /* istanbul ignore next // should not happen just fallback */
-        if (!selectedDish) {
-            console.warn("There is no dish selected.")
+        if (!selectedElement) {
+            console.warn("There is no element selected.")
             return
         }
 
         setIsLoadingDelete(true)
 
-        // Delete the dish
-        await deleteDish(selectedDish._id)
+        try {
+            if (type === "dish") {
+                await deleteDish(selectedElement._id)
+                closeDishDeleteModal()
+            } else if (type === "category") {
+                await deleteCategoryById(selectedElement._id)
+                closeCategoryDeleteModal()
+            }
 
-        closeDishDeleteModal()
-        setIsLoadingDelete(false)
-
-        // When dish is delete update List
-        getMenuEditor(menuId)
+            // When item is deleted update List
+            getMenuEditor(menuId)
+        } catch (error) {
+            // Delete failed
+        } finally {
+            setIsLoadingDelete(false)
+        }
     }
 
     const openDishDeleteModal = (dish: Dish) => {
@@ -70,6 +86,19 @@ export const SingleMenu: React.FC = () => {
         setDishDeleteModalOpen(false)
         setSelectedDish(null)
     }
+
+    const openCategoryDeleteModal = (category: Category) => {
+        setSelectedCategory(category)
+        setCategoryDeleteModalOpen(true)
+    }
+
+    const closeCategoryDeleteModal = () => {
+        setCategoryDeleteModalOpen(false)
+        setSelectedCategory(null)
+    }
+
+    if (!isLoading && menu?.categories.length === 0)
+        return <EmptyState icon={faPizzaSlice} to={`/admin/menus/${menuId}/categories`} title="Erstelle Kategorie" description="Es wurden noch keine Kategorie erstellt. Erstelle neue um Gerichten hinzufügen zu können." buttonText="Kategorie hinzufügen" />
 
     return (
         <div className="container md:max-w-full mt-12">
@@ -98,14 +127,14 @@ export const SingleMenu: React.FC = () => {
                         <>
                             {/* Category */}
                             {menu?.categories.map(category => (<div key={category._id}>
-                                <ListItem to={`/admin/menus/${menuId}/categories/${category._id}`} dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon as IconProp} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
-                                    {isMobile ? <IconButton icon={faPlus} /> : <Button kind="tertiary" dataCy={`singlemenu-${category.title}-dish-add`} to={`/admin/menus/${menuId}/categories/${category._id}/dish`} icon={faPlus} className="text-darkgrey mr-3">Gericht hinzufügen</Button>}
-                                    <IconButton icon={faTrash} onClick={() => console.log("remove")} />
+                                <ListItem to={`/admin/menus/${menuId}/categories/${category._id}`} dataCy="singlemenu-category-listitem" title={category.title} icon={category.icon !== '' ? category.icon as IconProp : 'folder'} background header={<p className="text-darkgrey">{category.dishes.length === 1 ? `1 Gericht` : `${category.dishes.length} Gerichte`}</p>}>
+                                    {isMobile ? <IconButton icon={faPlus} to={`/admin/menus/${menuId}/categories/${category._id}/dish`} /> : <Button kind="tertiary" dataCy={`singlemenu-${category.title}-dish-add`} to={`/admin/menus/${menuId}/categories/${category._id}/dish`} icon={faPlus} className="text-darkgrey mr-3">Gericht hinzufügen</Button>}
+                                    <IconButton dataCy="category-delete-button" icon={faTrash} onClick={() => openCategoryDeleteModal(category)} />
                                 </ListItem>
                                 {/* Dishes */}
                                 {category.dishes.map(dish => (<div key={dish._id}>
                                     <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/admin/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
-                                        <h6 className="text-headline-black text-lg font-semibold mr-3">{priceFormatter.format(dish.price / 100)}</h6>
+                                        <h6 className="text-headline-black text-lg font-semibold mr-3">{numberToPrice(dish.price)}</h6>
                                         <IconButton dataCy="dishes-delete-button" icon={faTrash} onClick={() => openDishDeleteModal(dish)} />
                                     </ListItem>
                                 </div>))}
@@ -122,7 +151,17 @@ export const SingleMenu: React.FC = () => {
                     description={`Das Löschen kann nicht rückgängig gemacht werden.`}
                     open={isDishDeleteModalOpen}
                     onDissmis={closeDishDeleteModal}
-                    handleDelete={handleDishDelete}
+                    handleDelete={() => handleDelete(selectedDish, "dish")}
+                    isLoadingDelete={isLoadingDelete}
+                />
+
+                {/* Delete Modal */}
+                <DeleteModal
+                    title={`${selectedCategory?.title}`}
+                    description={`Das Löschen kann nicht rückgängig gemacht werden.`}
+                    open={isCategoryDeleteModalOpen}
+                    onDissmis={closeCategoryDeleteModal}
+                    handleDelete={() => handleDelete(selectedCategory, "category")}
                     isLoadingDelete={isLoadingDelete}
                 />
                 {/* Categories and Dishes end */}
