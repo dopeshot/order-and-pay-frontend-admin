@@ -18,7 +18,7 @@ type Params = {
     menuId: string
 }
 
-export const MenuEditor: React.FC = () => {
+export const MenusEditor: React.FC = () => {
     const { menuId } = useParams<Params>()
     const isEditing = Boolean(menuId)
     const history = useHistory()

@@ -4,7 +4,7 @@ import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/UI/List"
 import { ListItem } from "../../components/UI/ListItem"
 
-export const Home: React.FunctionComponent = () => {
+export const Dashboard: React.FunctionComponent = () => {
     const content = [{
         title: 'Betrieb',
         items: [{

@@ -80,7 +80,7 @@ type CategoryDeleteData = {
     categoryId: string
 }
 
-export const CategoryEditor: React.FunctionComponent = () => {
+export const CategoriesEditor: React.FunctionComponent = () => {
     const { categoryId, menuId } = useParams<CategoryParams>()
     const history = useHistory()
     const isEditing = Boolean(categoryId)

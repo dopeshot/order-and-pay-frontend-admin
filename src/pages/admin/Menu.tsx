@@ -16,12 +16,12 @@ import { Dish } from "../../overmind/dishes/effects"
 import { Category } from "../../overmind/menuoverview/state"
 import { numberToPrice } from "../../services/numberToPrice"
 
-type SingleMenuParams = {
+type MenuParams = {
     menuId: string
 }
 
-export const SingleMenu: React.FC = () => {
-    const { menuId } = useParams<SingleMenuParams>()
+export const Menu: React.FC = () => {
+    const { menuId } = useParams<MenuParams>()
 
     // Local State 
     const [isLoading, setLoading] = useState(true)
