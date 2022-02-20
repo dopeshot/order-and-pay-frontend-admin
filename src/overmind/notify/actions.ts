@@ -1,13 +1,11 @@
-import { NotificationTitleMessage, NOTIFICATION_TYPE, Store } from "react-notifications-component";
+import { Store } from "react-notifications-component";
 import { Context } from "..";
+import { NotificationData } from "./type";
 
-export type NotificationData = {
-    title: NotificationTitleMessage
-    message: NotificationTitleMessage
-    type: NOTIFICATION_TYPE
-}
-
-export const createNotification = ({ state }: Context, notification: NotificationData) => {
+/**
+ * Creates notification overlay
+ */
+export const createNotification = (context: Context, notification: NotificationData) => {
 
     // We use this lib to create notifications (will replace with own code later).
     Store.addNotification({

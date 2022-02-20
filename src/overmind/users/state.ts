@@ -1,11 +1,9 @@
-import { User } from "./effects"
+import { User } from "./type"
 
 export type State = {
-    isLoadingUsers: boolean
     users: User[]
 }
 
 export const state: State = {
-    isLoadingUsers: false,
     users: []
 }

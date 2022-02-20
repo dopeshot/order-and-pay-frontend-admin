@@ -3,19 +3,30 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "react-router-dom"
 
-// MC: should seperate types for link and button
 export type ButtonProps = {
+    /** Which type of button we want, tertiary is a link */
     kind?: "primary" | "secondary" | "tertiary"
+    /** Optional icon before the text */
     icon?: IconProp
+    /** Optional can add classes to customize margins for example */
     className?: string
+    /** Optional disabled state when set to true button is disabled */
     disabled?: boolean
-    dataCy?: string
+    /** Optional loading state when set to true button is loading */
     loading?: boolean
+    /** button type default is "button" */
     type?: "button" | "reset" | "submit"
+    /** function that happens when you click button */
     onClick?: (values: any) => void
+    /** link to go when you click button */
     to?: string
+    /** for testing */
+    dataCy?: string
 }
 
+/**
+ *  Button component, can also be a link when kind tertiary
+ */
 export const Button: React.FC<ButtonProps> = ({ kind = "primary", icon, disabled, loading, dataCy, className, children, to, onClick, type = "button" }) => {
     disabled = loading ? true : disabled
 

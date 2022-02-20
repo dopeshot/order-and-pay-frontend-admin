@@ -1,11 +1,9 @@
-import { Order } from "./effects"
+import { Order } from "./type"
 
 export type State = {
-    isLoadingOrders: boolean
     orders: Order[]
 }
 
 export const state: State = {
-    isLoadingOrders: true,
     orders: []
 }

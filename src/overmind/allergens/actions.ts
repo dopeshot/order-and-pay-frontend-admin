@@ -1,7 +1,10 @@
 import axios from "axios"
 import { Context } from ".."
-import { AllergenDto } from "./effects"
+import { AllergenDto } from "./type"
 
+/**
+ * Get all Allergens request with error handling
+ */
 export const getAllAllergens = async ({ state, effects, actions }: Context) => {
     try {
         const response = await effects.allergens.getAllergens()
@@ -18,6 +21,9 @@ export const getAllAllergens = async ({ state, effects, actions }: Context) => {
     }
 }
 
+/**
+ * Create allergen request with error handling
+ */
 export const createAllergen = async ({ state, actions, effects }: Context, allergen: AllergenDto): Promise<true> => {
     try {
         const response = await effects.allergens.createAllergen(allergen)
@@ -36,6 +42,9 @@ export const createAllergen = async ({ state, actions, effects }: Context, aller
     }
 }
 
+/**
+ * Update allergen by id request with error handling
+ */
 export const updateAllergen = async ({ state, actions, effects }: Context, { id, allergen }: { id: string, allergen: AllergenDto }): Promise<true> => {
     try {
         const response = await effects.allergens.updateAllergen(id, allergen)
@@ -56,6 +65,9 @@ export const updateAllergen = async ({ state, actions, effects }: Context, { id,
     }
 }
 
+/**
+ * Delete allergen by id request with error handling
+ */
 export const deleteAllergen = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.allergens.deleteAllergen(id)

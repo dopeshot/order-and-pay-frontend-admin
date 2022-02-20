@@ -1,20 +1,5 @@
 import { request } from "../../services/axios";
-
-export type UserDto = {
-    email: string
-    username: string
-    password?: string
-}
-
-export type User = {
-    _id: string
-    email: string
-    username: string
-    password?: string
-}
-export type AccessToken = {
-    accessToken: string
-}
+import { AccessToken, User, UserDto } from "./type";
 
 // Get all users
 export const getAllUser = () => request.get<User[]>('/users')

@@ -1,8 +1,4 @@
-export type Allergen = {
-    _id: string
-    title: string
-    icon: string
-}
+import { Allergen } from "./type"
 
 export type State = {
     allergens: Allergen[]

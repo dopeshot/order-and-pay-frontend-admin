@@ -1,10 +1,5 @@
 import { derived } from "overmind"
-
-export type CurrentUser = {
-    _id: string,
-    username: string,
-    email: string
-}
+import { CurrentUser } from "./type"
 
 export type State = {
     authenticating: boolean
