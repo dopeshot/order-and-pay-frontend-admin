@@ -10,11 +10,11 @@ export type Order = {
     _id: string
     table: Table
     items: Item[]
-    PaymentStatus: PaymentStatus
-    Status: OrderStatus
+    paymentStatus: PaymentStatus
+    status: OrderStatus
     price: number
-    createdAt: string
-    updatedAt: string
+    createdAt: Date
+    updatedAt: Date
 }
 
 export type Item = {
