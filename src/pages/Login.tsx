@@ -11,8 +11,7 @@ export const Login: React.FC = () => {
     const { authenticating } = useAppState().auth
     const { login } = useActions().auth
 
-    // MC TODO: Add types here
-    const initialLoginValues: any = {
+    const initialLoginValues: Credentials = {
         email: "",
         password: ""
     }
