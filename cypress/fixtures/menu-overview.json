@@ -9,7 +9,7 @@
             "_id": "620e4e7d4583c2935980af39",
             "title": "Burger",
             "description": "Loaf with stuff on it",
-            "icon": "hamburger",
+            "icon": "burger",
             "choices": [
                 {
                     "id": 0,
