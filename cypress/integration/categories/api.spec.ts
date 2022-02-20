@@ -42,12 +42,6 @@ describe('Api Endpoints Categories', () => {
             cy.url().should('include', '/admin/menus/1/editor')
         })
 
-        it('should have disabled state when inputs are wrong', () => {
-            cy.get(`[data-cy="textinput-title-input"]`).focus().blur()
-
-            cy.get('[data-cy="category-save-button"]').should('have.class', 'opacity-80')
-        })
-
         it('should have loading icon when sending', () => {
             cy.get(`[data-cy="textinput-title-input"]`).type(category.title)
             cy.get(`[data-cy="textarea-description-input"]`).type(category.description)
