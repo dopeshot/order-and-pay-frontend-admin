@@ -13,7 +13,7 @@ import { Loading } from "../../components/UI/Loading"
 import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Dish } from "../../overmind/dishes/effects"
-import { Category } from "../../overmind/menuoverview/state"
+import { Category } from "../../overmind/menu/state"
 import { numberToPrice } from "../../services/numberToPrice"
 
 type MenuParams = {
@@ -37,8 +37,8 @@ export const Menu: React.FC = () => {
 
     // Global State
     const { isMobile } = useAppState().app
-    const { menu } = useAppState().menuoverview
-    const { getMenuEditor } = useActions().menuoverview
+    const { menu } = useAppState().menu
+    const { getMenuEditor } = useActions().menu
     const { deleteDish } = useActions().dishes
     const { deleteCategoryById } = useActions().categories
 
