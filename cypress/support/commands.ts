@@ -242,6 +242,10 @@ Cypress.Commands.add('getAllLabels', () => {
     }).as('getAllLabels')
 })
 
+Cypress.Commands.add('getAllLabelsEmpty', () => {
+    cy.intercept('GET', `${api}/labels`, []).as('getAllLabelsEmpty')
+})
+
 Cypress.Commands.add('createLabel', () => {
     cy.intercept('POST', `${api}/labels`, {
         fixture: 'label.json'

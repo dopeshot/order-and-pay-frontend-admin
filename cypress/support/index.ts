@@ -226,12 +226,17 @@ declare global {
             */
             deleteAllergen(): void
 
-
             /**
              * Custom command to intercept all get all labels request
              * @example cy.getAllLabels()
              */
             getAllLabels(): void
+
+            /**
+             * Custom command to intercept all get all labels request get empty array back
+             * @example cy.getAllLabelsEmpty()
+             */
+            getAllLabelsEmpty(): void
 
             /**
             * Custom command to intercept all login request
