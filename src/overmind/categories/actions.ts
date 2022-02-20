@@ -3,7 +3,7 @@ import { Context } from "..";
 import { Category, CategoryDto } from "./type";
 
 /**
- * Get all categories request with error handling MC TODO: Error handling
+ * Get all categories request with error handling
  */
 export const getAllCategories = async ({ effects, actions }: Context): Promise<Category[]> => {
     try {

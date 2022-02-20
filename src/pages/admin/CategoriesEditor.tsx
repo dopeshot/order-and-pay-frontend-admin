@@ -439,5 +439,3 @@ export const CategoriesEditor: React.FunctionComponent = () => {
         />
     </>
 }
-
-// MC TODO: Move save button to right in modals!

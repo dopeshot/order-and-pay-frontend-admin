@@ -8,10 +8,7 @@ describe('Tags', () => {
         const data = {
             modalHeading: 'Modal Heading',
             onDissmis: () => ""
-            // MC: Working on mock here but seems like reference is wrong: https://stackoverflow.com/questions/71119176/cypress-component-test-types-in-react
         }
-
-        // Why is open missing here? because it's the state of the modal
 
         // Mount component with only required params
         beforeEach(() => {
@@ -25,10 +22,6 @@ describe('Tags', () => {
 
         it('should display dismiss icon', () => {
             cy.get('[data-cy="modal-dismiss"]').should('be.visible')
-        })
-
-        it.only('should display dismiss background', () => {
-            // MC: TODO
         })
     })
 
