@@ -24,7 +24,7 @@ type LabelModalProps = {
  * Modal for add and edit labels, possible to use only add functionality
  */
 export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEditData, setModalEditData, modalOpen, setModalOpen }) => {
-    // Global State
+    // Global Actions
     const { createLabel, updateLabel } = useActions().labels
 
     // Local State
@@ -70,13 +70,11 @@ export const LabelModal: React.FunctionComponent<LabelModalProps> = ({ modalEdit
         }
     }
 
-    // Modal close handler
     const handleModelDismiss = () => {
         // istanbul ignore if // Prevent closing modal when form is submitting
         if (isModalLoading)
             return
 
-        // Close modal
         setModalOpen(false)
 
         // Clear modal data if we are editing a label

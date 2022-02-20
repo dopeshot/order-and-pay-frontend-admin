@@ -10,28 +10,40 @@ import { IconButton } from "../Buttons/IconButton"
 import { FormError } from "../Errors/FormError"
 
 type TableItemType = {
+    /** index of table item */
     index: number
+    /** unique id of table item */
     id: string
 }
 
 export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => {
-    const {
-        app: {
-            isMobile,
-            languageLocale
-        }
-    } = useAppState()
+    // Local State
+    const [isEdit, setIsEdit] = useState(false)
+    const [isMoreOptionsOpen, setIsMoreOptionsOpen] = useState(false)
+    const [isLoadingButton, setIsLoadingButton] = useState(false)
 
-    const { deleteTable, updateTable, toggleChecked } = useActions().tables
-
+    // Global State
+    const { isMobile, languageLocale } = useAppState().app
     const table = useAppState<TableDocument>(state => state.tables.tables.find(table => table._id === id)!)
 
+    // Global Actions
+    const { deleteTable, updateTable, toggleChecked } = useActions().tables
+
+    // Formik
     const initialValues = {
         _id: table._id,
         tableNumber: table.tableNumber,
         capacity: table.capacity
     }
 
+    // Formik Validation
+    const editTableSchema = yup.object().shape({
+        tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
+        capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein."),
+        _id: yup.string()
+    })
+
+    // Formik Submit Form
     const submitChanges = async ({ _id, tableNumber, capacity }: typeof initialValues) => {
         // istanbul ignore if // backoff strategy
         if (isLoadingButton)
@@ -44,16 +56,6 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
 
         setIsLoadingButton(false)
     }
-
-    const editTableSchema = yup.object().shape({
-        tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
-        capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein."),
-        _id: yup.string()
-    })
-
-    const [isEdit, setIsEdit] = useState(false)
-    const [isMoreOptionsOpen, setIsMoreOptionsOpen] = useState(false)
-    const [isLoadingButton, setIsLoadingButton] = useState(false)
 
     return (<tr data-cy={`table-table-row`}>
         {/* Checkbox */}
@@ -88,10 +90,9 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
                         </div>}
                 </td>
 
-                {/* Created by */}
+                {/* Created at */}
                 <td className="pr-4">
-                    <h5 className="font-semibold text-sm h-3">{table.author}</h5>
-                    <small className="text-lightgrey">erstellt am {table.updatedAt.toLocaleDateString(languageLocale)}</small>
+                    <h5 className="font-semibold">{table.updatedAt.toLocaleString(languageLocale)}</h5>
                 </td>
 
                 {/* Actions */}
