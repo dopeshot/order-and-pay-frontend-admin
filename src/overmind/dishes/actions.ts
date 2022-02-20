@@ -3,7 +3,7 @@ import { Context } from ".."
 import { Dish, DishDto } from "./effects"
 
 /**
- * Create new Dish
+ * Create new Dish request with error handling
  */
 export const createDish = async ({ effects, actions }: Context, dish: DishDto): Promise<true> => {
     try {
@@ -23,7 +23,7 @@ export const createDish = async ({ effects, actions }: Context, dish: DishDto): 
 }
 
 /**
- * Get one Dish by id
+ * Get one Dish by id request with error handling
  */
 export const getDishById = async ({ effects, actions }: Context, id: string): Promise<Dish> => {
     try {
@@ -44,7 +44,7 @@ export const getDishById = async ({ effects, actions }: Context, id: string): Pr
 }
 
 /**
- * Update one Dish by id
+ * Update one Dish by id request with error handling
  */
 export const updateDish = async ({ effects, actions }: Context, { dishId, dish }: { dishId: string, dish: DishDto }): Promise<true> => {
     try {
@@ -65,7 +65,7 @@ export const updateDish = async ({ effects, actions }: Context, { dishId, dish }
 }
 
 /**
- * Delete one Dish by id
+ * Delete one Dish by id request with error handling
  */
 export const deleteDish = async ({ effects, actions }: Context, id: string): Promise<true> => {
     try {

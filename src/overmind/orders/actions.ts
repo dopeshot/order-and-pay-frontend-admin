@@ -1,7 +1,9 @@
 import { Context } from ".."
 import { OrderDto } from "./effects"
 
-// Get all order action
+/**
+ * Get all Orders request
+ */
 export const getAllOrders = async ({ state, effects }: Context) => {
     state.orders.isLoadingOrders = true
     try {
@@ -14,7 +16,9 @@ export const getAllOrders = async ({ state, effects }: Context) => {
     state.orders.isLoadingOrders = false
 }
 
-// Update order status and payment action
+/**
+ * Update order status and payment action
+ */
 export const updateOrder = async ({ state, effects }: Context, { id, order }: { id: string, order: OrderDto }): Promise<boolean> => {
     try {
         const response = await effects.orders.updateOrder(id, order)

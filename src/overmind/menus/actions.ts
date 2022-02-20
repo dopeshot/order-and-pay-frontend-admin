@@ -3,6 +3,9 @@ import { Context } from ".."
 import { MenuDto } from "./effects"
 import { Menu } from "./state"
 
+/**
+ * Get all Menus request with error handling
+ */
 export const getAllMenus = async ({ state, actions, effects }: Context): Promise<void> => {
     state.menus.isLoadingMenus = true
     try {
@@ -23,7 +26,9 @@ export const getAllMenus = async ({ state, actions, effects }: Context): Promise
     state.menus.isLoadingMenus = false
 }
 
-// Create menu action
+/**
+ * Create a menu request with error handling
+ */
 export const createMenu = async ({ effects, actions }: Context, menu: MenuDto): Promise<true> => {
     try {
         // We just await the creation no need to update menu object
@@ -42,7 +47,9 @@ export const createMenu = async ({ effects, actions }: Context, menu: MenuDto): 
     }
 }
 
-// Get menu by id action
+/**
+ * Get menu by id request with error handling
+ */
 export const getMenuById = async ({ state, effects }: Context, id: string): Promise<Menu> => {
     try {
         const response = await effects.menus.getMenuById(id)
@@ -54,7 +61,9 @@ export const getMenuById = async ({ state, effects }: Context, id: string): Prom
     }
 }
 
-// Update menu by id action
+/**
+ * Update menu by id request with error handling
+ */
 export const updateMenu = async ({ effects, actions }: Context, { menuId, menu }: { menuId: string, menu: MenuDto }): Promise<true> => {
     try {
         // We just await the update no need to update menu object
@@ -73,7 +82,9 @@ export const updateMenu = async ({ effects, actions }: Context, { menuId, menu }
     }
 }
 
-// Delete menu by id action
+/**
+ * Delete a menu request with error handling
+ */
 export const deleteMenu = async ({ effects, actions }: Context, id: string): Promise<true> => {
     try {
         // We just await the deletion no need to update menu object

@@ -44,6 +44,8 @@ export type OrderDto = {
     PaymentStatus?: PaymentStatus
 }
 
+// Get all open Orders
 export const getAllOrders = () => request.get<Order[]>('/orders/current')
 
+// Update Order
 export const updateOrder = (id: string, order: OrderDto) => request.patch<Order>(`/orders/${id}`, order)
