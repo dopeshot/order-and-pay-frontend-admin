@@ -36,6 +36,7 @@ export const Home: React.FunctionComponent = () => {
             <Link to="/login">Gehe zu Login</Link>
             <Link to="/admin/menus/1/edit">Gehe zu Menu Overview</Link>
             <Button onClick={() => debug()}>Debug</Button>
+            <p className="text-amber-600">Nic</p>
             <List lines>
                 <ListItem onClick={() => console.log("parent")} title="Hobbies" background></ListItem>
                 <ListItem title="Football" indent onClick={() => console.log("parent")} header={<Tag title="Favorite" />}>
