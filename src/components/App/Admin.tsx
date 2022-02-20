@@ -13,8 +13,10 @@ import { Users } from "../../pages/Users/Users"
 import { Sidebar } from "../Navigation/Sidebar"
 import { Topbar } from "../Navigation/Topbar"
 
+/**
+ * Contains admin routes and styling 
+ */
 export const Admin: React.FC = () => {
-
     const { path } = useRouteMatch()
 
     return <div className="h-screen">

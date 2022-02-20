@@ -1,6 +1,9 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+/**
+ * Search component, has no functionality yet just styling
+ */
 export const Search: React.FunctionComponent = () => {
     return (
         <div className="relative hidden md:block">

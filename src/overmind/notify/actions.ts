@@ -2,11 +2,17 @@ import { NotificationTitleMessage, NOTIFICATION_TYPE, Store } from "react-notifi
 import { Context } from "..";
 
 export type NotificationData = {
+    /** Title of notification message */
     title: NotificationTitleMessage
+    /** Message of notification */
     message: NotificationTitleMessage
+    /** Type of notification for example warning */
     type: NOTIFICATION_TYPE
 }
 
+/**
+ * Creates notification overlay
+ */
 export const createNotification = ({ state }: Context, notification: NotificationData) => {
 
     // We use this lib to create notifications (will replace with own code later).

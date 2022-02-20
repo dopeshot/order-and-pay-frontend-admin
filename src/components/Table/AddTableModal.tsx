@@ -27,16 +27,19 @@ export const AddTableModal: React.FunctionComponent<TableModalProps> = ({ modalO
     // Global State
     const { createTable } = useActions().tables
 
+    // Formik
     const initialFormikValues = {
         tableNumber: "",
         capacity: ""
     }
 
+    // Formik Validation
     const addTableSchema = yup.object().shape({
         tableNumber: yup.string().required("Dies ist ein Pflichtfeld.").min(1, "Die Tischnummer muss aus mindestens 1 Zeichen bestehen.").max(8, "Die Tischnummer darf nicht länger als 8 Zeichen sein."),
         capacity: yup.number().required("Dies ist ein Pflichtfeld.").min(1, "Die Personenanzahl muss mindestens 1 sein.").max(100, "Die Personenanzahl darf nicht größer als 100 sein.")
     })
 
+    // Formik Submit Form
     const submitForm = async (values: any) => {
         setIsLoadingButton(true)
 

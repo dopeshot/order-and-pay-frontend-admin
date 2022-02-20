@@ -86,7 +86,7 @@ export const Tables: React.FunctionComponent = () => {
                                 </button>
                             </th>
                             <th className="pr-20 lg:pr-0">
-                                Erstellt von
+                                Erstellt am
                             </th>
                             <th className="pr-10 lg:pr-0">
                                 Aktionen

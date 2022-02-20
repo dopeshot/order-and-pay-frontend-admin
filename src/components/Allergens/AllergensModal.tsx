@@ -25,7 +25,7 @@ type AllergensModalProps = {
  * Modal for add and edit allergens, possible to use only add functionality
  */
 export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ modalEditData, setModalEditData, modalOpen, setModalOpen }) => {
-    // Global State
+    // Global Actions
     const { createAllergen, updateAllergen } = useActions().allergens
 
     // Local State
@@ -72,13 +72,11 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
         }
     }
 
-    // Modal close handler
     const handleModelDismiss = () => {
         // istanbul ignore if // Prevent closing modal when form is submitting
         if (isModalLoading)
             return
 
-        // Close modal
         setModalOpen(false)
 
         // Clear modal data if we are editing a label

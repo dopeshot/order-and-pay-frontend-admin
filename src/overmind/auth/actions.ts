@@ -28,7 +28,7 @@ export const initializeUser = async ({ state, effects, actions }: Context) => {
 
 
 /**
- * Login action
+ * Login request with error handling
  */
 export const login = async ({ state, effects, actions }: Context, credentials: Credentials) => {
     state.auth.authenticating = true
@@ -51,7 +51,7 @@ export const login = async ({ state, effects, actions }: Context, credentials: C
 }
 
 /**
- * Logout action
+ * Logouts the user
  */
 export const logout = ({ state, effects }: Context) => {
     state.auth.currentUser = null;

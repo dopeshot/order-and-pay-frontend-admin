@@ -3,7 +3,7 @@ import { config, Context } from ".."
 import { InitialTableHelper, Table, TableDocument } from "./state"
 
 /**
- * Load all Tables action
+ * Load all Tables with error handling
  */
 export const loadTables = async ({ state, effects, actions }: Context) => {
     state.tables.isLoadingTables = true
@@ -22,7 +22,7 @@ export const loadTables = async ({ state, effects, actions }: Context) => {
 }
 
 /**
- * Create a table action
+ * Create a table with error handling
  */
 export const createTable = async ({ state, effects, actions }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
@@ -41,7 +41,7 @@ export const createTable = async ({ state, effects, actions }: Context, { tableN
 }
 
 /**
- * Update a table by id action
+ * Update a table by id with error handling
  */
 export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
@@ -62,7 +62,7 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
 }
 
 /**
- * Delete table by id action
+ * Delete table by id with error handling
  */
 export const deleteTable = async ({ state, effects, actions }: Context, id: string) => {
     try {

@@ -2,6 +2,9 @@ import axios from "axios"
 import { Context } from ".."
 import { LabelDto } from "./effects"
 
+/**
+ * Get all Labels request with error handling
+ */
 export const getAllLabels = async ({ state, actions, effects }: Context) => {
     try {
         const response = await effects.labels.getLabels()
@@ -19,6 +22,9 @@ export const getAllLabels = async ({ state, actions, effects }: Context) => {
     }
 }
 
+/**
+ * Create a label request with error handling
+ */
 export const createLabel = async ({ state, actions, effects }: Context, label: LabelDto): Promise<true> => {
     try {
         const response = await effects.labels.createLabel(label)
@@ -38,6 +44,9 @@ export const createLabel = async ({ state, actions, effects }: Context, label: L
     }
 }
 
+/**
+ * Update a label request with error handling
+ */
 export const updateLabel = async ({ state, actions, effects }: Context, { id, label }: { id: string, label: LabelDto }): Promise<true> => {
     try {
         const response = await effects.labels.updateLabel(id, label)
@@ -58,6 +67,9 @@ export const updateLabel = async ({ state, actions, effects }: Context, { id, la
     }
 }
 
+/**
+ * Delete a label request with error handling
+ */
 export const deleteLabel = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {
         await effects.labels.deleteLabel(id)

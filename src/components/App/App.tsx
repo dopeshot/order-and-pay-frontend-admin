@@ -6,8 +6,10 @@ import { Admin } from './Admin';
 import { GuestRoute } from './GuestRoute';
 import { PrivateRoute } from './PrivateRoute';
 
+/**
+ * Router
+ */
 export const App: React.FunctionComponent = () => {
-
   return (
     <Router>
       <Switch>

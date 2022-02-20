@@ -3,7 +3,7 @@ import { Context } from ".."
 import { UserDto } from "./effects"
 
 /**
- * Get all Users
+ * Get all Users request with error handling
  */
 export const getAllUser = async ({ state, actions, effects }: Context) => {
     try {
@@ -22,7 +22,7 @@ export const getAllUser = async ({ state, actions, effects }: Context) => {
 }
 
 /**
- * Create new User
+ * Create new User request with error handling
  */
 export const createUser = async ({ state, effects, actions }: Context, user: UserDto): Promise<true> => {
     try {
@@ -47,7 +47,7 @@ export const createUser = async ({ state, effects, actions }: Context, user: Use
 }
 
 /**
- * Update User by id
+ * Update User by id request with error handling
  */
 export const updateUser = async ({ state, actions, effects }: Context, { _id, user }: { _id: string, user: UserDto }): Promise<true> => {
     try {
@@ -75,7 +75,7 @@ export const updateUser = async ({ state, actions, effects }: Context, { _id, us
 }
 
 /**
- * Delete User by id
+ * Delete User by id request with error handling
  */
 export const deleteUser = async ({ state, actions, effects }: Context, id: string): Promise<boolean> => {
     try {

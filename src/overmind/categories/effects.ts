@@ -37,3 +37,5 @@ export const getCategoryById = (id: string) => request.get<Category>(`/categorie
 export const updateCategory = (id: string, category: CategoryDto) => request.patch<Category>(`/categories/${id}`, category)
 // Delete category by id
 export const deleteCategory = (id: string) => request.delete(`/categories/${id}?type=hard`)
+// Get all Categories
+export const getAllCategories = () => request.get<Category[]>('/categories')
