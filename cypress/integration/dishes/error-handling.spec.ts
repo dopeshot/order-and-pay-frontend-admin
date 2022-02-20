@@ -1,6 +1,6 @@
 import dish from '../../fixtures/dish.json';
 
-describe('Api Error Handling', () => {
+describe('Error Handling', () => {
     describe('Create Dish Errors', () => {
         beforeEach(() => {
             cy.getAllAllergens()

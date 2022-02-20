@@ -1,7 +1,7 @@
 import allergens from '../../fixtures/allergens.json';
 import updateAllergen from '../../fixtures/update-allergen.json';
 
-describe('Api Error Handling Allergens', () => {
+describe('Error Handling Allergens', () => {
     describe('Empty', () => {
         beforeEach(() => {
             cy.getAllAllergensEmpty()

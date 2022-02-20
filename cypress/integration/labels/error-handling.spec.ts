@@ -1,7 +1,7 @@
 import labels from '../../fixtures/labels.json';
 import updatelabels from '../../fixtures/update-label.json';
 
-describe('Api Error Handling Labels', () => {
+describe('Error Handling Labels', () => {
     describe('Empty', () => {
         beforeEach(() => {
             cy.getAllLabelsEmpty()
