@@ -12,7 +12,7 @@ type DeleteModalProps = {
     /** Dissmiss Function */
     onDissmis: (value: any) => void
     /** What is called when click delete button */
-    handleDelete: (event: Event | void) => void
+    handleDelete: (event: Event) => void
     /** Loading State for Delete */
     isLoadingDelete?: boolean
 }
