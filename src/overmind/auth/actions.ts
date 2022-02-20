@@ -2,6 +2,9 @@ import axios from "axios";
 import { Context } from "..";
 import { Credentials } from "./effects";
 
+/**
+ *  Login user when app is startet and we already were logged in
+ */
 export const initializeUser = async ({ state, effects, actions }: Context) => {
     const token = localStorage.getItem('access_token')
     state.auth.authenticating = true
@@ -23,6 +26,10 @@ export const initializeUser = async ({ state, effects, actions }: Context) => {
     state.auth.authenticating = false
 }
 
+
+/**
+ * Login action
+ */
 export const login = async ({ state, effects }: Context, credentials: Credentials) => {
     state.auth.authenticating = true
     try {
@@ -33,11 +40,15 @@ export const login = async ({ state, effects }: Context, credentials: Credential
         const userResponse = await effects.auth.getCurrentUser()
         state.auth.currentUser = userResponse.data
     } catch (error) {
+        // TODO: Error handling
         console.error(error)
     }
     state.auth.authenticating = false
 }
 
+/**
+ * Logout action
+ */
 export const logout = ({ state, effects }: Context) => {
     state.auth.currentUser = null;
     effects.auth.setToken()

@@ -2,6 +2,9 @@ import axios from "axios"
 import { config, Context } from ".."
 import { InitialTableHelper, Table, TableDocument } from "./state"
 
+/**
+ * Load all Tables action
+ */
 export const loadTables = async ({ state, effects, actions }: Context) => {
     state.tables.isLoadingTables = true
     try {
@@ -18,6 +21,9 @@ export const loadTables = async ({ state, effects, actions }: Context) => {
     state.tables.isLoadingTables = false
 }
 
+/**
+ * Create a table action
+ */
 export const createTable = async ({ state, effects, actions }: Context, { tableNumber, capacity }: { tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
         const response = await effects.tables.createTable({ tableNumber, capacity })
@@ -34,6 +40,9 @@ export const createTable = async ({ state, effects, actions }: Context, { tableN
     return false
 }
 
+/**
+ * Update a table by id action
+ */
 export const updateTable = async ({ state, effects, actions }: Context, { id, tableNumber, capacity }: { id: string, tableNumber: string, capacity: number }): Promise<boolean> => {
     try {
         const response = await effects.tables.updateTable({ id, tableNumber, capacity })
@@ -52,11 +61,14 @@ export const updateTable = async ({ state, effects, actions }: Context, { id, ta
     return false
 }
 
+/**
+ * Delete table by id action
+ */
 export const deleteTable = async ({ state, effects, actions }: Context, id: string) => {
     try {
         await effects.tables.deleteTable(id)
         state.tables.tables = state.tables.tables.filter((table: Table) => table._id !== id)
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         actions.notify.createNotification({
             title: "Fehler beim Löschen des Tisches",
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
@@ -65,11 +77,17 @@ export const deleteTable = async ({ state, effects, actions }: Context, id: stri
     }
 }
 
+/**
+ * Toggle checked for table item
+ */
 export const toggleChecked = async ({ state }: Context, id: string) => {
     const table: TableDocument = state.tables.tables.find((table: Table) => table._id === id)!
     table.isChecked = !table.isChecked
 }
 
+/**
+ * Bulk table selection logic
+ */
 export const bulkTableSelection = async ({ state }: Context) => {
     let someTableIsChecked = false
     let setTablesTo = true
@@ -83,6 +101,9 @@ export const bulkTableSelection = async ({ state }: Context) => {
     state.tables.tables.forEach(table => table.isChecked = setTablesTo)
 }
 
+/**
+ * Sort table logic
+ */
 export const sortTable = async ({ state }: Context, sortedField: typeof config.state.tables.sort.currentField) => {
     // If you click again
     if (state.tables.sort.currentField === sortedField) {
@@ -110,6 +131,9 @@ export const sortTable = async ({ state }: Context, sortedField: typeof config.s
     }
 }
 
+/**
+ * Bulk delete request action
+ */
 export const bulkDelete = async ({ state, effects, actions }: Context) => {
     try {
         const idArray: string[] = []
@@ -121,7 +145,7 @@ export const bulkDelete = async ({ state, effects, actions }: Context) => {
         })
 
         await effects.tables.bulkDelete(idArray)
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         actions.notify.createNotification({
             title: "Fehler beim Löschen der Tische",
             message: axios.isAxiosError(error) && error.response ? error.response.data.message : "Netzwerk-Zeitüberschreitung",
