@@ -20,7 +20,7 @@ export const App: React.FunctionComponent = () => {
           <Admin />
         </PrivateRoute>
         <Route path="*">
-          <Redirect to="login" />
+          <Redirect to="/login" />
         </Route>
       </Switch>
     </Router >
