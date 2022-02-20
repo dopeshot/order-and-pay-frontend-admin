@@ -36,7 +36,7 @@ export const AllergensModal: React.FunctionComponent<AllergensModalProps> = ({ m
     }
 
     // Formik Validation
-    const validationSchema = Yup.object().shape({
+    const validationSchema: Yup.SchemaOf<AllergenDto> = Yup.object().shape({
         title: Yup.string().min(2).max(20).required("Title is required"),
         icon: Yup.string()
     })
