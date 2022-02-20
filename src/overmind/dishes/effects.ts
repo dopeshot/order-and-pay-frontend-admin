@@ -1,19 +1,5 @@
 import { request } from "../../services/axios"
-import { Allergen } from "../allergens/type"
-import { Label } from "../labels/type"
-
-export type DishDto = {
-    title: string
-    description: string
-    image?: string
-    isAvailable: boolean
-    price: number
-    categoryId: string // id ref: 'Category'
-    allergenIds: Allergen[] // id ref: 'Allergy
-    labelIds: Label[] // id ref: 'Label'
-}
-
-export type Dish = DishDto & { _id: string }
+import { Dish, DishDto } from "./type"
 
 // Create a Dish
 export const createDish = (createDishDto: DishDto) => request.post<Dish>('/dishes', createDishDto)

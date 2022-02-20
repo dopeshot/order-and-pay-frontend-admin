@@ -1,4 +1,4 @@
-import { Dish } from "../dishes/effects"
+import { Dish } from "../dishes/type"
 
 export enum Status {
     ACTIVE = "active",

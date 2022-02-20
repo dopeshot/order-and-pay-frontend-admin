@@ -12,7 +12,7 @@ import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { Dish } from "../../overmind/dishes/effects"
+import { Dish } from "../../overmind/dishes/type"
 import { Category } from "../../overmind/menu/state"
 import { numberToPrice } from "../../services/numberToPrice"
 

@@ -16,7 +16,7 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { LabelModal } from "../../components/Modals/LabelModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { Dish, DishDto } from "../../overmind/dishes/effects"
+import { Dish, DishDto } from "../../overmind/dishes/type"
 import { ComponentOptions } from "../../types/componentOptions"
 
 type Params = {
