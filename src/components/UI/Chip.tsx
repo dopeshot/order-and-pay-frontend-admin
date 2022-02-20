@@ -1,5 +1,5 @@
 
-export enum TagTypesEnum {
+export enum ChipTypesEnum {
     red = 'red-600',
     purple = "indigo-500",
     pink = "pink-500",
@@ -12,17 +12,17 @@ export enum TagTypesEnum {
     dark = "gray-900",
 }
 
-type TagProps = {
-    /** Is in the header of the modal, the title */
+type ChipProps = {
+    /** the tag of the chip */
     title: string
-    /** Is in the header of the modal, the subtitle. This is optional */
-    type?: TagTypesEnum
+    /** makes the color and background color of the chip */
+    type?: ChipTypesEnum
 }
 
 /**
- * Tag
+ * Chip
  */
-export const Tag: React.FC<TagProps> = ({ title, type = TagTypesEnum.blue }) => {
+export const Chip: React.FC<ChipProps> = ({ title, type = ChipTypesEnum.blue }) => {
     return (
         <div className={`inline-block bg-${type} bg-opacity-20 rounded-full px-3 mr-2`} data-cy="tag-box">
             <p className={`text-${type} text-sm font-semibold`} data-cy="tag-title">{title}</p>

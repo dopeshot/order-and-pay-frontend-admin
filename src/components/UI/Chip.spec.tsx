@@ -1,10 +1,10 @@
 import { mount } from '@cypress/react'
 import 'tailwindcss/tailwind.css'
-import { Tag, TagTypesEnum } from './Tag'
+import { Chip, ChipTypesEnum } from './Chip'
 
-describe('Tags', () => {
+describe('Chips', () => {
     // Define default tag color
-    const defaultTagType = TagTypesEnum.blue
+    const defaultTagType = ChipTypesEnum.blue
 
     describe('Basic', () => {
         const data = {
@@ -14,7 +14,7 @@ describe('Tags', () => {
 
         // Mount component with only required params
         beforeEach(() => {
-            mount(<Tag title={data.title} />)
+            mount(<Chip title={data.title} />)
         })
 
         it('should display text', () => {
@@ -33,11 +33,11 @@ describe('Tags', () => {
     describe('Advanced', () => {
         const data = {
             title: "It's tag!",
-            type: TagTypesEnum.red
+            type: ChipTypesEnum.red
         }
 
         beforeEach(() => {
-            mount(<Tag title={data.title} type={data.type} />)
+            mount(<Chip title={data.title} type={data.type} />)
         })
 
         it('should have red text color', () => {

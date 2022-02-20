@@ -9,8 +9,8 @@ import { EmptyState } from "../../components/Errors/EmptyState"
 import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
+import { Chip, ChipTypesEnum } from "../../components/UI/Chip"
 import { Loading } from "../../components/UI/Loading"
-import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Dish } from "../../overmind/dishes/effects"
 import { Category } from "../../overmind/menu/state"
@@ -109,7 +109,7 @@ export const Menu: React.FC = () => {
                 {/* Header */}
                 <div className="flex items-baseline">
                     <h1 className="text-2xl text-headline-black font-semibold mr-3 mb-1">{menu?.title}</h1>
-                    {menu?.isActive && <Tag title="aktiv" type={TagTypesEnum.green} />}
+                    {menu?.isActive && <Chip title="aktiv" type={ChipTypesEnum.green} />}
                 </div>
                 <div className="flex flex-col md:flex-row md:justify-between mb-8">
                     <div className="w-full mb-4 md:w-96 md:mb-0">
@@ -133,7 +133,7 @@ export const Menu: React.FC = () => {
                                 </ListItem>
                                 {/* Dishes */}
                                 {category.dishes.map(dish => (<div key={dish._id}>
-                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/admin/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Tag title="not available" type={TagTypesEnum.red} /> : <></>} indent>
+                                    <ListItem dataCy={`singlemenu-${category.title}-dish-listitem`} to={`/admin/menus/${menuId}/categories/${category._id}/dish/${dish._id}`} icon={faUtensils} title={dish.title} header={!dish.isAvailable ? <Chip title="not available" type={ChipTypesEnum.red} /> : <></>} indent>
                                         <h6 className="text-headline-black text-lg font-semibold mr-3">{numberToPrice(dish.price)}</h6>
                                         <IconButton dataCy="dishes-delete-button" icon={faTrash} onClick={() => openDishDeleteModal(dish)} />
                                     </ListItem>

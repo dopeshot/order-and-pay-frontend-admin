@@ -6,8 +6,8 @@ import { EmptyState } from "../../components/Errors/EmptyState"
 import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
+import { Chip, ChipTypesEnum } from "../../components/UI/Chip"
 import { Loading } from "../../components/UI/Loading"
-import { Tag, TagTypesEnum } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/state"
 
@@ -91,7 +91,7 @@ export const Menus: React.FC = () => {
 
         {/* Content */}
         {(menus.length === 0 && isLoadingMenus) ? <Loading /> : <List lines>
-            {menus.map((menu) => <ListItem dataCy="menus-list-item" key={menu._id} title={menu.title} icon={faFolder} to={`/admin/menus/${menu._id}/editor`} header={menu.isActive ? <Tag title="Aktiv" type={TagTypesEnum.green} /> : undefined}>
+            {menus.map((menu) => <ListItem dataCy="menus-list-item" key={menu._id} title={menu.title} icon={faFolder} to={`/admin/menus/${menu._id}/editor`} header={menu.isActive ? <Chip title="Aktiv" type={ChipTypesEnum.green} /> : undefined}>
                 <IconButton dataCy="menus-edit-button" className="ml-auto mr-4" icon={faEdit} to={`/admin/menus/${menu._id}/edit`} />
                 <IconButton dataCy="menus-delete-button" className="mr-4" icon={faTrash} onClick={() => openDeleteModal(menu)} />
             </ListItem>)}

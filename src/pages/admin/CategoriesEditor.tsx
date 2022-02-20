@@ -14,8 +14,8 @@ import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Modal } from "../../components/Modals/Modal"
+import { Chip } from "../../components/UI/Chip"
 import { Loading } from "../../components/UI/Loading"
-import { Tag } from "../../components/UI/Tag"
 import { useActions, useAppState } from "../../overmind"
 import { ChoiceType } from "../../overmind/categories/effects"
 import { Category } from "../../overmind/dishes/effects"
@@ -419,7 +419,7 @@ export const CategoriesEditor: React.FunctionComponent = () => {
                                             setParentChoiceId(choice.id)
                                             setEditOptionData(option)
                                             setModalOpenOption(true)
-                                        }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Tag title="Standard" /> : ''}>
+                                        }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Chip title="Standard" /> : ''}>
                                             <p className="mr-4">{numberToPrice(option.price)}</p>
                                             <IconButton dataCy="options-delete-button" icon={faTrash} onClick={() => openDeleteModal({ type: 'option', choiceId: choice.id, optionId: option.id, title: `Option-"${option.name}"` })} />
                                         </ListItem>)
