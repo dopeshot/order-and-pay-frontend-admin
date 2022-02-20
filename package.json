@@ -83,6 +83,8 @@
     "cypress": "^9.5.0",
     "nyc": "^15.1.0",
     "postcss": "^8.4.6",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^7.4.1",
     "tailwindcss": "^3.0.23",
     "webpack-dev-server": "^4.7.4"
   }
