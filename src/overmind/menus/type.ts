@@ -4,6 +4,7 @@ export type MenuDto = {
     title: string
     description: string
     isActive: boolean
+    status?: Status
 }
 
 export type Menu = {

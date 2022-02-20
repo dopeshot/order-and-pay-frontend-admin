@@ -1,6 +1,6 @@
 export type AllergenDto = {
     title: string
-    icon: string
+    icon?: string
 }
 
 export type Allergen = {
