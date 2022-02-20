@@ -25,7 +25,7 @@ describe('Bulk Actions', () => {
         })
 
         it('should mark all-check as checked when mark all tables', () => {
-            tables.map((table, i) => {
+            tables.forEach((table, i) => {
                 cy.get(`[data-cy="table-table-checkbox-${i}"]`).check()
             })
 
@@ -35,7 +35,7 @@ describe('Bulk Actions', () => {
         it('should mark tables as checked when click all-check (no checked)', () => {
             cy.get(`[data-cy="table-table-checkbox-allcheck"]`).check()
 
-            tables.map((table, i) => {
+            tables.forEach((table, i) => {
                 cy.get(`[data-cy="table-table-checkbox-${i}"]`).should('be.checked')
             })
         })
@@ -46,7 +46,7 @@ describe('Bulk Actions', () => {
 
             cy.get(`[data-cy="table-table-checkbox-allcheck"]`).check()
 
-            tables.map((table, i) => {
+            tables.forEach((table, i) => {
                 cy.get(`[data-cy="table-table-checkbox-${i}"]`).should('not.be.checked')
             })
         })
@@ -80,7 +80,7 @@ describe('Bulk Actions', () => {
         })
 
         it('should display all marked when every table is marked', () => {
-            tables.map((table, i) => {
+            tables.forEach((table, i) => {
                 cy.get(`[data-cy="table-table-checkbox-${i}"]`).check()
             })
 
@@ -121,3 +121,4 @@ describe('Bulk Actions', () => {
 })
 
 export { }
+
