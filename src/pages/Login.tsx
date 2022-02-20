@@ -5,19 +5,18 @@ import { Button } from "../components/Buttons/Button"
 import { PasswordInput } from "../components/Forms/PasswortInput"
 import { TextInput } from "../components/Forms/TextInput"
 import { useActions, useAppState } from "../overmind"
-import { Credentials } from "../overmind/auth/effects"
+import { Credentials } from "../overmind/auth/type"
 
 export const Login: React.FC = () => {
     const { authenticating } = useAppState().auth
     const { login } = useActions().auth
 
-    // MC TODO: Add types here
-    const initialLoginValues: any = {
+    const initialLoginValues: Credentials = {
         email: "",
         password: ""
     }
 
-    const validationLoginSchema = Yup.object().shape({
+    const validationLoginSchema: Yup.SchemaOf<Credentials> = Yup.object().shape({
         email: Yup.string().email("Diese E-Mail-Adresse ist ungültig. Versuche es mit einer anderen.").required("Dies ist ein Pflichtfeld"),
         password: Yup.string().required("Dies ist ein Pflichtfeld")
     })

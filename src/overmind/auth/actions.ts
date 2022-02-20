@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Context } from "..";
-import { Credentials } from "./effects";
+import { Credentials } from "./type";
 
 /**
  *  Login user when app is startet and we already were logged in
