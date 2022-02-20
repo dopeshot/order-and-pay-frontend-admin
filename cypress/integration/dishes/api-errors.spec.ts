@@ -15,10 +15,6 @@ describe('Api Error Handling', () => {
             cy.wait('@getAllCategories')
         })
 
-        it.skip('should handle create duplicate Dish Title', () => {
-            //TODO: needs to be implemented when feature ready
-        })
-
         it('should handle dish title to short (min 2 letters)', () => {
             cy.get('input[name="title"]').type('a').blur()
             cy.get('[data-cy="textinput-title-form-error"]').should('contain', 'Der Titel muss aus mindestens 2 Zeichen bestehen.')

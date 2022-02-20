@@ -371,7 +371,7 @@ export const CategoryEditor: React.FunctionComponent = () => {
         <div className="container mt-12">
             <BackButton to={`/admin/menus/${menuId}/editor`} />
             {isLoading ? <Loading /> : <>
-                <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie"}</h1>
+                <h1 className="text-2xl text-headline-black font-semibold mb-5">{isEditing ? "Kategorie bearbeiten" : "Neue Kategorie erstellen"}</h1>
 
                 <Formik initialValues={initialCategoryValues} enableReinitialize validationSchema={validationCategorySchema} onSubmit={submitCategory}>
                     <Form>
