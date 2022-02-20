@@ -1,10 +1,5 @@
 import { request } from "../../services/axios";
-import { Allergen } from "./state";
-
-export type AllergenDto = {
-    title: string
-    icon: string
-}
+import { Allergen, AllergenDto } from "./type";
 
 // Get all allergens
 export const getAllergens = () => request.get<Allergen[]>('/allergens')

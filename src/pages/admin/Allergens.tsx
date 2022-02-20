@@ -10,7 +10,7 @@ import { AllergensModal } from "../../components/Modals/AllergensModal"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { Allergen } from "../../overmind/allergens/state"
+import { Allergen } from "../../overmind/allergens/type"
 
 export const Allergens: React.FC = () => {
     // Get hooks to manipulate global state

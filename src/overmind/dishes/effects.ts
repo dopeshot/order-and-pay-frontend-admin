@@ -1,5 +1,5 @@
 import { request } from "../../services/axios"
-import { Allergen } from "../allergens/state"
+import { Allergen } from "../allergens/type"
 import { Label } from "../labels/state"
 
 export type DishDto = {
