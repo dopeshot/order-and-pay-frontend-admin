@@ -108,7 +108,7 @@ export const Orders: React.FC = () => {
                         <Button kind="tertiary" icon={faTrash} className="text-darkgrey mr-4" onClick={() => updateOrderHandler(order._id, "delete")}>Löschen</Button>
                     </ListItem>
                     {order.items.map(item => (
-                        <ListItem key={item.dishId} title={`${item.count}x ${item.dishId}`} icon={faUtensils} indent header={<p>{item.note}</p>}>
+                        <ListItem key={order._id + item.dishId + item.count + item.note} title={`${item.count}x ${item.dishId}`} icon={faUtensils} indent header={<p>{item.note}</p>}>
                             <p>{item.pickedChoices.id}:</p>
                             {item.pickedChoices.valueId.map((value, index) => (
                                 <p key={index} className="pl-3">{value}</p>
