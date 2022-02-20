@@ -8,7 +8,7 @@ export type State = {
 }
 
 export const state: State = {
-    layoutIsSideBarOpen: window.innerWidth < 768 ? false : true, 
+    layoutIsSideBarOpen: !(window.innerWidth < 768),
     isMobile: window.innerWidth < 768,
     languageLocale: 'de-DE', // BCP 47 Sprachcode 
     layoutIsSmallSidebar: derived((state: State) => !state.isMobile && !state.layoutIsSideBarOpen)

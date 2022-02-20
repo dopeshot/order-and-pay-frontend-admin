@@ -1,7 +1,7 @@
 import {
   BrowserRouter as Router, Redirect, Route, Switch
 } from 'react-router-dom';
-import { Login } from '../../pages/Login/Login';
+import { Login } from '../../pages/Login';
 import { Admin } from './Admin';
 import { GuestRoute } from './GuestRoute';
 import { PrivateRoute } from './PrivateRoute';

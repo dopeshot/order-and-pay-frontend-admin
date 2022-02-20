@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { AllergenDto } from "./effects"
+import { AllergenDto } from "./type"
 
 /**
  * Get all Allergens request with error handling

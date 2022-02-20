@@ -4,6 +4,9 @@ module.exports = {
     './public/**/*.html',
     './src/**/*.{ts,tsx}',
   ],
+  safelist: [{
+    pattern: /(border|text|bg)-*/,
+  }],
   theme: {
     container: {
       padding: {

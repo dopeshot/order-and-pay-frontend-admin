@@ -2,8 +2,8 @@ import { faBars, faChevronDown, faSearch, faSignOutAlt } from "@fortawesome/free
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { Link, useRouteMatch } from "react-router-dom"
-import avatar from '../../img/avatar.png'
-import logo from '../../img/logo.png'
+import avatar from '../../assets/img/avatar.png'
+import logo from '../../assets/img/logo.png'
 import { useActions, useAppState } from "../../overmind"
 import { IconButton } from "../Buttons/IconButton"
 import { Search } from "../Search/Search"

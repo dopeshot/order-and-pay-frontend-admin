@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { OrderDto } from "./effects"
+import { OrderDto } from "./type"
 
 /**
  * Get all Orders request

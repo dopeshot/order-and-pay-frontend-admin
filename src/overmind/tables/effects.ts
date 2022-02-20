@@ -26,14 +26,3 @@ export const bulkDelete = (idArray: string[]): Promise<void> => request.delete('
         ids: idArray
     }
 })
-
-/* istanbul ignore next */
-export const getTablesMock = async (): Promise<Table[]> => {
-    return await new Promise<Table[]>((resolve) => {
-        setTimeout(() => {
-            resolve([
-                { _id: "1", tableNumber: "1", capacity: 4, updatedAt: new Date("2021-11-23T18:03:44.101Z"), author: "Admin" },
-            ])
-        }, 20)
-    })
-}

@@ -29,7 +29,7 @@ describe('Api Endpoints Categories', () => {
 
             // Add option
             cy.contains('Neue Option').click()
-            cy.get(`[data-cy="options-modal"] [data-cy="textinput-name-input"]`).type(category.choices[0].options[0].name)
+            cy.get(`[data-cy="options-modal"] [data-cy="textinput-title-input"]`).type(category.choices[0].options[0].title)
             cy.contains('Hinzufügen').click()
 
             cy.createCategory()
@@ -40,12 +40,6 @@ describe('Api Endpoints Categories', () => {
             cy.wait('@getMenuOverviewEditor')
 
             cy.url().should('include', '/admin/menus/1/editor')
-        })
-
-        it('should have disabled state when inputs are wrong', () => {
-            cy.get(`[data-cy="textinput-title-input"]`).focus().blur()
-
-            cy.get('[data-cy="category-save-button"]').should('have.class', 'opacity-80')
         })
 
         it('should have loading icon when sending', () => {
@@ -109,13 +103,13 @@ describe('Api Endpoints Categories', () => {
 
             // Update option
             cy.get('[data-cy="options-list-item"]').first().click()
-            cy.get(`[data-cy="options-modal"] [data-cy="textinput-name-input"]`).clear().type(updatecategory.choices[0].options[0].name)
+            cy.get(`[data-cy="options-modal"] [data-cy="textinput-title-input"]`).clear().type(updatecategory.choices[0].options[0].title)
             cy.get(`[data-cy="isDefault-clickdiv"]`).click()
             cy.get('[data-cy="category-options-save-button"]').click()
 
             // Update option
             cy.get('[data-cy="options-list-item"]').first().click()
-            cy.get(`[data-cy="options-modal"] [data-cy="textinput-name-input"]`).clear().type(updatecategory.choices[0].options[0].name)
+            cy.get(`[data-cy="options-modal"] [data-cy="textinput-title-input"]`).clear().type(updatecategory.choices[0].options[0].title)
             cy.get(`[data-cy="isDefault-clickdiv"]`).click()
             cy.get('[data-cy="category-options-save-button"]').click()
 
@@ -175,8 +169,8 @@ describe('Api Endpoints Categories', () => {
         it('should delete option when click delete on options modal', () => {
             cy.getMenuOverviewEditor()
             cy.get('[data-cy="options-delete-button"]').first().click()
-            cy.get(`[data-cy='deletemodal-Option-"${category.choices[0].options[0].name}"-delete-button']`).click()
-            cy.contains(category.choices[0].options[0].name).should('not.exist')
+            cy.get(`[data-cy='deletemodal-Option-"${category.choices[0].options[0].title}"-delete-button']`).click()
+            cy.contains(category.choices[0].options[0].title).should('not.exist')
         })
 
         it('should have loading icon when deleting', () => {

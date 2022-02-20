@@ -3,7 +3,7 @@ import { Context } from ".."
 /**
  * Gets called before app is loaded
  */
-export const onInitializeOvermind = async ({ state, actions }: Context) => {
+export const onInitializeOvermind = async ({ actions }: Context) => {
     actions.auth.initializeUser()
     window.addEventListener("resize", actions.app.checkIsMobile)
 }
