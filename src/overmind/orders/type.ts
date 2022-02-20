@@ -2,8 +2,8 @@ import { ChoiceType } from "../categories/type"
 import { Table } from "../tables/state"
 
 export type OrderDto = {
-    Status: OrderStatus,
-    PaymentStatus?: PaymentStatus
+    status: OrderStatus,
+    paymentStatus?: PaymentStatus
 }
 
 export type Order = {

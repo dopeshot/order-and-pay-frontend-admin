@@ -6,7 +6,7 @@ import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { OrderStatus, PaymentStatus } from "../../overmind/orders/type"
+import { OrderDto, OrderStatus, PaymentStatus } from "../../overmind/orders/type"
 import { numberToPrice } from "../../services/numberToPrice"
 
 export const Orders: React.FC = () => {
@@ -32,18 +32,18 @@ export const Orders: React.FC = () => {
     }, [getAllOrders])
 
     const updateOrderHandler = (id: string, type: "edit" | "close" | "delete") => {
-        let order
+        let order: OrderDto
 
         switch (type) {
             case "edit":
                 order = {
-                    Status: OrderStatus.IN_PROGRESS
+                    status: OrderStatus.IN_PROGRESS
                 }
                 updateOrder({ id, order })
                 break
             case "close":
                 order = {
-                    Status: OrderStatus.FINISHED
+                    status: OrderStatus.FINISHED
                 }
                 updateOrder({ id, order })
                 // Refresh when order is completed
@@ -51,8 +51,8 @@ export const Orders: React.FC = () => {
                 break
             case "delete":
                 order = {
-                    Status: OrderStatus.CANCELLED,
-                    PaymentStatus: PaymentStatus.CANCELED
+                    status: OrderStatus.CANCELLED,
+                    paymentStatus: PaymentStatus.CANCELED
                 }
                 updateOrder({ id, order })
                 // Refresh when order is deleted
