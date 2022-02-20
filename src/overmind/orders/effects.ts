@@ -1,5 +1,5 @@
 import { request } from "../../services/axios";
-import { ChoiceType } from "../categories/effects";
+import { ChoiceType } from "../categories/type";
 
 export type Order = {
     _id: string

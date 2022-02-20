@@ -15,35 +15,6 @@ export type DishDto = {
 
 export type Dish = DishDto & { _id: string }
 
-enum ChoiceType {
-    RADIO = "radio",
-    CHECKBOX = "checkbox"
-}
-
-type Option = {
-    id: number
-    name: string
-    price: number
-}
-
-export type Choice = {
-    id: number
-    title: string
-    type: ChoiceType
-    default?: number // id of option
-    options: Option[]
-}
-
-export type Category = {
-    _id: string
-    title: string
-    description: string
-    icon: string
-    image: string
-    choices: Choice[]
-    menuId: string // id ref: 'Menu'
-}
-
 // Create a Dish
 export const createDish = (createDishDto: DishDto) => request.post<Dish>('/dishes', createDishDto)
 // Get a dish by id

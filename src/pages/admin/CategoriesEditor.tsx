@@ -17,46 +17,12 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Modal } from "../../components/Modals/Modal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { ChoiceType } from "../../overmind/categories/effects"
-import { Category } from "../../overmind/dishes/effects"
+import { Category, CategoryDtoWithoutChoices, Choice, ChoiceDto, ChoiceType, Option, OptionDto } from "../../overmind/categories/type"
 import { numberToPrice } from "../../services/numberToPrice"
 
 type CategoryParams = {
     categoryId: string,
     menuId: string
-}
-
-type CategoryWithoutChoices = {
-    title: string
-    description: string
-    icon: string
-    image: string
-    menuId: string
-}
-
-export type Option = {
-    id: number
-    name: string
-    price: number
-}
-
-export type OptionDto = {
-    name: string
-    price: number
-    isDefault: boolean
-}
-
-export type Choice = {
-    id: number
-    title: string
-    type: ChoiceType
-    isDefault?: number | null // id of option
-    options: Option[]
-}
-
-export type ChoiceDto = {
-    title: string,
-    type: ChoiceType
 }
 
 export type DeleteData = {
@@ -161,7 +127,7 @@ export const CategoriesEditor: React.FunctionComponent = () => {
         return () => { isMounted = false }
     }, [categoryId, getCategoryById, isEditing])
 
-    const initialCategoryValues: CategoryWithoutChoices = {
+    const initialCategoryValues: CategoryDtoWithoutChoices = {
         title: category?.title ?? "",
         description: category?.description ?? "",
         icon: category?.icon ?? "",
@@ -169,16 +135,15 @@ export const CategoriesEditor: React.FunctionComponent = () => {
         menuId: category?.menuId ?? menuId
     }
 
-    const validationCategorySchema = Yup.object().shape({
+    const validationCategorySchema: Yup.SchemaOf<CategoryDtoWithoutChoices> = Yup.object().shape({
         title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
         description: Yup.string().max(240, "Die Beschreibung darf nicht länger als 240 Zeichen sein."),
         icon: Yup.string().max(32, "Das Icon darf nicht länger als 32 Zeichen sein."),
         image: Yup.string().max(240, "Die Bild-URL darf nicht länger als 240 Zeichen sein."),
-        menu: Yup.string().max(128, "Ein Fehler ist aufgetreten. Die Menu-ID ist nicht definiert.")
+        menuId: Yup.string().max(128, "Ein Fehler ist aufgetreten. Die Menu-ID ist nicht definiert.").required()
     })
 
-
-    const submitCategory = async (values: CategoryWithoutChoices) => {
+    const submitCategory = async (values: CategoryDtoWithoutChoices) => {
         // Merge formik and choices state
         const newCategory = {
             ...values,
@@ -224,15 +189,14 @@ export const CategoriesEditor: React.FunctionComponent = () => {
     }
 
     // choices
-
     const initialChoiceValues: ChoiceDto = {
         title: editChoiceData?.title ?? "",
         type: editChoiceData?.type ?? ChoiceType.RADIO
     }
 
-    const validationChoiceSchema = Yup.object().shape({
+    const validationChoiceSchema: Yup.SchemaOf<ChoiceDto> = Yup.object().shape({
         title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
-        type: Yup.string().oneOf(Object.values(ChoiceType)).required()
+        type: Yup.mixed<ChoiceType>().oneOf(Object.values(ChoiceType)).required()
     })
 
     const submitChoice = (values: ChoiceDto) => {
@@ -283,17 +247,15 @@ export const CategoriesEditor: React.FunctionComponent = () => {
         }
     ]
 
-
     // options 
-
     const initialOptionValues: OptionDto = {
-        name: editOptionData?.name ?? "",
+        title: editOptionData?.title ?? "",
         price: editOptionData?.price ?? 100,
         isDefault: (parentChoiceId !== null && choices[choices.findIndex(choice => choice.id === parentChoiceId)]?.isDefault === editOptionData?.id) ?? false
     }
 
-    const validationOptionSchema = Yup.object().shape({
-        name: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
+    const validationOptionSchema: Yup.SchemaOf<OptionDto> = Yup.object().shape({
+        title: Yup.string().min(2, "Der Titel muss aus mindestens 2 Zeichen bestehen.").max(32, "Der Titel darf nicht länger als 32 Zeichen sein.").required("Dies ist ein Pflichtfeld."),
         price: Yup.number().min(-10000000, "Der Preis darf nicht kleiner als - 10 000 000 sein.").max(10000000, "Der Preis darf nicht größer als 10 000 000 sein.").required("Dies ist ein Pflichtfeld."),
         isDefault: Yup.boolean().required()
     })
@@ -419,9 +381,9 @@ export const CategoriesEditor: React.FunctionComponent = () => {
                                             setParentChoiceId(choice.id)
                                             setEditOptionData(option)
                                             setModalOpenOption(true)
-                                        }} title={option.name} icon={faCog} indent header={option.id === choice.isDefault ? <Chip title="Standard" /> : ''}>
+                                        }} title={option.title} icon={faCog} indent header={option.id === choice.isDefault ? <Chip title="Standard" /> : ''}>
                                             <p className="mr-4">{numberToPrice(option.price)}</p>
-                                            <IconButton dataCy="options-delete-button" icon={faTrash} onClick={() => openDeleteModal({ type: 'option', choiceId: choice.id, optionId: option.id, title: `Option-"${option.name}"` })} />
+                                            <IconButton dataCy="options-delete-button" icon={faTrash} onClick={() => openDeleteModal({ type: 'option', choiceId: choice.id, optionId: option.id, title: `Option-"${option.title}"` })} />
                                         </ListItem>)
                                     }
                                 </Fragment>

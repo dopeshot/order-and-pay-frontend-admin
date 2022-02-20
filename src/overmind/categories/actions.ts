@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Context } from "..";
-import { Category } from "../dishes/effects";
-import { CategoryDto } from "./effects";
+import { Category, CategoryDto } from "./type";
 
 /**
  * Get all categories request with error handling MC TODO: Error handling
