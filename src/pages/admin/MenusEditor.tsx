@@ -12,6 +12,7 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions } from "../../overmind"
 import { Menu, MenuDto } from "../../overmind/menus/type"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 type Params = {
     menuId: string
@@ -57,6 +58,7 @@ export const MenusEditor: React.FC = () => {
         if (isEditing)
             loadMenu()
 
+        setDocumentTitle(isEditing ? 'Menü bearbeiten' : 'Neues Menü erstellen')
         return () => { isMounted = false }
     }, [getMenuById, isEditing, menuId])
 

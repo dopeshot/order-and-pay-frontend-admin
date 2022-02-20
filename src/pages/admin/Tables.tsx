@@ -9,6 +9,7 @@ import { AddTableModal } from "../../components/Modals/AddTableModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Tables: React.FunctionComponent = () => {
     const {
@@ -22,6 +23,7 @@ export const Tables: React.FunctionComponent = () => {
 
     useEffect(() => {
         loadTables()
+        setDocumentTitle("Tische")
     }, [loadTables])
 
     if (!isLoadingTables && tables.length === 0)

@@ -19,6 +19,7 @@ import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Category, CategoryDtoWithoutChoices, Choice, ChoiceDto, ChoiceType, Option, OptionDto } from "../../overmind/categories/type"
 import { numberToPrice } from "../../services/numberToPrice"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 type CategoryParams = {
     categoryId: string,
@@ -123,6 +124,8 @@ export const CategoriesEditor: React.FunctionComponent = () => {
         // Check if we are editing an existing menu
         if (isEditing)
             loadCategory()
+
+        setDocumentTitle(isEditing ? "Kategorie bearbeiten" : "Neue Kategorie erstellen")
 
         return () => { isMounted = false }
     }, [categoryId, getCategoryById, isEditing])

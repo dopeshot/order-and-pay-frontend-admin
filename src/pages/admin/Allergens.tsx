@@ -11,6 +11,7 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Allergen } from "../../overmind/allergens/type"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Allergens: React.FC = () => {
     // Get hooks to manipulate global state
@@ -40,6 +41,7 @@ export const Allergens: React.FC = () => {
         }
 
         loadAllergens()
+        setDocumentTitle("Allergene")
     }, [getAllAllergens])
 
     const handleDelete = async (event: any) => {

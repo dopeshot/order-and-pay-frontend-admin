@@ -10,6 +10,7 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/type"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Menus: React.FC = () => {
     // Get hooks to manipulate global state
@@ -37,6 +38,7 @@ export const Menus: React.FC = () => {
             }
         }
         loadMenus()
+        setDocumentTitle("Menüs")
     }, [getAllMenus])
 
     const handleDelete = async () => {

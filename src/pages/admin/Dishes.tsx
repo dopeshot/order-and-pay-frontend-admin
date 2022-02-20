@@ -17,6 +17,7 @@ import { LabelModal } from "../../components/Modals/LabelModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Dish, DishDto } from "../../overmind/dishes/type"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 import { ComponentOptions } from "../../types/componentOptions"
 
 type Params = {
@@ -100,6 +101,7 @@ export const Dishes: React.FC = () => {
             setIsLoading(false)
         }
         main()
+        setDocumentTitle("Gericht")
         return () => { isMounted = false }
     }, [getDishById, isEditing, getAllAllergens, getAllCategories, getAllLabels, dishId])
 

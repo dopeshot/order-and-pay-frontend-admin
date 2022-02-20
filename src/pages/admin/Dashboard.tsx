@@ -1,8 +1,9 @@
 import { faChair, faChevronRight, faReceipt, faUser, faUtensils } from "@fortawesome/free-solid-svg-icons"
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
 import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Dashboard: React.FunctionComponent = () => {
     const content = [{
@@ -36,6 +37,10 @@ export const Dashboard: React.FunctionComponent = () => {
             path: `/admin/users`
         }],
     }]
+
+    useEffect(() => {
+        setDocumentTitle("Dashboard")
+    }, [])
 
     return (
         <div className="container mt-12">

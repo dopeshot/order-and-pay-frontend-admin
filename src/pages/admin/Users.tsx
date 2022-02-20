@@ -9,6 +9,7 @@ import { UsersModal } from "../../components/Modals/UsersModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { User } from "../../overmind/users/type"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Users: React.FC = () => {
     // Global States
@@ -34,6 +35,7 @@ export const Users: React.FC = () => {
             }
         }
         loadUsers()
+        setDocumentTitle("Benutzer")
     }, [getAllUser])
 
     const handleDelete = async (event: any) => {
