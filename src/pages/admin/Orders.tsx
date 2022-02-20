@@ -8,6 +8,7 @@ import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { OrderDto, OrderStatus, PaymentStatus } from "../../overmind/orders/type"
 import { numberToPrice } from "../../services/numberToPrice"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Orders: React.FC = () => {
     // Global Actions
@@ -29,6 +30,7 @@ export const Orders: React.FC = () => {
             }
         }
         loadOrders()
+        setDocumentTitle("Bestellungen")
     }, [getAllOrders])
 
     const updateOrderHandler = (id: string, type: "edit" | "close" | "delete") => {

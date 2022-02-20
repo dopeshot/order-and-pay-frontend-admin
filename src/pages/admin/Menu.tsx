@@ -15,6 +15,7 @@ import { useActions, useAppState } from "../../overmind"
 import { CategoryPopulated } from "../../overmind/categories/type"
 import { Dish } from "../../overmind/dishes/type"
 import { numberToPrice } from "../../services/numberToPrice"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 type MenuParams = {
     menuId: string
@@ -48,6 +49,7 @@ export const Menu: React.FC = () => {
                 setLoading(false)
         }
         loadMenu()
+        setDocumentTitle("Menu Editor")
     }, [getMenuEditor, menuId])
 
     const handleDelete = async (selectedElement: Dish | CategoryPopulated | null, type: "dish" | "category") => {

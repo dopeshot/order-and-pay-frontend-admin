@@ -11,6 +11,7 @@ import { LabelModal } from "../../components/Modals/LabelModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Label } from "../../overmind/labels/type"
+import { setDocumentTitle } from "../../services/setDocumentTitle"
 
 export const Labels: React.FC = () => {
     // Get hooks to manipulate global state
@@ -40,6 +41,7 @@ export const Labels: React.FC = () => {
         }
 
         loadLabels()
+        setDocumentTitle("Labels")
     }, [getAllLabels])
 
     const handleDelete = async () => {
