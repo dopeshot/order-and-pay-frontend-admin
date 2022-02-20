@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import * as yup from 'yup'
 import { useActions } from "../../overmind"
 import { Button } from "../Buttons/Button"
-import { TextInput } from "../Form/TextInput"
+import { TextInput } from "../Forms/TextInput"
 import { Modal } from "../Modals/Modal"
 
 type TableModalProps = {

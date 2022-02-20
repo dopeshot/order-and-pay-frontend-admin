@@ -5,8 +5,8 @@ import * as Yup from "yup"
 import { useActions } from "../../overmind"
 import { User, UserDto } from "../../overmind/users/effects"
 import { Button } from "../Buttons/Button"
-import { PasswordInput } from "../Form/PasswortInput"
-import { TextInput } from "../Form/TextInput"
+import { PasswordInput } from "../Forms/PasswortInput"
+import { TextInput } from "../Forms/TextInput"
 import { Modal } from "./Modal"
 
 type UsersModalProps = {

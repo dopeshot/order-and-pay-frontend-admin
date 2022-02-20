@@ -2,8 +2,8 @@ import { faSignInAlt } from "@fortawesome/free-solid-svg-icons"
 import { Form, Formik } from "formik"
 import * as Yup from 'yup'
 import { Button } from "../components/Buttons/Button"
-import { PasswordInput } from "../components/Form/PasswortInput"
-import { TextInput } from "../components/Form/TextInput"
+import { PasswordInput } from "../components/Forms/PasswortInput"
+import { TextInput } from "../components/Forms/TextInput"
 import { useActions, useAppState } from "../overmind"
 import { Credentials } from "../overmind/auth/effects"
 

@@ -6,7 +6,7 @@ import { useActions } from "../../overmind"
 import { LabelDto } from "../../overmind/labels/effects"
 import { Label } from "../../overmind/labels/state"
 import { Button } from "../Buttons/Button"
-import { TextInput } from "../Form/TextInput"
+import { TextInput } from "../Forms/TextInput"
 import { Modal } from "./Modal"
 
 type LabelModalProps = {

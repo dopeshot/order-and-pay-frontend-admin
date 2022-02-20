@@ -7,7 +7,7 @@ import { AllergenDto } from "../../overmind/allergens/effects"
 import { Allergen } from "../../overmind/allergens/state"
 import { LabelDto } from "../../overmind/labels/effects"
 import { Button } from "../Buttons/Button"
-import { TextInput } from "../Form/TextInput"
+import { TextInput } from "../Forms/TextInput"
 import { Modal } from "./Modal"
 
 type AllergensModalProps = {
