@@ -1,8 +1,8 @@
 import { faChair, faChevronRight, faReceipt, faUser, faUtensils } from "@fortawesome/free-solid-svg-icons"
 import { Fragment } from "react"
 import { IconButton } from "../../components/Buttons/IconButton"
-import { List } from "../../components/UI/List"
-import { ListItem } from "../../components/UI/ListItem"
+import { List } from "../../components/Lists/List"
+import { ListItem } from "../../components/Lists/ListItem"
 
 export const Dashboard: React.FunctionComponent = () => {
     const content = [{
