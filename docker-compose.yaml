@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  oap-frontend-admin:
+    container_name: oap-frontend-admin
+    build: 
+      context: .
+      target: dev
+    command: bash -c "cd /usr/src/app && npm run start"
+    ports:
+      - "4002:3000"
