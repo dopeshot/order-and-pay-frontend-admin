@@ -76,6 +76,12 @@ Cypress.Commands.add('getMenuOverviewEditor', () => {
     }).as('getMenuOverviewEditor')
 })
 
+Cypress.Commands.add('getMenuOverviewEditorEmptyCategories', () => {
+    cy.intercept('GET', `${api}/menus/**/editor`, {
+        fixture: 'menu-overview-empty-categories.json'
+    }).as('getMenuOverviewEditorEmptyCategories')
+})
+
 Cypress.Commands.add('getAllMenus', () => {
     cy.intercept('GET', `${api}/menus`, {
         fixture: 'menus.json'

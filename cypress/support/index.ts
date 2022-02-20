@@ -173,6 +173,12 @@ declare global {
             getAllCategories(): void
 
             /**
+             * Custom command to intercept all get all categories request get empty array back
+             * @example cy.getMenuOverviewEditorEmptyCategories()
+             */
+            getMenuOverviewEditorEmptyCategories(): void
+
+            /**
              * Custom command to intercept all create category request
              * @example cy.createCategory()
              */

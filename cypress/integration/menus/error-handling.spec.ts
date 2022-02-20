@@ -1,18 +1,26 @@
-import menus from '../../fixtures/menus.json';
-import updateMenu from '../../fixtures/update-menu.json';
+import menu from '../../fixtures/menu-overview.json'
+import menus from '../../fixtures/menus.json'
+import updateMenu from '../../fixtures/update-menu.json'
 
 describe('Error Handling Menus', () => {
     describe('Empty', () => {
-        beforeEach(() => {
+        it('should show empty state when there are no menus', () => {
             cy.getAllMenusEmpty()
             cy.visit('/admin/menus')
 
             cy.quickLogin()
             cy.wait('@getAllMenusEmpty')
+
+            cy.contains('Erstelle Menü').should('be.visible')
         })
 
-        it('should show empty state when there are no menus', () => {
-            cy.contains('Erstelle Menü').should('be.visible')
+        it('should show empty state when there are no categories', () => {
+            cy.getMenuOverviewEditorEmptyCategories()
+            cy.visit(`/admin/menus/${menu._id}/editor`)
+
+            cy.quickLogin()
+
+            cy.contains('Erstelle Kategorie')
         })
     })
 
@@ -54,5 +62,5 @@ describe('Error Handling Menus', () => {
     })
 })
 
-export { };
+export { }
 
