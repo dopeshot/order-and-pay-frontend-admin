@@ -110,8 +110,10 @@ export const Orders: React.FC = () => {
                     {order.items.map(item => (
                         <ListItem key={order._id + item.dishId + item.count + item.note} title={`${item.count}x ${item.dishName}`} icon={faUtensils} indent header={<p>{item.note}</p>}>
                             {item.pickedChoices.map(pickedChoice => <Fragment key={order._id + item.dishId + item.count + item.note + pickedChoice.id}>
-                                <p>{pickedChoice.title}</p>
-                                <p className="pl-3">{pickedChoice.optionNames.join(", ")}</p>
+                                {pickedChoice.optionNames.length !== 0 && <>
+                                    <h6 className="font-semibold pl-3">{pickedChoice.title}</h6>
+                                    <p className="pl-3">{pickedChoice.optionNames.join(", ")}</p>
+                                </>}
                             </Fragment>)}
                         </ListItem>
                     ))}
