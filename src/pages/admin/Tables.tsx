@@ -6,7 +6,7 @@ import { IconButton } from "../../components/Buttons/IconButton"
 import { EmptyState } from "../../components/Errors/EmptyState"
 import { TableItem } from "../../components/Lists/TableItem"
 import { AddTableModal } from "../../components/Modals/AddTableModal"
-import { Loading } from "../../components/UI/Loading"
+import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { TableDocument } from "../../overmind/tables/state"
 

@@ -6,7 +6,7 @@ import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { UsersModal } from "../../components/Modals/UsersModal"
-import { Loading } from "../../components/UI/Loading"
+import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { User } from "../../overmind/users/effects"
 

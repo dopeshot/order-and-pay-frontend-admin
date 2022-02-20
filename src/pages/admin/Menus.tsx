@@ -7,7 +7,7 @@ import { EmptyState } from "../../components/Errors/EmptyState"
 import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
-import { Loading } from "../../components/UI/Loading"
+import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Menu } from "../../overmind/menus/state"
 

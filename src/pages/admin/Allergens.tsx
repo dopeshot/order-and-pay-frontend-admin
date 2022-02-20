@@ -8,7 +8,7 @@ import { List } from "../../components/Lists/List"
 import { ListItem } from "../../components/Lists/ListItem"
 import { AllergensModal } from "../../components/Modals/AllergensModal"
 import { DeleteModal } from "../../components/Modals/DeleteModal"
-import { Loading } from "../../components/UI/Loading"
+import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
 import { Allergen } from "../../overmind/allergens/state"
 
