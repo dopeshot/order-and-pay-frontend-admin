@@ -191,6 +191,10 @@ Cypress.Commands.add('getAllAllergens', () => {
     }).as('getAllAllergens')
 })
 
+Cypress.Commands.add('getAllAllergensEmpty', () => {
+    cy.intercept('GET', `${api}/allergens`, []).as('getAllAllergensEmpty')
+})
+
 Cypress.Commands.add('createAllergen', () => {
     cy.intercept('POST', `${api}/allergens`, {
         fixture: 'allergen.json'

@@ -191,6 +191,12 @@ declare global {
             getAllAllergens(): void
 
             /**
+             * Custom command to intercept all get all allergens request get empty array back
+             * @example cy.getAllAllergensEmpty()
+             */
+            getAllAllergensEmpty(): void
+
+            /**
             * Custom command to intercept all create allergen request
             * @example cy.createAllergen()
             */
