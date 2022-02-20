@@ -33,6 +33,7 @@ export const TableItem: React.FC<TableItemType> = React.memo(({ index, id }) => 
     }
 
     const submitChanges = async ({ _id, tableNumber, capacity }: typeof initialValues) => {
+        // istanbul ignore if // backoff strategy
         if (isLoadingButton)
             return
 

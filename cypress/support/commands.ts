@@ -76,10 +76,20 @@ Cypress.Commands.add('getMenuOverviewEditor', () => {
     }).as('getMenuOverviewEditor')
 })
 
+Cypress.Commands.add('getMenuOverviewEditorEmptyCategories', () => {
+    cy.intercept('GET', `${api}/menus/**/editor`, {
+        fixture: 'menu-overview-empty-categories.json'
+    }).as('getMenuOverviewEditorEmptyCategories')
+})
+
 Cypress.Commands.add('getAllMenus', () => {
     cy.intercept('GET', `${api}/menus`, {
         fixture: 'menus.json'
     }).as('getAllMenus')
+})
+
+Cypress.Commands.add('getAllMenusEmpty', () => {
+    cy.intercept('GET', `${api}/menus`, []).as('getAllMenusEmpty')
 })
 
 Cypress.Commands.add('createMenu', () => {
@@ -88,7 +98,7 @@ Cypress.Commands.add('createMenu', () => {
     }).as('createMenu')
 })
 
-Cypress.Commands.add('createMenuDuplicate', () => {
+Cypress.Commands.add('createMenuDuplicateTitle', () => {
     cy.intercept('POST', `${api}/menus`, {
         statusCode: 409,
         body: {
@@ -96,7 +106,7 @@ Cypress.Commands.add('createMenuDuplicate', () => {
             "message": "This menu title already exists",
             "error": "Conflict"
         }
-    }).as('createMenuDuplicate')
+    }).as('createMenuDuplicateTitle')
 })
 
 Cypress.Commands.add('getMenuById', () => {
@@ -109,6 +119,17 @@ Cypress.Commands.add('updateMenu', () => {
     cy.intercept('PATCH', `${api}/menus/**`, {
         fixture: 'update-menu.json'
     }).as('updateMenu')
+})
+
+Cypress.Commands.add('updateMenuDuplicateTitle', () => {
+    cy.intercept('PATCH', `${api}/menus/**`, {
+        statusCode: 409,
+        body: {
+            "statusCode": 409,
+            "message": "This menu title already exists",
+            "error": "Conflict"
+        }
+    }).as('updateMenuDuplicateTitle')
 })
 
 Cypress.Commands.add('deleteMenu', () => {
@@ -160,11 +181,39 @@ Cypress.Commands.add('getAllCategories', () => {
     }).as('getAllCategories')
 })
 
+Cypress.Commands.add('getCategoryById', () => {
+    cy.intercept('GET', `${api}/categories/**`, {
+        fixture: 'category.json'
+    }).as('getCategoryById')
+})
+
+Cypress.Commands.add('createCategory', () => {
+    cy.intercept('POST', `${api}/categories`, {
+        fixture: 'category.json'
+    }).as('createCategory')
+})
+
+Cypress.Commands.add('updateCategory', () => {
+    cy.intercept('PATCH', `${api}/categories/**`, {
+        fixture: 'update-category.json'
+    }).as('updateCategory')
+})
+
+Cypress.Commands.add('deleteCategory', () => {
+    cy.intercept('DELETE', `${api}/categories/**`, {
+        statusCode: 204
+    }).as('deleteCategory')
+})
+
 /********* Allergen *********/
 Cypress.Commands.add('getAllAllergens', () => {
     cy.intercept('GET', `${api}/allergens`, {
         fixture: 'allergens.json'
     }).as('getAllAllergens')
+})
+
+Cypress.Commands.add('getAllAllergensEmpty', () => {
+    cy.intercept('GET', `${api}/allergens`, []).as('getAllAllergensEmpty')
 })
 
 Cypress.Commands.add('createAllergen', () => {
@@ -212,6 +261,10 @@ Cypress.Commands.add('getAllLabels', () => {
     cy.intercept('GET', `${api}/labels`, {
         fixture: 'labels.json'
     }).as('getAllLabels')
+})
+
+Cypress.Commands.add('getAllLabelsEmpty', () => {
+    cy.intercept('GET', `${api}/labels`, []).as('getAllLabelsEmpty')
 })
 
 Cypress.Commands.add('createLabel', () => {
@@ -311,7 +364,7 @@ Cypress.Commands.add('createUserDuplicateEmail', () => {
         statusCode: 409,
         body: {
             "statusCode": 409,
-            "message": "Username is already taken.",
+            "message": "Email is already taken.",
             "error": "Conflict"
         }
     }).as('createUserDuplicateEmail')
@@ -322,7 +375,7 @@ Cypress.Commands.add('createUserDuplicateUsername', () => {
         statusCode: 409,
         body: {
             "statusCode": 409,
-            "message": "Email is already taken.",
+            "message": "Username is already taken.",
             "error": "Conflict"
         }
     }).as('createUserDuplicateUsername')

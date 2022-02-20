@@ -2,17 +2,21 @@ import axios from "axios";
 import { Context } from "..";
 import { Credentials } from "./effects";
 
+/**
+ *  Login user when app is startet and we already were logged in
+ */
 export const initializeUser = async ({ state, effects, actions }: Context) => {
     const token = localStorage.getItem('access_token')
     state.auth.authenticating = true
 
     try {
+        // istanbul ignore if // cant test because we cant test if we get reloggedin
         if (token) {
             effects.auth.setToken(token)
             const userResponse = await effects.auth.getCurrentUser()
             state.auth.currentUser = userResponse.data
         }
-    } catch (error) {
+    } catch (error) /* istanbul ignore next */ {
         if (axios.isAxiosError(error) && error.response) {
             // Logout when the access token is not valid anymore
             actions.auth.logout()
@@ -22,6 +26,10 @@ export const initializeUser = async ({ state, effects, actions }: Context) => {
     state.auth.authenticating = false
 }
 
+
+/**
+ * Login action
+ */
 export const login = async ({ state, effects }: Context, credentials: Credentials) => {
     state.auth.authenticating = true
     try {
@@ -32,11 +40,15 @@ export const login = async ({ state, effects }: Context, credentials: Credential
         const userResponse = await effects.auth.getCurrentUser()
         state.auth.currentUser = userResponse.data
     } catch (error) {
+        // TODO: Error handling
         console.error(error)
     }
     state.auth.authenticating = false
 }
 
+/**
+ * Logout action
+ */
 export const logout = ({ state, effects }: Context) => {
     state.auth.currentUser = null;
     effects.auth.setToken()

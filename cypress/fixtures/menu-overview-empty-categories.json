@@ -1,0 +1,8 @@
+{
+    "_id": "620b9b0a1126e91d99b45559",
+    "title": "Mittagskarte",
+    "description": "Die Mittagskarte wird Mittags zwischen 12 Uhr und 16 Uhr Angeboten.",
+    "status": "active",
+    "isActive": true,
+    "categories": []
+}

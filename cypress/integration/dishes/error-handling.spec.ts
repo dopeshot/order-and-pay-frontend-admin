@@ -1,6 +1,6 @@
 import dish from '../../fixtures/dish.json';
 
-describe('Api Error Handling', () => {
+describe('Error Handling', () => {
     describe('Create Dish Errors', () => {
         beforeEach(() => {
             cy.getAllAllergens()
@@ -13,10 +13,6 @@ describe('Api Error Handling', () => {
             cy.wait('@getAllAllergens')
             cy.wait('@getAllLabels')
             cy.wait('@getAllCategories')
-        })
-
-        it.skip('should handle create duplicate Dish Title', () => {
-            //TODO: needs to be implemented when feature ready
         })
 
         it('should handle dish title to short (min 2 letters)', () => {
