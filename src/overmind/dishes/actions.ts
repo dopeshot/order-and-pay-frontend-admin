@@ -9,7 +9,7 @@ export const createDish = async ({ effects, actions }: Context, dish: DishDto): 
     try {
         await effects.dishes.createDish(dish)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
 
         actions.notify.createNotification({
@@ -51,7 +51,7 @@ export const updateDish = async ({ effects, actions }: Context, { dishId, dish }
         // We just await the update no need to update menu object
         await effects.dishes.updateDish(dishId, dish)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
 
         actions.notify.createNotification({
