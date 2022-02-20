@@ -3,7 +3,7 @@
 Das Adminfrontend stellt alle Funktionen zur Verfügung, die das Restaurant nutzen können soll.
 Da zum Benutzen dieses Frontends ein Account benötigt wird haben wir der Einfachheit halber einen Dummyaccount erstellt (im Deploy und in der Dockerversion des Backends)
 
-    username: normaluser@gmail.de
+    username: kobibenotet@gmail.de
     password: adsdfhjngegra
 
 ## Das Projekt starten
