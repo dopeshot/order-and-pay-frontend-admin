@@ -106,12 +106,17 @@ describe('Menu Overview', () => {
             cy.wait('@getMenuOverviewEditor')
         })
 
-        it.skip('should go to page add category when click "Kategorie hinzufügen" button', () => {
-            // TODO: Implement when categories are merged
+        it('should go to page add category when click "Kategorie hinzufügen" button', () => {
+            cy.contains('Kategorie hinzufügen').click()
+            cy.url().should('include', `/admin/menus/${menu._id}/categories`)
         })
 
-        it.skip('should go to page edit category when click category box', () => {
-            // TODO: Implement when categories are merged
+        it('should go to page edit category when click category box', () => {
+            cy.getCategoryById()
+            cy.get(`[data-cy="singlemenu-category-listitem"]`).first().click()
+
+            cy.wait('@getCategoryById')
+            cy.url().should('include', `/admin/menus/${menu._id}/categories/${menu.categories[0]._id}`)
         })
 
         it('should go to page add dish when click "Gericht hinzufügen" button', () => {
@@ -155,7 +160,28 @@ describe('Menu Overview', () => {
             cy.wait('@getMenuOverviewEditor')
         })
 
-        describe.skip('Category', () => {
+        describe('Category', () => {
+            beforeEach(() => {
+                cy.deleteCategory()
+                cy.getMenuOverviewEditor()
+                cy.get('[data-cy="category-delete-button"]').first().click()
+            })
+
+            it('should open delete modal when click on delete', () => {
+                cy.contains(`${menu.categories[0].title} löschen?`)
+            })
+
+            it('should close delete modal when click on x icon', () => {
+                cy.get('[data-cy="modal-close-iconbutton"]').click()
+                cy.get(`[data-cy="deletemodal-${menu.categories[0].title}]`).should('not.exist')
+            })
+
+            it('should delete category when click delete on modal', () => {
+                cy.get(`[data-cy="deletemodal-${menu.categories[0].title}-delete-button"]`).click()
+
+                cy.wait('@deleteCategory')
+                cy.wait('@getMenuOverviewEditor')
+            })
         })
 
         describe('Dish', () => {
