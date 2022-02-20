@@ -34,7 +34,7 @@ export const Topbar: React.FunctionComponent = () => {
                 <Search />
                 <div className="flex">
                     {/* Search Mobile */}
-                    {isMobile && <IconButton dataCy="topbar-search-iconbutton" icon={faSearch} textColor="text-lightgrey" onClick={() => ""} className="mr-2 md:mr-4" />}
+                    {isMobile && <IconButton dataCy="topbar-search-iconbutton" icon={faSearch} textColor="text-lightgrey" className="mr-2 md:mr-4" />}
 
                     {/* Account */}
                     <div className="relative inline-block">

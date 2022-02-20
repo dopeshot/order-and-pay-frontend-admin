@@ -49,7 +49,10 @@
       "src/pages/Home",
       "src/reportWebVitals.ts",
       "src/components/Buttons",
-      "src/components/Form"
+      "src/components/Form",
+      "src/services",
+      "src/pages/Orders",
+      "src/overmind/orders"
     ],
     "excludeAfterRemap": true
   },

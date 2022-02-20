@@ -85,7 +85,7 @@ export const deleteUser = async ({ state, actions, effects }: Context, id: strin
         await effects.users.deleteUser(id)
         state.users.users = state.users.users.filter(users => users._id !== id)
         return true
-    } catch (error) {
+    } catch (error) /* istanbul ignore next // should not happen just fallback */ {
         console.error(error)
 
         actions.notify.createNotification({
