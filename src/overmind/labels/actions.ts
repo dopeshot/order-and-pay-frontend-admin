@@ -3,11 +3,6 @@ import { Context } from ".."
 import { LabelDto } from "./effects"
 
 export const getAllLabels = async ({ state, actions, effects }: Context) => {
-    // istanbul ignore next //  Backoff when already loading
-    if (state.labels.isLoadingLabels)
-        return
-
-    state.labels.isLoadingLabels = true
     try {
         const response = await effects.labels.getLabels()
         const labels = response.data
@@ -22,7 +17,6 @@ export const getAllLabels = async ({ state, actions, effects }: Context) => {
         })
 
     }
-    state.labels.isLoadingLabels = false
 }
 
 export const createLabel = async ({ state, actions, effects }: Context, label: LabelDto): Promise<true> => {

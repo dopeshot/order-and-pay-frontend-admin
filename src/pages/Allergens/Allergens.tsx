@@ -30,8 +30,13 @@ export const Allergens: React.FC = () => {
     // Load allergens when page is loaded
     useEffect((): void => {
         async function loadAllergens() {
-            await getAllAllergens()
-            setLoadingAllergens(false)
+            try {
+                await getAllAllergens()
+            } catch (error) {
+                // Loading allergens failed
+            } finally {
+                setLoadingAllergens(false)
+            }
         }
 
         loadAllergens()

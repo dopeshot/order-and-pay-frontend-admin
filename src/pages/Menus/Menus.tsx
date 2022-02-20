@@ -16,17 +16,27 @@ export const Menus: React.FC = () => {
     const { getAllMenus } = useActions().menus
 
     // Get global state
-    const { menus, isLoadingMenus } = useAppState().menus
+    const { menus } = useAppState().menus
     const { deleteMenu } = useActions().menus
 
     // Component states
+    const [isLoadingMenus, setIsLoadingMenus] = useState(true)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null)
 
     // Load menus when page is loaded
     useEffect((): void => {
-        getAllMenus()
+        async function loadMenus() {
+            try {
+                await getAllMenus()
+            } catch (error) {
+                // Loading menus failed
+            } finally {
+                setIsLoadingMenus(false)
+            }
+        }
+        loadMenus()
     }, [getAllMenus])
 
     const handleDelete = async () => {

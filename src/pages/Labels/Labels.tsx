@@ -17,9 +17,10 @@ export const Labels: React.FC = () => {
     const { getAllLabels, deleteLabel } = useActions().labels
 
     // Get global state
-    const { labels, isLoadingLabels } = useAppState().labels
+    const { labels } = useAppState().labels
 
     // Component States
+    const [isLoadingLabels, setIsLoadingLabels] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
     const [modalEditData, setModalEditData] = useState<Label | null>(null)
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -28,7 +29,17 @@ export const Labels: React.FC = () => {
 
     // Load labels when page is loaded
     useEffect((): void => {
-        getAllLabels()
+        async function loadLabels() {
+            try {
+                await getAllLabels()
+            } catch (error) {
+                // Loading labels failed
+            } finally {
+                setIsLoadingLabels(false)
+            }
+        }
+
+        loadLabels()
     }, [getAllLabels])
 
     const handleDelete = async (event: any) => {
