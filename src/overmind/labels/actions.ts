@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { LabelDto } from "./effects"
+import { LabelDto } from "./type"
 
 /**
  * Get all Labels request with error handling

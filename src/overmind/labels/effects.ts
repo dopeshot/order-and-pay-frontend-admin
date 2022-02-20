@@ -1,10 +1,5 @@
-import { request } from "../../services/axios";
-import { Label } from "./state";
-
-export type LabelDto = {
-    title: string
-    icon: string
-}
+import { request } from "../../services/axios"
+import { Label, LabelDto } from "./type"
 
 // Get all labels
 export const getLabels = () => request.get<Label[]>('/labels')

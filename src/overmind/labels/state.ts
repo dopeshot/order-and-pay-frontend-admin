@@ -1,8 +1,4 @@
-export type Label = {
-    _id: string
-    title: string
-    icon: string
-}
+import { Label } from "./type"
 
 export type State = {
     labels: Label[]

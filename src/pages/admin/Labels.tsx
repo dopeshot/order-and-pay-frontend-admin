@@ -10,7 +10,7 @@ import { DeleteModal } from "../../components/Modals/DeleteModal"
 import { LabelModal } from "../../components/Modals/LabelModal"
 import { Loading } from "../../components/ProgressIndicators/Loading"
 import { useActions, useAppState } from "../../overmind"
-import { Label } from "../../overmind/labels/state"
+import { Label } from "../../overmind/labels/type"
 
 export const Labels: React.FC = () => {
     // Get hooks to manipulate global state
@@ -42,7 +42,7 @@ export const Labels: React.FC = () => {
         loadLabels()
     }, [getAllLabels])
 
-    const handleDelete = async (event: any) => {
+    const handleDelete = async () => {
         /* istanbul ignore next // should not happen just fallback */
         if (!selectedLabel) {
             console.warn("There is no label selected.")
