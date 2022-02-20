@@ -4,7 +4,6 @@ import { MenuDto } from "./effects"
 import { Menu } from "./state"
 
 export const getAllMenus = async ({ state, actions, effects }: Context): Promise<void> => {
-    state.menus.isLoadingMenus = true
     try {
         const response = await effects.menus.getAllMenus()
         const menus = response.data
@@ -20,7 +19,6 @@ export const getAllMenus = async ({ state, actions, effects }: Context): Promise
 
         throw (error)
     }
-    state.menus.isLoadingMenus = false
 }
 
 // Create menu action
