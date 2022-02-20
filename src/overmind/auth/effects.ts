@@ -1,10 +1,5 @@
 import { request } from "../../services/axios";
-import { CurrentUser } from "./state";
-
-export type Credentials = {
-    email: string,
-    password: string
-}
+import { Credentials, CurrentUser } from "./type";
 
 /** Login user */
 export const login = (credentials: Credentials) => request.post<{ access_token: string }>('/auth/login', credentials)

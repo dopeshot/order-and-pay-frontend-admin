@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { Dish, DishDto } from "./effects"
+import { Dish, DishDto } from "./type"
 
 /**
  * Create new Dish request with error handling

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { Context } from ".."
-import { UserDto } from "./effects"
+import { UserDto } from "./type"
 
 /**
  * Get all Users request with error handling

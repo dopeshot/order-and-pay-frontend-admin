@@ -7,7 +7,7 @@ import * as auth from './auth'
 import * as categories from './categories'
 import * as dishes from './dishes'
 import * as labels from './labels'
-import * as menuoverview from './menuoverview'
+import * as menu from './menu'
 import * as menus from './menus'
 import * as notify from './notify'
 import * as orders from './orders'
@@ -19,7 +19,7 @@ export const config = namespaced({
     app,
     labels,
     allergens,
-    menuoverview,
+    menu,
     menus,
     dishes,
     auth,
