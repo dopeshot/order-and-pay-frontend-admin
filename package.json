@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:cc": "react-scripts start -r @cypress/instrument-cra start",
+    "start:cc": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "craco react-scripts test",
     "eject": "react-scripts eject",
